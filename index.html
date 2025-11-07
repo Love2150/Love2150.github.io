@@ -324,42 +324,49 @@ title: "Brandon Love — Portfolio"
   </script>
 
   <!-- Medium embed loader (active) -->
-  <script defer src="https://medium-widget.pixelpoint.io/widget.js"></script>
-  <script>
-    (function(){
-      function initMedium() {
-        var container = document.getElementById('medium-feed');
-        if(!container){ return; }
-        var section = document.getElementById('medium');
-        var resource = section?.getAttribute('data-medium-resource') || 'https://medium.com/@brandonlove2150';
-        if(!/^https:\/\/(medium\.com\/(?:@|publication)|[a-z0-9-]+\.medium\.com)/i.test(resource)){
-          container.innerHTML = '<p class="meta">Set a valid Medium URL in <code>data-medium-resource</code> (e.g., <code>https://medium.com/@brandonlove2150</code>).</p>';
-          return;
-        }
-        if(!window.MediumWidget){
-          // Try again in a tick if the script hasn't loaded yet
-          return setTimeout(initMedium, 250);
-        }
-        try{
-          MediumWidget.Init({
-            renderTo: '#medium-feed',
-            params: {
-              resource: resource,
-              postsPerLine: 3,
-              limit: 6,
-              picture: 'big',
-              fields: ['description','claps','publishAt'],
-              ratio: 'landscape'
-            }
-          });
-        } catch (e) {
-          container.innerHTML = '<p class="meta">Could not load Medium posts. Verify your handle URL, make sure posts are public, and reload.</p>';
-          console.warn('Medium embed error:', e);
-        }
+<script src="https://medium-widget.pixelpoint.io/widget.js"></script>
+<script>
+(function () {
+  const resource = "https://medium.com/@brandonlove2150";
+  const feedSel = "#medium-feed";
+
+  function init(i = 0) {
+    const feed = document.querySelector(feedSel);
+    if (!feed) return;
+
+    if (window.MediumWidget) {
+      try {
+        MediumWidget.Init({
+          renderTo: feedSel,
+          params: {
+            resource,
+            postsPerLine: 3,
+            limit: 3,
+            picture: "big",
+            fields: ["description", "claps", "publishAt"],
+            ratio: "landscape"
+          }
+        });
+      } catch (e) {
+        feed.innerHTML = '<p class="meta">Couldn’t render Medium posts (script error). Try refreshing.</p>';
+        console.warn(e);
       }
-      window.addEventListener('load', initMedium);
-    })();
-  </script>
+      return;
+    }
+
+    if (i < 40) { // ~10s total
+      setTimeout(() => init(i + 1), 250);
+    } else {
+      feed.innerHTML = '<p class="meta">Couldn’t load Medium (likely a content blocker). Try disabling extensions for this page.</p>';
+    }
+  }
+
+  // Start immediately; also on load for good measure.
+  init();
+  window.addEventListener("load", init);
+})();
+</script>
+
 
   <!--
   ===================== JEKYLL SETUP (copy these into files) =====================
