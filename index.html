@@ -15,22 +15,18 @@ title: "Brandon Love — Portfolio"
   <meta name="theme-color" content="#111827"/>
   <style>
     :root{
-      --bg:#0b1020;
-      --card:#121934;
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --accent:#60a5fa;
-      --accent-2:#a78bfa;
-      --border:#1f2a4d;
-      --shadow:0 8px 24px rgba(0,0,0,.4);
+      --bg:#0b1020; --card:#121934; --text:#e5e7eb; --muted:#9ca3af;
+      --accent:#60a5fa; --accent-2:#a78bfa; --border:#1f2a4d; --shadow:0 8px 24px rgba(0,0,0,.4)
     }
     @media (prefers-color-scheme: light){
-      :root{--bg:#f8fafc;--card:#ffffff;--text:#0f172a;--muted:#475569;--border:#e2e8f0;--shadow:0 10px 20px rgba(2,6,23,.06);}
+      :root{--bg:#f8fafc;--card:#fff;--text:#0f172a;--muted:#475569;--border:#e2e8f0;--shadow:0 10px 20px rgba(2,6,23,.06)}
     }
     html{scroll-behavior:smooth}
-    body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--text);background:radial-gradient(1200px 800px at 100% -20%,#1b2350 0,transparent 60%),radial-gradient(1000px 800px at -20% 0,#111a3f 0,transparent 60%),var(--bg)}
+    body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--text);
+         background:radial-gradient(1200px 800px at 100% -20%,#1b2350 0,transparent 60%),radial-gradient(1000px 800px at -20% 0,#111a3f 0,transparent 60%),var(--bg)}
     a{color:var(--accent);text-decoration:none}
     img{max-width:100%;height:auto;display:block}
+
     .container{width:min(1100px,92%);margin-inline:auto}
     header{position:sticky;top:0;z-index:50;background:linear-gradient(0deg,rgba(0,0,0,.0),rgba(0,0,0,.4)),var(--bg);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
     .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
@@ -45,24 +41,32 @@ title: "Brandon Love — Portfolio"
       .drawer a{display:block;padding:12px 4%;border-top:1px solid var(--border)}
       .drawer.open{display:block}
     }
+
     section{padding:44px 0}
     .section-head{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:18px}
     .section-head h2{margin:0;font-size:clamp(1.2rem,1rem + 1.2vw,1.8rem)}
     .section-head p{margin:0;color:var(--muted)}
+
     .grid{display:grid;gap:1rem;grid-template-columns:repeat(12,1fr)}
-    .col-4{grid-column:span 4}
-    .col-6{grid-column:span 6}
-    .col-12{grid-column:span 12}
+    .col-4{grid-column:span 4} .col-6{grid-column:span 6} .col-12{grid-column:span 12}
     @media (max-width:980px){.col-4{grid-column:span 6}}
     @media (max-width:640px){.col-4,.col-6{grid-column:span 12}}
+
     .card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .card .thumb{aspect-ratio:16/9;background:linear-gradient(135deg,rgba(96,165,250,.2),rgba(167,139,250,.18)),repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0 8px,transparent 8px 16px)}
     .card-body{padding:14px 16px}
     .meta{color:var(--muted);font-size:.9rem}
+    .tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.4rem}
+    .tag{font-size:.78rem;padding:.25rem .5rem;border:1px solid var(--border);border-radius:999px;color:var(--muted)}
+
+    .post{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow)}
     footer{padding:32px 0;border-top:1px solid var(--border);color:var(--muted)}
+    .pill{display:inline-flex;gap:.5rem;align-items:center;padding:.35rem .6rem;border:1px dashed var(--border);border-radius:999px;color:var(--muted)}
   </style>
 </head>
 
 <body>
+  <!-- Header -->
   <header>
     <div class="container nav">
       <a class="brand" href="#top"><span class="dot"></span><span>Brandon Love</span></a>
@@ -72,9 +76,9 @@ title: "Brandon Love — Portfolio"
         <a href="#blog">Blog</a>
         <a href="#contact">Contact</a>
       </nav>
-      <button class="hamburger" aria-expanded="false">☰</button>
+      <button class="hamburger" aria-expanded="false" aria-controls="drawer">☰</button>
     </div>
-    <div id="drawer" class="drawer container">
+    <div id="drawer" class="drawer container" role="dialog" aria-label="Mobile menu">
       <a href="#portfolio">Portfolio</a>
       <a href="#projects">Projects</a>
       <a href="#blog">Blog</a>
@@ -83,38 +87,160 @@ title: "Brandon Love — Portfolio"
   </header>
 
   <main id="top">
-    <!-- Portfolio, Projects, Blog Sections (keep yours here) -->
-
-    <a href="/medium.html">View all posts →</a>
-    <section id="medium" class="container" data-medium-resource="https://medium.com/@brandonlove2150">
-      <div class="section-head">
-        <h2>Latest on Medium</h2>
-        <p>Pulled live from your Medium profile (public posts only).</p>
-      </div>
-      <div id="medium-feed" class="grid">
-        <p class="meta">Loading Medium posts…</p>
+    <!-- Hero -->
+    <section class="container" style="padding:64px 0 32px">
+      <div class="grid" style="grid-template-columns:1.2fr .8fr;align-items:center;gap:2rem">
+        <div>
+          <span class="pill">🚀 Open to Cybersecurity Roles</span>
+          <h1 style="font-size:clamp(1.6rem,1.2rem + 2.6vw,3rem);line-height:1.15;margin:.6rem 0 0">
+            Hi, I’m Brandon — I secure systems, analyze threats, and build resilient networks.
+          </h1>
+          <p class="meta" style="margin:.6rem 0 1.2rem">
+            Military logistics veteran turned security analyst. I enjoy blue-team investigations, discrete mathematics, and writing clear technical posts.
+          </p>
+          <div style="display:flex;gap:.8rem;flex-wrap:wrap">
+            <a class="pill" href="#projects">View Projects</a>
+            <a class="pill" href="#blog">Read the Blog</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="thumb" aria-hidden></div>
+          <div class="card-body meta">Static preview mock</div>
+        </div>
       </div>
     </section>
 
-    <!-- Optional static fallback -->
-    <div id="medium-fallback">
-      {% assign medium_posts = site.posts | where_exp: "p", "p.medium_canonical" | slice: 0, 3 %}
-      {% if medium_posts.size > 0 %}
-        <div class="grid">
-          {% for post in medium_posts %}
-          <article class="post col-12">
-            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-            <p class="meta">{{ post.date | date: "%b %d, %Y" }}{% if post.tags %} · Tags: {{ post.tags | join: ", " }}{% endif %}</p>
-            <p>{{ post.excerpt | strip_html | truncate: 200 }}</p>
-            {% if post.medium_canonical %}<p><a href="{{ post.medium_canonical }}" target="_blank" rel="noopener">View on Medium →</a></p>{% endif %}
-          </article>
-          {% endfor %}
-        </div>
-      {% else %}
-        <p class="meta">No imported Medium posts found in <code>_posts/</code>.</p>
-      {% endif %}
-    </div>
+    <!-- Portfolio -->
+    <section id="portfolio" class="container">
+      <div class="section-head">
+        <h2>Portfolio Highlights</h2>
+        <p>Selected work with short case studies.</p>
+      </div>
+      <div class="grid">
+        <article class="card col-6">
+          <div class="thumb" role="img" aria-label="Blue-team timeline analysis graphic"></div>
+          <div class="card-body">
+            <h3>Incident Response: Cobalt Strike</h3>
+            <p class="meta">DFIR · Network forensics · PCAP triage</p>
+            <div class="tags"><span class="tag">Wireshark</span><span class="tag">NetworkMiner</span><span class="tag">ATT&CK</span></div>
+          </div>
+          <a class="meta" style="padding:0 16px 16px" href="#">Read case study →</a>
+        </article>
+        <article class="card col-6">
+          <div class="thumb" role="img" aria-label="Detection engineering graphic"></div>
+          <div class="card-body">
+            <h3>Detection Eng: Batch Downloader (Laplas Clipper)</h3>
+            <p class="meta">Windows telemetry · Sigma draft · Pipeline notes</p>
+            <div class="tags"><span class="tag">PowerShell</span><span class="tag">YARA</span><span class="tag">Sigma</span></div>
+          </div>
+          <a class="meta" style="padding:0 16px 16px" href="#">Read write-up →</a>
+        </article>
+      </div>
+    </section>
 
+    <!-- Projects -->
+    <section id="projects" class="container">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <p>Hands-on labs, tools, and experiments.</p>
+      </div>
+      <div class="grid" id="projectGrid" aria-live="polite">
+        <article class="card col-4" data-tags="dfir windows powershell">
+          <div class="thumb" aria-hidden></div>
+          <div class="card-body">
+            <h3>PowerShell Deobfuscator</h3>
+            <p class="meta">Helper for base64/unicode escapes.</p>
+            <div class="tags"><span class="tag">PowerShell</span><span class="tag">DFIR</span></div>
+          </div>
+          <a class="meta" style="padding:0 16px 16px" href="#">Source →</a>
+        </article>
+        <article class="card col-4" data-tags="network wireshark pcap">
+          <div class="thumb" aria-hidden></div>
+          <div class="card-body">
+            <h3>PCAP Quick Profiler</h3>
+            <p class="meta">Protocol hierarchy snapshot.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Wireshark</span></div>
+          </div>
+          <a class="meta" style="padding:0 16px 16px" href="#">Docs →</a>
+        </article>
+        <article class="card col-4" data-tags="web github-actions ci">
+          <div class="thumb" aria-hidden></div>
+          <div class="card-body">
+            <h3>GitHub Pages CI</h3>
+            <p class="meta">Action to lint, build & deploy static sites.</p>
+            <div class="tags"><span class="tag">CI/CD</span><span class="tag">YAML</span></div>
+          </div>
+          <a class="meta" style="padding:0 16px 16px" href="#">Repo →</a>
+        </article>
+      </div>
+      <div class="container" style="padding-top:10px">
+        <label class="sr-only" for="filter">Filter projects</label>
+        <input id="filter" type="search" placeholder="Filter projects (e.g., wireshark, CI, DFIR)"
+               aria-controls="projectGrid"
+               style="width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text)">
+      </div>
+    </section>
+
+    <!-- Blog (Jekyll/Markdown from _posts) -->
+    <section id="blog" class="container">
+      <div class="section-head">
+        <h2>Blog</h2>
+        <p>Newest posts from my Jekyll blog.</p>
+      </div>
+      <div class="grid">
+        {% for post in site.posts limit: 6 %}
+        <article class="post col-12">
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="meta">{{ post.date | date: "%b %d, %Y" }}{% if post.tags %} · Tags: {{ post.tags | join: ", " }}{% endif %}</p>
+          <p>{{ post.excerpt | strip_html | truncate: 220 }}</p>
+        </article>
+        {% endfor %}
+      </div>
+      <p style="margin-top:10px"><a href="/feed.xml">RSS</a>{% if site.baseurl %} · <a href="{{ '/archive/' | relative_url }}">Archive</a>{% endif %}</p>
+    </section>
+
+    <!-- Medium (latest 3) -->
+    <p class="container"><a href="/medium.html">View all Medium posts →</a></p>
+    <section id="medium" class="container" data-medium-resource="https://medium.com/@brandonlove2150">
+      <div class="section-head">
+        <h2>Latest on Medium</h2>
+        <p class="meta">Pulled live from your Medium profile (public posts only).</p>
+      </div>
+      <div id="medium-feed" class="grid"><p class="meta">Loading Medium posts…</p></div>
+
+      <!-- Static fallback (hidden when widget loads) -->
+      <div id="medium-fallback" class="grid" style="margin-top:12px">
+        {% assign medium_posts = site.posts | where_exp: "p", "p.medium_canonical" | slice: 0, 3 %}
+        {% for post in medium_posts %}
+        <article class="post col-12">
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="meta">{{ post.date | date: "%b %d, %Y" }}{% if post.tags %} · Tags: {{ post.tags | join: ", " }}{% endif %}</p>
+          <p>{{ post.excerpt | strip_html | truncate: 200 }}</p>
+          {% if post.medium_canonical %}<p><a href="{{ post.medium_canonical }}" target="_blank" rel="noopener">View on Medium →</a></p>{% endif %}
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="container">
+      <div class="section-head">
+        <h2>Get in touch</h2>
+        <p>Reach out for collaborations, roles, or speaking.</p>
+      </div>
+      <div class="grid">
+        <div class="col-6 card" style="padding:16px">
+          <ul>
+            <li>Email: <a href="mailto:you@example.com">you@example.com</a></li>
+            <li>GitHub: <a href="#">github.com/your-user</a></li>
+            <li>Location: Chicago, IL</li>
+          </ul>
+        </div>
+        <div class="col-6 card" style="padding:16px">
+          <p class="meta">Write Markdown posts in <code>_posts/</code> with filenames like <code>YYYY-MM-DD-title.md</code>. Jekyll builds them automatically.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -125,14 +251,17 @@ title: "Brandon Love — Portfolio"
   </footer>
 
   <script>
-    // Mobile menu toggle
+    // Mobile menu + year + project filter
     const btn=document.querySelector('.hamburger');
     const drawer=document.getElementById('drawer');
     btn?.addEventListener('click',()=>{const open=drawer.classList.toggle('open');btn.setAttribute('aria-expanded',open?'true':'false');});
     document.getElementById('year').textContent=new Date().getFullYear();
+    const filter=document.getElementById('filter');
+    const cards=[...document.querySelectorAll('#projectGrid .card')];
+    filter?.addEventListener('input',(e)=>{const q=e.target.value.trim().toLowerCase();cards.forEach(c=>{const hay=(c.textContent+' '+(c.dataset.tags||'')).toLowerCase();c.style.display=!q||hay.includes(q)?'':'none';});});
   </script>
 
-  <!-- Medium Embed Loader -->
+  <!-- Medium widget + robust loader -->
   <script src="https://medium-widget.pixelpoint.io/widget.js"></script>
   <script>
   (function(){
@@ -145,14 +274,7 @@ title: "Brandon Love — Portfolio"
         try{
           MediumWidget.Init({
             renderTo:feedSel,
-            params:{
-              resource,
-              postsPerLine:3,
-              limit:3,
-              picture:"big",
-              fields:["description","claps","publishAt"],
-              ratio:"landscape"
-            }
+            params:{resource,postsPerLine:3,limit:3,picture:"big",fields:["description","claps","publishAt"],ratio:"landscape"}
           });
           const fb=document.getElementById("medium-fallback");
           if(fb)fb.style.display="none";
@@ -165,9 +287,9 @@ title: "Brandon Love — Portfolio"
       if(i<40)setTimeout(()=>init(i+1),250);
       else feed.innerHTML='<p class="meta">Couldn’t load Medium (likely a content blocker). Try disabling extensions for this page.</p>';
     }
-    init();
-    window.addEventListener("load",init);
+    init(); window.addEventListener("load",init);
   })();
   </script>
 </body>
 </html>
+
