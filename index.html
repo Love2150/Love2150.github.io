@@ -92,7 +92,7 @@ title: "Brandon Love — Portfolio"
       <nav class="menu">
         <a href="#portfolio">Portfolio</a>
         <a href="#projects">Projects</a>
-        <a href="#blog">Blog</a>
+        <a href="#latest-blogs">Blog</a>
         <a href="#contact">Contact</a>
       </nav>
       <button class="hamburger" aria-expanded="false" aria-controls="drawer">☰</button>
@@ -200,23 +200,7 @@ title: "Brandon Love — Portfolio"
       </div>
     </section>
 
-    <!-- Blog (Jekyll/Markdown from _posts) -->
-    <section id="blog" class="container">
-      <div class="section-head">
-        <h2>Blog</h2>
-        <p>Newest posts from my Jekyll blog.</p>
-      </div>
-      <div class="grid">
-        {% for post in site.posts limit: 6 %}
-        <article class="post col-12">
-          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-          <p class="meta">{{ post.date | date: "%b %d, %Y" }}{% if post.tags %} · Tags: {{ post.tags | join: ", " }}{% endif %}</p>
-          <p>{{ post.excerpt | strip_html | truncate: 220 }}</p>
-        </article>
-        {% endfor %}
-      </div>
-      <p style="margin-top:10px"><a href="/feed.xml">RSS</a>{% if site.baseurl %} · <a href="{{ '/archive/' | relative_url }}">Archive</a>{% endif %}</p>
-    </section>
+  
 
     <!-- Medium (latest 3) -->
     <section id="latest" class="container">
