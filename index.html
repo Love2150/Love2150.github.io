@@ -316,7 +316,7 @@ title: "Brandon Love — Portfolio"
         var section = document.getElementById('medium');
         var resource = section?.getAttribute('data-medium-resource') || 'https://medium.com/@brandonlove2150';
         if(!/^https:\/\/(medium\.com\/(?:@|publication)|[a-z0-9-]+\.medium\.com)/i.test(resource)){
-          container.innerHTML = '<p class="meta">Set a valid Medium URL in <code>data-medium-resource</code> (e.g., <code>https://medium.com/@your-handle</code> or <code>https://yourpub.medium.com</code>).</p>';
+          container.innerHTML = '<p class="meta">Set a valid Medium URL in <code>data-medium-resource</code> (e.g., <code>https://medium.com/@brandonlove2150</code> </code>).</p>';
           return;
         }
         if(!window.MediumWidget){
