@@ -241,6 +241,17 @@ title: "Brandon Love — Portfolio"
       <p class="container" style="margin-top:10px"><a href="/feed.xml">RSS</a> · <a href="/archive/">Archive</a></p>
     </section>
 
+    <!-- Medium Embed (auto-loads latest posts via RSS) -->
+    <section id="medium" class="container" data-medium-resource="https://medium.com/@your-medium-username">
+      <div class="section-head">
+        <h2>Latest on Medium</h2>
+        <p>Pulled live from your Medium profile (public posts only).</p>
+      </div>
+      <div id="medium-feed" class="grid">
+        <p class="meta">Loading Medium posts…</p>
+      </div>
+    </section>
+
     <!-- Contact / Footer CTA -->
     <section id="contact" class="container">
       <div class="section-head">
@@ -294,7 +305,45 @@ title: "Brandon Love — Portfolio"
       });
     });
   </script>
-  
+
+  <!-- Medium embed loader (active) -->
+  <script defer src="https://medium-widget.pixelpoint.io/widget.js"></script>
+  <script>
+    (function(){
+      function initMedium() {
+        var container = document.getElementById('medium-feed');
+        if(!container){ return; }
+        var section = document.getElementById('medium');
+        var resource = section?.getAttribute('data-medium-resource') || 'https://medium.com/@brandonlove2150';
+        if(!/^https:\/\/(medium\.com\/(?:@|publication)|[a-z0-9-]+\.medium\.com)/i.test(resource)){
+          container.innerHTML = '<p class="meta">Set a valid Medium URL in <code>data-medium-resource</code> (e.g., <code>https://medium.com/@your-handle</code> or <code>https://yourpub.medium.com</code>).</p>';
+          return;
+        }
+        if(!window.MediumWidget){
+          // Try again in a tick if the script hasn't loaded yet
+          return setTimeout(initMedium, 250);
+        }
+        try{
+          MediumWidget.Init({
+            renderTo: '#medium-feed',
+            params: {
+              resource: resource,
+              postsPerLine: 3,
+              limit: 6,
+              picture: 'big',
+              fields: ['description','claps','publishAt'],
+              ratio: 'landscape'
+            }
+          });
+        } catch (e) {
+          container.innerHTML = '<p class="meta">Could not load Medium posts. Verify your handle URL, make sure posts are public, and reload.</p>';
+          console.warn('Medium embed error:', e);
+        }
+      }
+      window.addEventListener('load', initMedium);
+    })();
+  </script>
+
   <!--
   ===================== JEKYLL SETUP (copy these into files) =====================
   1) _config.yml (put at repo root)
@@ -350,7 +399,39 @@ title: "Brandon Love — Portfolio"
       {% endfor %}
     </ul>
   </main>
-  </body></html>
+    
+  <script defer src="https://medium-widget.pixelpoint.io/widget.js"></script>
+  <script>
+    // Replace with your Medium profile or publication URL
+    const MEDIUM_RESOURCE = 'https://medium.com/@your-medium-username';
+
+    function initMedium() {
+      try {
+        if (!window.MediumWidget) throw new Error('Widget library not loaded');
+        MediumWidget.Init({
+          renderTo: '#medium-feed',
+          params: {
+            resource: MEDIUM_RESOURCE,    // e.g. 'https://medium.com/@shinyhunter' or 'https://yourpub.medium.com'
+            postsPerLine: 3,
+            limit: 6,
+            picture: 'big',
+            fields: ['description','claps','publishAt'],
+            ratio: 'landscape'
+          }
+        });
+      } catch (err) {
+        const el = document.querySelector('#medium-feed');
+        if (el) {
+          el.innerHTML = '<p class="meta">Could not load Medium posts. Check your handle URL, make sure posts are public, and try again.</p>';
+        }
+        console.warn('Medium embed error:', err);
+      }
+    }
+    // Run after page fully loads to avoid race conditions
+    window.addEventListener('load', initMedium);
+  </script>
+</body>
+</html>
 
   NOTES
   - Because this file now has YAML front matter at the top, Jekyll will process
