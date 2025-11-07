@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>All Medium Posts — Brandon Love</title>
+  <meta name="description" content="Full archive of Brandon Love's Medium posts, embedded on a single page." />
+  <meta name="theme-color" content="#111827" />
+  <style>
+    :root{--bg:#0b1020;--card:#121934;--text:#e5e7eb;--muted:#9ca3af;--border:#1f2a4d;--accent:#60a5fa;--accent-2:#a78bfa;--shadow:0 8px 24px rgba(0,0,0,.4)}
+    @media (prefers-color-scheme: light){:root{--bg:#f8fafc;--card:#ffffff;--text:#0f172a;--muted:#475569;--border:#e2e8f0;--shadow:0 10px 20px rgba(2,6,23,.06)}}
+    body{margin:0;font:16px/1.7 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text)}
+    a{color:var(--accent);text-decoration:none}
+    .container{width:min(1100px,92%);margin-inline:auto}
+    header{position:sticky;top:0;background:linear-gradient(0deg,rgba(0,0,0,.0),rgba(0,0,0,.35)),var(--bg);border-bottom:1px solid var(--border);backdrop-filter:blur(8px);z-index:10}
+    header .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:.6rem;font-weight:700}
+    .brand .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+    main{padding:36px 0}
+    h1{font-size:clamp(1.4rem,1rem+1.8vw,2rem);margin:.2rem 0 1rem}
+    .meta{color:var(--muted)}
+    #medium-feed{display:grid;grid-template-columns:repeat(12,1fr);gap:1rem}
+    .medium-card{grid-column:span 4;background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:12px;display:flex;flex-direction:column}
+    .medium-card img{border-radius:12px}
+    @media (max-width:980px){.medium-card{grid-column:span 6}}
+    @media (max-width:640px){.medium-card{grid-column:span 12}}
+    .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .search{width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text)}
+    .empty{color:var(--muted);text-align:center;padding:24px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="/" aria-label="Back to home"><span class="dot"></span><span>Brandon Love</span></a>
+      <nav><a href="/">Home</a></nav>
+    </div>
+  </header>
+
+  <main class="container" id="medium" data-medium-resource="https://medium.com/@brandonlove2150">
+    <h1>All Medium Posts</h1>
+    <p class="meta">Loaded from Medium. Use the search box to filter by title/description.</p>
+    <div class="toolbar">
+      <input id="filter" class="search" type="search" placeholder="Filter posts (e.g., DFIR, CVE, Wireshark)">
+    </div>
+    <div id="medium-feed" aria-live="polite"></div>
+    <p class="meta" id="count"></p>
+  </main>
+
+  <footer class="container" style="padding:24px 0;color:var(--muted)">© <span id="year"></span> Brandon Love</footer>
+
+  <script defer src="https://medium-widget.pixelpoint.io/widget.js"></script>
+  <script>
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const resource = document.getElementById('medium').getAttribute('data-medium-resource');
+    const feedEl = document.getElementById('medium-feed');
+    const filter = document.getElementById('filter');
+    const count = document.getElementById('count');
+
+    // Build a large list (Medium's widget supports big limits; if capped, it returns as many as allowed)
+    function init() {
+      if (!window.MediumWidget) return setTimeout(init, 150);
+      MediumWidget.Init({
+        renderTo: '#medium-feed',
+        params: {
+          resource: resource,
+          postsPerLine: 3,
+          limit: 100, // pull as many as possible
+          picture: 'big',
+          fields: ['description','claps','publishAt'],
+          ratio: 'landscape'
+        }
+      });
+      setTimeout(() => {
+        // Normalize cards after widget renders
+        const cards = Array.from(feedEl.children);
+        cards.forEach(c => c.classList.add('medium-card'));
+        count.textContent = cards.length ? `${cards.length} post(s)` : '';
+      }, 500);
+    }
+    window.addEventListener('load', init);
+
+    // Simple client-side filter (title + description)
+    filter.addEventListener('input', () => {
+      const q = filter.value.trim().toLowerCase();
+      const cards = Array.from(feedEl.children);
+      let shown = 0;
+      cards.forEach(c => {
+        const hay = (c.textContent || '').toLowerCase();
+        const match = !q || hay.includes(q);
+        c.style.display = match ? '' : 'none';
+        if (match) shown++;
+      });
+      count.textContent = shown ? `${shown} post(s)` : 'No matches';
+    });
+  </script>
+</body>
+</html>
