@@ -1,65 +1,18 @@
- <!--
-  ===================== JEKYLL SETUP (copy these into files) =====================
-  1) _config.yml (put at repo root)
-  -------------------------------------------------------------------------------
-  title: "Brandon Love — Portfolio"
-  url: "https://Love2150.github.io"   # update me
-  theme: null
-  plugins:
-    - jekyll-feed
-    - jekyll-sitemap
-  markdown: kramdown
-  kramdown:
-    input: GFM
-  collections:
-    posts:
-      output: true
-  permalink: /:categories/:year/:month/:day/:title/
-  timezone: America/Chicago
+title: "Brandon Love — Portfolio"
+url: "https://your-username.github.io"
+theme: null
 
-  2) .gitignore (optional)
-  -------------------------------------------------------------------------------
-  _site/
-  .sass-cache/
-  .jekyll-cache/
-  .jekyll-metadata
-  node_modules/
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
 
-  3) First post: _posts/2025-11-07-welcome.md
-  -------------------------------------------------------------------------------
-  ---
-  layout: post
-  title: "Welcome to the new Markdown blog"
-  tags: [intro, site]
-  ---
-  This is your first Jekyll-powered post. Write in **Markdown**, drop images into
-  an `assets/` folder, and link like `[my project](/#projects)`.
+markdown: kramdown
+kramdown:
+  input: GFM
 
-  4) Optional archive page: archive/index.md
-  -------------------------------------------------------------------------------
-  ---
-  layout: null
-  title: "Archive"
-  permalink: /archive/
-  ---
-  <!doctype html>
-  <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Archive</title></head><body>
-  <main class="container" style="padding:44px 0">
-    <h1>Archive</h1>
-    <ul>
-      {% for post in site.posts %}
-        <li><a href="{{ post.url | relative_url }}">{{ post.date | date: "%Y-%m-%d" }} — {{ post.title }}</a></li>
-      {% endfor %}
-    </ul>
-  </main>
-  </body></html>
+collections:
+  posts:
+    output: true
 
-  NOTES
-  - Because this file now has YAML front matter at the top, Jekyll will process
-    Liquid tags (like the <blog loop>) even though it's a full HTML document.
-  - You do NOT need layouts; we set `layout: null` to keep this single-file
-    approach. If you prefer traditional Jekyll layouts, I can scaffold `_layouts/`.
-  - After pushing to GitHub, ensure **Settings → Pages** uses the main branch.
-  - To add read time, include `read_time: 4` in a post's front matter.
-  =====
+permalink: "/:categories/:year/:month/:day/:title/"
+timezone: "America/Chicago"
