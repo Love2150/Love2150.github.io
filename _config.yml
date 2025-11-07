@@ -1,10 +1,13 @@
-title: "Brandon Love — Portfolio"
-url: "https://Love2150.github.io"
+title: "Brandon Love"
+description: "Cybersecurity analyst | DFIR, blue team, and write-ups"
+url: "https://love2150.github.io"   # lowercase is safest
+baseurl: ""                          # "" for user site; "/repo-name" for project site
 theme: null
 
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  # - jekyll-seo-tag   # optional; add if you want richer meta tags
 
 markdown: kramdown
 kramdown:
@@ -16,3 +19,5 @@ collections:
 
 permalink: "/:categories/:year/:month/:day/:title/"
 timezone: "America/Chicago"
+future: true
+
