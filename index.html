@@ -90,25 +90,33 @@ title: "Brandon Love — Portfolio"
 </head>
 
 <body>
-  <!-- Header -->
-  <header>
-    <div class="container nav">
-      <a class="brand" href="#top"><span class="dot"></span><span>Brandon Love</span></a>
-      <nav class="menu">
-        <a href="#portfolio">Portfolio</a>
-        <a href="#projects">Projects</a>
-        <a href="#latest-blogs">Blog</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <button class="hamburger" aria-expanded="false" aria-controls="drawer">☰</button>
-    </div>
-    <div id="drawer" class="drawer container" role="dialog" aria-label="Mobile menu">
+  
+   <!-- ======= HEADER ======= -->
+<header>
+  <div class="container nav">
+    <a class="brand" href="#top" aria-label="Home">
+      <span class="dot"></span>
+      <span>Brandon Love</span>
+    </a>
+
+    <nav class="menu" aria-label="Primary">
       <a href="#portfolio">Portfolio</a>
       <a href="#projects">Projects</a>
       <a href="#latest-blogs">Blog</a>
       <a href="#contact">Contact</a>
-    </div>
-  </header>
+    </nav>
+
+    <button class="hamburger" aria-expanded="false" aria-controls="drawer" aria-label="Toggle menu">☰</button>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div id="drawer" class="drawer container" role="dialog" aria-label="Mobile menu">
+    <a href="#portfolio">Portfolio</a>
+    <a href="#projects">Projects</a>
+    <a href="#latest-blogs">Blog</a>
+    <a href="#contact">Contact</a>
+  </div>
+</header>
 
   <main id="top">
     <!-- Hero -->
