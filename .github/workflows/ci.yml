@@ -9,58 +9,48 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install package (editable) + pytest
+      - name: Install (editable) + pytest
         run: |
+          set -euxo pipefail
           python -m pip install --upgrade pip
-          pip install -e .            # or: pip install -e .[beautify]
+          pip install -e .[beautify] || pip install -e .
           pip install pytest
 
-      - name: Verify package import and CLI on PATH
+      - name: Sanity: import + entry point
         run: |
+          set -euxo pipefail
           python -c "import eval_unpacker, sys; print('version:', getattr(eval_unpacker, '__version__', 'n/a'))"
           python - <<'PY'
-          import shutil, sys
-          print('CLI on PATH:', bool(shutil.which('eval-unpack')))
+          import shutil
+          p = shutil.which('eval-unpack')
+          print('eval-unpack on PATH:', p)
+          if not p:
+              raise SystemExit(1)
           PY
 
-      - name: CLI smoke test (create sample and run)
+      - name: Smoke test CLI
         run: |
+          set -euxo pipefail
           mkdir -p examples
           echo "eval(function(p,a,c,k,e,d){return p}('abc',10,2,'a|b'))" > examples/sample_packed.js
-          # Try via entry point
-          eval-unpack examples/sample_packed.js || (echo 'entry-point failed' && exit 1)
-          # Try via module (fallback if PATH issues)
-          python -m eval_unpacker.cli examples/sample_packed.js || (echo 'module fallback failed' && exit 1)
+          eval-unpack examples/sample_packed.js
+          # Also ensure module invocation works
+          python -m eval_unpacker.cli examples/sample_packed.js
 
       - name: Run pytest (if tests/ exists)
         run: |
           if [ -d tests ]; then
             pytest -q
           else
-            echo "No tests/ directory; skipping pytest."
+            echo "No tests/; skipping."
           fi
 
-          python -c "import importlib, pkgutil; import eval_unpacker, sys; print('version:', getattr(eval_unpacker, '__version__', 'n/a'))"
-          python -c "import shutil; print('eval-unpack on PATH:', shutil.which('eval-unpack'))"
-
-      - name: CLI smoke test (no input expected to succeed)
-        run: |
-          # Create a tiny packed-like sample to exercise parser
-          echo "eval(function(p,a,c,k,e,d){return p}('abc',10,2,'a|b'))" > examples/sample_packed.js
-          # Run the CLI. It should print something (no error exit).
-          eval-unpack examples/sample_packed.js || (echo 'CLI failed' && exit 1)
-
-      - name: Run pytest (if tests/ exists)
-        run: |
-          if [ -d tests ]; then
             pytest -q
           else
             echo "No tests/ directory; skipping pytest."
