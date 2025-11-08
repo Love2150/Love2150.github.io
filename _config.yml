@@ -21,3 +21,11 @@ permalink: "/:categories/:year/:month/:day/:title/"
 timezone: "America/Chicago"
 future: true
 
+collections:
+  posts:
+    output: true
+  projects:
+    output: true
+    permalink: /projects/:title/
+
+
