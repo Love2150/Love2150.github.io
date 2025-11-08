@@ -194,6 +194,3 @@ You are free to use, copy, and modify this project — attribution appreciated.
 ---
 
 > *“Security isn’t just defense — it’s clarity, curiosity, and continuous learning.”* 🛡️
-
-```
-
