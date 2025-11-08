@@ -141,7 +141,7 @@ title: "Brandon Love — Portfolio"
           </p>
           <div style="display:flex;gap:.8rem;flex-wrap:wrap">
             <a class="pill" href="#projects">View Projects</a>
-            <a class="pill" href="#blog">Read the Blog</a>
+            <a class="pill" href="#latest-blogs">Read the Blog</a>
           </div>
         </div>
         <div class="card">
@@ -222,13 +222,11 @@ title: "Brandon Love — Portfolio"
       </div>
     </section>
 
-  
-
-    <!-- Medium (latest 3) -->
-    <section id="latest" class="container">
+<!-- Latest Blogs (slider only, no Medium widget/fallback) -->
+<section id="latest-blogs" class="container">
   <div class="section-head">
-    <h2>Latest blogs</h2>
-    <p class="meta">Newest three posts, with images. The last slide links to the full archive.</p>
+    <h2>Latest Blogs</h2>
+    <p class="meta">Newest three posts with images. The last slide links to the full archive.</p>
   </div>
 
   <div class="blog-slider" aria-roledescription="carousel">
@@ -237,11 +235,6 @@ title: "Brandon Love — Portfolio"
       {%- assign top3 = newest | slice: 0, 3 -%}
 
       {%- for post in top3 -%}
-        {%- comment -%}
-          Figure out a hero image:
-          1) Prefer front matter: image / hero / thumbnail
-          2) Else try to grab the first <img src="..."> from content
-        {%- endcomment -%}
         {%- assign hero = post.image | default: post.hero | default: post.thumbnail -%}
         {%- if hero == nil or hero == "" -%}
           {%- assign split1 = post.content | split:'img src="' -%}
@@ -293,20 +286,6 @@ title: "Brandon Love — Portfolio"
 </section>
 
 
-      <!-- Static fallback (hidden when widget loads) -->
-      <div id="medium-fallback" class="grid" style="margin-top:12px">
-        {% assign medium_posts = site.posts | where_exp: "p", "p.medium_canonical" | slice: 0, 3 %}
-        {% for post in medium_posts %}
-        <article class="post col-12">
-          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-          <p class="meta">{{ post.date | date: "%b %d, %Y" }}{% if post.tags %} · Tags: {{ post.tags | join: ", " }}{% endif %}</p>
-          <p>{{ post.excerpt | strip_html | truncate: 200 }}</p>
-          {% if post.medium_canonical %}<p><a href="{{ post.medium_canonical }}" target="_blank" rel="noopener">View on Medium →</a></p>{% endif %}
-        </article>
-        {% endfor %}
-      </div>
-    </section>
-
     <!-- Contact -->
     <section id="contact" class="container">
       <div class="section-head">
@@ -320,10 +299,6 @@ title: "Brandon Love — Portfolio"
             <li>GitHub: <a href="#">github.com/your-user</a></li>
             <li>Location: Chicago, IL</li>
           </ul>
-        </div>
-        <div class="col-6 card" style="padding:16px">
-          <p class="meta">Write Markdown posts in <code>_posts/</code> with filenames like <code>YYYY-MM-DD-title.md</code>. Jekyll builds them automatically.</p>
-        </div>
       </div>
     </section>
   </main>
