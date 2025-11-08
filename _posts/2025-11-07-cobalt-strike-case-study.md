@@ -1,9 +1,11 @@
 ---
 layout: post
 title: "Cobalt Strike: Triage to Timeline"
+date: 2025-11-07 10:30:00 -0600
+image: /assets/images/cobalt-strike-hero.jpg   # ← this is option 4
 tags: [DFIR, PCAP, ATT&CK]
-read_time: 6
 ---
+
 
 I walked through a network forensics scenario involving Cobalt Strike beacons and HTTP/S traffic. <!--more-->
 
