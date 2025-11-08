@@ -13,22 +13,8 @@ title: "Brandon Love — Portfolio"
   <meta property="og:title" content="Brandon Love — Portfolio" />
   <meta property="og:description" content="Responsive personal site with portfolio, projects, and blog." />
   <meta name="theme-color" content="#111827"/>
-  /* Footer polish */
-footer {
-  padding: 32px 0;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  text-align: center;
-}
-footer a {
-  color: var(--accent);
-  text-decoration: none;
-}
-footer a:hover {
-  text-decoration: underline;
-}
 
-  <style>
+    <style>
     :root{
       --bg:#0b1020; --card:#121934; --text:#e5e7eb; --muted:#9ca3af;
       --accent:#60a5fa; --accent-2:#a78bfa; --border:#1f2a4d; --shadow:0 8px 24px rgba(0,0,0,.4)
@@ -177,7 +163,15 @@ section { scroll-margin-top: calc(var(--header-h) + 12px); }
 @media (max-width: 760px){
   .menu { display:none; } /* drawer handles mobile */
 }
-
+      /* Footer polish (keep only one footer style block in the file) */
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 
