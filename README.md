@@ -40,7 +40,6 @@ This portfolio serves as both a **personal brand hub** and a **cybersecurity lea
 
 ## 🗂️ Folder Structure
 
-```
 
 ├── _layouts/
 │   └── post.html             # Blog post layout
@@ -55,7 +54,6 @@ This portfolio serves as both a **personal brand hub** and a **cybersecurity lea
 ├── _config.yml               # Jekyll config file
 └── README.md                 # (this file)
 
-````
 
 ---
 
@@ -199,7 +197,3 @@ You are free to use, copy, and modify this project — attribution appreciated.
 
 ```
 
----
-
-Would you like me to create a **lightweight `LICENSE` file** (MIT format with your name and year) to match the badge and include it in your repo root?
-```
