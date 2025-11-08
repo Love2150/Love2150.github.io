@@ -385,90 +385,99 @@ title: "Brandon Love — Portfolio"
   })();
   </script>
  <script>
-(function makeSlider(cfg){
-  const track = document.getElementById(cfg.trackId);
-  if (!track) return;
-
-  const container = track.closest(cfg.containerSel);
-  const slides = Array.from(track.children);
-  const dotsWrap = document.getElementById(cfg.dotsId);
-  const prev = document.getElementById(cfg.prevId);
-  const next = document.getElementById(cfg.nextId);
-
-  let index = 0, timer = null, hovering = false, focused = false;
-
-  // dots
-  slides.forEach((_, i) => {
-    const b = document.createElement('button');
-    b.className = cfg.dotClass;
-    b.type = 'button';
-    b.setAttribute('aria-label', `Go to slide ${i+1} of ${slides.length}`);
-    b.addEventListener('click', () => go(i, true));
-    dotsWrap.appendChild(b);
-  });
-
-  function update(){
-    track.style.transform = `translateX(-${index * 100}%)`;
-    [...dotsWrap.children].forEach((d, i) => d.classList.toggle('active', i === index));
-    const h = slides[index].offsetHeight;
-    track.parentElement.style.height = h + 'px';
-  }
-  function go(i, user=false){
-    index = (i + slides.length) % slides.length;
-    update();
-    if (user) restartAutoplay();
-  }
-
-  prev?.addEventListener('click', () => go(index-1, true));
-  next?.addEventListener('click', () => go(index+1, true));
-
-  // touch
-  let x0 = null;
-  track.addEventListener('touchstart', e => x0 = e.touches[0].clientX, {passive:true});
-  track.addEventListener('touchmove', e => {
-    if (x0 === null) return;
-    const dx = e.touches[0].clientX - x0;
-    if (Math.abs(dx) > 42){ go(index + (dx<0?1:-1), true); x0 = null; }
-  }, {passive:true});
-
-  // focus/keyboard
-  container.setAttribute('tabindex','0');
-  container.addEventListener('focusin', ()=>{ focused = true; pauseAutoplay(); });
-  container.addEventListener('focusout', ()=>{ focused = false; resumeAutoplay(); });
-  container.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight') { e.preventDefault(); go(index+1, true); }
-    if (e.key === 'ArrowLeft')  { e.preventDefault(); go(index-1, true); }
-  });
-
-  // autoplay
-  const INTERVAL = cfg.interval || 5000;
-  function tick(){ if (!hovering && !focused) go(index+1); }
-  function startAutoplay(){ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; timer = setInterval(tick, INTERVAL); }
-  function pauseAutoplay(){ if (timer){ clearInterval(timer); timer = null; } }
-  function resumeAutoplay(){ if (!timer) startAutoplay(); }
-  function restartAutoplay(){ pauseAutoplay(); resumeAutoplay(); }
-
-  container.addEventListener('mouseenter', ()=>{ hovering = true; pauseAutoplay(); });
-  container.addEventListener('mouseleave', ()=>{ hovering = false; resumeAutoplay(); });
-
-  window.addEventListener('load', ()=>{ update(); startAutoplay(); });
-  window.addEventListener('resize', update);
-  const ro = new ResizeObserver(update);
-  slides.forEach(s => ro.observe(s));
-})({
-  // init Blog slider
-  containerSel: '.blog-slider',
-  trackId: 'blogTrack',
-  dotsId: 'blogDots',
-  prevId: 'prevSlide',
-  nextId: 'nextSlide',
-  dotClass: 'blog-dot',
-  interval: 5000
-});
-
 (function(){
-  // init Projects slider
-  (makeSlider)({
+  // Generic slider maker for any section
+  function makeSlider(cfg){
+    const track = document.getElementById(cfg.trackId);
+    if (!track) { console.warn('[slider] missing track:', cfg.trackId); return; }
+
+    const container = track.closest(cfg.containerSel);
+    const slides = Array.from(track.children);
+    const dotsWrap = document.getElementById(cfg.dotsId);
+    const prev = document.getElementById(cfg.prevId);
+    const next = document.getElementById(cfg.nextId);
+
+    let index = 0, timer = null, hovering = false, focused = false;
+
+    // dots
+    dotsWrap.innerHTML = '';
+    slides.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.className = cfg.dotClass;
+      b.type = 'button';
+      b.setAttribute('aria-label', `Go to slide ${i+1} of ${slides.length}`);
+      b.addEventListener('click', () => go(i, true));
+      dotsWrap.appendChild(b);
+    });
+
+    function update(){
+      track.style.transform = `translateX(-${index * 100}%)`;
+      [...dotsWrap.children].forEach((d, i) => d.classList.toggle('active', i === index));
+      // auto-fit height (after images load)
+      const h = slides[index].offsetHeight;
+      track.parentElement.style.height = (h || 0) + 'px';
+    }
+    function go(i, user=false){
+      index = (i + slides.length) % slides.length;
+      update();
+      if (user) restartAutoplay();
+    }
+
+    prev?.addEventListener('click', () => go(index-1, true));
+    next?.addEventListener('click', () => go(index+1, true));
+
+    // touch
+    let x0 = null;
+    track.addEventListener('touchstart', e => x0 = e.touches[0].clientX, {passive:true});
+    track.addEventListener('touchmove', e => {
+      if (x0 === null) return;
+      const dx = e.touches[0].clientX - x0;
+      if (Math.abs(dx) > 42){ go(index + (dx<0?1:-1), true); x0 = null; }
+    }, {passive:true});
+
+    // focus/keyboard
+    container.setAttribute('tabindex','0');
+    container.addEventListener('focusin', ()=>{ focused = true; pauseAutoplay(); });
+    container.addEventListener('focusout', ()=>{ focused = false; resumeAutoplay(); });
+    container.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(index+1, true); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); go(index-1, true); }
+    });
+
+    // autoplay with reduced-motion respect
+    const INTERVAL = cfg.interval || 5000;
+    function tick(){ if (!hovering && !focused) go(index+1); }
+    function startAutoplay(){ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; timer = setInterval(tick, INTERVAL); }
+    function pauseAutoplay(){ if (timer){ clearInterval(timer); timer = null; } }
+    function resumeAutoplay(){ if (!timer) startAutoplay(); }
+    function restartAutoplay(){ pauseAutoplay(); resumeAutoplay(); }
+
+    container.addEventListener('mouseenter', ()=>{ hovering = true; pauseAutoplay(); });
+    container.addEventListener('mouseleave', ()=>{ hovering = false; resumeAutoplay(); });
+
+    // update after images load too
+    window.addEventListener('load', update);
+    window.addEventListener('resize', update);
+    const ro = new ResizeObserver(update);
+    slides.forEach(s => ro.observe(s));
+
+    // kick off
+    update();
+    startAutoplay();
+  }
+
+  // Initialize both sliders
+  makeSlider({
+    containerSel: '.blog-slider',
+    trackId: 'blogTrack',
+    dotsId: 'blogDots',
+    prevId: 'prevSlide',
+    nextId: 'nextSlide',
+    dotClass: 'blog-dot',
+    interval: 5000
+  });
+
+  makeSlider({
     containerSel: '.proj-slider',
     trackId: 'projTrack',
     dotsId: 'projDots',
@@ -479,6 +488,7 @@ title: "Brandon Love — Portfolio"
   });
 })();
 </script>
+
   
 </body>
 </html>
