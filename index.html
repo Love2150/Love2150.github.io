@@ -90,6 +90,24 @@ title: "Brandon Love — Portfolio"
 .blog-dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:.45rem}
 .blog-dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.5)}
 .blog-dot.active,.blog-dot[aria-current="true"]{background:#fff}
+/* —— Projects slider —— */
+.proj-slider{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}
+.proj-track{display:flex;transition:transform .5s cubic-bezier(.22,.61,.36,1);will-change:transform}
+.proj-slide{min-width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:1rem;align-items:stretch}
+.proj-media{position:relative;border-right:1px solid var(--border);background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.12))}
+.proj-media img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:16/9}
+.proj-body{padding:16px;display:flex;flex-direction:column;justify-content:center}
+.proj-body h3{margin:.2rem 0 .4rem;font-size:clamp(1.05rem,1vw + 1rem,1.5rem)}
+.proj-body p.meta{color:var(--muted);margin:.1rem 0 .6rem}
+.proj-cta{margin-top:.6rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.proj-ghost{background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.12))}
+.proj-nav{position:absolute;inset:auto 0 8px 0;display:flex;justify-content:space-between;pointer-events:none}
+.proj-btn{pointer-events:auto;background:rgba(0,0,0,.35);border:1px solid var(--border);color:#fff;backdrop-filter:blur(6px);border-radius:999px;padding:.5rem .8rem;margin:0 .5rem;cursor:pointer}
+.proj-dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:.45rem}
+.proj-dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.5)}
+.proj-dot.active{background:#fff}
+@media (max-width: 900px){.proj-slide{grid-template-columns:1fr}.proj-media{border-right:0}}
+
 @media (max-width: 900px){.blog-slide{grid-template-columns:1fr}.blog-media{border-right:0}}
 @media (prefers-reduced-motion: reduce){
   .blog-track{transition:none}
@@ -179,48 +197,58 @@ title: "Brandon Love — Portfolio"
       </div>
     </section>
 
-    <!-- Projects -->
-    <section id="projects" class="container">
-      <div class="section-head">
-        <h2>Projects</h2>
-        <p>Hands-on labs, tools, and experiments.</p>
-      </div>
-      <div class="grid" id="projectGrid" aria-live="polite">
-        <article class="card col-4" data-tags="dfir windows powershell">
-          <div class="thumb" aria-hidden></div>
-          <div class="card-body">
-            <h3>PowerShell Deobfuscator</h3>
-            <p class="meta">Helper for base64/unicode escapes.</p>
-            <div class="tags"><span class="tag">PowerShell</span><span class="tag">DFIR</span></div>
+    <!-- Featured Projects (slider) -->
+<section id="featured-projects" class="container">
+  <div class="section-head">
+    <h2>Featured Projects</h2>
+    <p class="meta">Newest or hand-picked projects. Last slide links to all projects.</p>
+  </div>
+
+  <div class="proj-slider" aria-roledescription="carousel">
+    <div class="proj-track" id="projTrack">
+      {%- assign featured = site.projects | sort: 'weight' -%}
+      {%- assign top3 = featured | slice: 0, 3 -%}
+      {%- for p in top3 -%}
+        <article class="proj-slide">
+          <div class="proj-media">
+            {% if p.image %}
+              <img src="{{ p.image | relative_url }}" alt="{{ p.title | escape }}" loading="lazy" decoding="async">
+            {% else %}
+              <div class="proj-ghost" style="height:100%;min-height:240px"></div>
+            {% endif %}
           </div>
-          <a class="meta" style="padding:0 16px 16px" href="#">Source →</a>
-        </article>
-        <article class="card col-4" data-tags="network wireshark pcap">
-          <div class="thumb" aria-hidden></div>
-          <div class="card-body">
-            <h3>PCAP Quick Profiler</h3>
-            <p class="meta">Protocol hierarchy snapshot.</p>
-            <div class="tags"><span class="tag">Python</span><span class="tag">Wireshark</span></div>
+          <div class="proj-body">
+            <h3><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
+            <p class="meta">{% if p.tags %}{{ p.tags | join: ", " }} · {% endif %}{{ p.date | date: "%b %d, %Y" }}</p>
+            <p>{{ p.summary | default: p.excerpt | strip_html | truncate: 220 }}</p>
+            <div class="proj-cta">
+              {% if p.demo %}<a class="pill" href="{{ p.demo }}" target="_blank" rel="noopener">Demo →</a>{% endif %}
+              {% if p.repo %}<a class="pill" href="{{ p.repo }}" target="_blank" rel="noopener">Repo →</a>{% endif %}
+              <a class="pill" href="{{ p.url | relative_url }}">Details →</a>
+            </div>
           </div>
-          <a class="meta" style="padding:0 16px 16px" href="#">Docs →</a>
         </article>
-        <article class="card col-4" data-tags="web github-actions ci">
-          <div class="thumb" aria-hidden></div>
-          <div class="card-body">
-            <h3>GitHub Pages CI</h3>
-            <p class="meta">Action to lint, build & deploy static sites.</p>
-            <div class="tags"><span class="tag">CI/CD</span><span class="tag">YAML</span></div>
-          </div>
-          <a class="meta" style="padding:0 16px 16px" href="#">Repo →</a>
-        </article>
-      </div>
-      <div class="container" style="padding-top:10px">
-        <label class="sr-only" for="filter">Filter projects</label>
-        <input id="filter" type="search" placeholder="Filter projects (e.g., wireshark, CI, DFIR)"
-               aria-controls="projectGrid"
-               style="width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text)">
-      </div>
-    </section>
+      {%- endfor -%}
+
+      <!-- CTA slide to Projects page -->
+      <article class="proj-slide">
+        <div class="proj-media proj-ghost"></div>
+        <div class="proj-body" style="text-align:center;align-items:center">
+          <h3>See all projects</h3>
+          <p class="meta">Browse the full collection.</p>
+          <p><a class="pill" href="{{ '/projects/' | relative_url }}">View all projects →</a></p>
+        </div>
+      </article>
+    </div>
+
+    <div class="proj-nav" aria-hidden="true">
+      <button class="proj-btn" id="prevProj" aria-label="Previous">‹</button>
+      <button class="proj-btn" id="nextProj" aria-label="Next">›</button>
+    </div>
+    <div class="proj-dots" id="projDots" aria-hidden="true"></div>
+  </div>
+</section>
+
 
 <!-- Latest Blogs (slider only, no Medium widget/fallback) -->
 <section id="latest-blogs" class="container">
@@ -356,43 +384,37 @@ title: "Brandon Love — Portfolio"
     init(); window.addEventListener("load",init);
   })();
   </script>
-  <script>
-(function(){
-  const track = document.getElementById('blogTrack');
+ <script>
+(function makeSlider(cfg){
+  const track = document.getElementById(cfg.trackId);
   if (!track) return;
 
+  const container = track.closest(cfg.containerSel);
   const slides = Array.from(track.children);
-  const total = slides.length;
+  const dotsWrap = document.getElementById(cfg.dotsId);
+  const prev = document.getElementById(cfg.prevId);
+  const next = document.getElementById(cfg.nextId);
+
   let index = 0, timer = null, hovering = false, focused = false;
 
-  const dotsWrap = document.getElementById('blogDots');
-  const prev = document.getElementById('prevSlide');
-  const next = document.getElementById('nextSlide');
-  const slider = track.closest('.blog-slider');
-
-  // Build dots as buttons
+  // dots
   slides.forEach((_, i) => {
     const b = document.createElement('button');
-    b.className = 'blog-dot';
+    b.className = cfg.dotClass;
     b.type = 'button';
-    b.setAttribute('aria-label', `Go to slide ${i+1} of ${total}`);
+    b.setAttribute('aria-label', `Go to slide ${i+1} of ${slides.length}`);
     b.addEventListener('click', () => go(i, true));
     dotsWrap.appendChild(b);
   });
 
   function update(){
     track.style.transform = `translateX(-${index * 100}%)`;
-    [...dotsWrap.children].forEach((d, i) => {
-      d.classList.toggle('active', i === index);
-      d.setAttribute('aria-current', i === index ? 'true' : 'false');
-    });
-    // fit height
+    [...dotsWrap.children].forEach((d, i) => d.classList.toggle('active', i === index));
     const h = slides[index].offsetHeight;
     track.parentElement.style.height = h + 'px';
   }
-
   function go(i, user=false){
-    index = (i + total) % total;
+    index = (i + slides.length) % slides.length;
     update();
     if (user) restartAutoplay();
   }
@@ -400,7 +422,7 @@ title: "Brandon Love — Portfolio"
   prev?.addEventListener('click', () => go(index-1, true));
   next?.addEventListener('click', () => go(index+1, true));
 
-  // swipe
+  // touch
   let x0 = null;
   track.addEventListener('touchstart', e => x0 = e.touches[0].clientX, {passive:true});
   track.addEventListener('touchmove', e => {
@@ -409,35 +431,55 @@ title: "Brandon Love — Portfolio"
     if (Math.abs(dx) > 42){ go(index + (dx<0?1:-1), true); x0 = null; }
   }, {passive:true});
 
-  // keyboard (only when slider is focused)
-  slider.setAttribute('tabindex','0');
-  slider.addEventListener('focusin', ()=>{ focused = true; pauseAutoplay(); });
-  slider.addEventListener('focusout', ()=>{ focused = false; resumeAutoplay(); });
-  slider.addEventListener('keydown', e => {
+  // focus/keyboard
+  container.setAttribute('tabindex','0');
+  container.addEventListener('focusin', ()=>{ focused = true; pauseAutoplay(); });
+  container.addEventListener('focusout', ()=>{ focused = false; resumeAutoplay(); });
+  container.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight') { e.preventDefault(); go(index+1, true); }
     if (e.key === 'ArrowLeft')  { e.preventDefault(); go(index-1, true); }
   });
 
   // autoplay
-  const INTERVAL = 5000;
+  const INTERVAL = cfg.interval || 5000;
   function tick(){ if (!hovering && !focused) go(index+1); }
   function startAutoplay(){ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; timer = setInterval(tick, INTERVAL); }
   function pauseAutoplay(){ if (timer){ clearInterval(timer); timer = null; } }
   function resumeAutoplay(){ if (!timer) startAutoplay(); }
   function restartAutoplay(){ pauseAutoplay(); resumeAutoplay(); }
 
-  slider.addEventListener('mouseenter', ()=>{ hovering = true; pauseAutoplay(); });
-  slider.addEventListener('mouseleave', ()=>{ hovering = false; resumeAutoplay(); });
+  container.addEventListener('mouseenter', ()=>{ hovering = true; pauseAutoplay(); });
+  container.addEventListener('mouseleave', ()=>{ hovering = false; resumeAutoplay(); });
 
-  // initial
-  window.addEventListener('load', () => { update(); startAutoplay(); });
+  window.addEventListener('load', ()=>{ update(); startAutoplay(); });
   window.addEventListener('resize', update);
   const ro = new ResizeObserver(update);
   slides.forEach(s => ro.observe(s));
+})({
+  // init Blog slider
+  containerSel: '.blog-slider',
+  trackId: 'blogTrack',
+  dotsId: 'blogDots',
+  prevId: 'prevSlide',
+  nextId: 'nextSlide',
+  dotClass: 'blog-dot',
+  interval: 5000
+});
+
+(function(){
+  // init Projects slider
+  (makeSlider)({
+    containerSel: '.proj-slider',
+    trackId: 'projTrack',
+    dotsId: 'projDots',
+    prevId: 'prevProj',
+    nextId: 'nextProj',
+    dotClass: 'proj-dot',
+    interval: 5500
+  });
 })();
 </script>
-
-
+  
 </body>
 </html>
 
