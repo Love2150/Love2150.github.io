@@ -13,22 +13,8 @@ title: "Brandon Love — Portfolio"
   <meta property="og:title" content="Brandon Love — Portfolio" />
   <meta property="og:description" content="Responsive personal site with portfolio, projects, and blog." />
   <meta name="theme-color" content="#111827"/>
-  /* Footer polish */
-footer {
-  padding: 32px 0;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  text-align: center;
-}
-footer a {
-  color: var(--accent);
-  text-decoration: none;
-}
-footer a:hover {
-  text-decoration: underline;
-}
 
-  <style>
+    <style>
     :root{
       --bg:#0b1020; --card:#121934; --text:#e5e7eb; --muted:#9ca3af;
       --accent:#60a5fa; --accent-2:#a78bfa; --border:#1f2a4d; --shadow:0 8px 24px rgba(0,0,0,.4)
@@ -127,6 +113,70 @@ footer a:hover {
 @media (prefers-reduced-motion: reduce){
   .blog-track{transition:none}
 }
+    
+/* === Cyber Animation: cursor-reactive tilt + glow === */
+.cyber-anim {
+  --rx: 0deg;   /* rotateX */
+  --ry: 0deg;   /* rotateY */
+  border-radius: 18px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  will-change: transform, filter;
+  transition: transform 180ms ease, filter 220ms ease, box-shadow 220ms ease;
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.02);
+  box-shadow: 0 0 20px rgba(96,165,250,.30);
+  animation: cyberPulse 5s infinite ease-in-out;
+}
+
+.cyber-anim:hover {
+  box-shadow: 0 0 30px rgba(96,165,250,.55), 0 0 60px rgba(167,139,250,.35);
+  filter: brightness(1.08);
+}
+
+/* (keeps your existing pulse) */
+@keyframes cyberPulse {
+  0%,100% { box-shadow: 0 0 20px rgba(96,165,250,.30); }
+  50%     { box-shadow: 0 0 40px rgba(167,139,250,.45), 0 0 70px rgba(96,165,250,.35); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .cyber-anim { animation: none; transition: none; transform: none; }
+}
+/* --- Header/Top fixes --- */
+:root { --header-h: 64px; }
+@media (max-width: 760px){ :root { --header-h: 56px; } }
+
+header { position: sticky; top: 0; z-index: 50; }
+header .nav { min-height: var(--header-h); padding: 10px 0; }
+
+/* Push page content below sticky header */
+main { padding-top: calc(var(--header-h) + 8px); }
+
+/* Make anchor targets not hide under header */
+section { scroll-margin-top: calc(var(--header-h) + 12px); }
+
+/* Keep header compact; avoid accidental wrap making it tall */
+.nav { display:flex; align-items:center; justify-content:space-between; gap: 1rem; }
+.menu { display:flex; gap:1rem; flex-wrap: wrap; }
+@media (max-width: 760px){
+  .menu { display:none; } /* drawer handles mobile */
+}
+      /* Footer polish (keep only one footer style block in the file) */
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+      /* Narrative hero tweaks */
+.hero .pill { background: transparent; }
+@media (max-width: 900px){
+  .hero .grid { grid-template-columns: 1fr !important; }
+}
 
   </style>
 </head>
@@ -161,28 +211,75 @@ footer a:hover {
 </header>
 
   <main id="top">
-    <!-- Hero -->
-    <section class="container" style="padding:64px 0 32px">
-      <div class="grid" style="grid-template-columns:1.2fr .8fr;align-items:center;gap:2rem">
-        <div>
-          <span class="pill">🚀 Open to Cybersecurity Roles</span>
-          <h1 style="font-size:clamp(1.6rem,1.2rem + 2.6vw,3rem);line-height:1.15;margin:.6rem 0 0">
-            Hi, I’m Brandon — I secure systems, analyze threats, and build resilient networks.
-          </h1>
-          <p class="meta" style="margin:.6rem 0 1.2rem">
-            Military logistics veteran turned security analyst. I enjoy blue-team investigations, discrete mathematics, and writing clear technical posts.
-          </p>
-          <div style="display:flex;gap:.8rem;flex-wrap:wrap">
-            <a class="pill" href="#featured-projects">View Projects</a>
-            <a class="pill" href="#latest-blogs">Read the Blog</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="thumb" aria-hidden></div>
-          <div class="card-body meta">Static preview mock</div>
-        </div>
+    <!-- HERO — Narrative: Logistics ➝ Cyber -->
+<section class="container hero" style="padding:56px 0 32px">
+  <div class="grid" style="grid-template-columns:1.15fr .85fr;align-items:center;gap:2rem">
+    <!-- Left: Story -->
+    <div>
+      <span class="pill">🛡️ Veteran → Cyber Threat Hunter</span>
+      <h1 style="font-size:clamp(1.6rem,1.2rem + 2.6vw,3rem);line-height:1.15;margin:.6rem 0 0">
+        From tactical supply chains to tactical cyber defense.
+      </h1>
+      <p class="meta" style="margin:.6rem 0 1.1rem">
+        I’m <strong>Brandon Love</strong> — U.S. Army logistics veteran turned cybersecurity analyst.
+        I secure systems, decode threats, and turn noisy signals into clear, actionable defense.
+      </p>
+
+      <!-- Quick Creds Row (optional, remove if you want cleaner) -->
+      <ul class="meta" style="list-style:none;padding:0;margin:0 0 1rem;display:flex;gap:.8rem;flex-wrap:wrap">
+        <li>DFIR & Incident Response</li>
+        <li>MITRE ATT&amp;CK</li>
+        <li>Let’sDefend / HTB</li>
+        <li>Powershell &amp; Network Forensics</li>
+      </ul>
+
+      <div style="display:flex;gap:.8rem;flex-wrap:wrap">
+        <a class="pill" href="#featured-projects">Browse Projects</a>
+        <a class="pill" href="#latest-blogs">See Latest Blogs</a>
+        <a class="pill" href="#contact">Contact</a>
       </div>
-    </section>
+    </div>
+
+    <!-- Right: Visual -->
+    <div class="card" style="overflow:hidden">
+      <div class="thumb" aria-hidden>
+        <img
+          src="/assets/images/cybersecurity-animation.gif"
+          alt="Animated cyber defense lock with flowing data streams"
+          class="cyber-anim"
+          loading="lazy">
+      </div>
+      <div class="card-body meta">Journey: Logistics ➝ Cyber Defense</div>
+    </div>
+  </div>
+</section>
+
+    <!-- MY STORY SECTION -->
+<section id="story" class="container">
+  <div class="section-head">
+    <h2>My Story</h2>
+    <p class="meta">How my journey from logistics to cybersecurity built my mindset for defense.</p>
+  </div>
+
+  <div class="card" style="padding:24px;line-height:1.7">
+    <p>
+      My path into cybersecurity began in the U.S. Army, where I managed logistics networks and coordinated operations as a Motor Transport Operator (88M). 
+      Those years taught me the value of discipline, data-driven decisions, and operational resilience — principles that directly translate to defending digital systems today.
+    </p>
+
+    <p>
+      After transitioning from military service, I shifted focus from supply chains to security chains — learning to protect critical infrastructure through continuous education, 
+      hands-on labs, and professional certifications. I now apply structured investigation and analytical thinking to digital incidents, treating every alert like a mission.
+    </p>
+
+    <ul class="meta" style="list-style:none;padding:0;margin:1rem 0 0;display:grid;gap:.4rem">
+      <li>🎯 <strong>Mission Focus:</strong> Transforming data into defense through proactive analysis.</li>
+      <li>🔍 <strong>Strengths:</strong> Threat hunting, DFIR, MITRE ATT&CK alignment, and network forensics.</li>
+      <li>💡 <strong>Mindset:</strong> Adapt, analyze, and act — lessons from the field now applied to cyber defense.</li>
+    </ul>
+  </div>
+</section>
+
 
     <!-- Portfolio -->
     <section id="portfolio" class="container">
@@ -508,7 +605,60 @@ footer a:hover {
   });
 })();
 </script>
+<script>
+(function interactiveGlow(selector = '.cyber-anim'){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+  const MAX_TILT = 8;     // degrees
+  const MAX_GLOW = 28;    // px offset for the glow
+
+  function onMove(e, img){
+    const rect = img.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;   // 0..1
+    const y = (e.clientY - rect.top)  / rect.height;  // 0..1
+    const dx = (x - 0.5);   // -0.5..0.5
+    const dy = (y - 0.5);
+
+    // Tilt: rotate opposite to cursor direction for a parallax feel
+    const rx = (-dy * MAX_TILT).toFixed(2) + 'deg';
+    const ry = ( dx * MAX_TILT).toFixed(2) + 'deg';
+    img.style.setProperty('--rx', rx);
+    img.style.setProperty('--ry', ry);
+
+    // Glow offset (simulate light following cursor)
+    const gx = Math.round(dx * MAX_GLOW);
+    const gy = Math.round(dy * MAX_GLOW);
+    img.style.filter = `drop-shadow(${gx}px ${gy}px 26px rgba(96,165,250,.40))`;
+  }
+
+  function onLeave(img){
+    img.style.setProperty('--rx', '0deg');
+    img.style.setProperty('--ry', '0deg');
+    img.style.filter = 'none';
+  }
+
+  document.querySelectorAll(selector).forEach(img => {
+    // Mouse / pointer move
+    img.addEventListener('mousemove', (e)=> onMove(e, img), {passive:true});
+    img.addEventListener('mouseleave', ()=> onLeave(img), {passive:true});
+
+    // Keyboard focus accessibility: gently highlight, no tilt
+    img.addEventListener('focus', ()=> {
+      img.style.boxShadow = '0 0 32px rgba(96,165,250,.55)';
+    });
+    img.addEventListener('blur', ()=> {
+      img.style.boxShadow = '';
+      onLeave(img);
+    });
+
+    // Touch: a small pulse on tap (no permanent transform)
+    img.addEventListener('touchstart', ()=> {
+      img.style.transform = 'scale(1.035)';
+      setTimeout(()=> img.style.transform = '', 180);
+    }, {passive:true});
+  });
+})();
+</script>
   
 </body>
 </html>
