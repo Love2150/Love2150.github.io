@@ -25,7 +25,7 @@ def main():
         txt = sys.stdin.read()
     else:
         import codecs
-        with codecs.open(args.input, "r", "utf-8", errors="ignore") as fh:
+        with open(args.input, "r", encoding="utf-8", errors="ignore") as fh:
             txt = fh.read()
 
     matches = find_eval_function_calls(txt)
