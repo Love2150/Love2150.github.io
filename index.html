@@ -205,32 +205,49 @@ section { scroll-margin-top: calc(var(--header-h) + 12px); }
 </header>
 
   <main id="top">
-    <!-- Hero -->
-    <section class="container" style="padding:64px 0 32px">
-      <div class="grid" style="grid-template-columns:1.2fr .8fr;align-items:center;gap:2rem">
-        <div>
-          <span class="pill">🚀 Open to Cybersecurity Roles</span>
-          <h1 style="font-size:clamp(1.6rem,1.2rem + 2.6vw,3rem);line-height:1.15;margin:.6rem 0 0">
-            Hi, I’m Brandon — I secure systems, analyze threats, and build resilient networks.
-          </h1>
-          <p class="meta" style="margin:.6rem 0 1.2rem">
-            Military logistics veteran turned security analyst. I enjoy blue-team investigations, discrete mathematics, and writing clear technical posts.
-          </p>
-          <div style="display:flex;gap:.8rem;flex-wrap:wrap">
-            <a class="pill" href="#featured-projects">View Projects</a>
-            <a class="pill" href="#latest-blogs">Read the Blog</a>
-          </div>
-        </div>
-        <div class="card">
-  <div class="thumb">
-    <img src="/assets/images/cybersecurity-animation.gif"
-     alt="Cybersecurity animation showcasing data streams and glowing lock"
-     loading="lazy"
-     class="cyber-anim">
+    <!-- HERO — Narrative: Logistics ➝ Cyber -->
+<section class="container hero" style="padding:56px 0 32px">
+  <div class="grid" style="grid-template-columns:1.15fr .85fr;align-items:center;gap:2rem">
+    <!-- Left: Story -->
+    <div>
+      <span class="pill">🛡️ Veteran → Cyber Threat Hunter</span>
+      <h1 style="font-size:clamp(1.6rem,1.2rem + 2.6vw,3rem);line-height:1.15;margin:.6rem 0 0">
+        From tactical supply chains to tactical cyber defense.
+      </h1>
+      <p class="meta" style="margin:.6rem 0 1.1rem">
+        I’m <strong>Brandon Love</strong> — U.S. Army logistics veteran turned cybersecurity analyst.
+        I secure systems, decode threats, and turn noisy signals into clear, actionable defense.
+      </p>
+
+      <!-- Quick Creds Row (optional, remove if you want cleaner) -->
+      <ul class="meta" style="list-style:none;padding:0;margin:0 0 1rem;display:flex;gap:.8rem;flex-wrap:wrap">
+        <li>DFIR & Incident Response</li>
+        <li>MITRE ATT&amp;CK</li>
+        <li>Let’sDefend / HTB</li>
+        <li>Powershell &amp; Network Forensics</li>
+      </ul>
+
+      <div style="display:flex;gap:.8rem;flex-wrap:wrap">
+        <a class="pill" href="#projects">Browse Projects</a>
+        <a class="pill" href="#latest">See Threat Reports</a>
+        <a class="pill" href="#contact">Contact</a>
+      </div>
+    </div>
+
+    <!-- Right: Visual -->
+    <div class="card" style="overflow:hidden">
+      <div class="thumb" aria-hidden>
+        <img
+          src="/assets/images/A_looping_2D_digital_animation_GIF_showcases_cyber.png"
+          alt="Animated cyber defense lock with flowing data streams"
+          class="cyber-anim"
+          loading="lazy">
+      </div>
+      <div class="card-body meta">Journey: Logistics ➝ Cyber Defense</div>
+    </div>
   </div>
-  <div class="card-body meta">Cyber Defense Animation</div>
-</div>
-    </section>
+</section>
+
 
     <!-- Portfolio -->
     <section id="portfolio" class="container">
