@@ -2,7 +2,7 @@
 layout: null
 title: "Personal Portfolio & Blog (Jekyll + GitHub Pages)"
 date: 2025-11-07 10:00:00 -0600
-image: /assets/images/projects/portfolio-site-hero.jpg   # ← add an image to this path
+image: /assets/images/Homepage-Overlay.png   # ← add an image to this path
 tags: [Jekyll, GitHub Pages, CI/CD, JavaScript, HTML/CSS]
 summary: "Responsive portfolio with a Jekyll-powered blog, Medium-to-Markdown autosync, and custom blog/projects sliders."
 repo: "https://github.com/Love2150/Love2150.github.io"   # ← your repo URL
