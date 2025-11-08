@@ -62,25 +62,30 @@ title: "Brandon Love — Portfolio"
     .post{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow)}
     footer{padding:32px 0;border-top:1px solid var(--border);color:var(--muted)}
     .pill{display:inline-flex;gap:.5rem;align-items:center;padding:.35rem .6rem;border:1px dashed var(--border);border-radius:999px;color:var(--muted)}
-    /* —— Blog slider —— */
-.blog-slider { position: relative; overflow: hidden; border:1px solid var(--border); border-radius:18px; background:var(--card); box-shadow: var(--shadow); }
-.blog-track { display: flex; transition: transform .45s ease; will-change: transform; }
-.blog-slide { min-width: 100%; display: grid; grid-template-columns: 1.2fr .8fr; gap: 1rem; align-items: stretch; }
-.blog-media { position: relative; border-right:1px solid var(--border); }
-.blog-media img { width: 100%; height: 100%; object-fit: cover; display:block; }
-.blog-body { padding: 16px; display:flex; flex-direction:column; justify-content:center; }
-.blog-body h3 { margin:.2rem 0 .4rem; font-size: clamp(1.05rem,1vw + 1rem,1.5rem); }
-.blog-body p.meta { color:var(--muted); margin:.1rem 0 .6rem; }
-.blog-cta { margin-top: .6rem; }
-.blog-ghost { background: linear-gradient(135deg, rgba(96,165,250,.12), rgba(167,139,250,.12)); }
+   
+/* —— Latest Blogs slider (refined) —— */
+.blog-slider{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}
+.blog-track{display:flex;will-change:transform;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+.blog-slide{min-width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:1rem;align-items:stretch}
+.blog-media{position:relative;border-right:1px solid var(--border);background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.12))}
+.blog-media img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:16/9}
+.blog-media::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(0,0,0,.25),transparent 40%)}
+.blog-body{padding:16px;display:flex;flex-direction:column;justify-content:center}
+.blog-body h3{margin:.2rem 0 .4rem;font-size:clamp(1.05rem,1vw + 1rem,1.5rem)}
+.blog-body p.meta{color:var(--muted);margin:.1rem 0 .6rem}
+.blog-cta{margin-top:.6rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.blog-ghost{background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.12))}
+.blog-nav{position:absolute;inset:auto 0 8px 0;display:flex;justify-content:space-between;pointer-events:none}
+.blog-btn{pointer-events:auto;background:rgba(0,0,0,.35);border:1px solid var(--border);color:#fff;backdrop-filter:blur(6px);border-radius:999px;padding:.5rem .8rem;margin:0 .5rem;cursor:pointer}
+.blog-btn:focus{outline:2px solid var(--accent)}
+.blog-dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:.45rem}
+.blog-dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.5)}
+.blog-dot.active,.blog-dot[aria-current="true"]{background:#fff}
+@media (max-width: 900px){.blog-slide{grid-template-columns:1fr}.blog-media{border-right:0}}
+@media (prefers-reduced-motion: reduce){
+  .blog-track{transition:none}
+}
 
-.blog-nav { position:absolute; inset: auto 0 8px 0; display:flex; justify-content:space-between; pointer-events: none; }
-.blog-btn { pointer-events: auto; background: rgba(0,0,0,.35); border:1px solid var(--border); color:#fff; backdrop-filter: blur(6px);
-  border-radius: 999px; padding:.5rem .8rem; margin:0 .5rem; cursor:pointer; }
-.blog-dots { position:absolute; left:50%; bottom: 10px; transform: translateX(-50%); display:flex; gap:.4rem; }
-.blog-dot { width:8px; height:8px; border-radius:999px; background: rgba(255,255,255,.3); }
-.blog-dot.active { background: #fff; }
-@media (max-width: 860px){ .blog-slide { grid-template-columns: 1fr; } .blog-media { border-right:0; } }
   </style>
 </head>
 
@@ -232,7 +237,7 @@ title: "Brandon Love — Portfolio"
         <article class="blog-slide">
           <div class="blog-media{% if hero == nil or hero == '' %} blog-ghost{% endif %}">
             {%- if hero and hero != '' -%}
-              <img src="{{ hero | relative_url }}" alt="">
+              <img src="{{ hero | relative_url }}" alt="{{ post.title | escape }}" loading="lazy" decoding="async">
             {%- else -%}
               <div style="height:100%;min-height:240px"></div>
             {%- endif -%}
@@ -360,54 +365,80 @@ title: "Brandon Love — Portfolio"
 
   const slides = Array.from(track.children);
   const total = slides.length;
-  let index = 0;
+  let index = 0, timer = null, hovering = false, focused = false;
 
   const dotsWrap = document.getElementById('blogDots');
   const prev = document.getElementById('prevSlide');
   const next = document.getElementById('nextSlide');
+  const slider = track.closest('.blog-slider');
 
-  // dots (one per slide)
+  // Build dots as buttons
   slides.forEach((_, i) => {
-    const dot = document.createElement('span');
-    dot.className = 'blog-dot' + (i===0 ? ' active' : '');
-    dot.addEventListener('click', () => go(i));
-    dotsWrap.appendChild(dot);
+    const b = document.createElement('button');
+    b.className = 'blog-dot';
+    b.type = 'button';
+    b.setAttribute('aria-label', `Go to slide ${i+1} of ${total}`);
+    b.addEventListener('click', () => go(i, true));
+    dotsWrap.appendChild(b);
   });
 
-  function update() {
+  function update(){
     track.style.transform = `translateX(-${index * 100}%)`;
-    [...dotsWrap.children].forEach((d, i) => d.classList.toggle('active', i === index));
-  }
-  function go(i){ index = (i + total) % total; update(); }
-  prev?.addEventListener('click', () => go(index-1));
-  next?.addEventListener('click', () => go(index+1));
-
-  // swipe on touch
-  let x0=null;
-  track.addEventListener('touchstart', e=> x0 = e.touches[0].clientX, {passive:true});
-  track.addEventListener('touchmove', e=>{
-    if (x0===null) return;
-    const dx = e.touches[0].clientX - x0;
-    if (Math.abs(dx) > 40){ go(index + (dx<0?1:-1)); x0=null; }
-  }, {passive:true});
-
-  // keyboard
-  window.addEventListener('keydown', e=>{
-    if (e.key === 'ArrowRight') go(index+1);
-    if (e.key === 'ArrowLeft') go(index-1);
-  });
-
-  // auto-height per slide (helpful on mobile)
-  const resize = () => {
+    [...dotsWrap.children].forEach((d, i) => {
+      d.classList.toggle('active', i === index);
+      d.setAttribute('aria-current', i === index ? 'true' : 'false');
+    });
+    // fit height
     const h = slides[index].offsetHeight;
     track.parentElement.style.height = h + 'px';
-  };
-  window.addEventListener('load', resize);
-  window.addEventListener('resize', resize);
-  const ro = new ResizeObserver(resize);
+  }
+
+  function go(i, user=false){
+    index = (i + total) % total;
+    update();
+    if (user) restartAutoplay();
+  }
+
+  prev?.addEventListener('click', () => go(index-1, true));
+  next?.addEventListener('click', () => go(index+1, true));
+
+  // swipe
+  let x0 = null;
+  track.addEventListener('touchstart', e => x0 = e.touches[0].clientX, {passive:true});
+  track.addEventListener('touchmove', e => {
+    if (x0 === null) return;
+    const dx = e.touches[0].clientX - x0;
+    if (Math.abs(dx) > 42){ go(index + (dx<0?1:-1), true); x0 = null; }
+  }, {passive:true});
+
+  // keyboard (only when slider is focused)
+  slider.setAttribute('tabindex','0');
+  slider.addEventListener('focusin', ()=>{ focused = true; pauseAutoplay(); });
+  slider.addEventListener('focusout', ()=>{ focused = false; resumeAutoplay(); });
+  slider.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(index+1, true); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); go(index-1, true); }
+  });
+
+  // autoplay
+  const INTERVAL = 5000;
+  function tick(){ if (!hovering && !focused) go(index+1); }
+  function startAutoplay(){ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; timer = setInterval(tick, INTERVAL); }
+  function pauseAutoplay(){ if (timer){ clearInterval(timer); timer = null; } }
+  function resumeAutoplay(){ if (!timer) startAutoplay(); }
+  function restartAutoplay(){ pauseAutoplay(); resumeAutoplay(); }
+
+  slider.addEventListener('mouseenter', ()=>{ hovering = true; pauseAutoplay(); });
+  slider.addEventListener('mouseleave', ()=>{ hovering = false; resumeAutoplay(); });
+
+  // initial
+  window.addEventListener('load', () => { update(); startAutoplay(); });
+  window.addEventListener('resize', update);
+  const ro = new ResizeObserver(update);
   slides.forEach(s => ro.observe(s));
 })();
 </script>
+
 
 </body>
 </html>
