@@ -128,32 +128,37 @@ footer a:hover {
   .blog-track{transition:none}
 }
     
-/* === Cyber Animation Glow Effect === */
+/* === Cyber Animation: cursor-reactive tilt + glow === */
 .cyber-anim {
+  --rx: 0deg;   /* rotateX */
+  --ry: 0deg;   /* rotateY */
   border-radius: 18px;
   max-width: 100%;
   height: auto;
   display: block;
-  box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
-  transition: transform 0.6s ease, box-shadow 0.6s ease, filter 0.6s ease;
+  will-change: transform, filter;
+  transition: transform 180ms ease, filter 220ms ease, box-shadow 220ms ease;
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.02);
+  box-shadow: 0 0 20px rgba(96,165,250,.30);
   animation: cyberPulse 5s infinite ease-in-out;
 }
 
 .cyber-anim:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 30px rgba(96, 165, 250, 0.6), 0 0 60px rgba(167, 139, 250, 0.4);
-  filter: brightness(1.15);
+  box-shadow: 0 0 30px rgba(96,165,250,.55), 0 0 60px rgba(167,139,250,.35);
+  filter: brightness(1.08);
 }
 
-/* Pulse effect */
+/* (keeps your existing pulse) */
 @keyframes cyberPulse {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(167, 139, 250, 0.5), 0 0 70px rgba(96, 165, 250, 0.4);
-  }
+  0%,100% { box-shadow: 0 0 20px rgba(96,165,250,.30); }
+  50%     { box-shadow: 0 0 40px rgba(167,139,250,.45), 0 0 70px rgba(96,165,250,.35); }
 }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .cyber-anim { animation: none; transition: none; transform: none; }
+}
+
 
   </style>
 </head>
@@ -539,7 +544,60 @@ footer a:hover {
   });
 })();
 </script>
+<script>
+(function interactiveGlow(selector = '.cyber-anim'){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+  const MAX_TILT = 8;     // degrees
+  const MAX_GLOW = 28;    // px offset for the glow
+
+  function onMove(e, img){
+    const rect = img.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;   // 0..1
+    const y = (e.clientY - rect.top)  / rect.height;  // 0..1
+    const dx = (x - 0.5);   // -0.5..0.5
+    const dy = (y - 0.5);
+
+    // Tilt: rotate opposite to cursor direction for a parallax feel
+    const rx = (-dy * MAX_TILT).toFixed(2) + 'deg';
+    const ry = ( dx * MAX_TILT).toFixed(2) + 'deg';
+    img.style.setProperty('--rx', rx);
+    img.style.setProperty('--ry', ry);
+
+    // Glow offset (simulate light following cursor)
+    const gx = Math.round(dx * MAX_GLOW);
+    const gy = Math.round(dy * MAX_GLOW);
+    img.style.filter = `drop-shadow(${gx}px ${gy}px 26px rgba(96,165,250,.40))`;
+  }
+
+  function onLeave(img){
+    img.style.setProperty('--rx', '0deg');
+    img.style.setProperty('--ry', '0deg');
+    img.style.filter = 'none';
+  }
+
+  document.querySelectorAll(selector).forEach(img => {
+    // Mouse / pointer move
+    img.addEventListener('mousemove', (e)=> onMove(e, img), {passive:true});
+    img.addEventListener('mouseleave', ()=> onLeave(img), {passive:true});
+
+    // Keyboard focus accessibility: gently highlight, no tilt
+    img.addEventListener('focus', ()=> {
+      img.style.boxShadow = '0 0 32px rgba(96,165,250,.55)';
+    });
+    img.addEventListener('blur', ()=> {
+      img.style.boxShadow = '';
+      onLeave(img);
+    });
+
+    // Touch: a small pulse on tap (no permanent transform)
+    img.addEventListener('touchstart', ()=> {
+      img.style.transform = 'scale(1.035)';
+      setTimeout(()=> img.style.transform = '', 180);
+    }, {passive:true});
+  });
+})();
+</script>
   
 </body>
 </html>
