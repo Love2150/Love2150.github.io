@@ -158,7 +158,25 @@ footer a:hover {
 @media (prefers-reduced-motion: reduce) {
   .cyber-anim { animation: none; transition: none; transform: none; }
 }
+/* --- Header/Top fixes --- */
+:root { --header-h: 64px; }
+@media (max-width: 760px){ :root { --header-h: 56px; } }
 
+header { position: sticky; top: 0; z-index: 50; }
+header .nav { min-height: var(--header-h); padding: 10px 0; }
+
+/* Push page content below sticky header */
+main { padding-top: calc(var(--header-h) + 8px); }
+
+/* Make anchor targets not hide under header */
+section { scroll-margin-top: calc(var(--header-h) + 12px); }
+
+/* Keep header compact; avoid accidental wrap making it tall */
+.nav { display:flex; align-items:center; justify-content:space-between; gap: 1rem; }
+.menu { display:flex; gap:1rem; flex-wrap: wrap; }
+@media (max-width: 760px){
+  .menu { display:none; } /* drawer handles mobile */
+}
 
   </style>
 </head>
