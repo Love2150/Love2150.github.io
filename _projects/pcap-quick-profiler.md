@@ -2,7 +2,7 @@
 layout: null
 title: "PCAP Quick Profiler"
 date: 2025-10-10 09:00:00 -0600
-image: /assets/images/projects/pcap-quick-profiler-hero.jpg
+image: /assets/images/projects/Pcap-profiler.jpg
 summary: "Windows-friendly PCAP triage: protocols, top IPs/ports, HTTP/TLS metadata, and auto reports."
 tags: [dfir, networking, windows, python]
 repo: "https://github.com/Love2150/security-tools/tree/main/tools/Pcap-profiler"
