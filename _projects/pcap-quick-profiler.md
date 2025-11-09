@@ -6,7 +6,6 @@ image: /assets/images/projects/pcap-quick-profiler-hero.jpg
 summary: "Windows-friendly PCAP triage: protocols, top IPs/ports, HTTP/TLS metadata, and auto reports."
 tags: [dfir, networking, windows, python]
 repo: "https://github.com/Love2150/security-tools/tree/main/tools/Pcap-profiler"
-demo: ""
 weight: 10
 ---
 
