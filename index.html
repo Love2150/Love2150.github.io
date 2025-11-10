@@ -514,36 +514,21 @@ section { scroll-margin-top: calc(var(--header-h) + 12px); }
 </div>
 
 <script>
-// === Live Cybersecurity Tips — fast load version ===
-// - Instant: render cached tip from localStorage
-// - Background: fetch feeds with 2.5s timeout each
-// - Cache: 10 minutes
-
 (function () {
-  const FEEDS = [
-    "https://isc.sans.edu/rssfeed.xml",
-    "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed.xml",
-    "https://krebsonsecurity.com/feed/"
-  ];
-  const ROTATE_MS  = 60 * 1000;           // change visible tip every minute
-  const CACHE_MS   = 10 * 60 * 1000;      // keep cache for 10 minutes
-  const FETCH_TO   = 2500;                // per-feed timeout (ms)
-  const KEYWORDS = [
-    "best practice","guidance","how to","mitigation",
-    "hardening","secure","detection","playbook","tip","recommendation"
-  ];
-
   const mount = document.getElementById("cyber-tips");
   if (!mount) return;
 
   const ACCENT = getComputedStyle(document.documentElement).getPropertyValue("--accent") || "#2563eb";
+  const ROTATE_MS = 60 * 1000;          // rotate visible tip every minute
+  const CACHE_MS  = 10 * 60 * 1000;     // keep local cache for 10 minutes
+  const CACHE_KEY = "cyber_tips_json_v1";
 
   let items = [];
   let cursor = 0;
 
-  // ---------- Utils ----------
-  const tidy = (s) => (s || "").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
-  const ago = (d) => {
+  const tidy = (s="") => s.replace(/\s+/g," ").trim();
+  const ago = (iso) => {
+    const d = new Date(iso);
     const mins = Math.floor((Date.now() - d.getTime())/60000);
     if (mins < 1) return "just now";
     if (mins < 60) return `${mins}m ago`;
@@ -551,131 +536,79 @@ section { scroll-margin-top: calc(var(--header-h) + 12px); }
     if (hrs < 24) return `${hrs}h ago`;
     return `${Math.floor(hrs/24)}d ago`;
   };
-  const parseFeed = (xmlText, url) => {
-    const doc = new DOMParser().parseFromString(xmlText, "text/xml");
-    const channelTitle = tidy(
-      doc.querySelector("channel > title")?.textContent ||
-      doc.querySelector("feed > title")?.textContent ||
-      new URL(url).hostname
-    );
 
-    const rss = [...doc.querySelectorAll("item")].map(n => ({
-      title: tidy(n.querySelector("title")?.textContent),
-      link: tidy(n.querySelector("link")?.textContent),
-      date: new Date(n.querySelector("pubDate, date")?.textContent || Date.now()),
-      source: channelTitle,
-      summary: tidy(n.querySelector("description")?.textContent || n.querySelector("content\\:encoded")?.textContent || "")
-    }));
-    const atom = [...doc.querySelectorAll("entry")].map(n => {
-      const linkEl = n.querySelector("link[rel='alternate']") || n.querySelector("link");
-      return {
-        title: tidy(n.querySelector("title")?.textContent),
-        link: linkEl ? (linkEl.getAttribute("href") || "").trim() : "",
-        date: new Date(n.querySelector("updated, published")?.textContent || Date.now()),
-        source: channelTitle,
-        summary: tidy(n.querySelector("summary, content")?.textContent || "")
-      };
-    });
-    return rss.length ? rss : atom;
-  };
-  const timeoutFetch = (url, ms) => {
-    const ctrl = new AbortController();
-    const id = setTimeout(() => ctrl.abort(), ms);
-    return fetch(url, { signal: ctrl.signal, cache: "no-store" })
-      .finally(() => clearTimeout(id));
-  };
-  const fetchFeed = async (feedUrl) => {
-    // CORS-friendly proxy
-    const proxied = `https://api.allorigins.win/get?url=${encodeURIComponent(feedUrl)}&nocache=${Date.now()}`;
-    const res = await timeoutFetch(proxied, FETCH_TO);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    return parseFeed(data.contents, feedUrl);
-  };
-
-  // ---------- Rendering ----------
-  const render = () => {
+  function render() {
     if (!items.length) return;
     const it = items[cursor % items.length];
     const summary = it.summary && it.summary.length > 180 ? it.summary.slice(0,177) + "…" : it.summary;
     mount.innerHTML = `
       <p><strong>Tip:</strong>
-        <a href="${it.link || '#'}" target="_blank" rel="noopener"
-           style="text-underline-offset:2px; color:${ACCENT};">${it.title || "Read more"}</a>
+        <a href="${it.link || '#'}" target="_blank" rel="noopener" style="text-underline-offset:2px; color:${ACCENT};">
+          ${tidy(it.title || "Read more")}
+        </a>
       </p>
-      ${summary ? `<p>${summary}</p>` : ""}
+      ${summary ? `<p>${tidy(summary)}</p>` : ""}
       <p class="meta">${it.source ? it.source + " · " : ""}${it.date ? ago(it.date) : ""}</p>
     `;
     cursor++;
-  };
+  }
 
-  // ---------- Cache ----------
-  const CACHE_KEY = "cyber_tips_cache_v1";
-  const loadCache = () => {
+  function loadCache() {
     try {
       const raw = localStorage.getItem(CACHE_KEY);
       if (!raw) return null;
-      const { savedAt, items: cached } = JSON.parse(raw);
-      if (!Array.isArray(cached)) return null;
+      const { savedAt, payload } = JSON.parse(raw);
+      if (!payload || !Array.isArray(payload.items)) return null;
       if (Date.now() - savedAt > CACHE_MS) return null;
-      return cached;
+      return payload;
     } catch { return null; }
-  };
-  const saveCache = (arr) => {
-    try {
-      localStorage.setItem(CACHE_KEY, JSON.stringify({ savedAt: Date.now(), items: arr }));
-    } catch {}
-  };
+  }
 
-  // ---------- Load cached immediately ----------
+  function saveCache(payload) {
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ savedAt: Date.now(), payload }));
+    } catch {}
+  }
+
+  async function fetchTips() {
+    // Cache-bust with timestamp so we don't get an older CDN copy
+    const url = `/assets/tips.json?v=${Date.now()}`;
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  }
+
+  // 1) Paint instantly from local cache, if present
   const cached = loadCache();
-  if (cached && cached.length) {
-    items = cached;
-    render(); // instant paint
+  if (cached) {
+    items = cached.items || [];
+    render();
   } else {
-    mount.querySelector(".meta")?.remove();
     mount.innerHTML = `<p class="meta">Loading tip…</p>`;
   }
 
-  // ---------- Background refresh (fast/strict) ----------
-  const refresh = async () => {
-    try {
-      const results = await Promise.allSettled(FEEDS.map(fetchFeed));
-      const merged = results.filter(r => r.status === "fulfilled").flatMap(r => r.value);
-
-      // filter for “best practice” vibe
-      const filtered = merged.filter(it => {
-        const hay = `${it.title} ${it.summary}`.toLowerCase();
-        return KEYWORDS.some(k => hay.includes(k));
-      });
-
-      // dedupe + sort
-      const seen = new Set();
-      const unique = (filtered.length ? filtered : merged)
-        .filter(it => {
-          const key = it.link || it.title;
-          if (seen.has(key)) return false;
-          seen.add(key);
-          return true;
-        })
-        .sort((a,b) => b.date - a.date)
-        .slice(0, 25); // cap for speed
-
-      if (unique.length) {
-        items = unique;
-        saveCache(items);
-        cursor = 0;
-        render();
-      }
-    } catch (e) {
-      // keep cached render; no hard failure UI needed
-      console.warn("Feed refresh error:", e);
+  // 2) Pull fresh JSON (fast, same-origin)
+  fetchTips().then(data => {
+    if (data && Array.isArray(data.items) && data.items.length) {
+      items = data.items;
+      saveCache(data);
+      cursor = 0;
+      render();
     }
-  };
+  }).catch(() => {
+    // keep cached view if network fails
+  });
 
-  refresh();                     // kick off background fetch
+  // 3) Rotate and occasionally re-pull
   setInterval(render, ROTATE_MS);
-  setInterval(refresh, CACHE_MS); // refresh roughly when cache would expire
+  setInterval(async () => {
+    try {
+      const data = await fetchTips();
+      if (data && Array.isArray(data.items) && data.items.length) {
+        items = data.items; cursor = 0; render(); saveCache(data);
+      }
+    } catch {}
+  }, CACHE_MS);
 })();
 </script>
 
