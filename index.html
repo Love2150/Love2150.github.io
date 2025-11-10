@@ -506,11 +506,174 @@ section { scroll-margin-top: calc(var(--header-h) + 12px); }
 
 
     </div>
-    <div class="col-6 card" style="padding:16px">
-      <p><strong>Tip:</strong> Write Markdown posts in <code>_posts/</code> using the format <code>YYYY-MM-DD-title.md</code>. Jekyll will automatically build them on GitHub Pages.</p>
-      <p class="meta">This site is 100% static — no trackers, no frameworks, just clean HTML and Markdown.</p>
-    </div>
-  </div>
+    <div class="col-6 card" id="cyber-tips" style="padding:16px">
+  <p class="meta">Loading live cybersecurity tip…</p>
+  <noscript>
+    Enable JavaScript to see live security tips.
+  </noscript>
+</div>
+
+<script>
+// === Live Cybersecurity Tips (client-side) ===
+// Rotates a new item every minute; refreshes feeds periodically.
+// Uses AllOrigins as a CORS-friendly proxy for RSS/Atom feeds.
+
+(function () {
+  // 1) Add/adjust feeds here (RSS/Atom). Keep 3–8 sources for variety.
+  const FEEDS = [
+    "https://krebsonsecurity.com/feed/",
+    "https://isc.sans.edu/rssfeed.xml",        // SANS Internet Storm Center diaries
+    "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed.xml" // UK NCSC (site-wide feed)
+    // Optional extras (uncomment to use; may be noisy):
+    // "https://feeds.feedburner.com/TheDfirReport",
+    // "https://www.us-cert.gov/ncas/alerts.xml" // legacy alias; may redirect
+  ];
+
+  // 2) Timing
+  const ROTATE_MS = 60 * 1000;     // change displayed tip every 60s
+  const REFRESH_MS = 10 * 60 * 1000; // refetch feeds every 10 min (tweak if you want)
+
+  // 3) Theming (inherits your site, but allows a subtle accent on link)
+  const ACCENT = getComputedStyle(document.documentElement)
+    .getPropertyValue("--accent") || "#2563eb";
+
+  const mount = document.getElementById("cyber-tips");
+  if (!mount) return;
+
+  // State
+  let items = [];     // {title, link, source, date, summary}
+  let cursor = 0;     // which item we’re showing
+
+  // Utilities
+  const ago = (d) => {
+    const diff = Math.max(0, Date.now() - d.getTime());
+    const mins = Math.floor(diff / 60000);
+    if (mins < 1) return "just now";
+    if (mins < 60) return `${mins}m ago`;
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return `${hrs}h ago`;
+    const days = Math.floor(hrs / 24);
+    return `${days}d ago`;
+  };
+
+  const tidy = (s) => (s || "")
+    .replace(/<[^>]+>/g, "")     // strip HTML tags
+    .replace(/\s+/g, " ")
+    .trim();
+
+  // Parse RSS/Atom text into item objects
+  const parseFeed = (xmlText, url) => {
+    const doc = new DOMParser().parseFromString(xmlText, "text/xml");
+    const channelTitle = tidy(
+      (doc.querySelector("channel > title")?.textContent) ||
+      (doc.querySelector("feed > title")?.textContent) ||
+      new URL(url).hostname
+    );
+
+    const rssItems = [...doc.querySelectorAll("item")].map(node => {
+      const title = tidy(node.querySelector("title")?.textContent);
+      const link  = tidy(node.querySelector("link")?.textContent);
+      const date  = new Date(node.querySelector("pubDate, date")?.textContent || Date.now());
+      const summary = tidy(
+        node.querySelector("description")?.textContent ||
+        node.querySelector("content\\:encoded")?.textContent ||
+        ""
+      );
+      return { title, link, date, source: channelTitle, summary };
+    });
+
+    const atomItems = [...doc.querySelectorAll("entry")].map(node => {
+      const title = tidy(node.querySelector("title")?.textContent);
+      const linkEl = node.querySelector("link[rel='alternate']") || node.querySelector("link");
+      const link = linkEl ? (linkEl.getAttribute("href") || "").trim() : "";
+      const date = new Date(node.querySelector("updated, published")?.textContent || Date.now());
+      const summary = tidy(node.querySelector("summary, content")?.textContent || "");
+      return { title, link, date, source: channelTitle, summary };
+    });
+
+    return rssItems.length ? rssItems : atomItems;
+  };
+
+  // Fetch via AllOrigins (public CORS helper)
+  const fetchFeed = async (feedUrl) => {
+    const proxied = `https://api.allorigins.win/get?url=${encodeURIComponent(feedUrl)}`;
+    const res = await fetch(proxied, { cache: "no-store" });
+    if (!res.ok) throw new Error(`Fetch failed ${res.status}`);
+    const data = await res.json();
+    return parseFeed(data.contents, feedUrl);
+  };
+
+  const refresh = async () => {
+    try {
+      const results = await Promise.allSettled(FEEDS.map(fetchFeed));
+      const merged = results
+        .filter(r => r.status === "fulfilled")
+        .flatMap(r => r.value);
+
+      // Filter for “best practices” style content heuristically
+      const KEYWORDS = [
+        "best practice", "guidance", "how to", "mitigation",
+        "hardening", "secure", "detection", "playbook", "tip", "recommendation"
+      ];
+      const filtered = merged.filter(it => {
+        const hay = `${it.title} ${it.summary}`.toLowerCase();
+        return KEYWORDS.some(k => hay.includes(k));
+      });
+
+      // De-dupe by link/title, sort by recency
+      const seen = new Set();
+      items = filtered
+        .filter(it => {
+          const key = it.link || it.title;
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        })
+        .sort((a, b) => b.date - a.date);
+
+      if (!items.length) {
+        // fallback to latest 10 from merged if filters are too strict
+        items = merged
+          .sort((a, b) => b.date - a.date)
+          .slice(0, 10);
+      }
+      cursor = 0;
+      render();
+    } catch (e) {
+      mount.innerHTML = `
+        <p><strong>Tip:</strong> Keep software auto-updates enabled and use MFA on all accounts.</p>
+        <p class="meta">Live feed temporarily unavailable.</p>`;
+      console.warn(e);
+    }
+  };
+
+  const render = () => {
+    if (!items.length) return;
+    const it = items[cursor % items.length];
+    const summary = it.summary && it.summary.length > 180
+      ? it.summary.slice(0, 177) + "…"
+      : it.summary;
+
+    mount.innerHTML = `
+      <p><strong>Tip:</strong>
+        <a href="${it.link || '#'}" target="_blank" rel="noopener" style="text-underline-offset:2px; color:${ACCENT};">
+          ${it.title || "Read more"}
+        </a>
+      </p>
+      ${summary ? `<p>${summary}</p>` : ""}
+      <p class="meta">${it.source ? it.source + " · " : ""}${it.date ? ago(it.date) : ""}</p>
+    `;
+    cursor++;
+  };
+
+  // Kickoff
+  refresh();                      // initial fetch
+  setInterval(render, ROTATE_MS); // rotate the visible tip
+  setInterval(refresh, REFRESH_MS); // refresh feeds
+
+})();
+</script>
+
 </section>
 
   </main>
