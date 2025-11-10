@@ -1,0 +1,40 @@
+name: Update Security Tips JSON
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"   # every 10 minutes
+  workflow_dispatch: {}       # allow manual run
+  push:
+    paths:
+      - scripts/fetch-feeds.mjs
+      - package.json
+      - package-lock.json
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install
+        run: |
+          npm ci || npm i
+
+      - name: Build tips JSON
+        run: |
+          npm run build:tips
+
+      - name: Commit changes (if any)
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update tips.json"
+          file_pattern: assets/tips.json
