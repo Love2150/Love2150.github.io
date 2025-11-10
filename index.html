@@ -514,151 +514,94 @@ section { scroll-margin-top: calc(var(--header-h) + 12px); }
 </div>
 
 <script>
-// === Live Cybersecurity Tips (client-side) ===
-// Rotates a new item every minute; refreshes feeds periodically.
-// Uses AllOrigins as a CORS-friendly proxy for RSS/Atom feeds.
+// === Live Cybersecurity Tips — fast load version ===
+// - Instant: render cached tip from localStorage
+// - Background: fetch feeds with 2.5s timeout each
+// - Cache: 10 minutes
 
 (function () {
-  // 1) Add/adjust feeds here (RSS/Atom). Keep 3–8 sources for variety.
   const FEEDS = [
-    "https://krebsonsecurity.com/feed/",
-    "https://isc.sans.edu/rssfeed.xml",        // SANS Internet Storm Center diaries
-    "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed.xml" // UK NCSC (site-wide feed)
-    // Optional extras (uncomment to use; may be noisy):
-    // "https://feeds.feedburner.com/TheDfirReport",
-    // "https://www.us-cert.gov/ncas/alerts.xml" // legacy alias; may redirect
+    "https://isc.sans.edu/rssfeed.xml",
+    "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed.xml",
+    "https://krebsonsecurity.com/feed/"
   ];
-
-  // 2) Timing
-  const ROTATE_MS = 60 * 1000;     // change displayed tip every 60s
-  const REFRESH_MS = 10 * 60 * 1000; // refetch feeds every 10 min (tweak if you want)
-
-  // 3) Theming (inherits your site, but allows a subtle accent on link)
-  const ACCENT = getComputedStyle(document.documentElement)
-    .getPropertyValue("--accent") || "#2563eb";
+  const ROTATE_MS  = 60 * 1000;           // change visible tip every minute
+  const CACHE_MS   = 10 * 60 * 1000;      // keep cache for 10 minutes
+  const FETCH_TO   = 2500;                // per-feed timeout (ms)
+  const KEYWORDS = [
+    "best practice","guidance","how to","mitigation",
+    "hardening","secure","detection","playbook","tip","recommendation"
+  ];
 
   const mount = document.getElementById("cyber-tips");
   if (!mount) return;
 
-  // State
-  let items = [];     // {title, link, source, date, summary}
-  let cursor = 0;     // which item we’re showing
+  const ACCENT = getComputedStyle(document.documentElement).getPropertyValue("--accent") || "#2563eb";
 
-  // Utilities
+  let items = [];
+  let cursor = 0;
+
+  // ---------- Utils ----------
+  const tidy = (s) => (s || "").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
   const ago = (d) => {
-    const diff = Math.max(0, Date.now() - d.getTime());
-    const mins = Math.floor(diff / 60000);
+    const mins = Math.floor((Date.now() - d.getTime())/60000);
     if (mins < 1) return "just now";
     if (mins < 60) return `${mins}m ago`;
-    const hrs = Math.floor(mins / 60);
+    const hrs = Math.floor(mins/60);
     if (hrs < 24) return `${hrs}h ago`;
-    const days = Math.floor(hrs / 24);
-    return `${days}d ago`;
+    return `${Math.floor(hrs/24)}d ago`;
   };
-
-  const tidy = (s) => (s || "")
-    .replace(/<[^>]+>/g, "")     // strip HTML tags
-    .replace(/\s+/g, " ")
-    .trim();
-
-  // Parse RSS/Atom text into item objects
   const parseFeed = (xmlText, url) => {
     const doc = new DOMParser().parseFromString(xmlText, "text/xml");
     const channelTitle = tidy(
-      (doc.querySelector("channel > title")?.textContent) ||
-      (doc.querySelector("feed > title")?.textContent) ||
+      doc.querySelector("channel > title")?.textContent ||
+      doc.querySelector("feed > title")?.textContent ||
       new URL(url).hostname
     );
 
-    const rssItems = [...doc.querySelectorAll("item")].map(node => {
-      const title = tidy(node.querySelector("title")?.textContent);
-      const link  = tidy(node.querySelector("link")?.textContent);
-      const date  = new Date(node.querySelector("pubDate, date")?.textContent || Date.now());
-      const summary = tidy(
-        node.querySelector("description")?.textContent ||
-        node.querySelector("content\\:encoded")?.textContent ||
-        ""
-      );
-      return { title, link, date, source: channelTitle, summary };
+    const rss = [...doc.querySelectorAll("item")].map(n => ({
+      title: tidy(n.querySelector("title")?.textContent),
+      link: tidy(n.querySelector("link")?.textContent),
+      date: new Date(n.querySelector("pubDate, date")?.textContent || Date.now()),
+      source: channelTitle,
+      summary: tidy(n.querySelector("description")?.textContent || n.querySelector("content\\:encoded")?.textContent || "")
+    }));
+    const atom = [...doc.querySelectorAll("entry")].map(n => {
+      const linkEl = n.querySelector("link[rel='alternate']") || n.querySelector("link");
+      return {
+        title: tidy(n.querySelector("title")?.textContent),
+        link: linkEl ? (linkEl.getAttribute("href") || "").trim() : "",
+        date: new Date(n.querySelector("updated, published")?.textContent || Date.now()),
+        source: channelTitle,
+        summary: tidy(n.querySelector("summary, content")?.textContent || "")
+      };
     });
-
-    const atomItems = [...doc.querySelectorAll("entry")].map(node => {
-      const title = tidy(node.querySelector("title")?.textContent);
-      const linkEl = node.querySelector("link[rel='alternate']") || node.querySelector("link");
-      const link = linkEl ? (linkEl.getAttribute("href") || "").trim() : "";
-      const date = new Date(node.querySelector("updated, published")?.textContent || Date.now());
-      const summary = tidy(node.querySelector("summary, content")?.textContent || "");
-      return { title, link, date, source: channelTitle, summary };
-    });
-
-    return rssItems.length ? rssItems : atomItems;
+    return rss.length ? rss : atom;
   };
-
-  // Fetch via AllOrigins (public CORS helper)
+  const timeoutFetch = (url, ms) => {
+    const ctrl = new AbortController();
+    const id = setTimeout(() => ctrl.abort(), ms);
+    return fetch(url, { signal: ctrl.signal, cache: "no-store" })
+      .finally(() => clearTimeout(id));
+  };
   const fetchFeed = async (feedUrl) => {
-    const proxied = `https://api.allorigins.win/get?url=${encodeURIComponent(feedUrl)}`;
-    const res = await fetch(proxied, { cache: "no-store" });
-    if (!res.ok) throw new Error(`Fetch failed ${res.status}`);
+    // CORS-friendly proxy
+    const proxied = `https://api.allorigins.win/get?url=${encodeURIComponent(feedUrl)}&nocache=${Date.now()}`;
+    const res = await timeoutFetch(proxied, FETCH_TO);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     return parseFeed(data.contents, feedUrl);
   };
 
-  const refresh = async () => {
-    try {
-      const results = await Promise.allSettled(FEEDS.map(fetchFeed));
-      const merged = results
-        .filter(r => r.status === "fulfilled")
-        .flatMap(r => r.value);
-
-      // Filter for “best practices” style content heuristically
-      const KEYWORDS = [
-        "best practice", "guidance", "how to", "mitigation",
-        "hardening", "secure", "detection", "playbook", "tip", "recommendation"
-      ];
-      const filtered = merged.filter(it => {
-        const hay = `${it.title} ${it.summary}`.toLowerCase();
-        return KEYWORDS.some(k => hay.includes(k));
-      });
-
-      // De-dupe by link/title, sort by recency
-      const seen = new Set();
-      items = filtered
-        .filter(it => {
-          const key = it.link || it.title;
-          if (seen.has(key)) return false;
-          seen.add(key);
-          return true;
-        })
-        .sort((a, b) => b.date - a.date);
-
-      if (!items.length) {
-        // fallback to latest 10 from merged if filters are too strict
-        items = merged
-          .sort((a, b) => b.date - a.date)
-          .slice(0, 10);
-      }
-      cursor = 0;
-      render();
-    } catch (e) {
-      mount.innerHTML = `
-        <p><strong>Tip:</strong> Keep software auto-updates enabled and use MFA on all accounts.</p>
-        <p class="meta">Live feed temporarily unavailable.</p>`;
-      console.warn(e);
-    }
-  };
-
+  // ---------- Rendering ----------
   const render = () => {
     if (!items.length) return;
     const it = items[cursor % items.length];
-    const summary = it.summary && it.summary.length > 180
-      ? it.summary.slice(0, 177) + "…"
-      : it.summary;
-
+    const summary = it.summary && it.summary.length > 180 ? it.summary.slice(0,177) + "…" : it.summary;
     mount.innerHTML = `
       <p><strong>Tip:</strong>
-        <a href="${it.link || '#'}" target="_blank" rel="noopener" style="text-underline-offset:2px; color:${ACCENT};">
-          ${it.title || "Read more"}
-        </a>
+        <a href="${it.link || '#'}" target="_blank" rel="noopener"
+           style="text-underline-offset:2px; color:${ACCENT};">${it.title || "Read more"}</a>
       </p>
       ${summary ? `<p>${summary}</p>` : ""}
       <p class="meta">${it.source ? it.source + " · " : ""}${it.date ? ago(it.date) : ""}</p>
@@ -666,11 +609,73 @@ section { scroll-margin-top: calc(var(--header-h) + 12px); }
     cursor++;
   };
 
-  // Kickoff
-  refresh();                      // initial fetch
-  setInterval(render, ROTATE_MS); // rotate the visible tip
-  setInterval(refresh, REFRESH_MS); // refresh feeds
+  // ---------- Cache ----------
+  const CACHE_KEY = "cyber_tips_cache_v1";
+  const loadCache = () => {
+    try {
+      const raw = localStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      const { savedAt, items: cached } = JSON.parse(raw);
+      if (!Array.isArray(cached)) return null;
+      if (Date.now() - savedAt > CACHE_MS) return null;
+      return cached;
+    } catch { return null; }
+  };
+  const saveCache = (arr) => {
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ savedAt: Date.now(), items: arr }));
+    } catch {}
+  };
 
+  // ---------- Load cached immediately ----------
+  const cached = loadCache();
+  if (cached && cached.length) {
+    items = cached;
+    render(); // instant paint
+  } else {
+    mount.querySelector(".meta")?.remove();
+    mount.innerHTML = `<p class="meta">Loading tip…</p>`;
+  }
+
+  // ---------- Background refresh (fast/strict) ----------
+  const refresh = async () => {
+    try {
+      const results = await Promise.allSettled(FEEDS.map(fetchFeed));
+      const merged = results.filter(r => r.status === "fulfilled").flatMap(r => r.value);
+
+      // filter for “best practice” vibe
+      const filtered = merged.filter(it => {
+        const hay = `${it.title} ${it.summary}`.toLowerCase();
+        return KEYWORDS.some(k => hay.includes(k));
+      });
+
+      // dedupe + sort
+      const seen = new Set();
+      const unique = (filtered.length ? filtered : merged)
+        .filter(it => {
+          const key = it.link || it.title;
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        })
+        .sort((a,b) => b.date - a.date)
+        .slice(0, 25); // cap for speed
+
+      if (unique.length) {
+        items = unique;
+        saveCache(items);
+        cursor = 0;
+        render();
+      }
+    } catch (e) {
+      // keep cached render; no hard failure UI needed
+      console.warn("Feed refresh error:", e);
+    }
+  };
+
+  refresh();                     // kick off background fetch
+  setInterval(render, ROTATE_MS);
+  setInterval(refresh, CACHE_MS); // refresh roughly when cache would expire
 })();
 </script>
 
