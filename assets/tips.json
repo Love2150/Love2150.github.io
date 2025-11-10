@@ -1,0 +1,355 @@
+{
+  "updated_at": "2025-11-10T02:45:30.012Z",
+  "items": [
+    {
+      "title": "Drilling Down on Uncle Sam’s Proposed TP-Link Ban",
+      "summary": "The U.S. government is reportedly preparing to ban the sale of wireless routers and other networking gear from TP-Link Systems, a tech company that currently enjoys an estimated 50% market share among home users and small businesses. Experts say while the proposed ban may have more to do with TP-Link's ties to China than any specific technical threats, much of the rest of the industry serving this market also sources hardware from China and ships products that are insecure fresh out of the box.",
+      "link": "https://krebsonsecurity.com/2025/11/drilling-down-on-uncle-sams-proposed-tp-link-ban/",
+      "date": "2025-11-09T18:14:40.000Z",
+      "source": "Krebs on Security"
+    },
+    {
+      "title": "Apple Patches Everything, Again, (Tue, Nov 4th)",
+      "summary": "Apple released its expected set of operating system upgrades. This is a minor feature upgrade that also includes fixes for 110 different vulnerabilities. As usual for Apple, many of the vulnerabilities affect multiple operating systems. None of the vulnerabilities is marked as already exploited. Apple only offers very sparse vulnerability descriptions. Here are some vulnerabilities that may be worth watching:",
+      "link": "https://isc.sans.edu/diary/rss/32448",
+      "date": "2025-11-04T12:10:29.000Z",
+      "source": "SANS Internet Storm Center, InfoCON: green"
+    },
+    {
+      "title": "Aisuru Botnet Shifts from DDoS to Residential Proxies",
+      "summary": "Aisuru, the botnet responsible for a series of record-smashing distributed denial-of-service (DDoS) attacks this year, recently was overhauled to support a more low-key, lucrative and sustainable business: Renting hundreds of thousands of infected Internet of Things (IoT) devices to proxy services that help cybercriminals anonymize their traffic. Experts says a glut of proxies from Aisuru and other sources is fueling large-scale data harvesting efforts tied to various artificial intelligence (AI) projects, helping content scrapers evade detection by routing their traffic through residential connections that appear to be regular Internet users.",
+      "link": "https://krebsonsecurity.com/2025/10/aisuru-botnet-shifts-from-ddos-to-residential-proxies/",
+      "date": "2025-10-29T00:51:05.000Z",
+      "source": "Krebs on Security"
+    },
+    {
+      "title": "EASM buyer's guide now available",
+      "summary": "How to choose an external attack surface management (EASM) tool that’s right for your organisation.",
+      "link": "https://www.ncsc.gov.uk/blog-post/easm-buyers-guide-now-available",
+      "date": "2025-10-28T14:10:51.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Phishing attacks: defending your organisation",
+      "summary": "How to defend your organisation from email phishing attacks.",
+      "link": "https://www.ncsc.gov.uk/guidance/phishing",
+      "date": "2025-10-13T22:19:23.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "RFC 9794: a new standard for post-quantum terminology",
+      "summary": "The NCSC’s contribution to the Internet Engineering Task Force will help to make the internet more secure.",
+      "link": "https://www.ncsc.gov.uk/blog-post/new-standard-for-post-quantum-terminology",
+      "date": "2025-10-07T15:31:41.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Putting staff welfare at the heart of incident response",
+      "summary": "Guidance for staff responsible for managing a cyber incident response within their organisation.",
+      "link": "https://www.ncsc.gov.uk/guidance/putting-staff-welfare-at-the-heart-of-incident-response",
+      "date": "2025-09-30T15:29:54.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Understanding your OT environment: the first step to stronger cyber security",
+      "summary": "If you can’t see your entire operational technology environment, you can’t defend it. New guidance from the NCSC will help you gain that visibility.",
+      "link": "https://www.ncsc.gov.uk/blog-post/understanding-ot-environment-1step-stronger-cyber-security",
+      "date": "2025-09-29T07:21:59.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Early Years practitioners: using cyber security to protect your settings",
+      "summary": "How to protect sensitive information about your setting and the children in your care from accidental damage and online criminals.",
+      "link": "https://www.ncsc.gov.uk/guidance/early-years-practitioners-using-cyber-security-to-protect-your-settings",
+      "date": "2025-09-26T10:46:20.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Buying, selling and donating second-hand devices",
+      "summary": "How to erase the personal data from your phone, tablets, and other devices (and why it's important when you're buying and selling them).",
+      "link": "https://www.ncsc.gov.uk/guidance/buying-selling-second-hand-devices",
+      "date": "2025-09-11T13:37:24.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Social Media: how to use it safely",
+      "summary": "Use privacy settings across social media platforms to manage your digital footprint.",
+      "link": "https://www.ncsc.gov.uk/guidance/social-media-how-to-use-it-safely",
+      "date": "2025-08-29T06:24:22.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Ransomware: 'WannaCry' guidance for enterprise administrators",
+      "summary": "Guidance for enterprise administrators who want to reduce the likelihood of being held to ransom by WannaCry (or other types of ransomware).",
+      "link": "https://www.ncsc.gov.uk/guidance/ransomware-wannacry-guidance-enterprise-administrators-1",
+      "date": "2025-08-13T10:05:05.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Mitigating malware and ransomware attacks",
+      "summary": "How to defend organisations against malware or ransomware attacks.",
+      "link": "https://www.ncsc.gov.uk/guidance/mitigating-malware-and-ransomware-attacks",
+      "date": "2025-08-13T09:54:21.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Incidents impacting retailers – recommendations from the NCSC",
+      "summary": "A joint blog post by the NCSC’s National Resilience Director, Jonathon Ellison, and Chief Technology Officer, Ollie Whitehouse.",
+      "link": "https://www.ncsc.gov.uk/blog-post/incidents-impacting-retailers",
+      "date": "2025-07-29T15:20:49.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Trusting the tech: using password managers and passkeys to help you stay secure online",
+      "summary": "How today’s secure tools simplify your digital life, and reduce login stress and password fatigue",
+      "link": "https://www.ncsc.gov.uk/blog-post/trust-the-tech-using-password-managers-passkeys-to-help-you-stay-secure-online",
+      "date": "2025-06-24T07:02:15.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Decommissioning assets",
+      "summary": "How to retire digital assets (such as data, software, or hardware) from operation.",
+      "link": "https://www.ncsc.gov.uk/guidance/decommissioning-assets",
+      "date": "2025-05-20T06:28:48.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Data breaches: guidance for individuals and families",
+      "summary": "How to protect yourself from the impact of data breaches",
+      "link": "https://www.ncsc.gov.uk/guidance/data-breaches",
+      "date": "2025-05-15T08:48:15.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Ransomware: 'WannaCry' guidance for home users and small businesses",
+      "summary": "Guidance for home users or small businesses who want to reduce the likelihood of being held to ransom by WannaCry (or other types of ransomware).",
+      "link": "https://www.ncsc.gov.uk/guidance/wannacry-guidance-for-home-users-and-small-businesses",
+      "date": "2025-05-08T11:54:52.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Software Code of Practice: building a secure digital future",
+      "summary": "New voluntary code of practice for technology providers defines a market baseline for cyber security.",
+      "link": "https://www.ncsc.gov.uk/blog-post/software-code-of-practice-building-a-secure-digital-future",
+      "date": "2025-05-07T08:06:21.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "New guidance on securing HTTP-based APIs",
+      "summary": "Why it’s essential to secure your APIs to build trust with your customers and partners.",
+      "link": "https://www.ncsc.gov.uk/blog-post/new-guidance-on-securing-http-based-apis",
+      "date": "2025-04-03T06:28:42.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Privileged access workstations: introducing our new set of principles",
+      "summary": "Principles-based guidance for organisations setting up a PAW solution.",
+      "link": "https://www.ncsc.gov.uk/blog-post/introducing-new-paws-principles",
+      "date": "2025-03-24T12:46:38.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Passkeys: the promise of a simpler and safer alternative to passwords",
+      "summary": "The merits of choosing passkeys over passwords to help keep your online accounts more secure, and explaining how the technology promises to do this",
+      "link": "https://www.ncsc.gov.uk/blog-post/passkeys-promise-simpler-alternative-passwords",
+      "date": "2025-03-24T07:39:00.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "The future of telecoms in the UK",
+      "summary": "NCSC Technical Director Dr Ian Levy explains how the security analysis behind the DCMS supply chain review will ensure the UK’s telecoms networks are secure – regardless of the vendors used.",
+      "link": "https://www.ncsc.gov.uk/blog-post/the-future-of-telecoms-in-the-uk",
+      "date": "2025-03-20T07:40:55.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Studies in secure system design",
+      "summary": "Worked examples for Operational Technology and Virtualised systems, using the NCSC’s secure design principles",
+      "link": "https://www.ncsc.gov.uk/blog-post/studies-in-secure-system-design",
+      "date": "2025-03-13T08:36:36.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Spotlight on shadow IT",
+      "summary": "New guidance to help organisations manage rogue devices and services within the enterprise.",
+      "link": "https://www.ncsc.gov.uk/blog-post/spotlight-on-shadow-it",
+      "date": "2025-03-13T08:35:58.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Smart devices: new law helps citizens to choose secure products",
+      "summary": "Download the NCSC’s point-of-sale leaflet explaining how new PSTI regulation affects consumers and retailers.",
+      "link": "https://www.ncsc.gov.uk/blog-post/smart-devices-law",
+      "date": "2025-03-13T08:29:58.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "SCADA 'in the cloud': new guidance for OT organisations",
+      "summary": "If migrating SCADA solutions to the cloud, cyber security must be a key consideration for operational technology organisations.",
+      "link": "https://www.ncsc.gov.uk/blog-post/scada-cloud-new-guidance-ot-organisations",
+      "date": "2025-03-13T08:28:01.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Relaunching the NCSC's Cloud security guidance collection",
+      "summary": "Andrew A explains what's new in a significant update to the NCSC's flagship cloud guidance.",
+      "link": "https://www.ncsc.gov.uk/blog-post/relaunching-the-ncscs-cloud-security-guidance-collection",
+      "date": "2025-03-13T08:11:33.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Protecting internet-facing services on public service CNI",
+      "summary": "How operators of critical national infrastructure (CNI) can use NCSC guidance and blogs to secure their internet-facing services.",
+      "link": "https://www.ncsc.gov.uk/blog-post/protecting-internet-facing-services-public-service-cni",
+      "date": "2025-03-13T07:57:06.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Protect your management interfaces",
+      "summary": "Why it's important to protect the interfaces used to manage your infrastructure, and some recommendations on how you might do this.",
+      "link": "https://www.ncsc.gov.uk/blog-post/protect-your-management-interfaces",
+      "date": "2025-03-13T07:55:47.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Offline backups in an online world",
+      "summary": "How to protect your backups that are stored in the public cloud.",
+      "link": "https://www.ncsc.gov.uk/blog-post/offline-backups-in-an-online-world",
+      "date": "2025-03-13T07:45:04.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Not all types of MFA are created equal...",
+      "summary": "Our updated multi-factor authentication (MFA) guidance recommends organisations use techniques that give better protection against phishing attacks.",
+      "link": "https://www.ncsc.gov.uk/blog-post/not-all-types-mfa-created-equal",
+      "date": "2025-03-12T14:29:02.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "New techniques added to the NCSC’s ‘risk management toolbox’",
+      "summary": "Refreshed guidance published to help practitioners manage cyber risk.",
+      "link": "https://www.ncsc.gov.uk/blog-post/new-techniques-added-to-the-ncsc-risk-management-toolbox",
+      "date": "2025-03-12T14:28:07.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "New cloud guidance: how to 'lift and shift' successfully",
+      "summary": "Henry O discusses the pitfalls of performing a basic ‘lift and shift’ cloud migration.",
+      "link": "https://www.ncsc.gov.uk/blog-post/new-cloud-guidance-lift-shift-successfully",
+      "date": "2025-03-12T14:25:16.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "NCSC's cyber security training for staff now available",
+      "summary": "The NCSC’s e-learning package 'Top Tips For Staff' can be completed online, or built into your own training platform.",
+      "link": "https://www.ncsc.gov.uk/blog-post/ncsc-cyber-security-training-for-staff-now-available",
+      "date": "2025-03-12T14:23:40.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Motivating developers to write secure code",
+      "summary": "The 'Motivating Jenny' project is helping to change the conversation about security in software development.",
+      "link": "https://www.ncsc.gov.uk/blog-post/motivating-developers-to-write-secure-code",
+      "date": "2025-03-12T14:09:11.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Migrating to post-quantum cryptography",
+      "summary": "New guidance from the NCSC helps system and risk owners plan their migration to post-quantum cryptography (PQC).",
+      "link": "https://www.ncsc.gov.uk/blog-post/migrating-to-post-quantum-cryptography-pqc",
+      "date": "2025-03-12T14:08:33.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Introducing the guidelines for secure AI",
+      "summary": "New guidelines will help developers make informed decisions about the design, development, deployment and operation of their AI systems.",
+      "link": "https://www.ncsc.gov.uk/blog-post/introducing-guidelines-secure-ai-system-development",
+      "date": "2025-03-12T13:57:59.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Interactive administration in the cloud: managing the risks",
+      "summary": "Tips to help you secure and reduce interactive access to your cloud infrastructure.",
+      "link": "https://www.ncsc.gov.uk/blog-post/interactive-administration-cloud-managing-risk",
+      "date": "2025-03-12T13:53:22.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Identifying suspicious credential usage",
+      "summary": "How NCSC guidance can help organisations detect and protect themselves from credential abuse.",
+      "link": "https://www.ncsc.gov.uk/blog-post/identifying-suspicious-credential-usage",
+      "date": "2025-03-12T13:49:33.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "How to talk to board members about cyber",
+      "summary": "New guidance helps CISOs communicate with Boards to improve oversight of cyber risk.",
+      "link": "https://www.ncsc.gov.uk/blog-post/how-to-talk-to-board-members-about-cyber",
+      "date": "2025-03-12T13:48:08.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Helping banish malicious adverts – and drive a secure advertising ecosystem",
+      "summary": "If your brand uses digital advertising, the NCSC has new guidance to help you choose a security-minded partner.",
+      "link": "https://www.ncsc.gov.uk/blog-post/helping-banish-malicious-adverts",
+      "date": "2025-03-12T13:44:52.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Drawing good architecture diagrams",
+      "summary": "Some tips on good diagram drafting and pitfalls to avoid when trying to understand a system in order to secure it.",
+      "link": "https://www.ncsc.gov.uk/blog-post/drawing-good-architecture-diagrams",
+      "date": "2025-03-12T12:25:48.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Digital twins: secure design and development",
+      "summary": "How existing NCSC guidance can assist those looking to develop and deploy ‘digital twins’.",
+      "link": "https://www.ncsc.gov.uk/blog-post/digital-twins-secure-design-development",
+      "date": "2025-03-12T12:25:27.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Defending software build pipelines from malicious attack",
+      "summary": "Compromise of your software build pipeline can have wide-reaching impact; here's how to tackle the problem.",
+      "link": "https://www.ncsc.gov.uk/blog-post/defending-software-build-pipelines-from-malicious-attack",
+      "date": "2025-03-12T12:25:06.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "CNI system design: Secure Remote Access",
+      "summary": "A Critical National Infrastructure (CNI)-specific look at NCSC guidance on remote access architecture design",
+      "link": "https://www.ncsc.gov.uk/blog-post/cni-system-design-secure-remote-access",
+      "date": "2025-03-12T12:18:32.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Bring Your Own Device: How to do it well",
+      "summary": "Updated NCSC guidance on enabling your staff to use their own devices for work.",
+      "link": "https://www.ncsc.gov.uk/blog-post/bring-your-own-device-how-to-do-it-well",
+      "date": "2025-03-12T12:16:08.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Business email compromise: new guidance to protect your organisation",
+      "summary": "How to disrupt targeted phishing attacks aimed at senior executives or budget holders.",
+      "link": "https://www.ncsc.gov.uk/blog-post/business-email-compromise-guidance-protect-organisation",
+      "date": "2025-03-12T12:15:46.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "AIT fraud: what you need to know",
+      "summary": "SMS and telephone guidance updated to address the rise in Artificial Inflation of Traffic (AIT).",
+      "link": "https://www.ncsc.gov.uk/blog-post/ait-fraud-what-you-need-to-know",
+      "date": "2025-03-12T12:10:33.000Z",
+      "source": "NCSC Feed"
+    },
+    {
+      "title": "Advanced Mobile Solutions (AMS) guidance trailer",
+      "summary": "Chris P explains how AMS will enable high-threat organisations to stay connected ‘on the go'.",
+      "link": "https://www.ncsc.gov.uk/blog-post/advanced-mobile-solutions-update",
+      "date": "2025-03-12T12:09:00.000Z",
+      "source": "NCSC Feed"
+    }
+  ]
+}
