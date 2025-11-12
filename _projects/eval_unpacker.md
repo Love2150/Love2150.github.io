@@ -1,11 +1,3 @@
-Absolutely—here’s a **single, drag-and-drop `.md` file** for the `eval_unpacker` project page. Save it as either:
-
-* `_projects/eval_unpacker.md` *(if you use the `projects` collection)*, **or**
-* `projects/eval_unpacker.md` *(if you use plain pages)*
-
-> Keep only **one** copy to avoid duplicates.
-
-````markdown
 ---
 layout: page
 title: "eval_unpacker — JavaScript De-obfuscation Toolkit"
@@ -157,7 +149,4 @@ ipv4:
   Add a screenshot or diagram at that path to show a hero image.
 
 ```
-
-If you want, I can also generate a small **before/after sample** (obfuscated JS → decoded output) to append as a “Samples” section.
-::contentReference[oaicite:0]{index=0}
 ```
