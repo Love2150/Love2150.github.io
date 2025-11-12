@@ -27,14 +27,7 @@ PCAP Quick Profiler turns raw captures into fast, readable triage: protocol mix,
   </a>
 </p>
 
-<iframe
-  title="PCAP demo report"
-  src="{{ '/reports/pcap-profiler/demo_report.html' | relative_url }}?v={{ site.time | date: '%s' }}"
-  width="100%"
-  height="760"
-  style="border:1px solid #e2e8f0;border-radius:12px">
-</iframe>
-
+{% include pcap-demo-iframe.html %}
 
 ---
 
@@ -46,6 +39,14 @@ PCAP Quick Profiler turns raw captures into fast, readable triage: protocol mix,
 - Beacon suspects (score, hits, average interval)
 
 > **Allowlist:** Place `enrichment/allowlist.json` next to the script to hide known-good SNI/JA3 in results.
+
+---
+
+## 🔗 Links
+- **Repo:** <{{ page.repo }}>
+- **Raw report:** <{{ page.demo | relative_url }}>
+- **Homepage:** <{{ '/' | relative_url }}>
+
 
 ---
 
