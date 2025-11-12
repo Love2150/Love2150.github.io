@@ -1,12 +1,12 @@
-<iframe src="/reports/pcap-profiler/demo_report.html"
-        width="100%" height="760"
-        style="border:1px solid #e2e8f0;border-radius:12px"></iframe>
-
 # PCAP Quick Profiler — Demo
+
+[▶ Open the live demo report](https://love2150.github.io/reports/pcap-profiler/demo_report.html)
+
+![PCAP Report – Demo](https://love2150.github.io/assets/images/pcap_demo.png)
 
 **Goal.** Rapid triage of PCAPs focusing on DNS/TLS/HTTP, with simple beacon detection and a dark-mode HTML report.
 
-**Dataset.** Small filtered slice (250 packets, ~194 KB) from an existing capture.
+**Dataset.** Small filtered slice (≈250 packets, ~194 KB) from an existing capture.
 
 **Method (how it works).**
 - Filters to DNS/TLS/HTTP for speed, parses via TShark JSON.
@@ -16,8 +16,8 @@
 
 **Findings (demo).**
 - No beacon suspects surfaced.
-- HTTP and PKI endpoints consistent with Windows/Let’s Encrypt OCSP/CRL lookups.
-- User-Agent `Microsoft-CryptoAPI/10.0` indicates certificate validation activity.
+- HTTP/PKI endpoints consistent with Windows/Let’s Encrypt OCSP/CRL lookups.
+- UA `Microsoft-CryptoAPI/10.0` indicates certificate validation activity.
 
 **Limitations.**
 - Encrypted payloads; resumed TLS may lack SNI; thresholds may need tuning.
