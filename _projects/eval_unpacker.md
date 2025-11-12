@@ -14,7 +14,7 @@ image: /assets/images/eval_unpacker.png
 summary: "Detects and safely unpacks common JS obfuscators (Packer, base64 chains, array-join loaders), extracts IOCs, and beautifies output."
 tags: [reverse-engineering, javascript, malware-analysis, dfir, python]
 repo: "https://github.com/Love2150/security-tools/tree/main/tools/eval_unpacker"
-weight: 9
+weight: 5
 description: "A Python-based static de-obfuscation tool that detects Dean Edwards Packer (eval(function(p,a,c,k,e,d){…})), layered base64, escaped Unicode/hex, atob wrappers, and array-join loaders. Produces beautified code + extracted IOCs for rapid triage."
 ---
 
