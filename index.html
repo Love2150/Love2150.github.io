@@ -14,7 +14,12 @@ title: "Brandon Love — Portfolio"
   <meta property="og:description" content="Responsive personal site with portfolio, projects, and blog." />
   <meta name="theme-color" content="#111827"/>
 
-    <style>
+  <!-- NEW: social preview + RSS -->
+  <meta property="og:image" content="{{ '/assets/images/pcap_demo.png' | relative_url }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" type="application/rss+xml" title="Brandon Love — Blog" href="{{ '/feed.xml' | relative_url }}">
+
+  <style>
     :root{
       --bg:#0b1020; --card:#121934; --text:#e5e7eb; --muted:#9ca3af;
       --accent:#60a5fa; --accent-2:#a78bfa; --border:#1f2a4d; --shadow:0 8px 24px rgba(0,0,0,.4)
@@ -36,21 +41,20 @@ title: "Brandon Love — Portfolio"
     .menu{display:flex;gap:1.2rem}
     .hamburger{display:none;background:none;border:0;color:var(--text);font-size:1.35rem}
 
-/* NEW: hide drawer by default */
-.drawer { display: none; }
+    /* NEW: hide drawer by default */
+    .drawer { display: none; }
 
-@media (max-width:760px){
-  .menu{display:none}
-  .hamburger{display:block}
-  .drawer{
-    display:none;                    /* stays hidden until toggled */
-    position:absolute; inset:56px 0 auto 0;
-    background:var(--bg); border-bottom:1px solid var(--border);
-  }
-  .drawer a{display:block;padding:12px 4%;border-top:1px solid var(--border)}
-  .drawer.open{display:block}        /* only shows on mobile when toggled */
-}
-
+    @media (max-width:760px){
+      .menu{display:none}
+      .hamburger{display:block}
+      .drawer{
+        display:none;                    /* stays hidden until toggled */
+        position:absolute; inset:56px 0 auto 0;
+        background:var(--bg); border-bottom:1px solid var(--border);
+      }
+      .drawer a{display:block;padding:12px 4%;border-top:1px solid var(--border)}
+      .drawer.open{display:block}        /* only shows on mobile when toggled */
+    }
 
     section{padding:44px 0}
     .section-head{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:18px}
@@ -71,767 +75,134 @@ title: "Brandon Love — Portfolio"
 
     .post{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow)}
     footer{padding:32px 0;border-top:1px solid var(--border);color:var(--muted)}
+
     .pill{display:inline-flex;gap:.5rem;align-items:center;padding:.35rem .6rem;border:1px dashed var(--border);border-radius:999px;color:var(--muted)}
-   
-/* —— Latest Blogs slider (refined) —— */
-.blog-slider{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}
-.blog-track{display:flex;will-change:transform;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
-.blog-slide{min-width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:1rem;align-items:stretch}
-.blog-media{position:relative;border-right:1px solid var(--border);background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.12))}
-.blog-media img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:16/9}
-.blog-media::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(0,0,0,.25),transparent 40%)}
-.blog-body{padding:16px;display:flex;flex-direction:column;justify-content:center}
-.blog-body h3{margin:.2rem 0 .4rem;font-size:clamp(1.05rem,1vw + 1rem,1.5rem)}
-.blog-body p.meta{color:var(--muted);margin:.1rem 0 .6rem}
-.blog-cta{margin-top:.6rem;display:flex;gap:.5rem;flex-wrap:wrap}
-.blog-ghost{background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.12))}
-.blog-nav{position:absolute;inset:auto 0 8px 0;display:flex;justify-content:space-between;pointer-events:none}
-.blog-btn{pointer-events:auto;background:rgba(0,0,0,.35);border:1px solid var(--border);color:#fff;backdrop-filter:blur(6px);border-radius:999px;padding:.5rem .8rem;margin:0 .5rem;cursor:pointer}
-.blog-btn:focus{outline:2px solid var(--accent)}
-.blog-dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:.45rem}
-.blog-dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.5)}
-.blog-dot.active,.blog-dot[aria-current="true"]{background:#fff}
-/* —— Projects slider —— */
-.proj-slider{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}
-.proj-track{display:flex;transition:transform .5s cubic-bezier(.22,.61,.36,1);will-change:transform}
-.proj-slide{min-width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:1rem;align-items:stretch}
-.proj-media{position:relative;border-right:1px solid var(--border);background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.12))}
-.proj-media img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:16/9}
-.proj-body{padding:16px;display:flex;flex-direction:column;justify-content:center}
-.proj-body h3{margin:.2rem 0 .4rem;font-size:clamp(1.05rem,1vw + 1rem,1.5rem)}
-.proj-body p.meta{color:var(--muted);margin:.1rem 0 .6rem}
-.proj-cta{margin-top:.6rem;display:flex;gap:.5rem;flex-wrap:wrap}
-.proj-ghost{background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.12))}
-.proj-nav{position:absolute;inset:auto 0 8px 0;display:flex;justify-content:space-between;pointer-events:none}
-.proj-btn{pointer-events:auto;background:rgba(0,0,0,.35);border:1px solid var(--border);color:#fff;backdrop-filter:blur(6px);border-radius:999px;padding:.5rem .8rem;margin:0 .5rem;cursor:pointer}
-.proj-dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:.45rem}
-.proj-dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.5)}
-.proj-dot.active{background:#fff}
-@media (max-width: 900px){.proj-slide{grid-template-columns:1fr}.proj-media{border-right:0}}
 
-@media (max-width: 900px){.blog-slide{grid-template-columns:1fr}.blog-media{border-right:0}}
-@media (prefers-reduced-motion: reduce){
-  .blog-track{transition:none}
-}
-    
-/* === Cyber Animation: cursor-reactive tilt + glow === */
-.cyber-anim {
-  --rx: 0deg;   /* rotateX */
-  --ry: 0deg;   /* rotateY */
-  border-radius: 18px;
-  max-width: 100%;
-  height: auto;
-  display: block;
-  will-change: transform, filter;
-  transition: transform 180ms ease, filter 220ms ease, box-shadow 220ms ease;
-  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.02);
-  box-shadow: 0 0 20px rgba(96,165,250,.30);
-  animation: cyberPulse 5s infinite ease-in-out;
-}
+    /* —— Latest Blogs slider (refined) —— */
+    .blog-slider{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}
+    .blog-track{display:flex;will-change:transform;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+    .blog-slide{min-width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:1rem;align-items:stretch}
+    .blog-media{position:relative;border-right:1px solid var(--border);background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.12))}
+    .blog-media img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:16/9}
+    .blog-media::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(0,0,0,.25),transparent 40%)}
+    .blog-body{padding:16px;display:flex;flex-direction:column;justify-content:center}
+    .blog-body h3{margin:.2rem 0 .4rem;font-size:clamp(1.05rem,1vw + 1rem,1.5rem)}
+    .blog-body p.meta{color:var(--muted);margin:.1rem 0 .6rem}
+    .blog-cta{margin-top:.6rem;display:flex;gap:.5rem;flex-wrap:wrap}
+    .blog-ghost{background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.12))}
+    .blog-nav{position:absolute;inset:auto 0 8px 0;display:flex;justify-content:space-between;pointer-events:none}
+    .blog-btn{pointer-events:auto;background:rgba(0,0,0,.35);border:1px solid var(--border);color:#fff;backdrop-filter:blur(6px);border-radius:999px;padding:.5rem .8rem;margin:0 .5rem;cursor:pointer}
+    .blog-btn:focus{outline:2px solid var(--accent)}
+    .blog-dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:.45rem}
+    .blog-dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.5)}
+    .blog-dot.active,.blog-dot[aria-current="true"]{background:#fff}
 
-.cyber-anim:hover {
-  box-shadow: 0 0 30px rgba(96,165,250,.55), 0 0 60px rgba(167,139,250,.35);
-  filter: brightness(1.08);
-}
+    /* —— Projects slider —— */
+    .proj-slider{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}
+    .proj-track{display:flex;transition:transform .5s cubic-bezier(.22,.61,.36,1);will-change:transform}
+    .proj-slide{min-width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:1rem;align-items:stretch}
+    .proj-media{position:relative;border-right:1px solid var(--border);background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.12))}
+    .proj-media img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:16/9}
+    .proj-body{padding:16px;display:flex;flex-direction:column;justify-content:center}
+    .proj-body h3{margin:.2rem 0 .4rem;font-size:clamp(1.05rem,1vw + 1rem,1.5rem)}
+    .proj-body p.meta{color:var(--muted);margin:.1rem 0 .6rem}
+    .proj-cta{margin-top:.6rem;display:flex;gap:.5rem;flex-wrap:wrap}
+    .proj-ghost{background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.12))}
+    .proj-nav{position:absolute;inset:auto 0 8px 0;display:flex;justify-content:space-between;pointer-events:none}
+    .proj-btn{pointer-events:auto;background:rgba(0,0,0,.35);border:1px solid var(--border);color:#fff;backdrop-filter:blur(6px);border-radius:999px;padding:.5rem .8rem;margin:0 .5rem;cursor:pointer}
+    .proj-dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:.45rem}
+    .proj-dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.5)}
+    .proj-dot.active{background:#fff}
+    @media (max-width: 900px){.proj-slide{grid-template-columns:1fr}.proj-media{border-right:0}}
+    @media (max-width: 900px){.blog-slide{grid-template-columns:1fr}.blog-media{border-right:0}}
+    @media (prefers-reduced-motion: reduce){ .blog-track{transition:none} }
 
-/* (keeps your existing pulse) */
-@keyframes cyberPulse {
-  0%,100% { box-shadow: 0 0 20px rgba(96,165,250,.30); }
-  50%     { box-shadow: 0 0 40px rgba(167,139,250,.45), 0 0 70px rgba(96,165,250,.35); }
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .cyber-anim { animation: none; transition: none; transform: none; }
-}
-/* --- Header/Top fixes --- */
-:root { --header-h: 64px; }
-@media (max-width: 760px){ :root { --header-h: 56px; } }
-
-header { position: sticky; top: 0; z-index: 50; }
-header .nav { min-height: var(--header-h); padding: 10px 0; }
-
-/* Push page content below sticky header */
-main { padding-top: calc(var(--header-h) + 8px); }
-
-/* Make anchor targets not hide under header */
-section { scroll-margin-top: calc(var(--header-h) + 12px); }
-
-/* Keep header compact; avoid accidental wrap making it tall */
-.nav { display:flex; align-items:center; justify-content:space-between; gap: 1rem; }
-.menu { display:flex; gap:1rem; flex-wrap: wrap; }
-@media (max-width: 760px){
-  .menu { display:none; } /* drawer handles mobile */
-}
-      /* Footer polish (keep only one footer style block in the file) */
-    footer {
-      padding: 32px 0;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      text-align: center;
+    /* === Cyber Animation === */
+    .cyber-anim {
+      --rx: 0deg; --ry: 0deg;
+      border-radius: 18px; max-width: 100%; height: auto; display: block;
+      will-change: transform, filter;
+      transition: transform 180ms ease, filter 220ms ease, box-shadow 220ms ease;
+      transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.02);
+      box-shadow: 0 0 20px rgba(96,165,250,.30);
+      animation: cyberPulse 5s infinite ease-in-out;
     }
+    .cyber-anim:hover { box-shadow: 0 0 30px rgba(96,165,250,.55), 0 0 60px rgba(167,139,250,.35); filter: brightness(1.08); }
+    @keyframes cyberPulse { 0%,100% { box-shadow: 0 0 20px rgba(96,165,250,.30); } 50% { box-shadow: 0 0 40px rgba(167,139,250,.45), 0 0 70px rgba(96,165,250,.35); } }
+    @media (prefers-reduced-motion: reduce) { .cyber-anim { animation: none; transition: none; transform: none; } }
+
+    /* --- Header/Top fixes --- */
+    :root { --header-h: 64px; }
+    @media (max-width: 760px){ :root { --header-h: 56px; } }
+    header { position: sticky; top: 0; z-index: 50; }
+    header .nav { min-height: var(--header-h); padding: 10px 0; }
+    main { padding-top: calc(var(--header-h) + 8px); }
+    section { scroll-margin-top: calc(var(--header-h) + 12px); }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap: 1rem; }
+    .menu { display:flex; gap:1rem; flex-wrap: wrap; }
+    @media (max-width: 760px){ .menu { display:none; } }
+
+    /* Footer polish */
+    footer { padding: 32px 0; border-top: 1px solid var(--border); color: var(--muted); text-align: center; }
     footer a { color: var(--accent); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
-      /* Narrative hero tweaks */
-.hero .pill { background: transparent; }
-@media (max-width: 900px){
-  .hero .grid { grid-template-columns: 1fr !important; }
-}
 
+    /* Narrative hero tweaks */
+    .hero .pill { background: transparent; }
+    @media (max-width: 900px){ .hero .grid { grid-template-columns: 1fr !important; } }
+
+    /* Contact buttons */
+    .contact-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .5rem; }
+    .btn-contact {
+      display: inline-flex; align-items: center; gap: .5rem; padding: .55rem .9rem;
+      border-radius: 9999px; border: 1px solid var(--border, rgba(0,0,0,.15));
+      background: transparent; color: inherit; text-decoration: none;
+      font: 500 0.95rem/1.1 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      transition: transform .06s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease, color .15s ease;
+    }
+    .btn-contact:hover { border-color: var(--accent, #2563eb); color: var(--accent, #2563eb); box-shadow: 0 4px 14px rgba(0,0,0,.12); transform: translateY(-1px); }
+    .btn-contact:active { transform: translateY(0); box-shadow: 0 2px 6px rgba(0,0,0,.10); }
+    .btn-contact svg { display:block; fill: currentColor; }
+    .btn-contact:first-child { background: var(--accent, #2563eb); color: #fff; border-color: var(--accent, #2563eb); }
+    .btn-contact:first-child:hover { filter: brightness(1.05); color: #fff; }
+    @media (prefers-color-scheme: dark) {
+      .btn-contact { border-color: var(--border, rgba(255,255,255,.18)); }
+      .btn-contact:hover { box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+    }
   </style>
 </head>
 
 <body>
   
-   <!-- ======= HEADER ======= -->
-<header>
-  <div class="container nav">
-    <a class="brand" href="#top" aria-label="Home">
-      <span class="dot"></span>
-      <span>Brandon Love</span>
-    </a>
+  <!-- ======= HEADER ======= -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Home">
+        <span class="dot"></span>
+        <span>Brandon Love</span>
+      </a>
 
-    <nav class="menu" aria-label="Primary">
+      <nav class="menu" aria-label="Primary">
+        <a href="#portfolio">Portfolio</a>
+        <a href="#featured-projects">Projects</a>
+        <a href="#latest-blogs">Blog</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="hamburger" aria-expanded="false" aria-controls="drawer" aria-label="Toggle menu">☰</button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="drawer" class="drawer container" role="dialog" aria-label="Mobile menu">
       <a href="#portfolio">Portfolio</a>
       <a href="#featured-projects">Projects</a>
       <a href="#latest-blogs">Blog</a>
       <a href="#contact">Contact</a>
-    </nav>
-
-    <button class="hamburger" aria-expanded="false" aria-controls="drawer" aria-label="Toggle menu">☰</button>
-  </div>
-
-  <!-- Mobile Drawer -->
-  <div id="drawer" class="drawer container" role="dialog" aria-label="Mobile menu">
-    <a href="#portfolio">Portfolio</a>
-    <a href="#featured-projects">Projects</a>
-    <a href="#latest-blogs">Blog</a>
-    <a href="#contact">Contact</a>
-  </div>
-</header>
+    </div>
+  </header>
 
   <main id="top">
-    <!-- HERO — Narrative: Logistics ➝ Cyber -->
-<section class="container hero" style="padding:56px 0 32px">
-  <div class="grid" style="grid-template-columns:1.15fr .85fr;align-items:center;gap:2rem">
-    <!-- Left: Story -->
-    <div>
-      <span class="pill">🛡️ Veteran → Cyber Threat Hunter</span>
-      <h1 style="font-size:clamp(1.6rem,1.2rem + 2.6vw,3rem);line-height:1.15;margin:.6rem 0 0">
-        From tactical supply chains to tactical cyber defense.
-      </h1>
-      <p class="meta" style="margin:.6rem 0 1.1rem">
-        I’m <strong>Brandon Love</strong> — U.S. Army logistics veteran turned cybersecurity analyst.
-        I secure systems, decode threats, and turn noisy signals into clear, actionable defense.
-      </p>
+    <!-- HERO -->
+    <
 
-      <!-- Quick Creds Row (optional, remove if you want cleaner) -->
-      <ul class="meta" style="list-style:none;padding:0;margin:0 0 1rem;display:flex;gap:.8rem;flex-wrap:wrap">
-        <li>DFIR & Incident Response</li>
-        <li>MITRE ATT&amp;CK</li>
-        <li>Let’sDefend / HTB</li>
-        <li>Powershell &amp; Network Forensics</li>
-      </ul>
-
-      <div style="display:flex;gap:.8rem;flex-wrap:wrap">
-        <a class="pill" href="#featured-projects">Browse Projects</a>
-        <a class="pill" href="#latest-blogs">See Latest Blogs</a>
-        <a class="pill" href="#contact">Contact</a>
-      </div>
-    </div>
-
-    <!-- Right: Visual -->
-    <div class="card" style="overflow:hidden">
-      <div class="thumb" aria-hidden>
-        <img
-          src="/assets/images/cybersecurity-animation.gif"
-          alt="Animated cyber defense lock with flowing data streams"
-          class="cyber-anim"
-          loading="lazy">
-      </div>
-      <div class="card-body meta">Journey: Logistics ➝ Cyber Defense</div>
-    </div>
-  </div>
-</section>
-
-    <!-- MY STORY SECTION -->
-<section id="story" class="container">
-  <div class="section-head">
-    <h2>My Story</h2>
-    <p class="meta">How my journey from logistics to cybersecurity built my mindset for defense.</p>
-  </div>
-
-  <div class="card" style="padding:24px;line-height:1.7">
-    <p>
-      My path into cybersecurity began in the U.S. Army, where I managed logistics networks and coordinated operations as a Motor Transport Operator (88M). 
-      Those years taught me the value of discipline, data-driven decisions, and operational resilience — principles that directly translate to defending digital systems today.
-    </p>
-
-    <p>
-      After transitioning from military service, I shifted focus from supply chains to security chains — learning to protect critical infrastructure through continuous education, 
-      hands-on labs, and professional certifications. I now apply structured investigation and analytical thinking to digital incidents, treating every alert like a mission.
-    </p>
-
-    <ul class="meta" style="list-style:none;padding:0;margin:1rem 0 0;display:grid;gap:.4rem">
-      <li>🎯 <strong>Mission Focus:</strong> Transforming data into defense through proactive analysis.</li>
-      <li>🔍 <strong>Strengths:</strong> Threat hunting, DFIR, MITRE ATT&CK alignment, and network forensics.</li>
-      <li>💡 <strong>Mindset:</strong> Adapt, analyze, and act — lessons from the field now applied to cyber defense.</li>
-    </ul>
-  </div>
-</section>
-
-
-    <!-- Portfolio -->
-    <section id="portfolio" class="container">
-      <div class="section-head">
-        <h2>Portfolio Highlights</h2>
-        <p>Selected work with short case studies.</p>
-      </div>
-      <div class="grid">
-        <article class="card col-6">
-          <div class="thumb" role="img" aria-label="PCAP Quick Profiler report preview"
-               style="background-image:url('{{ '/assets/images/pcap_demo.png' | relative_url }}');background-size:cover;background-position:center"></div>
-          <div class="card-body">
-            <h3>PCAP Quick Profiler</h3>
-            <p class="meta">Portfolio Spotlight · Live triage demo</p>
-            <div class="tags"><span class="tag">DFIR</span><span class="tag">PyShark</span><span class="tag">TShark</span></div>
-          </div>
-          <a class="meta" style="padding:0 16px 16px"
-             href="{{ '/projects/pcap-quick-profiler/' | relative_url }}">Open live demo →</a>
-        </article>
-
-
-        <article class="card col-6">
-          <div class="thumb" role="img" aria-label="Detection engineering graphic"></div>
-          <div class="card-body">
-            <h3>Detection Eng: Batch Downloader (Laplas Clipper)</h3>
-            <p class="meta">Windows telemetry · Sigma draft · Pipeline notes</p>
-            <div class="tags"><span class="tag">PowerShell</span><span class="tag">YARA</span><span class="tag">Sigma</span></div>
-          </div>
-          <a class="meta" style="padding:0 16px 16px" href="#">Read write-up →</a>
-        </article>
-      </div>
-    </section>
-
-    <!-- Featured Projects (slider) -->
-<section id="featured-projects" class="container">
-  <div class="section-head">
-    <h2>Featured Projects</h2>
-    <p class="meta">Newest or hand-picked projects. Last slide links to all projects.</p>
-  </div>
-
-  <div class="proj-slider" aria-roledescription="carousel">
-    <div class="proj-track" id="projTrack">
-      {%- assign featured = site.projects | sort: 'weight' -%}
-      {%- assign top3 = featured | slice: 0, 3 -%}
-      {%- for p in top3 -%}
-        <article class="proj-slide">
-          <div class="proj-media">
-            {% if p.image %}
-              <img src="{{ p.image | relative_url }}" alt="{{ p.title | escape }}" loading="lazy" decoding="async">
-            {% else %}
-              <div class="proj-ghost" style="height:100%;min-height:240px"></div>
-            {% endif %}
-          </div>
-          <div class="proj-body">
-            <h3><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
-            <p class="meta">{% if p.tags %}{{ p.tags | join: ", " }} · {% endif %}{{ p.date | date: "%b %d, %Y" }}</p>
-            <p>{{ p.summary | default: p.excerpt | strip_html | truncate: 220 }}</p>
-            <div class="proj-cta">
-              {% if p.demo %}<a class="pill" href="{{ p.demo }}" target="_blank" rel="noopener">Demo →</a>{% endif %}
-              {% if p.repo %}<a class="pill" href="{{ p.repo }}" target="_blank" rel="noopener">Repo →</a>{% endif %}
-              <a class="pill" href="{{ p.url | relative_url }}">Details →</a>
-            </div>
-          </div>
-        </article>
-      {%- endfor -%}
-
-      <!-- CTA slide -->
-      <article class="proj-slide">
-        <div class="proj-media proj-ghost"></div>
-        <div class="proj-body" style="text-align:center;align-items:center">
-          <h3>See all projects</h3>
-          <p class="meta">Browse the full collection.</p>
-          <p><a class="pill" href="{{ '/projects/' | relative_url }}">View all projects →</a></p>
-        </div>
-      </article>
-    </div>
-
-    <div class="proj-nav" aria-hidden="true">
-      <button class="proj-btn" id="prevProj" aria-label="Previous">‹</button>
-      <button class="proj-btn" id="nextProj" aria-label="Next">›</button>
-    </div>
-    <div class="proj-dots" id="projDots" aria-hidden="true"></div>
-  </div>
-</section>
-
-<!-- Latest Blogs (slider only, no Medium widget/fallback) -->
-<section id="latest-blogs" class="container">
-  <div class="section-head">
-    <h2>Latest Blogs</h2>
-    <p class="meta">Newest three posts with images. The last slide links to the full archive.</p>
-  </div>
-
-  <div class="blog-slider" aria-roledescription="carousel">
-    <div class="blog-track" id="blogTrack">
-      {%- assign newest = site.posts | sort: "date" | reverse -%}
-      {%- assign top3 = newest | slice: 0, 3 -%}
-
-      {%- for post in top3 -%}
-        {%- assign hero = post.image | default: post.hero | default: post.thumbnail -%}
-        {%- if hero == nil or hero == "" -%}
-          {%- assign split1 = post.content | split:'img src="' -%}
-          {%- if split1.size > 1 -%}
-            {%- assign split2 = split1[1] | split:'"' -%}
-            {%- assign hero = split2[0] -%}
-          {%- endif -%}
-        {%- endif -%}
-
-        <article class="blog-slide">
-          <div class="blog-media{% if hero == nil or hero == '' %} blog-ghost{% endif %}">
-            {%- if hero and hero != '' -%}
-              <img src="{{ hero | relative_url }}" alt="{{ post.title | escape }}" loading="lazy" decoding="async">
-            {%- else -%}
-              <div style="height:100%;min-height:240px"></div>
-            {%- endif -%}
-          </div>
-          <div class="blog-body">
-            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-            <p class="meta">{{ post.date | date: "%b %d, %Y" }}{% if post.tags %} · {{ post.tags | join: ", " }}{% endif %}</p>
-            <p>{{ post.excerpt | strip_html | truncate: 220 }}</p>
-            <div class="blog-cta">
-              <a class="pill" href="{{ post.url | relative_url }}">Read post →</a>
-              {%- if post.medium_canonical -%}
-                <a class="pill" href="{{ post.medium_canonical }}" target="_blank" rel="noopener">Open on Medium ↗</a>
-              {%- endif -%}
-            </div>
-          </div>
-        </article>
-      {%- endfor -%}
-
-      <!-- CTA slide to the rest of the posts -->
-      <article class="blog-slide">
-        <div class="blog-media blog-ghost"></div>
-        <div class="blog-body" style="text-align:center;align-items:center">
-          <h3>Explore the full archive</h3>
-          <p class="meta">All posts, filters, and deep dives.</p>
-          <p><a class="pill" href="{{ '/archive/' | relative_url }}">View all posts →</a></p>
-        </div>
-      </article>
-    </div>
-
-    <div class="blog-nav" aria-hidden="true">
-      <button class="blog-btn" id="prevSlide" aria-label="Previous">‹</button>
-      <button class="blog-btn" id="nextSlide" aria-label="Next">›</button>
-    </div>
-    <div class="blog-dots" id="blogDots" aria-hidden="true"></div>
-  </div>
-</section>
-
-
-    <!-- Contact -->
-<section id="contact" class="container">
-  <div class="section-head">
-    <h2>Get in touch</h2>
-    <p>Reach out for collaborations, roles available, or training opportunities.</p>
-  </div>
-  <div class="grid">
-    <div class="col-6 card" style="padding:16px">
- <!-- Contact: pill buttons styled with existing theme vars -->
-<div class="contact-actions">
-  <a class="btn-contact" href="https://www.linkedin.com/in/brandon-love-85b247261" target="_blank" rel="noopener" aria-label="Open LinkedIn">
-    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM0 8h5v16H0V8zm7.5 0H12v2.23h.06c.63-1.14 2.17-2.49 4.66-2.49 4.99 0 5.92 3.28 5.92 7.55V24h-5v-6.91c0-1.65-.03-3.78-2.3-3.78-2.3 0-2.65 1.8-2.65 3.66V24h-5V8z"/></svg>
-    LinkedIn
-  </a>
-
-  <a class="btn-contact" href="mailto:brandonlove2150@icloud.com?subject=Hello%20Brandon&body=Hi%20Brandon%2C%0A%0A" aria-label="Compose email to Brandon">
-    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v.4l10 6.25L22 6.4V6a2 2 0 0 0-2-2zm2 5.1-9.35 5.83a1.5 1.5 0 0 1-1.3 0L2 9.1V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9.1z"/></svg>
-    Email
-  </a>
-
-  <a class="btn-contact" href="https://github.com/Love2150" target="_blank" rel="noopener" aria-label="Open GitHub">
-    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
-    GitHub
-  </a>
-
-  <a class="btn-contact" href="https://www.google.com/maps/search/?api=1&query=Killeen%2C%20TX" target="_blank" rel="noopener" aria-label="Open map to Killeen, Texas">
-    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
-    Killeen, TX
-  </a>
-</div>
-
-<style>
-  /* Contact buttons — inherits your theme vars */
-  .contact-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .6rem;
-    margin-top: .5rem;
-  }
-  .btn-contact {
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
-    padding: .55rem .9rem;
-    border-radius: 9999px;
-    border: 1px solid var(--border, rgba(0,0,0,.15));
-    background: transparent;
-    color: inherit;
-    text-decoration: none;
-    font: 500 0.95rem/1.1 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    transition: transform .06s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease, color .15s ease;
-  }
-  .btn-contact:hover {
-    border-color: var(--accent, #2563eb);
-    color: var(--accent, #2563eb);
-    box-shadow: 0 4px 14px rgba(0,0,0,.12);
-    transform: translateY(-1px);
-  }
-  .btn-contact:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 6px rgba(0,0,0,.10);
-  }
-  .btn-contact svg { display:block; fill: currentColor; }
-  /* Optional: make the first button “filled” to mirror primary CTAs */
-  .btn-contact:first-child {
-    background: var(--accent, #2563eb);
-    color: #fff;
-    border-color: var(--accent, #2563eb);
-  }
-  .btn-contact:first-child:hover {
-    filter: brightness(1.05);
-    color: #fff;
-  }
-  @media (prefers-color-scheme: dark) {
-    .btn-contact { border-color: var(--border, rgba(255,255,255,.18)); }
-    .btn-contact:hover { box-shadow: 0 6px 18px rgba(0,0,0,.35); }
-  }
-</style>
-
-
-    </div>
-    <div class="col-6 card" id="cyber-tips" style="padding:16px">
-  <p class="meta">Loading live cybersecurity tip…</p>
-  <noscript>
-    Enable JavaScript to see live security tips.
-  </noscript>
-</div>
-
-<script>
-(function () {
-  const mount = document.getElementById("cyber-tips");
-  if (!mount) return;
-
-  const ACCENT = getComputedStyle(document.documentElement).getPropertyValue("--accent") || "#2563eb";
-  const ROTATE_MS = 60 * 1000;          // rotate visible tip every minute
-  const CACHE_MS  = 10 * 60 * 1000;     // keep local cache for 10 minutes
-  const CACHE_KEY = "cyber_tips_json_v1";
-
-  let items = [];
-  let cursor = 0;
-
-  const tidy = (s="") => s.replace(/\s+/g," ").trim();
-  const ago = (iso) => {
-    const d = new Date(iso);
-    const mins = Math.floor((Date.now() - d.getTime())/60000);
-    if (mins < 1) return "just now";
-    if (mins < 60) return `${mins}m ago`;
-    const hrs = Math.floor(mins/60);
-    if (hrs < 24) return `${hrs}h ago`;
-    return `${Math.floor(hrs/24)}d ago`;
-  };
-
-  function render() {
-    if (!items.length) return;
-    const it = items[cursor % items.length];
-    const summary = it.summary && it.summary.length > 180 ? it.summary.slice(0,177) + "…" : it.summary;
-    mount.innerHTML = `
-      <p><strong>Tip:</strong>
-        <a href="${it.link || '#'}" target="_blank" rel="noopener" style="text-underline-offset:2px; color:${ACCENT};">
-          ${tidy(it.title || "Read more")}
-        </a>
-      </p>
-      ${summary ? `<p>${tidy(summary)}</p>` : ""}
-      <p class="meta">${it.source ? it.source + " · " : ""}${it.date ? ago(it.date) : ""}</p>
-    `;
-    cursor++;
-  }
-
-  function loadCache() {
-    try {
-      const raw = localStorage.getItem(CACHE_KEY);
-      if (!raw) return null;
-      const { savedAt, payload } = JSON.parse(raw);
-      if (!payload || !Array.isArray(payload.items)) return null;
-      if (Date.now() - savedAt > CACHE_MS) return null;
-      return payload;
-    } catch { return null; }
-  }
-
-  function saveCache(payload) {
-    try {
-      localStorage.setItem(CACHE_KEY, JSON.stringify({ savedAt: Date.now(), payload }));
-    } catch {}
-  }
-
-  async function fetchTips() {
-    // Cache-bust with timestamp so we don't get an older CDN copy
-    const url = `/assets/tips.json?v=${Date.now()}`;
-    const res = await fetch(url, { cache: "no-store" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return res.json();
-  }
-
-  // 1) Paint instantly from local cache, if present
-  const cached = loadCache();
-  if (cached) {
-    items = cached.items || [];
-    render();
-  } else {
-    mount.innerHTML = `<p class="meta">Loading tip…</p>`;
-  }
-
-  // 2) Pull fresh JSON (fast, same-origin)
-  fetchTips().then(data => {
-    if (data && Array.isArray(data.items) && data.items.length) {
-      items = data.items;
-      saveCache(data);
-      cursor = 0;
-      render();
-    }
-  }).catch(() => {
-    // keep cached view if network fails
-  });
-
-  // 3) Rotate and occasionally re-pull
-  setInterval(render, ROTATE_MS);
-  setInterval(async () => {
-    try {
-      const data = await fetchTips();
-      if (data && Array.isArray(data.items) && data.items.length) {
-        items = data.items; cursor = 0; render(); saveCache(data);
-      }
-    } catch {}
-  }, CACHE_MS);
-})();
-</script>
-
-</section>
-
-  </main>
-
-  <footer>
-  <div class="container" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
-    <span>© <span id="year"></span> Brandon Love. All rights reserved.</span>
-    <span>
-      Built with ♥ and shipped on GitHub Pages ·
-      <a href="https://github.com/Love2150/Love2150.github.io/blob/main/LICENSE" target="_blank" rel="noopener">
-        MIT License
-      </a>
-    </span>
-  </div>
-</footer>
-
-
-  <script>
-    // Mobile menu + year + project filter
-    const btn=document.querySelector('.hamburger');
-    const drawer=document.getElementById('drawer');
-    btn?.addEventListener('click',()=>{const open=drawer.classList.toggle('open');btn.setAttribute('aria-expanded',open?'true':'false');});
-    document.getElementById('year').textContent=new Date().getFullYear();
-    const filter=document.getElementById('filter');
-    const cards=[...document.querySelectorAll('#projectGrid .card')];
-    filter?.addEventListener('input',(e)=>{const q=e.target.value.trim().toLowerCase();cards.forEach(c=>{const hay=(c.textContent+' '+(c.dataset.tags||'')).toLowerCase();c.style.display=!q||hay.includes(q)?'':'none';});});
-  </script>
-
-  <!-- Medium widget + robust loader -->
-  <script src="https://medium-widget.pixelpoint.io/widget.js"></script>
-  <script>
-  (function(){
-    const resource="https://medium.com/@brandonlove2150";
-    const feedSel="#medium-feed";
-    function init(i=0){
-      const feed=document.querySelector(feedSel);
-      if(!feed)return;
-      if(window.MediumWidget){
-        try{
-          MediumWidget.Init({
-            renderTo:feedSel,
-            params:{resource,postsPerLine:3,limit:3,picture:"big",fields:["description","claps","publishAt"],ratio:"landscape"}
-          });
-          const fb=document.getElementById("medium-fallback");
-          if(fb)fb.style.display="none";
-        }catch(e){
-          feed.innerHTML='<p class="meta">Couldn’t render Medium posts (script error). Try refreshing.</p>';
-          console.warn(e);
-        }
-        return;
-      }
-      if(i<40)setTimeout(()=>init(i+1),250);
-      else feed.innerHTML='<p class="meta">Couldn’t load Medium (likely a content blocker). Try disabling extensions for this page.</p>';
-    }
-    init(); window.addEventListener("load",init);
-  })();
-  </script>
- <script>
-(function(){
-  // Generic slider maker for any section
-  function makeSlider(cfg){
-    const track = document.getElementById(cfg.trackId);
-    if (!track) { console.warn('[slider] missing track:', cfg.trackId); return; }
-
-    const container = track.closest(cfg.containerSel);
-    const slides = Array.from(track.children);
-    const dotsWrap = document.getElementById(cfg.dotsId);
-    const prev = document.getElementById(cfg.prevId);
-    const next = document.getElementById(cfg.nextId);
-
-    let index = 0, timer = null, hovering = false, focused = false;
-
-    // dots
-    dotsWrap.innerHTML = '';
-    slides.forEach((_, i) => {
-      const b = document.createElement('button');
-      b.className = cfg.dotClass;
-      b.type = 'button';
-      b.setAttribute('aria-label', `Go to slide ${i+1} of ${slides.length}`);
-      b.addEventListener('click', () => go(i, true));
-      dotsWrap.appendChild(b);
-    });
-
-    function update(){
-      track.style.transform = `translateX(-${index * 100}%)`;
-      [...dotsWrap.children].forEach((d, i) => d.classList.toggle('active', i === index));
-      // auto-fit height (after images load)
-      const h = slides[index].offsetHeight;
-      track.parentElement.style.height = (h || 0) + 'px';
-    }
-    function go(i, user=false){
-      index = (i + slides.length) % slides.length;
-      update();
-      if (user) restartAutoplay();
-    }
-
-    prev?.addEventListener('click', () => go(index-1, true));
-    next?.addEventListener('click', () => go(index+1, true));
-
-    // touch
-    let x0 = null;
-    track.addEventListener('touchstart', e => x0 = e.touches[0].clientX, {passive:true});
-    track.addEventListener('touchmove', e => {
-      if (x0 === null) return;
-      const dx = e.touches[0].clientX - x0;
-      if (Math.abs(dx) > 42){ go(index + (dx<0?1:-1), true); x0 = null; }
-    }, {passive:true});
-
-    // focus/keyboard
-    container.setAttribute('tabindex','0');
-    container.addEventListener('focusin', ()=>{ focused = true; pauseAutoplay(); });
-    container.addEventListener('focusout', ()=>{ focused = false; resumeAutoplay(); });
-    container.addEventListener('keydown', e => {
-      if (e.key === 'ArrowRight') { e.preventDefault(); go(index+1, true); }
-      if (e.key === 'ArrowLeft')  { e.preventDefault(); go(index-1, true); }
-    });
-
-    // autoplay with reduced-motion respect
-    const INTERVAL = cfg.interval || 5000;
-    function tick(){ if (!hovering && !focused) go(index+1); }
-    function startAutoplay(){ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; timer = setInterval(tick, INTERVAL); }
-    function pauseAutoplay(){ if (timer){ clearInterval(timer); timer = null; } }
-    function resumeAutoplay(){ if (!timer) startAutoplay(); }
-    function restartAutoplay(){ pauseAutoplay(); resumeAutoplay(); }
-
-    container.addEventListener('mouseenter', ()=>{ hovering = true; pauseAutoplay(); });
-    container.addEventListener('mouseleave', ()=>{ hovering = false; resumeAutoplay(); });
-
-    // update after images load too
-    window.addEventListener('load', update);
-    window.addEventListener('resize', update);
-    const ro = new ResizeObserver(update);
-    slides.forEach(s => ro.observe(s));
-
-    // kick off
-    update();
-    startAutoplay();
-  }
-
-  // Initialize both sliders
-  makeSlider({
-    containerSel: '.blog-slider',
-    trackId: 'blogTrack',
-    dotsId: 'blogDots',
-    prevId: 'prevSlide',
-    nextId: 'nextSlide',
-    dotClass: 'blog-dot',
-    interval: 5000
-  });
-
-  makeSlider({
-    containerSel: '.proj-slider',
-    trackId: 'projTrack',
-    dotsId: 'projDots',
-    prevId: 'prevProj',
-    nextId: 'nextProj',
-    dotClass: 'proj-dot',
-    interval: 5500
-  });
-})();
-</script>
-<script>
-(function interactiveGlow(selector = '.cyber-anim'){
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  const MAX_TILT = 8;     // degrees
-  const MAX_GLOW = 28;    // px offset for the glow
-
-  function onMove(e, img){
-    const rect = img.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;   // 0..1
-    const y = (e.clientY - rect.top)  / rect.height;  // 0..1
-    const dx = (x - 0.5);   // -0.5..0.5
-    const dy = (y - 0.5);
-
-    // Tilt: rotate opposite to cursor direction for a parallax feel
-    const rx = (-dy * MAX_TILT).toFixed(2) + 'deg';
-    const ry = ( dx * MAX_TILT).toFixed(2) + 'deg';
-    img.style.setProperty('--rx', rx);
-    img.style.setProperty('--ry', ry);
-
-    // Glow offset (simulate light following cursor)
-    const gx = Math.round(dx * MAX_GLOW);
-    const gy = Math.round(dy * MAX_GLOW);
-    img.style.filter = `drop-shadow(${gx}px ${gy}px 26px rgba(96,165,250,.40))`;
-  }
-
-  function onLeave(img){
-    img.style.setProperty('--rx', '0deg');
-    img.style.setProperty('--ry', '0deg');
-    img.style.filter = 'none';
-  }
-
-  document.querySelectorAll(selector).forEach(img => {
-    // Mouse / pointer move
-    img.addEventListener('mousemove', (e)=> onMove(e, img), {passive:true});
-    img.addEventListener('mouseleave', ()=> onLeave(img), {passive:true});
-
-    // Keyboard focus accessibility: gently highlight, no tilt
-    img.addEventListener('focus', ()=> {
-      img.style.boxShadow = '0 0 32px rgba(96,165,250,.55)';
-    });
-    img.addEventListener('blur', ()=> {
-      img.style.boxShadow = '';
-      onLeave(img);
-    });
-
-    // Touch: a small pulse on tap (no permanent transform)
-    img.addEventListener('touchstart', ()=> {
-      img.style.transform = 'scale(1.035)';
-      setTimeout(()=> img.style.transform = '', 180);
-    }, {passive:true});
-  });
-})();
-</script>
-  
-</body>
-</html>
 
