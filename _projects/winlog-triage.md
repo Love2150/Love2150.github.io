@@ -104,3 +104,7 @@ pySigma optional integration with a curated ruleset
 Enrichment toggles (VT/AbuseIPDB) via environment variables
 
 Case bundle export (HTML + JSON + matched rules)
+> If you want a repo link to show under the overview buttons, add `repo:` to the front matter, e.g.  
+> `repo: https://github.com/Love2150/security-tools/tree/main/tools/winlog-triage`
+
+---
