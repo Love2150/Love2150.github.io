@@ -289,14 +289,19 @@ section { scroll-margin-top: calc(var(--header-h) + 12px); }
       </div>
       <div class="grid">
         <article class="card col-6">
-          <div class="thumb" role="img" aria-label="Blue-team timeline analysis graphic"></div>
+          <div class="thumb" role="img" aria-label="PCAP Quick Profiler report preview"
+               style="background-image:url('{{ '/assets/images/pcap_demo.png' | relative_url }}');background-size:cover;background-position:center"></div>
           <div class="card-body">
-            <h3>Incident Response: Cobalt Strike</h3>
-            <p class="meta">DFIR · Network forensics · PCAP triage</p>
-            <div class="tags"><span class="tag">Wireshark</span><span class="tag">NetworkMiner</span><span class="tag">ATT&CK</span></div>
-          </div>
-          <a class="meta" style="padding:0 16px 16px" href="#">Read case study →</a>
+            <h3>PCAP Quick Profiler</h3>
+            <p class="meta">DNS/TLS/HTTP triage · Beaconing suspects · Dark-mode HTML</p>
+            <div class="tags">
+              <span class="tag">Wireshark</span><span class="tag">PyShark</span><span class="tag">DFIR</span>
+            </div>
+         </div>
+         <a class="meta" style="padding:0 16px 16px"
+            href="{{ '/projects/pcap-profiler/' | relative_url }}">Open live demo →</a>
         </article>
+
         <article class="card col-6">
           <div class="thumb" role="img" aria-label="Detection engineering graphic"></div>
           <div class="card-body">
