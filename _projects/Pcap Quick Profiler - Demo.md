@@ -1,6 +1,6 @@
 # PCAP Quick Profiler — Demo
 
-[▶ Open the live demo report](https://love2150.github.io/reports/pcap-profiler/demo_report.html)
+[▶ Open the live demo report](tools/Pcap-profiler/out/demo_small_20251110-145852.html)
 
 ![PCAP Report – Demo](https://love2150.github.io/assets/images/pcap_demo.png)
 
