@@ -1,3 +1,7 @@
+<iframe src="/reports/pcap-profiler/demo_report.html"
+        width="100%" height="760"
+        style="border:1px solid #e2e8f0;border-radius:12px"></iframe>
+
 # PCAP Quick Profiler — Demo
 
 **Goal.** Rapid triage of PCAPs focusing on DNS/TLS/HTTP, with simple beacon detection and a dark-mode HTML report.
