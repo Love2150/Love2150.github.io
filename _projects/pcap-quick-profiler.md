@@ -24,7 +24,6 @@ PCAP Quick Profiler turns raw captures into fast, readable triage: protocol mix,
 
 {% include pcap-demo-iframe.html %}
 
-
 ---
 
 ## 📈 What it shows
