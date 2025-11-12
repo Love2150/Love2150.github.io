@@ -2,7 +2,7 @@
 layout: page
 title: "eval_unpacker — JavaScript De-obfuscation Toolkit"
 permalink: /projects/eval_unpacker/
-image: /assets/images/eval_unpacker.png
+image: /assets/images/eeval-unpacker-hero.jpg
 summary: "Detects and safely unpacks common JS obfuscators (Packer, base64 chains, array-join loaders), extracts IOCs, and beautifies output."
 tags: [reverse-engineering, javascript, malware-analysis, dfir, python]
 repo: "https://github.com/Love2150/security-tools/tree/main/tools/eval_unpacker"
