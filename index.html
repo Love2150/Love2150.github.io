@@ -294,14 +294,17 @@ title: "Brandon Love — Portfolio"
 
         <!-- Detection Eng card (placeholder) -->
         <article class="card col-6">
-          <div class="thumb" role="img" aria-label="Detection engineering graphic"></div>
+          <div class="thumb" role="img" aria-label="Windows Log Triage report preview"
+               style="background-image:url('{{ '/assets/images/wintriage_demo.png' | relative_url }}');background-size:cover;background-position:center"></div>
           <div class="card-body">
-            <h3>Detection Eng: Batch Downloader (Laplas Clipper)</h3>
-            <p class="meta">Windows telemetry · Sigma draft · Pipeline notes</p>
-            <div class="tags"><span class="tag">PowerShell</span><span class="tag">YARA</span><span class="tag">Sigma</span></div>
+            <h3>Windows Log Triage</h3>
+            <p class="meta">EVTX + Sysmon → Sigma-like hits + IOCs</p>
+            <div class="tags"><span class="tag">DFIR</span><span class="tag">Sysmon</span><span class="tag">Sigma</span></div>
           </div>
-          <a class="meta" style="padding:0 16px 16px" href="#">Read write-up →</a>
+          <a class="meta" style="padding:0 16px 16px"
+             href="{{ '/projects/winlog-triage/' | relative_url }}">Open live demo →</a>
         </article>
+
       </div>
     </section>
 
