@@ -28,7 +28,8 @@ PCAP Quick Profiler turns raw captures into fast, readable triage: protocol mix,
 <iframe
   title="PCAP demo report"
   src="{{ '/reports/pcap-profiler/demo_report.html' | relative_url }}?v={{ site.time | date: '%s' }}"
-  width="100%" height="760"
+  width="100%"
+  height="760"
   style="border:1px solid #e2e8f0;border-radius:12px">
 </iframe>
 
@@ -49,5 +50,3 @@ PCAP Quick Profiler turns raw captures into fast, readable triage: protocol mix,
 - **Repo:** <{{ page.repo }}>
 - **Raw report:** <{{ page.demo | relative_url }}>
 - **Homepage:** <{{ '/' | relative_url }}>
-
-
