@@ -10,25 +10,10 @@ weight: 10
 <!-- Brand banner -->
 <div style="display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:16px;background:linear-gradient(135deg,#0b1220,#121a2a 55%,#1e2a44);color:#e8eefc;border:1px solid rgba(255,255,255,.06);margin-bottom:24px;">
   <img src="/assets/images/brand/brandmark.png" alt="Brandon Love brand" style="width:56px;height:56px;border-radius:12px;object-fit:cover;" onerror="this.style.display='none'">
-  <div>
-    <div style="font-weight:700;font-size:22px;letter-spacing:.2px;">Brandon Love · Security Engineering & DFIR</div>
-    <div style="opacity:.85;font-size:14px;">SOC/IR Report Template — Markdown, Jekyll-ready</div>
-  </div>
-</div>
-
-> **How to use:** Copy this file into your repo (suggested path: `/reports/soc-analyst-template.md`). It renders as a page at `/reports/soc-analyst-template/`. Update the logo at `/assets/images/brand/brandmark.png` or remove the `<img>` tag above.
-
----
-
-# 🧾 SOC Analyst Report Template
-
-Use this template to document investigations, incidents, and alerts handled by your SOC or blue team. The sections are arranged for quick exec consumption first, then deep technical evidence.
-
----
-
+ 
 ## 1) Executive Summary
-> _One paragraph. Who/what/when/impact/containment._  
-> Example: On Oct 6, 2023, suspicious Microsoft SharePoint Server Elevation of Privilege(CVE-2023-29357) was detected on host `MS-SharePointServer`. Investigation confirmed the activity was malicious; containment actions prevented further impact. No lateral movement observed.
+
+Example: On Oct 6, 2023, suspicious Microsoft SharePoint Server Elevation of Privilege(CVE-2023-29357) was detected on host `MS-SharePointServer`. Investigation confirmed the activity was malicious; containment actions prevented further impact. No lateral movement observed.
 
 ---
 
