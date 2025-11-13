@@ -28,5 +28,7 @@ plugins:
   - jekyll-sitemap
 
 image: /assets/images/og-default.png
+timezone: America/Chicago
+future: true
 
 
