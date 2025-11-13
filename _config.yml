@@ -2,11 +2,12 @@ title: "Brandon Love | Security Tools & Portfolio"
 description: "Cybersecurity projects, DFIR utilities, and learning notes by Brandon Love."
 url: "https://love2150.github.io"
 baseurl: ""
+
 author:
   name: "Brandon Love"
   twitter: "love2150"
 
-# Navigation menu
+# Top navigation (your header must render site.nav; if not, we’ll add a snippet next)
 nav:
   - title: Home
     url: /
@@ -19,6 +20,20 @@ nav:
   - title: Contact
     url: /contact/
 
+# Collections (for /projects/)
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+# Optional defaults so each project auto-uses the 'project' layout
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: project
+
 # Build settings
 theme: minima
 markdown: kramdown
@@ -27,8 +42,12 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
+# SEO / social fallback
 image: /assets/images/og-default.png
+
+# Time handling
 timezone: America/Chicago
-future: true
+future: true  # uncomment if you want future-dated posts to publish
+
 
 
