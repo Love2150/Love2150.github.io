@@ -4,11 +4,8 @@ title: "Reports"
 permalink: /reports/
 ---
 
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Reports · Brandon Love</title>
 <style>
   :root{--bg:#0b1020;--card:#121934;--text:#e5e7eb;--muted:#9ca3af;--accent:#60a5fa;--border:#1f2a4d;--shadow:0 8px 24px rgba(0,0,0,.4)}
@@ -28,12 +25,14 @@ permalink: /reports/
   .tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.2rem}
   .tag{font-size:.78rem;padding:.2rem .45rem;border:1px solid var(--border);border-radius:999px;color:var(--muted)}
 </style>
-</head>
-<body>
+</head><body>
   <main class="container">
     <h1>Security Reports</h1>
     <div class="grid" role="list">
-      {%- assign items = site.pages | where_exp:"p","p.url contains '/reports/analyst_report/'" | where_exp:"p","p.hidden != true" | sort:"weight" -%}
+      {%- assign items = site.pages
+          | where_exp: "p","p.url contains '/reports/analyst_report/'"
+          | where_exp: "p","p.hidden != true"
+          | sort: "weight" -%}
       {%- for r in items -%}
         {%- assign img = r.image | default: '/assets/images/projects/fallback.jpg' -%}
         <article class="card col-4" role="listitem">
@@ -45,11 +44,14 @@ permalink: /reports/
               <a href="{{ r.url | relative_url }}">{{ r.title }}</a>
             </h2>
             <p class="meta">{{ r.description | default: "No description provided" }}</p>
-            <p class="meta">Last updated: {{ r.date | date: "%b %d, %Y" }}</p>
+            <p class="meta">
+              {%- if r.tags and r.tags.size > 0 -%}{{ r.tags | join: " · " }} · {%- endif -%}
+              {%- if r.date -%}{{ r.date | date: "%b %d, %Y" }}{%- endif -%}
+            </p>
+            <div class="tags">{% for t in r.tags limit:4 %}<span class="tag">{{ t }}</span>{% endfor %}</div>
           </div>
         </article>
       {%- endfor -%}
     </div>
   </main>
-</body>
-</html>
+</body></html>
