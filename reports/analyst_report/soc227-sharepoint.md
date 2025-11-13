@@ -1,10 +1,11 @@
 ---
-layout: page
-title: "SOC227- Microsoft SharePoint Server Elevation of Privilege"
+title: "SOC227 — Microsoft SharePoint Server Elevation of Privilege"
 description: "Analyst Write Up."
-permalink: /reports/soc-analyst-template/
 image: /assets/images/og-default.png
+tags: [sharepoint, cve-2023-29357, privilege-escalation]
+weight: 10
 ---
+
 
 <!-- Brand banner -->
 <div style="display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:16px;background:linear-gradient(135deg,#0b1220,#121a2a 55%,#1e2a44);color:#e8eefc;border:1px solid rgba(255,255,255,.06);margin-bottom:24px;">
