@@ -1,10 +1,14 @@
 ---
 layout: page
 title: "SOC Analyst Report Template"
-description: "Reusable SOC/IR report format for documenting security incidents — branded for Brandon Love."
+description: "Use this to write new reports."
 permalink: /reports/soc-analyst-template/
-image: /assets/images/og-default.png
+hidden: true
+sitemap: false
+robots: noindex
+redirect_to: /reports/
 ---
+
 
 <!-- Brand banner -->
 <div style="display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:16px;background:linear-gradient(135deg,#0b1220,#121a2a 55%,#1e2a44);color:#e8eefc;border:1px solid rgba(255,255,255,.06);margin-bottom:24px;">
