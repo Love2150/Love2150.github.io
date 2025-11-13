@@ -35,15 +35,38 @@ permalink: /reports/
     <p class="meta" style="margin-top:0">Case studies, investigations, and write-ups.</p>
 
     <div class="grid" role="list">
-      {% assign items = site.pages
-          | where_exp: "p","p.url contains '/reports/analyst_report/'"
-          | where_exp: "p","p.hidden != true"
-          | sort: "weight" %}
-      
-      {% if items == nil or items.size == 0 %}
+      {% assign shown = 0 %}
+      {% for p in site.pages %}
+        {% if p.url and p.url contains '/reports/analyst_report/' and p.hidden != true %}
+          {% assign img = p.image | default: '/assets/images/projects/fallback.jpg' %}
+          <article class="card col-4" role="listitem">
+            <div class="thumb" aria-label="{{ p.title | escape }}">
+              <img src="{{ img | relative_url }}" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="card-body">
+              <h2 style="margin:.1rem 0 .2rem; font-size:1.1rem;">
+                <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
+              </h2>
+              <p class="meta">
+                {% if p.tags and p.tags.size > 0 %}{{ p.tags | join: " · " }} · {% endif %}
+                {% if p.date %}{{ p.date | date: "%b %d, %Y" }}{% endif %}
+              </p>
+              {% if p.description %}<p>{{ p.description }}</p>{% endif %}
+              <div class="tags">
+                {% if p.tags %}{% for t in p.tags limit:4 %}<span class="tag">{{ t }}</span>{% endfor %}{% endif %}
+              </div>
+              <p class="meta" style="margin-top:.4rem"><a href="{{ p.url | relative_url }}">Read report →</a></p>
+            </div>
+          </article>
+          {% assign shown = shown | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+
+      {% if shown == 0 %}
         <p class="meta">No reports yet. Add Markdown files to <code>reports/analyst_report/</code>.</p>
       {% endif %}
-
-      {% for r in items %}
-        {% assign img = r.image | default: '/assets/images/
+    </div>
+  </main>
+</body>
+</html>
 
