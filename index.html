@@ -9,14 +9,14 @@ title: "Brandon Love — Portfolio"
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Brandon Love — Portfolio</title>
+
+  <!-- SEO / Social -->
   <meta name="description" content="Responsive personal site with portfolio, projects, and blog, ready for GitHub Pages." />
   <meta property="og:title" content="Brandon Love — Portfolio" />
   <meta property="og:description" content="Responsive personal site with portfolio, projects, and blog." />
-  <meta name="theme-color" content="#111827"/>
-
-  <!-- NEW: social preview + RSS -->
-  <meta property="og:image" content="{{ '/assets/images/pcap_demo.png' | relative_url }}">
+  <meta property="og:image" content="{{ page.image | default: site.image | absolute_url }}">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#111827"/>
   <link rel="alternate" type="application/rss+xml" title="Brandon Love — Blog" href="{{ '/feed.xml' | relative_url }}">
 
   <style>
@@ -41,19 +41,17 @@ title: "Brandon Love — Portfolio"
     .menu{display:flex;gap:1.2rem}
     .hamburger{display:none;background:none;border:0;color:var(--text);font-size:1.35rem}
 
-    /* NEW: hide drawer by default */
+    /* Drawer hidden by default (mobile) */
     .drawer { display: none; }
-
     @media (max-width:760px){
       .menu{display:none}
       .hamburger{display:block}
       .drawer{
-        display:none;                    /* stays hidden until toggled */
-        position:absolute; inset:56px 0 auto 0;
+        display:none; position:absolute; inset:56px 0 auto 0;
         background:var(--bg); border-bottom:1px solid var(--border);
       }
       .drawer a{display:block;padding:12px 4%;border-top:1px solid var(--border)}
-      .drawer.open{display:block}        /* only shows on mobile when toggled */
+      .drawer.open{display:block}
     }
 
     section{padding:44px 0}
@@ -78,7 +76,7 @@ title: "Brandon Love — Portfolio"
 
     .pill{display:inline-flex;gap:.5rem;align-items:center;padding:.35rem .6rem;border:1px dashed var(--border);border-radius:999px;color:var(--muted)}
 
-    /* —— Latest Blogs slider (refined) —— */
+    /* Blog slider */
     .blog-slider{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}
     .blog-track{display:flex;will-change:transform;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
     .blog-slide{min-width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:1rem;align-items:stretch}
@@ -95,9 +93,9 @@ title: "Brandon Love — Portfolio"
     .blog-btn:focus{outline:2px solid var(--accent)}
     .blog-dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:.45rem}
     .blog-dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.5)}
-    .blog-dot.active,.blog-dot[aria-current="true"]{background:#fff}
+    .blog-dot.active,[aria-current="true"]{background:#fff}
 
-    /* —— Projects slider —— */
+    /* Projects slider */
     .proj-slider{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}
     .proj-track{display:flex;transition:transform .5s cubic-bezier(.22,.61,.36,1);will-change:transform}
     .proj-slide{min-width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:1rem;align-items:stretch}
@@ -117,7 +115,7 @@ title: "Brandon Love — Portfolio"
     @media (max-width: 900px){.blog-slide{grid-template-columns:1fr}.blog-media{border-right:0}}
     @media (prefers-reduced-motion: reduce){ .blog-track{transition:none} }
 
-    /* === Cyber Animation === */
+    /* Cyber Animation */
     .cyber-anim {
       --rx: 0deg; --ry: 0deg;
       border-radius: 18px; max-width: 100%; height: auto; display: block;
@@ -131,27 +129,20 @@ title: "Brandon Love — Portfolio"
     @keyframes cyberPulse { 0%,100% { box-shadow: 0 0 20px rgba(96,165,250,.30); } 50% { box-shadow: 0 0 40px rgba(167,139,250,.45), 0 0 70px rgba(96,165,250,.35); } }
     @media (prefers-reduced-motion: reduce) { .cyber-anim { animation: none; transition: none; transform: none; } }
 
-    /* --- Header/Top fixes --- */
     :root { --header-h: 64px; }
     @media (max-width: 760px){ :root { --header-h: 56px; } }
-    header { position: sticky; top: 0; z-index: 50; }
     header .nav { min-height: var(--header-h); padding: 10px 0; }
     main { padding-top: calc(var(--header-h) + 8px); }
     section { scroll-margin-top: calc(var(--header-h) + 12px); }
-    .nav { display:flex; align-items:center; justify-content:space-between; gap: 1rem; }
-    .menu { display:flex; gap:1rem; flex-wrap: wrap; }
-    @media (max-width: 760px){ .menu { display:none; } }
 
-    /* Footer polish */
+    /* Footer */
     footer { padding: 32px 0; border-top: 1px solid var(--border); color: var(--muted); text-align: center; }
     footer a { color: var(--accent); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
-    /* Narrative hero tweaks */
     .hero .pill { background: transparent; }
     @media (max-width: 900px){ .hero .grid { grid-template-columns: 1fr !important; } }
 
-    /* Contact buttons */
     .contact-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .5rem; }
     .btn-contact {
       display: inline-flex; align-items: center; gap: .5rem; padding: .55rem .9rem;
@@ -173,11 +164,10 @@ title: "Brandon Love — Portfolio"
 </head>
 
 <body>
-  
-  <!-- ======= HEADER ======= -->
+  <!-- HEADER -->
   <header>
     <div class="container nav">
-      <a class="brand" href="#top" aria-label="Home">
+      <a class="brand" href="{{ '/' | relative_url }}" aria-label="Home">
         <span class="dot"></span>
         <span>Brandon Love</span>
       </a>
@@ -186,6 +176,7 @@ title: "Brandon Love — Portfolio"
         <a href="#portfolio">Portfolio</a>
         <a href="#featured-projects">Projects</a>
         <a href="#latest-blogs">Blog</a>
+        <a href="{{ '/reports/soc-analyst-template/' | relative_url }}">Reports</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -197,6 +188,7 @@ title: "Brandon Love — Portfolio"
       <a href="#portfolio">Portfolio</a>
       <a href="#featured-projects">Projects</a>
       <a href="#latest-blogs">Blog</a>
+      <a href="{{ '/reports/soc-analyst-template/' | relative_url }}">Reports</a>
       <a href="#contact">Contact</a>
     </div>
   </header>
@@ -232,7 +224,7 @@ title: "Brandon Love — Portfolio"
 
         <!-- Right -->
         <div class="card" style="overflow:hidden">
-          <div class="thumb" aria-hidden>
+          <div class="thumb" aria-hidden="true">
             <img
               src="/assets/images/cybersecurity-animation.gif"
               alt="Animated cyber defense lock with flowing data streams"
@@ -253,11 +245,11 @@ title: "Brandon Love — Portfolio"
 
       <div class="card" style="padding:24px;line-height:1.7">
         <p>
-          My path into cybersecurity began in the U.S. Army, where I managed logistics networks and coordinated operations as a Motor Transport Operator (88M). 
+          My path into cybersecurity began in the U.S. Army, where I managed logistics networks and coordinated operations as a Motor Transport Operator (88M).
           Those years taught me the value of discipline, data-driven decisions, and operational resilience — principles that directly translate to defending digital systems today.
         </p>
         <p>
-          After transitioning from military service, I shifted focus from supply chains to security chains — learning to protect critical infrastructure through continuous education, 
+          After transitioning from military service, I shifted focus from supply chains to security chains — learning to protect critical infrastructure through continuous education,
           hands-on labs, and professional certifications. I now apply structured investigation and analytical thinking to digital incidents, treating every alert like a mission.
         </p>
         <ul class="meta" style="list-style:none;padding:0;margin:1rem 0 0;display:grid;gap:.4rem">
@@ -287,27 +279,24 @@ title: "Brandon Love — Portfolio"
           </div>
           <a class="meta" style="padding:0 16px 16px"
              href="{{ '/projects/pcap-quick-profiler/' | relative_url }}">Open live demo →</a>
-          <!-- NEW: raw report link -->
           <a class="meta" style="padding:0 16px 16px"
              href="{{ '/reports/pcap-profiler/demo_report.html' | relative_url }}" target="_blank" rel="noopener">Open raw report ↗</a>
         </article>
 
-        <!-- Detection Eng card (placeholder) -->
+        <!-- Windows Log Triage card -->
         <article class="card col-6">
           <div class="thumb" role="img" aria-label="Windows Log Triage report preview"
                style="background-image:url('{{ '/assets/images/wintriage_demo.png' | relative_url }}');background-size:cover;background-position:center"></div>
           <div class="card-body">
             <h3>Windows Log Triage</h3>
             <p class="meta">EVTX + Sysmon → Sigma-like hits + IOCs</p>
-           <div class="tags">
-             <span class="tag">DFIR</span><span class="tag">Sysmon</span><span class="tag">Sigma</span>
-           </div>
+            <div class="tags">
+              <span class="tag">DFIR</span><span class="tag">Sysmon</span><span class="tag">Sigma</span>
+            </div>
           </div>
           <a class="meta" style="padding:0 16px 16px"
              href="{{ '/projects/winlog-triage/' | relative_url }}">Open live demo →</a>
         </article>
-
-
       </div>
     </section>
 
@@ -320,7 +309,11 @@ title: "Brandon Love — Portfolio"
 
       <div class="proj-slider" aria-roledescription="carousel">
         <div class="proj-track" id="projTrack">
-          {%- assign featured = site.projects | sort: 'weight' -%}
+          {%- comment -%} Null-safe collection resolution {%- endcomment -%}
+          {% assign _proj = site.projects | default: site.collections['projects'] %}
+          {% if _proj and _proj.docs %}{% assign featured = _proj.docs %}{% else %}{% assign featured = site.pages | where: 'layout', 'project' %}{% endif %}
+          {% if featured and featured.size > 0 %}{% assign featured = featured | sort: 'weight' %}{% endif %}
+
           {%- assign top3 = featured | slice: 0, 3 -%}
           {%- for p in top3 -%}
             <article class="proj-slide">
@@ -333,7 +326,7 @@ title: "Brandon Love — Portfolio"
               </div>
               <div class="proj-body">
                 <h3><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
-                <p class="meta">{% if p.tags %}{{ p.tags | join: ", " }} · {% endif %}{{ p.date | date: "%b %d, %Y" }}</p>
+                <p class="meta">{% if p.tags %}{{ p.tags | join: ", " }} · {% endif %}{% if p.date %}{{ p.date | date: "%b %d, %Y" }}{% endif %}</p>
                 <p>{{ p.summary | default: p.excerpt | strip_html | truncate: 220 }}</p>
                 <div class="proj-cta">
                   {% if p.demo %}<a class="pill" href="{{ p.demo }}" target="_blank" rel="noopener">Demo →</a>{% endif %}
@@ -387,7 +380,11 @@ title: "Brandon Love — Portfolio"
             <article class="blog-slide">
               <div class="blog-media{% if hero == nil or hero == '' %} blog-ghost{% endif %}">
                 {%- if hero and hero != '' -%}
-                  <img src="{{ hero | relative_url }}" alt="{{ post.title | escape }}" loading="lazy" decoding="async">
+                  {% if hero contains '://' %}
+                    <img src="{{ hero }}" alt="{{ post.title | escape }}" loading="lazy" decoding="async">
+                  {% else %}
+                    <img src="{{ hero | relative_url }}" alt="{{ post.title | escape }}" loading="lazy" decoding="async">
+                  {% endif %}
                 {%- else -%}
                   <div style="height:100%;min-height:240px"></div>
                 {%- endif -%}
@@ -395,7 +392,8 @@ title: "Brandon Love — Portfolio"
               <div class="blog-body">
                 <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
                 <p class="meta">{{ post.date | date: "%b %d, %Y" }}{% if post.tags %} · {{ post.tags | join: ", " }}{% endif %}</p>
-                <p>{{ post.excerpt | strip_html | truncate: 220 }}</p>
+                <!-- Strip Medium tail artifacts -->
+                <p>{{ post.excerpt | strip_html | replace: '——2','' | replace: '— — 2','' | truncate: 220 }}</p>
                 <div class="blog-cta">
                   <a class="pill" href="{{ post.url | relative_url }}">Read post →</a>
                   {%- if post.medium_canonical -%}
@@ -526,19 +524,12 @@ title: "Brandon Love — Portfolio"
         }
 
         const cached = loadCache();
-        if (cached) {
-          items = cached.items || [];
-          render();
-        } else {
-          mount.innerHTML = `<p class="meta">Loading tip…</p>`;
-        }
+        if (cached) { items = cached.items || []; render(); }
+        else { mount.innerHTML = `<p class="meta">Loading tip…</p>`; }
 
         fetchTips().then(data => {
           if (data && Array.isArray(data.items) && data.items.length) {
-            items = data.items;
-            saveCache(data);
-            cursor = 0;
-            render();
+            items = data.items; saveCache(data); cursor = 0; render();
           }
         }).catch(() => { /* keep cached view if network fails */ });
 
