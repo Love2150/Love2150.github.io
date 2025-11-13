@@ -51,42 +51,64 @@ permalink: /projects/
   <main class="container">
     <h1>Projects</h1>
 
-    <div class="grid" role="list">
-      {%- assign items = site.projects | where_exp: "p","p.published != false" | sort: "weight" -%}
-      {%- for p in items -%}
-        {%- assign img = p.image | default: '/assets/images/projects/fallback.jpg' -%}
-        <article class="card col-4" role="listitem">
-          <div class="thumb" aria-label="{{ p.title | escape }}">
-            <img src="{{ img | relative_url }}" alt="" loading="lazy" decoding="async">
-          </div>
-          <div class="card-body">
-            <h2 style="margin:.1rem 0 .2rem; font-size:1.1rem;">
-              <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
-            </h2>
-            <p class="meta">
-              {%- if p.tags and p.tags.size > 0 -%}
-                {{ p.tags | join: " · " }} ·
-              {%- endif -%}
-              {%- if p.date -%} {{ p.date | date: "%b %d, %Y" }} {%- endif -%}
-            </p>
-            {%- if p.summary -%}
-              <p>{{ p.summary }}</p>
-            {%- endif -%}
-            <div class="tags">
-              {%- for t in p.tags limit:4 -%}<span class="tag">{{ t }}</span>{%- endfor -%}
+    {%- comment -%}
+      Resolve items robustly:
+      - Prefer the 'projects' collection (site.projects or site.collections['projects'].docs)
+      - Fallback: any page using layout 'project'
+      Only sort when we actually have items; avoids "Cannot sort a null object".
+    {%- endcomment -%}
+    {% assign _projects = site.projects | default: site.collections['projects'] %}
+    {% if _projects and _projects.docs %}
+      {% assign items = _projects.docs %}
+    {% elsif _projects and _projects != empty %}
+      {% assign items = _projects %}
+    {% else %}
+      {% assign items = site.pages | where: 'layout', 'project' %}
+    {% endif %}
+
+    {% if items and items.size > 0 %}
+      {% assign items = items | sort: 'weight' %}
+      <div class="grid" role="list">
+        {%- for p in items -%}
+          {%- assign img = p.image | default: '/assets/images/projects/fallback.jpg' -%}
+          <article class="card col-4" role="listitem">
+            <div class="thumb" aria-label="{{ p.title | escape }}">
+              <img src="{{ img | relative_url }}" alt="{{ p.title | escape }}" loading="lazy" decoding="async">
             </div>
-            <p class="more">
-              {%- if p.demo and p.demo != "" -%}
-                <a href="{{ p.demo }}" target="_blank" rel="noopener">Demo →</a>&nbsp;&nbsp;
+            <div class="card-body">
+              <h2 style="margin:.1rem 0 .2rem; font-size:1.1rem;">
+                <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
+              </h2>
+              <p class="meta">
+                {%- if p.tags and p.tags.size > 0 -%}
+                  {{ p.tags | join: " · " }} ·
+                {%- endif -%}
+                {%- if p.date -%} {{ p.date | date: "%b %d, %Y" }} {%- endif -%}
+              </p>
+              {%- if p.summary -%}
+                <p>{{ p.summary }}</p>
               {%- endif -%}
-              {%- if p.repo and p.repo != "" -%}
-                <a href="{{ p.repo }}" target="_blank" rel="noopener">Repo →</a>
+              {%- if p.tags and p.tags.size > 0 -%}
+              <div class="tags">
+                {%- for t in p.tags limit:4 -%}<span class="tag">{{ t }}</span>{%- endfor -%}
+              </div>
               {%- endif -%}
-            </p>
-          </div>
-        </article>
-      {%- endfor -%}
-    </div>
+              <p class="more">
+                {%- if p.demo and p.demo != "" -%}
+                  <a href="{{ p.demo }}" target="_blank" rel="noopener">Demo →</a>&nbsp;&nbsp;
+                {%- endif -%}
+                {%- if p.repo and p.repo != "" -%}
+                  <a href="{{ p.repo }}" target="_blank" rel="noopener">Repo →</a>
+                {%- endif -%}
+              </p>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {% else %}
+      <p>No projects found.</p>
+    {% endif %}
   </main>
 </body>
 </html>
+
