@@ -1,6 +1,3 @@
-1) Replace the entire project page
-
-File: _projects/winlog-triage.md
 
 ---
 layout: page
