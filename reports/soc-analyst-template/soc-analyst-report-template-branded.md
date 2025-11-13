@@ -2,12 +2,15 @@
 layout: page
 title: "SOC Analyst Report Template"
 description: "Use this to write new reports."
-permalink: /reports/soc-analyst-template/
+# REMOVE this line if present:
+# permalink: /reports/soc-analyst-template/
 hidden: true
 sitemap: false
 robots: noindex
-redirect_to: /reports/
+# Optional: send visitors to the grid instead of this page
+redirect_to: /reports/soc-analyst-template/
 ---
+
 
 
 <!-- Brand banner -->
