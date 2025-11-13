@@ -1,35 +1,31 @@
-title: "Brandon Love"
-description: "Cybersecurity analyst | DFIR, blue team, and write-ups"
-url: "https://love2150.github.io"   # lowercase is safest
-baseurl: ""                          # "" for user site; "/repo-name" for project site
-theme: null
+title: "Brandon Love | Security Tools & Portfolio"
+description: "Cybersecurity projects, DFIR utilities, and learning notes by Brandon Love."
+url: "https://love2150.github.io"
+baseurl: ""
+author:
+  name: "Brandon Love"
+  twitter: "love2150"
 
+# Navigation menu
+nav:
+  - title: Home
+    url: /
+  - title: Projects
+    url: /projects/
+  - title: Blog
+    url: /archive/
+  - title: Reports
+    url: /reports/soc-analyst-template/
+  - title: Contact
+    url: /contact/
+
+# Build settings
+theme: minima
+markdown: kramdown
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
   - jekyll-sitemap
-  # - jekyll-seo-tag   # optional; add if you want richer meta tags
 
-markdown: kramdown
-kramdown:
-  input: GFM
+image: /assets/images/og-default.png
 
-collections:
-  posts:
-    output: true
-
-permalink: "/:categories/:year/:month/:day/:title/"
-timezone: "America/Chicago"
-future: true
-
-collections:
-  posts:
-    output: true
-  projects:
-    output: true
-    permalink: /projects/:title/
-
-
-collections:
-  projects:
-    output: true
-    permalink: /projects/:title/
