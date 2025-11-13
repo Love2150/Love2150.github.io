@@ -7,7 +7,7 @@ author:
   name: "Brandon Love"
   twitter: "love2150"
 
-# Top navigation (your header must render site.nav; if not, we’ll add a snippet next)
+# Top navigation
 nav:
   - title: Home
     url: /
@@ -16,23 +16,35 @@ nav:
   - title: Blog
     url: /archive/
   - title: Reports
-    url: /reports/soc-analyst-template/
+    url: /reports/
   - title: Contact
     url: /contact/
 
-# Collections (for /projects/)
+# Collections
 collections:
   projects:
     output: true
     permalink: /projects/:name/
+  reports:
+    output: true
+    permalink: /reports/:name/
 
-# Optional defaults so each project auto-uses the 'project' layout
+# Defaults (safe: use layout: page unless you add _layouts/project.html)
 defaults:
   - scope:
       path: ""
       type: "projects"
     values:
-      layout: project
+      layout: page
+      hidden: false
+      weight: 100
+  - scope:
+      path: ""
+      type: "reports"
+    values:
+      layout: page
+      hidden: false
+      weight: 100
 
 # Build settings
 theme: minima
@@ -47,7 +59,8 @@ image: /assets/images/og-default.png
 
 # Time handling
 timezone: America/Chicago
-future: true  # uncomment if you want future-dated posts to publish
+future: true
+
 
 
 
