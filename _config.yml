@@ -7,7 +7,9 @@ author:
   name: "Brandon Love"
   twitter: "love2150"
 
-# Top navigation
+# ----------------------------------------
+# Navigation
+# ----------------------------------------
 nav:
   - title: Home
     url: /
@@ -20,7 +22,9 @@ nav:
   - title: Contact
     url: /contact/
 
+# ----------------------------------------
 # Collections
+# ----------------------------------------
 collections:
   projects:
     output: true
@@ -29,8 +33,11 @@ collections:
     output: true
     permalink: /reports/:name/
 
-# Defaults (safe: use layout: page unless you add _layouts/project.html)
+# ----------------------------------------
+# Defaults for content types
+# ----------------------------------------
 defaults:
+  # Projects
   - scope:
       path: ""
       type: "projects"
@@ -38,6 +45,8 @@ defaults:
       layout: page
       hidden: false
       weight: 100
+
+  # Reports (e.g., analyst write-ups)
   - scope:
       path: ""
       type: "reports"
@@ -46,7 +55,17 @@ defaults:
       hidden: false
       weight: 100
 
-# Build settings
+  # Markdown in reports/analyst_report/ folder
+  - scope:
+      path: "reports/analyst_report"
+    values:
+      layout: page
+      hidden: false
+      weight: 100
+
+# ----------------------------------------
+# Theme & Plugins
+# ----------------------------------------
 theme: minima
 markdown: kramdown
 plugins:
@@ -54,10 +73,10 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
-# SEO / social fallback
+# ----------------------------------------
+# SEO & Build Settings
+# ----------------------------------------
 image: /assets/images/og-default.png
-
-# Time handling
 timezone: America/Chicago
 future: true
 
