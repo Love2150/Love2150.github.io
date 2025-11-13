@@ -3,35 +3,48 @@ layout: null
 title: "Reports"
 permalink: /reports/
 ---
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Reports · Brandon Love</title>
 <style>
-  :root{--bg:#0b1020;--card:#121934;--text:#e5e7eb;--muted:#9ca3af;--accent:#60a5fa;--border:#1f2a4d;--shadow:0 8px 24px rgba(0,0,0,.4)}
-  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-  a{color:var(--accent);text-decoration:none}
-  .container{width:min(1100px,92%);margin-inline:auto;padding:28px 0 60px}
-  h1{font-size:clamp(1.6rem,1rem + 2vw,2.2rem);margin:0 0 8px}
-  .grid{display:grid;gap:1rem;grid-template-columns:repeat(12,1fr)}
+  :root{--bg:#0b1020; --card:#121934; --text:#e5e7eb; --muted:#9ca3af; --accent:#60a5fa; --border:#1f2a4d; --shadow:0 8px 24px rgba(0,0,0,.4)}
+  body{margin:0; background:var(--bg); color:var(--text); font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+  a{color:var(--accent); text-decoration:none}
+  .container{width:min(1100px,92%); margin-inline:auto; padding:28px 0 60px}
+  h1{font-size:clamp(1.6rem,1rem + 2vw,2.2rem); margin:0 0 8px}
+  .grid{display:grid; gap:1rem; grid-template-columns:repeat(12,1fr)}
   .col-4{grid-column:span 4}
   @media (max-width:980px){.col-4{grid-column:span 6}}
   @media (max-width:640px){.col-4{grid-column:span 12}}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);height:100%;display:flex;flex-direction:column}
-  .thumb{position:relative;width:100%;aspect-ratio:16/9;background:linear-gradient(135deg, rgba(96,165,250,.18), rgba(167,139,250,.16))}
-  .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-  .card-body{padding:14px 16px;display:flex;flex-direction:column;gap:.4rem}
-  .meta{color:#9ca3af;font-size:.9rem}
-  .tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.2rem}
-  .tag{font-size:.78rem;padding:.2rem .45rem;border:1px solid var(--border);border-radius:999px;color:#9ca3af}
+
+  .card{background:var(--card); border:1px solid var(--border); border-radius:18px; overflow:hidden; box-shadow:var(--shadow); height:100%; display:flex; flex-direction:column}
+  .thumb{position:relative; width:100%; aspect-ratio:16/9; background:linear-gradient(135deg, rgba(96,165,250,.18), rgba(167,139,250,.16))}
+  .thumb img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+  .card-body{padding:14px 16px; display:flex; flex-direction:column; gap:.4rem}
+  .meta{color:var(--muted); font-size:.9rem}
+  .tags{display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.2rem}
+  .tag{font-size:.78rem; padding:.2rem .45rem; border:1px solid var(--border); border-radius:999px; color:var(--muted)}
 </style>
-</head><body>
+</head>
+<body>
   <main class="container">
     <h1>Security Reports</h1>
+    <p class="meta" style="margin-top:0">Case studies, investigations, and write-ups.</p>
+
     <div class="grid" role="list">
       {%- assign items = site.pages
           | where_exp: "p","p.url contains '/reports/analyst_report/'"
           | where_exp: "p","p.hidden != true"
           | sort: "weight" -%}
+
+      {%- if items == nil or items.size == 0 -%}
+        <p class="meta">No reports yet. Add Markdown files to <code>reports/analyst_report/</code>.</p>
+      {%- endif -%}
+
       {%- for r in items -%}
         {%- assign img = r.image | default: '/assets/images/projects/fallback.jpg' -%}
         <article class="card col-4" role="listitem">
@@ -42,14 +55,29 @@ permalink: /reports/
             <h2 style="margin:.1rem 0 .2rem; font-size:1.1rem;">
               <a href="{{ r.url | relative_url }}">{{ r.title }}</a>
             </h2>
-            <p class="meta">{{ r.description | default: "No description provided" }}</p>
             <p class="meta">
-              {%- if r.tags and r.tags.size > 0 -%}{{ r.tags | join: " · " }} · {%- endif -%}
-              {%- if r.date -%}{{ r.date | date: "%b %d, %Y" }}{%- endif -%}
+              {%- if r.tags and r.tags.size > 0 -%}
+                {{ r.tags | join: " · " }} ·
+              {%- endif -%}
+              {%- if r.date -%} {{ r.date | date: "%b %d, %Y" }} {%- endif -%}
             </p>
-            <div class="tags">{% for t in r.tags limit:4 %}<span class="tag">{{ t }}</span>{% endfor %}</div>
+            {%- if r.description -%}
+              <p>{{ r.description }}</p>
+            {%- endif -%}
+            <div class="tags">
+              {%- for t in r.tags limit:4 -%}<span class="tag">{{ t }}</span>{%- endfor -%}
+            </div>
+            <p class="meta" style="margin-top:.4rem">
+              <a href="{{ r.url | relative_url }}">Read report →</a>
+            </p>
           </div>
         </article>
+      {%- endfor -%}
+    </div>
+  </main>
+</body>
+</html>
+
       {%- endfor -%}
     </div>
   </main>
