@@ -33,6 +33,12 @@ jobs:
         run: |
           npm run build:tips
 
+      - name: Sync with remote main
+        run: |
+          git fetch origin main
+          git checkout main
+          git pull --rebase origin main
+    
       - name: Commit changes (if any)
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
