@@ -327,6 +327,135 @@ title: "Brandon Love — Portfolio"
       </div>
     </section>
 
+    <!-- SOC Playbooks -->
+    <section id="soc-playbooks" class="container">
+      <div class="section-head">
+        <h2>SOC Playbooks</h2>
+        <p class="meta">How I triage, investigate, and respond to real-world alerts.</p>
+      </div>
+
+      <div class="grid">
+        <!-- Playbook 1 -->
+        <article class="card col-4">
+          <div class="card-body">
+            <h3>Suspicious PowerShell Execution</h3>
+            <p class="meta">Event IDs 4104, 4688, Sysmon 1/7/11</p>
+            <p>
+              Detect and investigate encoded or living-off-the-land PowerShell activity,
+              with a focus on command-line logging and child process behavior.
+            </p>
+            <ul class="meta" style="padding-left:1.1rem;margin:0.4rem 0 0;">
+              <li>Hunt for suspicious <code>powershell.exe</code> command lines</li>
+              <li>Correlate process tree with network connections</li>
+              <li>Export script blocks and decode payloads</li>
+              <li>Verify persistence and credentials impact</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Playbook 2 -->
+        <article class="card col-4">
+          <div class="card-body">
+            <h3>SharePoint EoP (CVE-2023-29357)</h3>
+            <p class="meta">Public-facing app exploit → privilege escalation</p>
+            <p>
+              Playbook for investigating suspicious SharePoint activity,
+              mapping evidence to MITRE ATT&amp;CK and confirming impact.
+            </p>
+            <ul class="meta" style="padding-left:1.1rem;margin:0.4rem 0 0;">
+              <li>Review SharePoint / IIS logs for exploit patterns</li>
+              <li>Correlate authentication changes &amp; new privileges</li>
+              <li>Check for webshells or uploaded payloads</li>
+              <li>Validate containment and patch status</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Playbook 3 -->
+        <article class="card col-4">
+          <div class="card-body">
+            <h3>Malicious Office → Initial Access</h3>
+            <p class="meta">Phishing → macro → child process</p>
+            <p>
+              Playbook focused on suspicious Office documents spawning
+              scripting engines or LOLBINs on endpoints.
+            </p>
+            <ul class="meta" style="padding-left:1.1rem;margin:0.4rem 0 0;">
+              <li>Identify email + attachment source in mail logs</li>
+              <li>Correlate <code>WINWORD.EXE</code> / <code>EXCEL.EXE</code> child processes</li>
+              <li>Extract IOCs from dropped files and network traffic</li>
+              <li>Document user impact and recommend awareness actions</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SOC Stats & Badges -->
+    <section id="soc-stats" class="container">
+      <div class="section-head">
+        <h2>Hands-on SOC Experience</h2>
+        <p class="meta">Live blue-team platforms and structured training.</p>
+      </div>
+
+      <div class="grid">
+        <!-- Stats widget (static, easy to update) -->
+        <article class="card col-6">
+          <div class="card-body">
+            <h3>Let’sDefend Blue Team Lab</h3>
+            <p class="meta">Active SOC training · Realistic alert queues</p>
+            <p>
+              I regularly work through SIEM alerts, phishing cases, and incident
+              simulations on Let’sDefend to sharpen my triage and investigation flow.
+            </p>
+            <ul class="meta" style="padding-left:1.1rem;margin:0.4rem 0 0;">
+              <li>Focus on alert triage, evidence gathering, and root-cause analysis</li>
+              <li>Practice mapping findings to MITRE ATT&amp;CK</li>
+              <li>Document outcomes in SOC-style reports and playbooks</li>
+            </ul>
+            <p class="meta" style="margin-top:.6rem;">
+              <a href="https://app.letsdefend.io/user/shinyhunter" target="_blank" rel="noopener">
+                View my Let’sDefend profile ↗
+              </a>
+            </p>
+          </div>
+        </article>
+
+        <!-- Badges / platforms -->
+        <article class="card col-6">
+          <div class="card-body">
+            <h3>Cyber Range & Training Badges</h3>
+            <p class="meta">Platforms I use to stay sharp.</p>
+
+            <div style="display:flex;flex-direction:column;gap:.45rem;margin-top:.4rem;">
+              <div class="pill" style="justify-content:space-between;">
+                <span>Let’sDefend · Blue Team Labs</span>
+                <a href="https://app.letsdefend.io/user/shinyhunter" target="_blank" rel="noopener" class="meta">
+                  Profile ↗
+                </a>
+              </div>
+              <div class="pill" style="justify-content:space-between;">
+                <span>Hack The Box · Windows &amp; Linux boxes</span>
+                <span class="meta">Hands-on attack paths &amp; defense mindset</span>
+              </div>
+              <div class="pill" style="justify-content:space-between;">
+                <span>Splunk / SIEM Labs</span>
+                <span class="meta">Search, correlation, dashboards</span>
+              </div>
+              <div class="pill" style="justify-content:space-between;">
+                <span>ISC2 &amp; foundational security training</span>
+                <span class="meta">Core security concepts &amp; standards</span>
+              </div>
+            </div>
+
+            <p class="meta" style="margin-top:.7rem;">
+              I treat these platforms like a real SOC: hypothesis → evidence → conclusion → report.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <!-- Latest Blogs -->
     <section id="latest-blogs" class="container">
       <div class="section-head">
