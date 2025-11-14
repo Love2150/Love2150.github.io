@@ -17,28 +17,27 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          # fetch full history so rebase works properly
           fetch-depth: 0
 
-      # 🔹 Make sure we’re up to date with origin/main
-      - name: Sync with remote main (hard reset)
+      # ✅ Always start from the exact state of origin/main
+      - name: Sync with remote main
         run: |
           git fetch origin main
           git checkout main
-          git pull --hard origin main
+          git reset --hard origin/main
 
-      # 🔹 Your script or command that updates assets/tips.json
-      # (Replace this with whatever actually generates tips.json)
+      # 🔧 Your script that updates assets/tips.json
       - name: Generate latest tips.json
         run: |
-          echo "TODO: generate tips.json here"
-          # example placeholder just touches the file:
-          # python scripts/update_tips.py
+          # TODO: replace with your real command
+          # example: python scripts/update_tips.py
+          echo "updating tips.json…" > /dev/null
 
-      # 🔹 Auto-commit just tips.json back to main
+      # 💾 Auto-commit just tips.json back to main
       - name: Commit updated tips.json
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          branch: main                # <— IMPORTANT: explicitly push to main
+          branch: main
           file_pattern: assets/tips.json
           commit_message: "chore: update tips.json"
+
