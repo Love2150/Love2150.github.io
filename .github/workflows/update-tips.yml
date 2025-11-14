@@ -1,46 +1,44 @@
-name: Update Security Tips JSON
+name: Update cyber tips
 
 on:
   schedule:
-    - cron: "*/10 * * * *"   # every 10 minutes
-  workflow_dispatch: {}       # allow manual run
-  push:
-    paths:
-      - scripts/fetch-feeds.mjs
-      - package.json
-      - package-lock.json
+    # run every 2 hours (adjust if you like)
+    - cron: "0 */2 * * *"
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  update-tips:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # fetch full history so rebase works properly
+          fetch-depth: 0
 
-      - name: Install
-        run: |
-          npm ci || npm i
-
-      - name: Build tips JSON
-        run: |
-          npm run build:tips
-
+      # 🔹 Make sure we’re up to date with origin/main
       - name: Sync with remote main
         run: |
           git fetch origin main
           git checkout main
           git pull --rebase origin main
-    
-      - name: Commit changes (if any)
+
+      # 🔹 Your script or command that updates assets/tips.json
+      # (Replace this with whatever actually generates tips.json)
+      - name: Generate latest tips.json
+        run: |
+          echo "TODO: generate tips.json here"
+          # example placeholder just touches the file:
+          # python scripts/update_tips.py
+
+      # 🔹 Auto-commit just tips.json back to main
+      - name: Commit updated tips.json
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: update tips.json"
+          branch: main                # <— IMPORTANT: explicitly push to main
           file_pattern: assets/tips.json
+          commit_message: "chore: update tips.json"
