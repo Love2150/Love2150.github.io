@@ -17,7 +17,7 @@ Fast Windows log triage for analysts. Ingests **EVTX + Sysmon**, extracts **IOCs
   <a class="pill" href="{{ page.repo }}" target="_blank" rel="noopener">Repo →</a>
 </div>
 
-## ▶ Live Demo (embedded)
+## Live Demo (embedded)
 <iframe
   title="Windows Log Triage demo"
   src="{{ '/reports/wintriage/demo_report.html' | relative_url }}?v={{ site.time | date: '%s' }}"
