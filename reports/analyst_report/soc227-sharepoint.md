@@ -117,7 +117,7 @@ explorer.exe → powershell.exe → Invoke-WebRequest http://example[.]com/file.
 
 ## 9) Indicators of Compromise (IOCs)
 | Type      | Value                  | Description       |
-| --------- | ---------------------- | ----------------- |
+|-----------|------------------------|-------------------|
 | IP        | 39.91.166.222          | Suspected C2      |
 | File Hash | `none`                 | Malicious payload |
 | URL       | `http://www.apnic.net` | Download location |
