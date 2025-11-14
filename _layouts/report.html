@@ -11,18 +11,20 @@ layout: null
 
   <style>
     :root {
-      --bg:#0b1020; 
-      --text:#e5e7eb; 
-      --muted:#9ca3af; 
-      --accent:#60a5fa; 
+      --bg:#0b1020;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --accent:#60a5fa;
       --border:#1f2a4d;
+      --card:#121934;
+      --shadow:0 8px 24px rgba(0,0,0,.4);
     }
 
     body {
       margin:0;
       background:var(--bg);
       color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
       line-height:1.6;
     }
 
@@ -38,96 +40,199 @@ layout: null
 
     header .nav {
       width:min(1100px,92%);
-      margin:auto;
+      margin-inline:auto;
       display:flex;
       justify-content:space-between;
       align-items:center;
+      gap:1.5rem;
     }
 
-    header a {
+    header .brand {
+      color:var(--accent);
+      font-weight:600;
+      text-decoration:none;
+      font-size:1.05rem;
+    }
+
+    header nav {
+      display:flex;
+      gap:1.2rem;
+      font-size:.95rem;
+    }
+
+    header nav a {
       color:var(--text);
       text-decoration:none;
-      font-weight:500;
     }
-
-    header a:hover {
+    header nav a:hover {
       color:var(--accent);
     }
 
     main {
       width:min(1100px,92%);
-      margin:auto;
-      padding:32px 0;
+      margin-inline:auto;
+      padding:32px 0 40px;
     }
+
+    main h1 {
+      margin-top:0;
+      margin-bottom:0.5rem;
+      font-size:clamp(1.4rem,1rem + 1.5vw,2rem);
+    }
+
+    .page-meta {
+      color:var(--muted);
+      font-size:.9rem;
+      margin-bottom:1.5rem;
+    }
+
+    /* === Reports grid + cards (index page) === */
+    .reports-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:1rem;
+      margin-top:1.5rem;
+    }
+
+    .report-card {
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+      height:100%;
+    }
+
+    .report-card-thumb {
+      position:relative;
+      width:100%;
+      aspect-ratio:16/9;
+      background:linear-gradient(135deg,rgba(96,165,250,.18),rgba(167,139,250,.16));
+    }
+
+    .report-card-thumb img {
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .report-card-body {
+      padding:14px 16px;
+      display:flex;
+      flex-direction:column;
+      gap:.4rem;
+    }
+
+    .report-card-body h2 {
+      margin:.1rem 0 .2rem;
+      font-size:1.05rem;
+    }
+
+    .report-card-body h2 a {
+      color:var(--text);
+      text-decoration:none;
+    }
+
+    .report-card-body h2 a:hover {
+      color:var(--accent);
+    }
+
+    .report-card-body .meta {
+      color:var(--muted);
+      font-size:.9rem;
+    }
+
+    .report-tags {
+      display:flex;
+      flex-wrap:wrap;
+      gap:.35rem;
+      margin-top:.2rem;
+    }
+
+    .report-tag {
+      font-size:.78rem;
+      padding:.2rem .45rem;
+      border:1px solid var(--border);
+      border-radius:999px;
+      color:var(--muted);
+    }
+
+    /* Content defaults for individual report pages */
+    table { border-collapse:collapse; width:100%; margin:16px 0; }
+    th, td { border:1px solid #1f2a4d; padding:8px 10px; }
+    th { background:#111a2a; }
+    code { background:#101827; padding:3px 6px; border-radius:4px; }
+    pre code { display:block; padding:12px; border-radius:8px; }
 
     /* Footer */
     footer {
-      margin-top:48px;
-      padding:24px 0;
-      background:#0b1020;
+      padding:24px 0 28px;
       border-top:1px solid var(--border);
+      background:#0b1020;
       color:var(--muted);
-      text-align:center;
+      font-size:.9rem;
     }
-
+    footer .foot-inner{
+      width:min(1100px,92%);
+      margin-inline:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
     footer a {
       color:var(--accent);
       text-decoration:none;
     }
-
-    table {
-      width:100%;
-      border-collapse:collapse;
-      margin:16px 0;
-    }
-    th,td {
-      border:1px solid #1f2a4d;
-      padding:8px 10px;
-    }
-    th {
-      background:#111a2a;
-    }
-    code {
-      background:#101827;
-      padding:3px 6px;
-      border-radius:4px;
-    }
-    pre code {
-      display:block;
-      padding:12px;
-      border-radius:8px;
+    footer a:hover {
+      text-decoration:underline;
     }
   </style>
 </head>
 
 <body>
+  <!-- === Shared Header for all reports === -->
+  <header>
+    <div class="nav">
+      <a class="brand" href="{{ '/' | relative_url }}">← Brandon Love</a>
+      <nav>
+        <a href="{{ '/' | relative_url }}">Home</a>
+        <a href="{{ '/projects/' | relative_url }}">Projects</a>
+        <a href="{{ '/archive/' | relative_url }}">Blog</a>
+        <a href="{{ '/reports/analyst_report/' | relative_url }}">Reports</a>
+      </nav>
+    </div>
+  </header>
 
-<!-- ===== Header ===== -->
-<header>
-  <div class="nav">
-    <a href="{{ '/' | relative_url }}" style="font-weight:600;color:var(--accent);">← Home</a>
+  <!-- === Page Content === -->
+  <main>
+    <h1>{{ page.title }}</h1>
+    {% if page.description %}
+      <p class="page-meta">{{ page.description }}</p>
+    {% endif %}
 
-    <nav style="display:flex; gap:1.2rem;">
-      <a href="{{ '/' | relative_url }}">Home</a>
-      <a href="{{ '/projects/' | relative_url }}">Projects</a>
-      <a href="{{ '/archive/' | relative_url }}">Blog</a>
-      <a href="{{ '/reports/analyst_report/' | relative_url }}">Reports</a>
-    </nav>
-  </div>
-</header>
+    {{ content }}
+  </main>
 
-<!-- ===== Content ===== -->
-<main>
-  <h1>{{ page.title }}</h1>
-  {{ content }}
-</main>
-
-<!-- ===== Footer ===== -->
-<footer>
-  © {{ site.time | date: "%Y" }} Brandon Love · All rights reserved.  
-  <br/>
-  Built with ♥ using GitHub Pages · <a href="https://github.com/Love2150/Love2150.github.io">View Source</a>
-</footer>
-
+  <!-- === Shared Footer === -->
+  <footer>
+    <div class="foot-inner">
+      <span>© {{ site.time | date: '%Y' }} Brandon Love. All rights reserved.</span>
+      <span>
+        Built with ♥ on GitHub Pages ·
+        <a href="{{ '/' | relative_url }}">Home</a> ·
+        <a href="{{ '/projects/' | relative_url }}">Projects</a> ·
+        <a href="{{ '/reports/analyst_report/' | relative_url }}">Reports</a> ·
+        <a href="{{ '/archive/' | relative_url }}">Blog</a>
+      </span>
+    </div>
+  </footer>
 </body>
 </html>
+
