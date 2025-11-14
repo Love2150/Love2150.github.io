@@ -10,7 +10,7 @@ weight: 10
 description: "Fast PCAP triage with DNS/TLS/HTTP focus, beacon detection, allowlist, and dark-mode HTML output."
 ---
 
-## 🧠 Overview
+## Overview
 PCAP Quick Profiler turns raw captures into fast, readable triage: protocol mix, top IPs/ports, HTTP/TLS metadata (SNI/JA3), and an experimental beaconing score.
 
 ---
@@ -26,7 +26,7 @@ PCAP Quick Profiler turns raw captures into fast, readable triage: protocol mix,
 
 ---
 
-## 📈 What it shows
+## What it shows
 - Protocol hierarchy & bytes by protocol  
 - Top IPs/ports  
 - HTTP hosts, URLs, User-Agents, content-types  
