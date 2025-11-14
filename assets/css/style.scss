@@ -1,0 +1,35 @@
+/* === BRANDON LOVE GLOBAL DARK HEADER OVERRIDE === */
+
+.site-header {
+  background: #0b1020 !important;
+  border-bottom: 1px solid #1f2a4d !important;
+  padding: 12px 0;
+}
+
+.site-header .wrapper {
+  color: #e5e7eb !important;
+}
+
+.site-title,
+.site-title:visited {
+  color: #e5e7eb !important;
+}
+
+.site-nav .page-link {
+  color: #e5e7eb !important;
+}
+
+.site-nav .page-link:hover {
+  color: #60a5fa !important;
+}
+
+.site-nav {
+  background: transparent !important;
+}
+
+@media (max-width: 600px) {
+  .site-nav .page-link {
+    display: block;
+    padding: 10px 0;
+  }
+}

