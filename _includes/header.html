@@ -1,34 +1,39 @@
 {% comment %}
-Custom site-wide header override for Minima.
-
-Shows a simple nav:
-Home · Projects · Posts · Analyst Reports
+Global dark header for all Minima-based pages.
+Shows: Brandon Love + Home / Projects / Posts / Analyst Reports
+Matches the dark footer styling.
 {% endcomment %}
 
-<header class="bl-header" role="banner" style="border-bottom:1px solid #e5e7eb;margin-bottom:1.5rem;">
-  <div class="wrapper" style="max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:0.75rem 1rem;">
+<header class="site-header" role="banner"
+        style="background:#0b1020;border-bottom:1px solid #1f2a4d;margin-bottom:1.5rem;">
+  <div class="wrapper"
+       style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:0.85rem 1rem;color:#e5e7eb;">
+    
     <!-- Brand -->
-    <a href="{{ '/' | relative_url }}" class="bl-brand" style="font-weight:600;font-size:1.15rem;text-decoration:none;color:inherit;">
+    <a href="{{ '/' | relative_url }}"
+       style="font-weight:600;font-size:1.15rem;text-decoration:none;color:#e5e7eb;">
       Brandon Love
     </a>
 
     <!-- Nav -->
-    <nav class="bl-nav" aria-label="Primary navigation" style="display:flex;gap:1rem;font-size:0.95rem;">
-      <a href="{{ '/' | relative_url }}" style="text-decoration:none;color:inherit;">Home</a>
-      <a href="{{ '/projects/' | relative_url }}" style="text-decoration:none;color:inherit;">Projects</a>
-      <a href="{{ '/archive/' | relative_url }}" style="text-decoration:none;color:inherit;">Posts</a>
-      <a href="{{ '/reports/analyst_report/' | relative_url }}" style="text-decoration:none;color:inherit;">Analyst Reports</a>
+    <nav aria-label="Primary navigation"
+         style="display:flex;gap:1rem;font-size:0.95rem;">
+      <a href="{{ '/' | relative_url }}" style="text-decoration:none;color:#e5e7eb;">Home</a>
+      <a href="{{ '/projects/' | relative_url }}" style="text-decoration:none;color:#e5e7eb;">Projects</a>
+      <a href="{{ '/archive/' | relative_url }}" style="text-decoration:none;color:#e5e7eb;">Posts</a>
+      <a href="{{ '/reports/analyst_report/' | relative_url }}" style="text-decoration:none;color:#e5e7eb;">Analyst Reports</a>
     </nav>
   </div>
 </header>
 
 <style>
-  .bl-header a:hover {
+  .site-header a:hover {
     text-decoration: underline;
+    color: #93c5fd;
   }
 
   @media (max-width: 640px) {
-    .bl-header .wrapper {
+    .site-header .wrapper {
       flex-direction: column;
       align-items: flex-start;
     }
