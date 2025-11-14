@@ -1,5 +1,5 @@
 {
-  "updated_at": "2025-11-14T07:22:34.613Z",
+  "updated_at": "2025-11-14T07:40:14.699Z",
   "items": [
     {
       "title": "Formbook Delivered Through Multiple Scripts, (Thu, Nov 13th)",
@@ -7,6 +7,20 @@
       "link": "https://isc.sans.edu/diary/rss/32480",
       "date": "2025-11-13T08:47:41.000Z",
       "source": "SANS Internet Storm Center, InfoCON: green"
+    },
+    {
+      "title": "Drilling Down on Uncle Sam’s Proposed TP-Link Ban",
+      "summary": "The U.S. government is reportedly preparing to ban the sale of wireless routers and other networking gear from TP-Link Systems, a tech company that currently enjoys an estimated 50% market share among home users and small businesses. Experts say while the proposed ban may have more to do with TP-Link's ties to China than any specific technical threats, much of the rest of the industry serving this market also sources hardware from China and ships products that are insecure fresh out of the box.",
+      "link": "https://krebsonsecurity.com/2025/11/drilling-down-on-uncle-sams-proposed-tp-link-ban/",
+      "date": "2025-11-09T18:14:40.000Z",
+      "source": "Krebs on Security"
+    },
+    {
+      "title": "Aisuru Botnet Shifts from DDoS to Residential Proxies",
+      "summary": "Aisuru, the botnet responsible for a series of record-smashing distributed denial-of-service (DDoS) attacks this year, recently was overhauled to support a more low-key, lucrative and sustainable business: Renting hundreds of thousands of infected Internet of Things (IoT) devices to proxy services that help cybercriminals anonymize their traffic. Experts says a glut of proxies from Aisuru and other sources is fueling large-scale data harvesting efforts tied to various artificial intelligence (AI) projects, helping content scrapers evade detection by routing their traffic through residential connections that appear to be regular Internet users.",
+      "link": "https://krebsonsecurity.com/2025/10/aisuru-botnet-shifts-from-ddos-to-residential-proxies/",
+      "date": "2025-10-29T00:51:05.000Z",
+      "source": "Krebs on Security"
     },
     {
       "title": "EASM buyer's guide now available",
@@ -335,20 +349,6 @@
       "summary": "Chris P explains how AMS will enable high-threat organisations to stay connected ‘on the go'.",
       "link": "https://www.ncsc.gov.uk/blog-post/advanced-mobile-solutions-update",
       "date": "2025-03-12T12:09:00.000Z",
-      "source": "NCSC Feed"
-    },
-    {
-      "title": "The cyber threat to sports organisations",
-      "summary": "The NCSC report highlights the cyber threats faced by the sports sector and suggests how to stop or lessen their impact on organisations.",
-      "link": "https://www.ncsc.gov.uk/report/the-cyber-threat-to-sports-organisations",
-      "date": "2025-03-12T11:18:10.000Z",
-      "source": "NCSC Feed"
-    },
-    {
-      "title": "Summary of the NCSC analysis of May 2020 US sanction",
-      "summary": "A summary of the NCSC’s analysis of the May 2020 US sanction which caused the NCSC to modify the scope of its security mitigation strategy for Huawei.",
-      "link": "https://www.ncsc.gov.uk/report/summary-of-ncsc-analysis-of-us-may-2020-sanction",
-      "date": "2025-03-12T11:17:43.000Z",
       "source": "NCSC Feed"
     }
   ]
