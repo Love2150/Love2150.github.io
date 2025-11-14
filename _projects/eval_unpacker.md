@@ -10,7 +10,7 @@ weight: 5
 description: "A Python-based static de-obfuscation tool that detects Dean Edwards Packer (eval(function(p,a,c,k,e,d){…})), layered base64, escaped Unicode/hex, atob wrappers, and array-join loaders. Produces beautified code + extracted IOCs for rapid triage."
 ---
 
-## 🧠 What is it?
+## What is it?
 `eval_unpacker` is a **static JavaScript de-obfuscation** tool for analysts. It **does not execute** attacker code. Instead, it detects common packers, repeatedly **decodes layers** (base64/hex/`%uXXXX`/`\xNN`/`\uNNNN`/`unescape`/`atob`), reconstructs array-join loaders, and finally **beautifies** the result and **extracts IOCs** (domains, URLs, IPs, hashes, emails).
 
 - No `eval`/VM runtime — safe pattern/AST-assisted approach  
@@ -19,7 +19,7 @@ description: "A Python-based static de-obfuscation tool that detects Dean Edward
 
 ---
 
-## 🔍 What it detects/unpacks
+## What it detects/unpacks
 - **Dean Edwards Packer**: `eval(function(p,a,c,k,e,d){…})`
 - **Layered encodings**: base64 → hex → `%uXXXX`/`\xNN`/`\uNNNN` → `unescape`/`atob`
 - **Array-join loaders**: `['h','t','t','p'].join('')`, chunk rebuild patterns
@@ -33,7 +33,7 @@ description: "A Python-based static de-obfuscation tool that detects Dean Edward
 
 ---
 
-## ⚡ Quick start
+## Quick start
 ```powershell
 # 1) Create & activate venv (Windows PowerShell)
 python -m venv .venv
@@ -48,7 +48,7 @@ python eval_unpacker.py .\samples\packed.js --out .\out
 
 ---
 
-## 🖥️ CLI usage
+## CLI usage
 
 ```text
 usage: eval_unpacker.py [-h] [--out OUTDIR] [--max-passes N] [--beautify {on,off}]
@@ -70,7 +70,7 @@ options:
 
 ---
 
-## 📤 Output (example)
+## Output (example)
 
 **Console summary**
 
@@ -100,7 +100,7 @@ ipv4:
 
 ---
 
-## 🧪 How it works (high-level)
+## How it works (high-level)
 
 1. **Sniff** obfuscation signatures (regex + token checks).
 2. **Unpack** in passes: Packer → base64/hex → escape normalization → `atob/unescape` → array-join rebuild.
@@ -110,7 +110,7 @@ ipv4:
 
 ---
 
-## 🪪 Why analysts like it
+## Why analysts like it
 
 * **Fast triage** — answer “what is this?” in seconds
 * **Repeatable** — deterministic output, ideal for case notes/PRs
@@ -119,7 +119,7 @@ ipv4:
 
 ---
 
-## ⚠️ Limitations
+## Limitations
 
 * Custom VM protectors and runtime-keyed decryptors won’t fully de-virtualize.
 * Heavy anti-analysis (WASM VMs, canvas/audio crypto) needs sandboxing.
@@ -127,7 +127,7 @@ ipv4:
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
 * Extra array-mangling/AST rebuild patterns
 * Optional `prettier` backend (auto-detect if Node is present)
@@ -136,14 +136,14 @@ ipv4:
 
 ---
 
-## 🔗 Links
+## Links
 
 * **Repo:** <{{ page.repo }}>
 * **Related project:** PCAP Quick Profiler → {{ '/projects/pcap-quick-profiler/' | relative_url }}
 
 ---
 
-## 📎 Notes for this site
+## Notes for this site
 
 * The header image path is `/assets/images/eval_unpacker.png`.
   Add a screenshot or diagram at that path to show a hero image.
