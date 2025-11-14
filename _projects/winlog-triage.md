@@ -71,4 +71,4 @@ VT/AbuseIPDB enrichment toggles
 
 Case bundle export (HTML + JSON + matched rules)
 
-© {{ site.time | date: '%Y' }} Brandon Love · Windows Log Triage (MVP)
+
