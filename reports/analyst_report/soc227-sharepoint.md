@@ -18,14 +18,14 @@ weight: 10
 
 ---
 
-## 1️⃣ Executive Summary
+## 1️) Executive Summary
 On **Oct 6, 2023**, a suspicious Microsoft SharePoint Server Elevation of Privilege (**CVE-2023-29357**) was detected on host `MS-SharePointServer`.  
 Investigation confirmed the activity was **malicious**; containment actions prevented further impact.  
 No lateral movement was observed.
 
 ---
 
-## 2️⃣ Incident Details
+## 2️) Incident Details
 
 | Field | Description |
 |-------|-------------|
@@ -41,7 +41,7 @@ No lateral movement was observed.
 
 ---
 
-## 3️⃣ Timeline of Events (CST)
+## 3️) Timeline of Events (CST)
 | Time | Event |
 |------|-------|
 | 20:05 | Detection triggered |
@@ -52,7 +52,7 @@ No lateral movement was observed.
 
 ---
 
-## 4️⃣ Technical Analysis
+## 4️) Technical Analysis
 
 **Process Tree**
 ```plaintext
