@@ -42,13 +42,13 @@ No lateral movement was observed.
 ---
 
 ## 3️) Timeline of Events (CST)
-| Time | Event |
-|------|-------|
-| 20:05 | Detection triggered |
+| Time  | Event                         |
+|------ |-------------------------------|
+| 20:05 | Detection triggered           |
 | 09:00 | Analyst investigation started |
-| 09:20 | Root cause identified |
-| 09:30 | Containment performed |
-| 09:45 | Incident resolved |
+| 09:20 | Root cause identified         |
+| 09:30 | Containment performed         |
+| 09:45 | Incident resolved             |
 
 ---
 
@@ -113,12 +113,12 @@ explorer.exe → powershell.exe → Invoke-WebRequest http://example[.]com/file.
 ---
 
 ## 9) Indicators of Compromise (IOCs)
-| Type | Value | Description |
-|------|------|-------------|
-| IP | 39.91.166.222 | Suspected C2 |
-| File Hash | `none` | Malicious payload |
-| URL | `http://www.apnic.net` | Download location |
-| Domain | `apnic.net` | Attacker infra |
+| Type      | Value                  | Description                 |
+|-----------|------------------------|-----------------------------|
+| IP        | 39.91.166.222          | Suspected C2                |
+| File Hash | `none`                 | Malicious payload           |
+| URL       | `http://www.apnic.net` | Download location           |
+| Domain    | `apnic.net`            | Attacker infra              |
 
 ---
 
@@ -130,8 +130,6 @@ explorer.exe → powershell.exe → Invoke-WebRequest http://example[.]com/file.
 - Packet captures (if applicable)
 
 ---
-
-<small style="opacity:.7">© 2025 Brandon Love. Last updated: "2025-11-13 13:18".</small>
 
 <!-- Minimal in-page styles to match the site's aesthetic -->
 <style>
