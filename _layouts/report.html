@@ -1,39 +1,133 @@
 ---
-layout: default
+layout: null
 ---
 
-<article class="page bl-report">
-  <div class="page-content">
-    {{ content }}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{{ page.title }}</title>
+
+  <style>
+    :root {
+      --bg:#0b1020; 
+      --text:#e5e7eb; 
+      --muted:#9ca3af; 
+      --accent:#60a5fa; 
+      --border:#1f2a4d;
+    }
+
+    body {
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto;
+      line-height:1.6;
+    }
+
+    /* Header */
+    header {
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:#0b1020;
+      border-bottom:1px solid var(--border);
+      padding:14px 0;
+    }
+
+    header .nav {
+      width:min(1100px,92%);
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    header a {
+      color:var(--text);
+      text-decoration:none;
+      font-weight:500;
+    }
+
+    header a:hover {
+      color:var(--accent);
+    }
+
+    main {
+      width:min(1100px,92%);
+      margin:auto;
+      padding:32px 0;
+    }
+
+    /* Footer */
+    footer {
+      margin-top:48px;
+      padding:24px 0;
+      background:#0b1020;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      text-align:center;
+    }
+
+    footer a {
+      color:var(--accent);
+      text-decoration:none;
+    }
+
+    table {
+      width:100%;
+      border-collapse:collapse;
+      margin:16px 0;
+    }
+    th,td {
+      border:1px solid #1f2a4d;
+      padding:8px 10px;
+    }
+    th {
+      background:#111a2a;
+    }
+    code {
+      background:#101827;
+      padding:3px 6px;
+      border-radius:4px;
+    }
+    pre code {
+      display:block;
+      padding:12px;
+      border-radius:8px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===== Header ===== -->
+<header>
+  <div class="nav">
+    <a href="{{ '/' | relative_url }}" style="font-weight:600;color:var(--accent);">← Home</a>
+
+    <nav style="display:flex; gap:1.2rem;">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <a href="{{ '/projects/' | relative_url }}">Projects</a>
+      <a href="{{ '/archive/' | relative_url }}">Blog</a>
+      <a href="{{ '/reports/analyst_report/' | relative_url }}">Reports</a>
+    </nav>
   </div>
-</article>
+</header>
 
-<style>
-  /* Optional polish specific to report pages */
+<!-- ===== Content ===== -->
+<main>
+  <h1>{{ page.title }}</h1>
+  {{ content }}
+</main>
 
-  .bl-report {
-    max-width: 960px;
-    margin: 0 auto 2.5rem auto;
-  }
+<!-- ===== Footer ===== -->
+<footer>
+  © {{ site.time | date: "%Y" }} Brandon Love · All rights reserved.  
+  <br/>
+  Built with ♥ using GitHub Pages · <a href="https://github.com/Love2150/Love2150.github.io">View Source</a>
+</footer>
 
-  .bl-report h1,
-  .bl-report h2,
-  .bl-report h3 {
-    margin-top: 1.6rem;
-  }
-
-  .bl-report table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .bl-report th,
-  .bl-report td {
-    border: 1px solid #e5e7eb;
-    padding: 8px 10px;
-  }
-
-  .bl-report th {
-    background: #f3f4f6;
-  }
-</style>
+</body>
+</html>
