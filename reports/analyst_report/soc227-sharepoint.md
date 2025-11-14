@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: report
 title: "SOC227 — Microsoft SharePoint Server Elevation of Privilege"
 description: "Analyst Write-Up · CVE-2023-29357 Investigation"
 image: /assets/images/projects/sharepoint-cve.png
