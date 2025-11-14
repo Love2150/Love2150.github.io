@@ -21,11 +21,11 @@ jobs:
           fetch-depth: 0
 
       # 🔹 Make sure we’re up to date with origin/main
-      - name: Sync with remote main
+      - name: Sync with remote main (hard reset)
         run: |
           git fetch origin main
           git checkout main
-          git pull --rebase origin main
+          git pull --hard origin main
 
       # 🔹 Your script or command that updates assets/tips.json
       # (Replace this with whatever actually generates tips.json)
