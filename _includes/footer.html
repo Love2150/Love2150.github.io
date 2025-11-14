@@ -25,6 +25,7 @@ Falls back to site.title if no page.title.
     © {{ site.time | date: "%Y" }} <strong>Brandon Love</strong> · {{ context_title }}
   </p>
   <p style="margin: 4px 0 0;">
+    <a href="{{ '/' | relative_url }}" style="color:#e5e7eb;text-decoration:none;">Home</a>
     <a href="{{ '/projects/' | relative_url }}" style="color:#60a5fa;text-decoration:none;">Projects</a> ·
     <a href="{{ '/reports/analyst_report/' | relative_url }}" style="color:#60a5fa;text-decoration:none;">Reports</a> ·
     <a href="{{ '/archive/' | relative_url }}" style="color:#60a5fa;text-decoration:none;">Blog</a>
