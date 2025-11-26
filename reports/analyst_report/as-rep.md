@@ -7,14 +7,16 @@ tags: [DFIR, Windows-Event-Logs, Active-Directory, Kerberos]
 weight: 09
 ---
 
-# AS-REP — Kerberos Authentication Investigation
+<!-- === Brand Banner === -->
+<div style="display:flex;align-items:center;gap:18px;padding:20px;border-radius:18px;background:linear-gradient(135deg,#0b1220,#121a2a 55%,#1e2a44);border:1px solid rgba(255,255,255,.06);margin-bottom:24px;color:#e8eefc;">
+  <img src="/assets/images/brand/brandmark.png" alt="Brandon Love brand" style="width:60px;height:60px;border-radius:12px;object-fit:cover;" onerror="this.style.display='none'">
+  <div>
+    <div style="font-weight:700;font-size:22px;letter-spacing:.2px;">AS-REP Challenge</div>
+    <div style="opacity:.85;font-size:14px;">Kerberos AS-REP Roasting · DFIR / Incident Response Report</div>
+  </div>
+</div>
 
-Analyst Write-Up · LetsDefend Kerberos AS-REP Roasting Timeline
-
-AS-REP Challenge — LetsDefend  
-Kerberos AS-REP Roasting · DFIR / Incident Response Report
-
-* * *
+---
 
 ## 1) Executive Summary
 
