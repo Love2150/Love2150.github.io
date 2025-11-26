@@ -2,13 +2,12 @@
 title: "AS-REP — Kerberos Authentication Investigation"
 layout: page
 permalink: /reports/analyst_report/as-rep.html
+image: /assets/images/as-rep.png
 ---
 
 # AS-REP — Kerberos Authentication Investigation
 
 Analyst Write-Up · LetsDefend Kerberos AS-REP Roasting Timeline
-
-![Brandon Love brand](/assets/images/brand/brandmark.png)
 
 AS-REP Challenge — LetsDefend  
 Kerberos AS-REP Roasting · DFIR / Incident Response Report
