@@ -1,120 +1,134 @@
 ---
-title: "AS-REP Roasting Investigation Report (LetsDefend)"
+title: "AS-REP — Kerberos Authentication Investigation"
 layout: page
 permalink: /reports/analyst_report/as-rep.html
 ---
 
-<div class="card report-hero">
-  <h1 class="report-title">AS-REP Roasting Investigation Report</h1>
-  <p class="report-subtitle">Windows Security Log Triage • Kerberos Authentication Analysis • Timeline Correlation</p>
+# AS-REP — Kerberos Authentication Investigation
 
-  <div class="report-meta">
-    <span class="chip">LetsDefend Lab</span>
-    <span class="chip">Active Directory</span>
-    <span class="chip">Kerberos</span>
-    <span class="chip">Incident Triage</span>
-  </div>
+Analyst Write-Up · LetsDefend Kerberos AS-REP Roasting Timeline
 
-  <div class="callout info">
-    <strong>Portfolio note:</strong> This report is based on a controlled LetsDefend dataset for educational purposes.
-  </div>
-</div>
+![Brandon Love brand](/assets/images/brand/brandmark.png)
 
-<div class="card report-section">
-  ## Case Summary
+AS-REP Challenge — LetsDefend  
+Kerberos AS-REP Roasting · DFIR / Incident Response Report
 
-  **Incident Type:** Kerberos AS-REP Roasting / Credential Access  
-  **Severity:** High (credential theft can lead to domain compromise)  
-  **Primary Finding:** A Kerberos TGT request for user **Corrado** used **RC4 encryption (0x17)** from a suspicious internal host **192.168.110.129**, followed by a successful network logon and post-access discovery (**whoami.exe**).
-</div>
+* * *
 
-<div class="card report-section">
-  ## Key Evidence Observed
+## 1) Executive Summary
 
-  ### Domain Controller (DC) — Security.evtx
-  - **Event ID:** 4768 (TGT requested)  
-  - **Time:** 2024-10-05 14:42:44  
-  - **User:** Corrado  
-  - **User SID:** S-1-5-21-3079141193-1468241477-2901848075-1108  
-  - **Ticket Encryption Type:** **0x17 (RC4)**  
-  - **Service:** krbtgt (Service SID ends in **-502**)  
-  - **Source IP/Port:** **192.168.110.129:49684**
+On **Oct 5, 2024**, suspicious Kerberos authentication activity was identified involving user **Corrado**.
+A Kerberos ticket request using **RC4 (0x17)** was observed from an internal host (**192.168.110.129**),
+followed by a successful network logon and basic post-access discovery activity (**whoami.exe**).
 
-  ### Workstation/User Logs (Corrado folder)
-  - **Event ID:** 4624 (Successful logon)  
-  - **Time:** 2024-10-05 14:48:58  
-  - **Logon Type:** 3 (Network)  
-  - **Source Address:** **192.168.110.129**
+* * *
 
-  ### Prefetch (Command Execution Indicator)
-  - **Artifact:** whoami.exe  
-  - **Time:** 2024-10-05 ~15:01:28  
-  - **Interpretation:** Post-access validation/discovery behavior commonly observed after credential misuse.
-</div>
+## 2) Incident Details
 
-<div class="card report-section">
-  ## Timeline (Condensed)
+| Field | Description |
+|---|---|
+| Report Type | Kerberos Authentication / AS-REP Roasting (Lab) |
+| Analyst | Brandon Love |
+| Date/Time Detected | 2024-10-05 14:42:44 |
+| Severity | High |
+| Category | Credential Access / Authentication Abuse |
+| Detection Source | Windows Security Logs (DC + Workstation) |
+| Systems Affected | Domain Controller (Security.evtx), Corrado Workstation Logs |
+| Users Involved | Corrado |
+| Business Impact | Lab / Training Dataset |
 
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-time">2024-10-05 14:42:44</div>
-      <div class="timeline-body"><strong>4768</strong> Kerberos TGT request for <strong>Corrado</strong> using <code>RC4 (0x17)</code> from <code>192.168.110.129:49684</code>.</div>
-    </div>
+* * *
 
-    <div class="timeline-item">
-      <div class="timeline-time">2024-10-05 14:48:58</div>
-      <div class="timeline-body"><strong>4624</strong> Successful logon (<code>Logon Type 3</code>) correlated to <code>192.168.110.129</code>.</div>
-    </div>
+## 3) Timeline of Events
 
-    <div class="timeline-item">
-      <div class="timeline-time">2024-10-05 ~15:01:28</div>
-      <div class="timeline-body">Prefetch indicates <code>whoami.exe</code> execution (post-access discovery/validation).</div>
-    </div>
-  </div>
-</div>
+| Time | Event |
+|---|---|
+| 2024-10-05 14:42:44 | DC Security log shows Kerberos ticket request (Event ID **4768**) for **Corrado** using **RC4 (0x17)** from **192.168.110.129:49684** |
+| 2024-10-05 14:48:58 | Workstation Security log shows successful logon (Event ID **4624**, Logon Type **3**) linked to **192.168.110.129** |
+| 2024-10-05 ~15:01:28 | Prefetch indicates **whoami.exe** execution (post-access validation / discovery) |
 
-<div class="card report-section">
-  ## Assessment & Likely Attack Flow
+* * *
 
-  - Activity aligns with **AS-REP Roasting-style** credential access patterns (lab scenario).
-  - **RC4 (0x17)** is a notable legacy/weak encryption indicator often treated as suspicious in modern environments.
-  - Successful logon + quick discovery suggests the actor validated access and began initial exploration.
-</div>
+## 4) Technical Analysis
 
-<div class="card report-section">
-  ## Indicators of Compromise (IOCs)
+### DC Evidence (Security.evtx)
 
-  <div class="ioc-list">
-    <div class="ioc-row"><span>Source IP</span><code>192.168.110.129</code></div>
-    <div class="ioc-row"><span>Targeted User</span><code>Corrado</code></div>
-    <div class="ioc-row"><span>Kerberos Signal</span><code>EventID 4768 + TicketEncryptionType 0x17 (RC4)</code></div>
-    <div class="ioc-row"><span>Execution Evidence</span><code>whoami.exe</code></div>
-  </div>
-</div>
+- **Event ID:** 4768 (TGT requested)
+- **Time:** 2024-10-05 14:42:44
+- **User:** Corrado
+- **User SID:** S-1-5-21-3079141193-1468241477-2901848075-1108
+- **Ticket Encryption Type:** `0x17 (RC4)`
+- **Service:** `krbtgt` (Service SID ends in `-502`)
+- **Source:** `192.168.110.129:49684`
 
-<div class="card report-section">
-  ## MITRE ATT&CK Mapping (Practical)
+### Workstation Evidence (Corrado Security Log)
 
-  - **T1558.004** — Steal or Forge Kerberos Tickets: AS-REP Roasting  
-  - **T1078** — Valid Accounts (if credentials were used)  
-  - **Discovery** — Post-logon validation/discovery behavior
-</div>
+- **Event ID:** 4624 (Successful logon)
+- **Time:** 2024-10-05 14:48:58
+- **Logon Type:** `3 (Network)`
+- **Source Address:** `192.168.110.129`
 
-<div class="card report-section">
-  ## Recommended Response Actions
+### Host Artifact Evidence (Prefetch)
 
-  ### Immediate containment
-  - Investigate / isolate host **192.168.110.129** (EDR triage, running processes, network connections, persistence).
-  - Reset credentials for **Corrado** and review recent authentication activity.
-  - Hunt for follow-on activity: **4769**, **4672**, **4688**, **4648**.
+- **Executable:** `whoami.exe`
+- **Approx Time:** 2024-10-05 ~15:01:28
+- **Meaning:** Quick “validate access” behavior commonly seen after credential abuse.
 
-  ### Hardening
-  - Audit AD for accounts that do not require Kerberos pre-authentication and remediate unnecessary exceptions.
-  - Reduce/disable RC4 where feasible; prioritize **AES**.
-  - Enforce strong password policy for service/privileged accounts and monitor anomalies.
-</div>
+### MITRE ATT&CK (Reference)
 
-<div class="report-actions">
-  <a class="btn" href="/reports/analyst_report/">← Back to Analyst Reports</a>
-  <a class="btn btn-ghost" href="/">Home</a>
-</div>
+- **T1558.004** — Steal or Forge Kerberos Tickets: AS-REP Roasting  
+- **T1078** — Valid Accounts (if credentials were used)  
+- **Discovery** — Post-logon validation/discovery behavior
+
+* * *
+
+## 5) Containment & Eradication (Checked = Completed)
+
+- [ ] Isolate suspected source host (192.168.110.129)
+- [ ] Reset impacted user credentials (Corrado)
+- [ ] Collect additional telemetry (EDR, process execution, network connections)
+- [ ] Review for follow-on activity (4769, 4672, 4688, 4648)
+- [ ] Validate no persistence mechanisms present
+
+* * *
+
+## 6) Recovery & Verification
+
+- [ ] Confirm host is clean (AV/EDR scan)
+- [ ] Restore access after validation
+- [ ] Monitor authentication activity for reoccurrence
+- [ ] Document lessons learned / update detections
+
+* * *
+
+## 7) Root Cause
+
+> Activity consistent with **AS-REP-roasting-style authentication abuse** in a lab dataset: a Kerberos ticket request associated with legacy/weak encryption indicators (RC4 / 0x17), followed by successful access and basic discovery.
+
+* * *
+
+## 8) Recommendations
+
+- Audit AD accounts that do not require Kerberos pre-authentication and remove unnecessary exceptions.
+- Reduce/disable RC4 where feasible and prioritize AES-compatible configuration.
+- Strengthen passwords for at-risk accounts (service/privileged) and monitor for abnormal ticket requests.
+
+* * *
+
+## 9) Indicators of Compromise (IOCs)
+
+| Type | Value | Description |
+|---|---|---|
+| IP | 192.168.110.129 | Source host initiating suspicious Kerberos activity |
+| Account | Corrado | Targeted user account |
+| Kerberos | Event ID 4768 + TicketEncryptionType 0x17 | Suspicious ticket request with RC4 indicator |
+| Host Artifact | whoami.exe | Post-access validation/discovery |
+
+* * *
+
+## 10) Appendices (Evidence)
+
+- DC Security.evtx excerpts (Event ID 4768)
+- Workstation Security.evtx excerpts (Event ID 4624)
+- Prefetch metadata for `whoami.exe`
+- Screenshots from investigation notes (if applicable)
