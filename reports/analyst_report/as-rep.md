@@ -1,7 +1,7 @@
 ---
 layout: report
 title: "AS-REP · Kerberos Authentication Investigation"
-description: "Analyst Write-Up · AS-REP Attack
+description: "Analyst Write-Up · AS-REP Attack"
 image: /assets/images/as-rep.png
 tags: [DFIR, Windows-Event-Logs, Active-Directory, Kerberos]
 weight: 09
