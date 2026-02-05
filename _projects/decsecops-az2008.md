@@ -2,7 +2,7 @@
 layout: page
 title: "DevSecOps Labs (AZ-2008)"
 permalink: /projects/devsecops-az2008/
-image: /assets/images/devsecops_az2008.png
+image: /assets/images/IMG_1108.jpeg
 summary: "Secure planning, PR-based change control, CI/CD + IaC, and resiliency testing with Azure + GitHub."
 tags: [devsecops, cloud-security, cicd, iac, github-actions, bicep, resiliency, chaos-engineering, copilot]
 weight: 9
