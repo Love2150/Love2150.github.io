@@ -13,7 +13,7 @@ repo:
 Completed four AZ-2008 DevOps Foundations labs and translated them into cybersecurity value: **secure planning**, **controlled change**, **repeatable delivery**, and **tested resiliency**. This project showcases how I approach *security as part of the delivery lifecycle* (DevSecOps), not just reactive response.
 
 <div class="meta" style="margin:.5rem 0 1rem;display:flex;gap:.5rem;flex-wrap:wrap">
-  <a class="pill" href="PASTE_LINKEDIN_ARTICLE_URL_HERE" target="_blank" rel="noopener">LinkedIn article ↗</a>
+  <a class="pill" href="https://www.linkedin.com/posts/brandon-love-85b247261_decsecops-lab-report-activity-7425214543745970176-88nu?utm_medium=ios_app&rcm=ACoAAEBJIAcBe019Lrv15iIwechHrNMlLIWBqVA&utm_source=social_share_send&utm_campaign=copy_link" target="_blank" rel="noopener">LinkedIn article ↗</a>
   <a class="pill" href="PASTE_AZ2008_NOTES_OR_REPO_URL_HERE" target="_blank" rel="noopener">Notes/Repo →</a>
 </div>
 
