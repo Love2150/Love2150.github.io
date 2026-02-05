@@ -13,7 +13,7 @@ Completed four AZ-2008 DevOps Foundations labs and translated them into cybersec
 
 <div class="meta" style="margin:.5rem 0 1rem;display:flex;gap:.5rem;flex-wrap:wrap">
   <a class="pill" href="https://www.linkedin.com/posts/brandon-love-85b247261_decsecops-lab-report-activity-7425214543745970176-88nu?utm_medium=ios_app&rcm=ACoAAEBJIAcBe019Lrv15iIwechHrNMlLIWBqVA&utm_source=social_share_send&utm_campaign=copy_link" target="_blank" rel="noopener">LinkedIn article ↗</a>
-  
+</div>
 
 ## Lab Breakdown (Skills + Products Used)
 
