@@ -26,7 +26,7 @@ The lab simulates a real-world SOC lifecycle:
 
 ## 🏗 Architecture Diagram
 
-![Architecture Diagram](/assets/images/wazuh-lab-architecture.png)
+![Architecture Diagram](/assets/images/F8C556A5-ACB7-4FE1-8417-62B2AEEA9DED.png)
 
 *Figure 1: High-level architecture of Wazuh, endpoints, VirusTotal integration, and Action1 patch workflow.*
 
