@@ -49,8 +49,8 @@ The lab simulates a real-world SOC lifecycle:
 Installed Wazuh All-in-One:
 
 ```bash
-curl -sO https://packages.wazuh.com/4.x/wazuh-install.sh
-sudo bash wazuh-install.sh -a
+- curl -sO https://packages.wazuh.com/4.x/wazuh-install.sh 
+- sudo bash wazuh-install.sh -a
 
 📸 Wazuh Dashboard
 
