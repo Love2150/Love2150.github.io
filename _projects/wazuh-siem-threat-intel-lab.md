@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Wazuh SIEM + VirusTotal + Action1 Patch Management Lab"
-image: /assets/images/
+image: /assets/images/F8C556A5-ACB7-4FE1-8417-62B2AEEA9DED.png
 permalink: /projects/wazuh-siem-threat-intel-lab/
 tags: [siem, wazuh, threat-intelligence, patch-management, soc, blue-team, linux, windows]
 ---
