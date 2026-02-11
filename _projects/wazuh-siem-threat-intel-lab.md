@@ -1,3 +1,4 @@
+
 ---
 layout: page
 title: "Wazuh SIEM + VirusTotal + Action1 Patch Management Lab"
@@ -14,9 +15,9 @@ This project documents the deployment of a full security monitoring and remediat
 
 - Wazuh (SIEM + HIDS)
 - Ubuntu Server (Manager)
-- Windows & Linux Endpoints
-- VirusTotal (Threat Intelligence Enrichment)
-- Action1 (Patch Management)
+- Windows & Linux endpoints
+- VirusTotal (threat intelligence enrichment)
+- Action1 (patch management)
 
 The lab simulates a real-world SOC lifecycle:
 
@@ -24,7 +25,7 @@ The lab simulates a real-world SOC lifecycle:
 
 ---
 
-## 🏗 Architecture Diagram
+## Architecture diagram
 
 ![Architecture Diagram](/assets/images/F8C556A5-ACB7-4FE1-8417-62B2AEEA9DED.png)
 
@@ -35,49 +36,59 @@ The lab simulates a real-world SOC lifecycle:
 ## Environment
 
 | Component | Role |
-|------------|------|
+|---|---|
 | SIEM | Wazuh |
 | Server OS | Ubuntu Server |
 | Endpoints | Windows 10/11, Ubuntu Linux |
-| Threat Intelligence | VirusTotal API |
-| Patch Management | Action1 |
+| Threat intelligence | VirusTotal API |
+| Patch management | Action1 |
 
 ---
 
-## 1️⃣ Wazuh Deployment (Ubuntu)
+## 1️⃣ Wazuh deployment on Ubuntu
 
 Installed Wazuh All-in-One:
 
 ```bash
-- curl -sO https://packages.wazuh.com/4.x/wazuh-install.sh 
-- sudo bash wazuh-install.sh -a
+curl -sO https://packages.wazuh.com/4.x/wazuh-install.sh
+sudo bash wazuh-install.sh -a
 
-📸 Wazuh Dashboard
+Verified services:
+
+sudo systemctl status wazuh-manager
+sudo systemctl status wazuh-indexer
+sudo systemctl status wazuh-dashboard
+
+Screenshot: Wazuh dashboard
 
 Figure 2: Wazuh dashboard showing active agents and alert summary.
 
 ⸻
 
-2️⃣ Endpoint Onboarding
+2️⃣ Endpoint onboarding
 
-Windows Agent
+Windows agent
 
-- msiexec.exe /i wazuh-agent.msi /q WAZUH_MANAGER="<server-ip>"
-- NET START WazuhSvc
+Install and start the agent:
 
-📸 Windows Agent Connected
+msiexec.exe /i wazuh-agent.msi /q WAZUH_MANAGER="<server-ip>" WAZUH_REGISTRATION_SERVER="<server-ip>"
+NET START WazuhSvc
+
+Screenshot: Windows agent connected
 
 Figure 3: Windows endpoint successfully registered in Wazuh.
 
 ⸻
 
-Linux Agent
+Linux agent
 
-- sudo dpkg -i wazuh-agent.deb
-- sudo systemctl enable wazuh-agent
-- sudo systemctl start wazuh-agent
+Install and enable the agent:
 
-📸 Linux Agent Connected
+sudo dpkg -i wazuh-agent.deb
+sudo systemctl enable wazuh-agent
+sudo systemctl start wazuh-agent
+
+Screenshot: Linux agent connected
 
 Figure 4: Linux endpoint successfully reporting to Wazuh.
 
@@ -89,23 +100,25 @@ Monitored download directories:
 
 Windows
 
-- C:\Users\*\Downloads
+C:\Users\*\Downloads
 
 Linux
 
-- /home/*/Downloads
+/home/*/Downloads
 
-📸 FIM Alert Example
+Screenshot: FIM alert example
 
 Figure 5: File creation event detected in Downloads directory.
 
 ⸻
 
-4️⃣ VirusTotal Integration
+4️⃣ VirusTotal integration
 
 Configured in:
 
 /var/ossec/etc/ossec.conf
+
+Added the integration block:
 
 <integration>
   <name>virustotal</name>
@@ -114,60 +127,58 @@ Configured in:
   <alert_format>json</alert_format>
 </integration>
 
-Reloaded systemd and restarted manager:
+Reloaded systemd and restarted Wazuh Manager:
 
-- sudo systemctl daemon-reload
-- sudo systemctl restart wazuh-manager.service
+sudo systemctl daemon-reload
+sudo systemctl restart wazuh-manager.service
 
-📸 VirusTotal Enriched Alert
+Screenshot: VirusTotal enriched alert
 
 Figure 6: Wazuh alert enriched with VirusTotal detection ratio.
 
 ⸻
 
-5️⃣ Vulnerability Detection
+5️⃣ Vulnerability detection
 
-Enabled vulnerability detection module to identify:
+Enabled vulnerability detection to identify:
 	•	Missing security patches
 	•	Outdated software versions
 	•	Known CVEs
 
-📸 Vulnerability Dashboard
+Screenshot: Vulnerability dashboard
 
 Figure 7: Detected vulnerabilities mapped to CVEs.
 
 ⸻
 
-6️⃣ Patch Management with Action1
+6️⃣ Patch management with Action1
 
-Installed Action1 agent on endpoints.
-
-Configured:
+Installed the Action1 agent on endpoints and configured:
 	•	Auto-approve critical patches
 	•	Scheduled maintenance windows
 	•	Controlled reboots
 	•	Compliance tracking
 
-📸 Action1 Patch Deployment
+Screenshot: Action1 patch deployment
 
 Figure 8: Patch deployment and compliance view in Action1.
 
 ⸻
 
-🔄 Integrated Security Lifecycle
+🔄 Integrated security lifecycle
 
 Phase	Tool	Function
-Log Collection	Wazuh	Centralized monitoring
-File Detection	Wazuh FIM	Detect new downloads
-Threat Enrichment	VirusTotal	Hash reputation lookup
-Vulnerability Detection	Wazuh	Identify exposure
-Patch Remediation	Action1	Deploy updates
+Log collection	Wazuh	Centralized monitoring
+File detection	Wazuh FIM	Detect new downloads
+Threat enrichment	VirusTotal	Hash reputation lookup
+Vulnerability detection	Wazuh	Identify exposure
+Patch remediation	Action1	Deploy updates
 Validation	Wazuh	Confirm compliance
 
 
 ⸻
 
-Skills Demonstrated
+Skills demonstrated
 	•	SIEM deployment & configuration
 	•	Windows & Linux agent management
 	•	Threat intelligence integration
