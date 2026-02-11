@@ -65,7 +65,7 @@ Screenshot: Wazuh dashboard
 
 Figure 2: Wazuh dashboard showing active agents and alert summary.
 
-⸻
+---
 
 2️⃣ Endpoint onboarding
 
@@ -81,7 +81,7 @@ Screenshot: Windows agent connected
 
 Figure 3: Windows endpoint successfully registered in Wazuh.
 
-⸻
+---
 
 Linux agent
 
@@ -97,7 +97,7 @@ Screenshot: Linux agent connected
 
 Figure 4: Linux endpoint successfully reporting to Wazuh.
 
-⸻
+---
 
 3️⃣ File Integrity Monitoring (FIM)
 
@@ -117,7 +117,7 @@ Screenshot: FIM alert example
 
 Figure 5: File creation event detected in Downloads directory.
 
-⸻
+---
 
 4️⃣ VirusTotal integration
 
@@ -149,7 +149,7 @@ Screenshot: VirusTotal enriched alert
 
 Figure 6: Wazuh alert enriched with VirusTotal detection ratio.
 
-⸻
+---
 
 5️⃣ Vulnerability detection
 
@@ -162,7 +162,7 @@ Screenshot: Vulnerability dashboard
 
 Figure 7: Detected vulnerabilities mapped to CVEs.
 
-⸻
+---
 
 6️⃣ Patch management with Action1
 
@@ -176,20 +176,20 @@ Screenshot: Action1 patch deployment
 
 Figure 8: Patch deployment and compliance view in Action1.
 
-⸻
+---
 
 🔄 Integrated security lifecycle
 
-Phase	Tool	Function
-Log collection	Wazuh	Centralized monitoring
-File detection	Wazuh FIM	Detect new downloads
-Threat enrichment	VirusTotal	Hash reputation lookup
-Vulnerability detection	Wazuh	Identify exposure
-Patch remediation	Action1	Deploy updates
-Validation	Wazuh	Confirm compliance
+| Phase	| Tool	| Function |
+|---|---|
+| Log collection | Wazuh | Centralized monitoring |
+| File detection | Wazuh FIM | Detect new downloads |
+| Threat enrichment | VirusTotal | Hash reputation lookup |
+| Vulnerability detection | Wazuh | Identify exposure |
+| Patch remediation | Action1 |	Deploy updates |
+| Validation | Wazuh | Confirm compliance |
 
-
-⸻
+--- 
 
 Skills demonstrated
 	•	SIEM deployment & configuration
@@ -201,7 +201,7 @@ Skills demonstrated
 	•	SOC workflow design
 	•	Blue team operational alignment
 
-⸻
+---
 
 Outcome
 
