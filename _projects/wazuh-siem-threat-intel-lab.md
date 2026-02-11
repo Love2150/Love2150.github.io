@@ -64,7 +64,7 @@ Figure 2: Wazuh dashboard showing active agents and alert summary.
 
 ---
 
-2️⃣ Endpoint onboarding
+## 2️⃣ Endpoint onboarding
 
 Windows agent
 
@@ -93,7 +93,7 @@ Figure 4: Linux endpoint successfully reporting to Wazuh.
 
 ---
 
-3️⃣ File Integrity Monitoring (FIM)
+## 3️⃣ File Integrity Monitoring (FIM)
 
 Monitored download directories:
 
@@ -111,7 +111,7 @@ Figure 5: File creation event detected in Downloads directory.
 
 ---
 
-4️⃣ VirusTotal integration
+## 4️⃣ VirusTotal integration
 
 Configured in:
 
@@ -138,7 +138,7 @@ Figure 6: Wazuh alert enriched with VirusTotal detection ratio.
 
 ---
 
-5️⃣ Vulnerability detection
+## 5️⃣ Vulnerability detection
 
 Enabled vulnerability detection to identify:
 
@@ -152,7 +152,7 @@ Figure 7: Detected vulnerabilities mapped to CVEs.
 
 ---
 
-6️⃣ Patch management with Action1
+## 6️⃣ Patch management with Action1
 
 Installed the Action1 agent on endpoints and configured:
 
@@ -167,7 +167,7 @@ Figure 8: Patch deployment and compliance view in Action1.
 
 ---
 
-🔄 Integrated security lifecycle
+## 🔄 Integrated security lifecycle
 
 | Phase	| Tool | Function |
 |---|---|
@@ -180,7 +180,7 @@ Figure 8: Patch deployment and compliance view in Action1.
 
 --- 
 
-Skills demonstrated
+## Skills demonstrated
 
 - SIEM deployment & configuration
 - Windows & Linux agent management
@@ -193,6 +193,6 @@ Skills demonstrated
 
 ---
 
-Outcome
+## Outcome
 
 Built a defense-in-depth monitoring and remediation lab that mirrors modern enterprise SOC operations and demonstrates practical blue team capabilities including detection engineering, enrichment automation, and structured patch compliance validation.
