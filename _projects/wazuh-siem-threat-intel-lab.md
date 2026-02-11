@@ -48,16 +48,15 @@ The lab simulates a real-world SOC lifecycle:
 
 Installed Wazuh All-in-One:
 
-    sudo systemctl daemon-reload
-    sudo systemctl restart wazuh-manager.service
+
+    curl -sO https://packages.wazuh.com/4.x/wazuh-install.sh
+    sudo bash wazuh-install.sh -a
 
 Verified services:
 
-```bash
-sudo systemctl status wazuh-manager
-sudo systemctl status wazuh-indexer
-sudo systemctl status wazuh-dashboard
-```
+   sudo systemctl status wazuh-manager
+   sudo systemctl status wazuh-indexer
+   sudo systemctl status wazuh-dashboard
 
 Screenshot: Wazuh dashboard
 
@@ -71,10 +70,9 @@ Windows agent
 
 Install and start the agent:
 
-```bash
-msiexec.exe /i wazuh-agent.msi /q WAZUH_MANAGER="<server-ip>" WAZUH_REGISTRATION_SERVER="<server-ip>"
-NET START WazuhSvc
-```
+    msiexec.exe /i wazuh-agent.msi /q WAZUH_MANAGER="<server-ip>" WAZUH_REGISTRATION_SERVER="<server-ip>"
+    NET START WazuhSvc
+	
 Screenshot: Windows agent connected
 
 Figure 3: Windows endpoint successfully registered in Wazuh.
@@ -85,11 +83,9 @@ Linux agent
 
 Install and enable the agent:
 
-```bash
-sudo dpkg -i wazuh-agent.deb
-sudo systemctl enable wazuh-agent
-sudo systemctl start wazuh-agent
-```
+    sudo dpkg -i wazuh-agent.deb
+    sudo systemctl enable wazuh-agent
+    sudo systemctl start wazuh-agent
 
 Screenshot: Linux agent connected
 
@@ -103,14 +99,12 @@ Monitored download directories:
 
 Windows
 
-```bash
-C:\Users\*\Downloads
-```
+   C:\Users\*\Downloads
+   
 Linux
 
-```bash
-/home/*/Downloads
-```
+    /home/*/Downloads
+	
 Screenshot: FIM alert example
 
 Figure 5: File creation event detected in Downloads directory.
@@ -121,27 +115,22 @@ Figure 5: File creation event detected in Downloads directory.
 
 Configured in:
 
-```bash
-/var/ossec/etc/ossec.conf
-```
+
+    /var/ossec/etc/ossec.conf
 
 Added the integration block:
 
-```bash
-<integration>
-  <name>virustotal</name>
-  <api_key>YOUR_API_KEY</api_key>
-  <group>syscheck</group>
-  <alert_format>json</alert_format>
-</integration>
-```
+    <integration>
+      <name>virustotal</name>
+      <api_key>YOUR_API_KEY</api_key>
+      <group>syscheck</group>
+      <alert_format>json</alert_format>
+    </integration>
 
 Reloaded systemd and restarted Wazuh Manager:
 
-```bash
-sudo systemctl daemon-reload
-sudo systemctl restart wazuh-manager.service
-```
+    sudo systemctl daemon-reload
+    sudo systemctl restart wazuh-manager.service
 
 Screenshot: VirusTotal enriched alert
 
