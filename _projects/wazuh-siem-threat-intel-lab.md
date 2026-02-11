@@ -51,6 +51,7 @@ Installed Wazuh All-in-One:
 ```bash
 curl -sO https://packages.wazuh.com/4.x/wazuh-install.sh
 sudo bash wazuh-install.sh -a
+```
 
 Verified services:
 
