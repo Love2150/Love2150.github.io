@@ -1,4 +1,3 @@
-
 ---
 layout: page
 title: "Wazuh SIEM + VirusTotal + Action1 Patch Management Lab"
