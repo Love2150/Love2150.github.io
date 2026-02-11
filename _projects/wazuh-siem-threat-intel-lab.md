@@ -154,6 +154,7 @@ Figure 6: Wazuh alert enriched with VirusTotal detection ratio.
 5️⃣ Vulnerability detection
 
 Enabled vulnerability detection to identify:
+
 	•	Missing security patches
 	•	Outdated software versions
 	•	Known CVEs
@@ -167,6 +168,7 @@ Figure 7: Detected vulnerabilities mapped to CVEs.
 6️⃣ Patch management with Action1
 
 Installed the Action1 agent on endpoints and configured:
+
 	•	Auto-approve critical patches
 	•	Scheduled maintenance windows
 	•	Controlled reboots
@@ -192,6 +194,7 @@ Figure 8: Patch deployment and compliance view in Action1.
 --- 
 
 Skills demonstrated
+
 	•	SIEM deployment & configuration
 	•	Windows & Linux agent management
 	•	Threat intelligence integration
