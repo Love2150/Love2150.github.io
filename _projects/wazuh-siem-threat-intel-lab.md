@@ -62,8 +62,8 @@ Figure 2: Wazuh dashboard showing active agents and alert summary.
 
 Windows Agent
 
-msiexec.exe /i wazuh-agent.msi /q WAZUH_MANAGER="<server-ip>"
-NET START WazuhSvc
+- msiexec.exe /i wazuh-agent.msi /q WAZUH_MANAGER="<server-ip>"
+- NET START WazuhSvc
 
 📸 Windows Agent Connected
 
@@ -73,9 +73,9 @@ Figure 3: Windows endpoint successfully registered in Wazuh.
 
 Linux Agent
 
-sudo dpkg -i wazuh-agent.deb
-sudo systemctl enable wazuh-agent
-sudo systemctl start wazuh-agent
+- sudo dpkg -i wazuh-agent.deb
+- sudo systemctl enable wazuh-agent
+- sudo systemctl start wazuh-agent
 
 📸 Linux Agent Connected
 
@@ -89,11 +89,11 @@ Monitored download directories:
 
 Windows
 
-C:\Users\*\Downloads
+- C:\Users\*\Downloads
 
 Linux
 
-/home/*/Downloads
+- /home/*/Downloads
 
 📸 FIM Alert Example
 
@@ -116,8 +116,8 @@ Configured in:
 
 Reloaded systemd and restarted manager:
 
-sudo systemctl daemon-reload
-sudo systemctl restart wazuh-manager.service
+- sudo systemctl daemon-reload
+- sudo systemctl restart wazuh-manager.service
 
 📸 VirusTotal Enriched Alert
 
