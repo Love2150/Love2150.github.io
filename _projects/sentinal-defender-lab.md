@@ -44,8 +44,7 @@ Azure Activity Logs / Defender Alerts
  (Enrichment + Incident Updates)
 ```
 
-**Architecture diagram placeholder:**  
-![Architecture Diagram](/assets/images/sentinel-defender-architecture.png)
+![Architecture Diagram]/assets/images/99DAEB53-5C2E-4278-A819-13915F7FE91E.png
 
 ---
 
