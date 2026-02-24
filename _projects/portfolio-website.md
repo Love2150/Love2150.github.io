@@ -7,7 +7,7 @@ tags: [Jekyll, GitHub Pages, CI/CD, JavaScript, HTML/CSS]
 summary: "Responsive portfolio with a Jekyll-powered blog, Medium-to-Markdown autosync, and custom blog/projects sliders."
 repo: "https://github.com/Love2150/Love2150.github.io"   # ← your repo URL
 demo: "https://love2150.github.io/"                      # ← live site
-weight: 1                                               # ← lower = more featured in slider
+weight: 3                                              # ← lower = more featured in slider
 ---
 
 ### What I built
