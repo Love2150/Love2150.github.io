@@ -187,7 +187,7 @@ Trigger (Sentinel Incident)
   -> Notify (Teams/Email) [optional]
 ```
 
-image:
+image: /assets/images/IMG_1146.png
 
 ---
 
