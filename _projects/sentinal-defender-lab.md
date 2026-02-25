@@ -205,8 +205,7 @@ I validated the pipeline by:
 - [ ] Playbook ran successfully
 - [ ] Incident contains enrichment comment/tags
 
-**Screenshot placeholder:**  
-![Playbook Run History]
+image: /assets/images/IMG_1147.png
 
 ---
 
