@@ -101,15 +101,13 @@ AzureActivity
 | take 10
 ```
 
-**Screenshot placeholder:**  
-![Azure Activity Connector](/assets/images/sentinel-azure-activity-connector.png)
 
 #### B) Microsoft Defender Integration (choose the one(s) you enabled)
 - Defender for Endpoint / Defender for Cloud / Defender for Identity / Defender for Office 365
 - Ensure Defender alerts flow into Sentinel incidents
 
-**Screenshot placeholder:**  
-![Defender Connector](/assets/images/sentinel-defender-connector.png)
+
+image: 
 
 ---
 
