@@ -79,7 +79,7 @@ image: /assets/images/99DAEB53-5C2E-4278-A819-13915F7FE91E.png
 3. Confirm workspace is active and reachable
 
 **Screenshot placeholder:**  
-![LAW Created](/assets/images/sentinel-law-created.png)
+image: /assets/images/IMG_1144.jpeg
 
 ---
 
@@ -87,9 +87,6 @@ image: /assets/images/99DAEB53-5C2E-4278-A819-13915F7FE91E.png
 1. Go to **Microsoft Sentinel**
 2. Select your workspace (`law-sentinel-lab`)
 3. Click **Add** / **Enable**
-
-**Screenshot placeholder:**  
-![Sentinel Enabled](/assets/images/sentinel-enabled.png)
 
 ---
 
