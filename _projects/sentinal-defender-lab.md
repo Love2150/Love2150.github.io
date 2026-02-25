@@ -107,7 +107,7 @@ AzureActivity
 - Ensure Defender alerts flow into Sentinel incidents
 
 
-image: 
+image: /assets/images/IMG_1145.jpeg
 
 ---
 
