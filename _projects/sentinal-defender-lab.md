@@ -135,8 +135,6 @@ AzureActivity
   - Azure resource: `ResourceId`
 - Tactics (suggested): Defense Evasion / Persistence (depending on scenario)
 
-**Screenshot placeholder:**  
-![Analytics Rule](/assets/images/sentinel-analytics-rule-nsg-write.png)
 
 ---
 
@@ -155,9 +153,6 @@ When an incident fires, I:
    - Comment/tag only (benign)
    - Escalate severity
    - Trigger playbook to enrich and notify
-
-**Screenshot placeholder:**  
-![Incident View](/assets/images/sentinel-incident-view.png)
 
 ---
 
@@ -192,8 +187,7 @@ Trigger (Sentinel Incident)
   -> Notify (Teams/Email) [optional]
 ```
 
-**Screenshot placeholder:**  
-![Playbook Overview](/assets/images/sentinel-playbook-overview.png)
+image:
 
 ---
 
@@ -212,7 +206,7 @@ I validated the pipeline by:
 - [ ] Incident contains enrichment comment/tags
 
 **Screenshot placeholder:**  
-![Playbook Run History](/assets/images/sentinel-playbook-run-history.png)
+![Playbook Run History]
 
 ---
 
