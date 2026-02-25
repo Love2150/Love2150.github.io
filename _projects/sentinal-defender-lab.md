@@ -45,7 +45,7 @@ Azure Activity Logs / Defender Alerts
  (Enrichment + Incident Updates)
 ```
 
-image: /assets/images/99DAEB53-5C2E-4278-A819-13915F7FE91E.png
+![Architecture Diagram](/assets/images/99DAEB53-5C2E-4278-A819-13915F7FE91E.png)
 
 ---
 
@@ -78,8 +78,8 @@ image: /assets/images/99DAEB53-5C2E-4278-A819-13915F7FE91E.png
 2. Create a **Log Analytics Workspace** (ex: `law-sentinel-lab`)
 3. Confirm workspace is active and reachable
 
-**Screenshot placeholder:**  
-image: /assets/images/IMG_1144.jpeg
+  
+[LAW Created](/assets/images/IMG_1144.jpeg)
 
 ---
 
@@ -107,7 +107,7 @@ AzureActivity
 - Ensure Defender alerts flow into Sentinel incidents
 
 
-image: /assets/images/IMG_1145.jpeg
+[Defender](/assets/images/IMG_1145.jpeg)
 
 ---
 
@@ -187,7 +187,7 @@ Trigger (Sentinel Incident)
   -> Notify (Teams/Email) [optional]
 ```
 
-image: /assets/images/IMG_1146.png
+[Playbook Overview](/assets/images/IMG_1146.png)
 
 ---
 
@@ -205,7 +205,7 @@ I validated the pipeline by:
 - [ ] Playbook ran successfully
 - [ ] Incident contains enrichment comment/tags
 
-image: /assets/images/IMG_1147.png
+[Playbook Run History](/assets/images/IMG_1147.png)
 
 ---
 
