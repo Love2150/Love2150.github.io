@@ -79,7 +79,7 @@ Azure Activity Logs / Defender Alerts
 3. Confirm workspace is active and reachable
 
   
-[LAW Created](/assets/images/IMG_1144.jpeg)
+![LAW Created](/assets/images/IMG_1144.jpeg)
 
 ---
 
@@ -107,7 +107,7 @@ AzureActivity
 - Ensure Defender alerts flow into Sentinel incidents
 
 
-[Defender](/assets/images/IMG_1145.jpeg)
+![Defender](/assets/images/IMG_1145.jpeg)
 
 ---
 
@@ -187,7 +187,7 @@ Trigger (Sentinel Incident)
   -> Notify (Teams/Email) [optional]
 ```
 
-[Playbook Overview](/assets/images/IMG_1146.png)
+![Playbook Overview](/assets/images/IMG_1146.png)
 
 ---
 
@@ -205,7 +205,7 @@ I validated the pipeline by:
 - [ ] Playbook ran successfully
 - [ ] Incident contains enrichment comment/tags
 
-[Playbook Run History](/assets/images/IMG_1147.png)
+![Playbook Run History](/assets/images/IMG_1147.png)
 
 ---
 
