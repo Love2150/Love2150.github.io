@@ -1,5 +1,4 @@
 
-```markdown
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0b1020,50:1d4ed8,100:7c3aed&height=220&section=header&text=Brandon%20Love&fontSize=54&fontColor=ffffff&fontAlignY=38&desc=SOC%20Analyst%20%7C%20Detection%20Engineering%20%7C%20DFIR%20%7C%20Incident%20Response&descAlignY=60&descSize=20" alt="Brandon Love cybersecurity profile banner" />
 </p>
