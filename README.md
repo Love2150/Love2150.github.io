@@ -86,7 +86,7 @@ Built an end-to-end cloud SOC workflow using Sentinel, Defender, KQL, Log Analyt
 - KQL investigations
 - SOAR automation
 
-[View Project â](https://love2150.github.io/projects/sentinel-defender-lab/)
+[View Project →](https://love2150.github.io/projects/sentinel-defender-lab/)
 
 </td>
 <td width="50%" valign="top">
@@ -102,7 +102,7 @@ Built a detect, enrich, remediate, and validate workflow across Windows and Linu
 - Patch validation
 - Alert investigation
 
-[View Project â](https://love2150.github.io/projects/wazuh-siem-threat-intel-lab/)
+[View Project →](https://love2150.github.io/projects/wazuh-siem-threat-intel-lab/)
 
 </td>
 </tr>
@@ -121,7 +121,7 @@ Developed a Python-based EVTX and Sysmon analysis tool for rapid Windows investi
 - Encoded PowerShell detection
 - HTML, JSON, and CSV reporting
 
-[View Project â](https://love2150.github.io/projects/winlog-triage/)
+[View Project →](https://love2150.github.io/projects/winlog-triage/)
 
 </td>
 <td width="50%" valign="top">
@@ -137,7 +137,7 @@ Created a Python network-analysis utility that converts packet captures into ana
 - SNI analysis
 - Protocol statistics
 
-[View Project â](https://love2150.github.io/projects/pcap-quick-profiler/)
+[View Project →](https://love2150.github.io/projects/pcap-quick-profiler/)
 
 </td>
 </tr>
