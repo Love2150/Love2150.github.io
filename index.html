@@ -924,7 +924,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
             style="padding:0 16px 16px"
             href="{{ '/projects/winlog-triage/' | relative_url }}"
           >
-            View case study â
+            View case study →
           </a>
         </article>
       </div>
@@ -979,13 +979,13 @@ title: "Brandon Love | SOC Analyst & Incident Response"
                   <div class="proj-cta">
                     {% if p.demo %}
                       <a class="pill" href="{{ p.demo }}" target="_blank" rel="noopener">
-                        Demo â
+                        Demo →
                       </a>
                     {% endif %}
 
                     {% if p.repo %}
                       <a class="pill" href="{{ p.repo }}" target="_blank" rel="noopener">
-                        Repository â
+                        Repository →
                       </a>
                     {% endif %}
 
@@ -1003,7 +1003,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
                   Add project files to <code>_projects/</code> or pages under <code>/projects/</code>.
                 </p>
                 <p>
-                  <a class="pill" href="{{ '/projects/' | relative_url }}">Open Projects â</a>
+                  <a class="pill" href="{{ '/projects/' | relative_url }}">Open Projects →</a>
                 </p>
               </div>
             </article>
@@ -1015,7 +1015,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
               <h3>Explore the full project collection</h3>
               <p class="meta">View all labs, tools, case studies, and technical documentation.</p>
               <p>
-                <a class="pill" href="{{ '/projects/' | relative_url }}">View All Projects â</a>
+                <a class="pill" href="{{ '/projects/' | relative_url }}">View All Projects →</a>
               </p>
             </div>
           </article>
@@ -1157,7 +1157,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
                 <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
                 <p class="meta">
                   {{ post.date | date: "%b %d, %Y" }}
-                  {% if post.tags %} Â· {{ post.tags | join: ", " }}{% endif %}
+                  {% if post.tags %} · {{ post.tags | join: ", " }}{% endif %}
                 </p>
                 <p>{{ post.excerpt | strip_html | truncate: 220 }}</p>
 
@@ -1171,7 +1171,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
                       target="_blank"
                       rel="noopener"
                     >
-                      Open on Medium â
+                      Open on Medium ↗
                     </a>
                   {% endif %}
                 </div>
@@ -1185,15 +1185,15 @@ title: "Brandon Love | SOC Analyst & Incident Response"
               <h3>Explore the full archive</h3>
               <p class="meta">Browse all technical articles, reports, and investigations.</p>
               <p>
-                <a class="pill" href="{{ '/archive/' | relative_url }}">View All Posts â</a>
+                <a class="pill" href="{{ '/archive/' | relative_url }}">View All Posts →</a>
               </p>
             </div>
           </article>
         </div>
 
         <div class="blog-nav" aria-hidden="true">
-          <button class="blog-btn" id="prevSlide" aria-label="Previous">â¹</button>
-          <button class="blog-btn" id="nextSlide" aria-label="Next">âº</button>
+          <button class="blog-btn" id="prevSlide" aria-label="Previous">&lsaquo;</button>
+<button class="blog-btn" id="nextSlide" aria-label="Next">&rsaquo;</button>
         </div>
 
         <div class="blog-dots" id="blogDots" aria-hidden="true"></div>
