@@ -1159,10 +1159,18 @@ title: "Brandon Love | SOC Analyst & Incident Response"
                   {{ post.date | date: "%b %d, %Y" }}
                   {% if post.tags %} &middot; {{ post.tags | join: ", " }}{% endif %}
                 </p>
-                <p>{{ post.excerpt | strip_html | truncate: 220 }}</p>
+                <p>
+                  {{
+                    post.excerpt
+                    | strip_html
+                    | replace: '——2', ''
+                    | replace: '— — 2', ''
+                    | truncate: 220
+                  }}
+                </p>
 
                 <div class="blog-cta">
-                  <a class="pill" href="{{ post.url | relative_url }}">Read Article →</a>
+                  <a class="pill" href="{{ post.url | relative_url }}">Read Article &rarr;</a>
 
                   {% if post.medium_canonical %}
                     <a
@@ -1171,7 +1179,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
                       target="_blank"
                       rel="noopener"
                     >
-                      Open on Medium ↗
+                      Open on Medium &#8599;
                     </a>
                   {% endif %}
                 </div>
@@ -1185,7 +1193,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
               <h3>Explore the full archive</h3>
               <p class="meta">Browse all technical articles, reports, and investigations.</p>
               <p>
-                <a class="pill" href="{{ '/archive/' | relative_url }}">View All Posts →</a>
+                <a class="pill" href="{{ '/archive/' | relative_url }}">View All Posts &rarr;</a>
               </p>
             </div>
           </article>
@@ -1193,7 +1201,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
 
         <div class="blog-nav" aria-hidden="true">
           <button class="blog-btn" id="prevSlide" aria-label="Previous">&lsaquo;</button>
-<button class="blog-btn" id="nextSlide" aria-label="Next">&rsaquo;</button>
+          <button class="blog-btn" id="nextSlide" aria-label="Next">&rsaquo;</button>
         </div>
 
         <div class="blog-dots" id="blogDots" aria-hidden="true"></div>
