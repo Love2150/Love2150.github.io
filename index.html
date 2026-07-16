@@ -1,6 +1,6 @@
 ---
 layout: null
-title: "Brandon Love — Portfolio"
+title: "Brandon Love | SOC Analyst & Incident Response"
 ---
 
 <!doctype html>
@@ -8,151 +8,664 @@ title: "Brandon Love — Portfolio"
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Brandon Love | SOC Analyst & Incident Response</title>
 
   <!-- SEO / Social -->
-  <meta name="description" content="Brandon Love is a U.S. Army veteran and cybersecurity professional specializing in SOC analysis, incident response, Microsoft Sentinel, Wazuh, digital forensics, Python, PowerShell, and detection engineering." />
+  <meta
+    name="description"
+    content="Brandon Love is a U.S. Army veteran and cybersecurity professional specializing in SOC analysis, incident response, Microsoft Sentinel, Wazuh, digital forensics, Python, PowerShell, and detection engineering."
+  />
   <meta property="og:title" content="Brandon Love | SOC Analyst & Incident Response" />
-  <meta property="og:description" content="Cybersecurity portfolio featuring SOC investigations, SIEM labs, incident response, detection engineering, digital forensics, and custom security tools." />
-  <meta property="og:image" content="{{ page.image | default: site.image | absolute_url }}">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#111827"/>
-  <link rel="alternate" type="application/rss+xml" title="Brandon Love — Blog" href="{{ '/feed.xml' | relative_url }}">
+  <meta
+    property="og:description"
+    content="Cybersecurity portfolio featuring SOC investigations, SIEM labs, incident response, detection engineering, digital forensics, and custom security tools."
+  />
+  <meta property="og:image" content="{{ page.image | default: site.image | absolute_url }}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#111827" />
+
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="Brandon Love â Blog"
+    href="{{ '/feed.xml' | relative_url }}"
+  />
 
   <style>
-    :root{
-      --bg:#0b1020; --card:#121934; --text:#e5e7eb; --muted:#9ca3af;
-      --accent:#60a5fa; --accent-2:#a78bfa; --border:#1f2a4d; --shadow:0 8px 24px rgba(0,0,0,.4)
+    :root {
+      --bg: #0b1020;
+      --card: #121934;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #60a5fa;
+      --accent-2: #a78bfa;
+      --border: #1f2a4d;
+      --shadow: 0 8px 24px rgba(0, 0, 0, .4);
+      --header-h: 64px;
     }
-    @media (prefers-color-scheme: light){
-      :root{--bg:#f8fafc;--card:#fff;--text:#0f172a;--muted:#475569;--border:#e2e8f0;--shadow:0 10px 20px rgba(2,6,23,.06)}
-    }
-    html{scroll-behavior:smooth}
-    body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--text);
-         background:radial-gradient(1200px 800px at 100% -20%,#1b2350 0,transparent 60%),radial-gradient(1000px 800px at -20% 0,#111a3f 0,transparent 60%),var(--bg)}
-    a{color:var(--accent);text-decoration:none}
-    img{max-width:100%;height:auto;display:block}
 
-    .container{width:min(1100px,92%);margin-inline:auto}
-    header{position:sticky;top:0;z-index:50;background:linear-gradient(0deg,rgba(0,0,0,.0),rgba(0,0,0,.4)),var(--bg);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-    .brand{display:flex;align-items:center;gap:.6rem;font-weight:700}
-    .brand .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
-    .menu{display:flex;gap:1.2rem}
-    .hamburger{display:none;background:none;border:0;color:var(--text);font-size:1.35rem}
-
-    .drawer { display: none; }
-    @media (max-width:760px){
-      .menu{display:none}
-      .hamburger{display:block}
-      .drawer{
-        display:none; position:absolute; inset:56px 0 auto 0;
-        background:var(--bg); border-bottom:1px solid var(--border);
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --card: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --border: #e2e8f0;
+        --shadow: 0 10px 20px rgba(2, 6, 23, .06);
       }
-      .drawer a{display:block;padding:12px 4%;border-top:1px solid var(--border)}
-      .drawer.open{display:block}
     }
 
-    section{padding:44px 0}
-    .section-head{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:18px}
-    .section-head h2{margin:0;font-size:clamp(1.2rem,1rem + 1.2vw,1.8rem)}
-    .section-head p{margin:0;color:var(--muted)}
+    @media (max-width: 760px) {
+      :root {
+        --header-h: 56px;
+      }
+    }
 
-    .grid{display:grid;gap:1rem;grid-template-columns:repeat(12,1fr)}
-    .col-4{grid-column:span 4} .col-6{grid-column:span 6} .col-12{grid-column:span 12}
-    @media (max-width:980px){.col-4{grid-column:span 6}}
-    @media (max-width:640px){.col-4,.col-6{grid-column:span 12}}
+    * {
+      box-sizing: border-box;
+    }
 
-    .card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
-    .card .thumb{aspect-ratio:16/9;background:linear-gradient(135deg,rgba(96,165,250,.2),rgba(167,139,250,.18)),repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0 8px,transparent 8px 16px)}
-    .card-body{padding:14px 16px}
-    .meta{color:var(--muted);font-size:.9rem}
-    .tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.4rem}
-    .tag{font-size:.78rem;padding:.25rem .5rem;border:1px solid var(--border);border-radius:999px;color:var(--muted)}
+    html {
+      scroll-behavior: smooth;
+    }
 
-    .post{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow)}
-    footer{padding:32px 0;border-top:1px solid var(--border);color:var(--muted)}
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 100% -20%, #1b2350 0, transparent 60%),
+        radial-gradient(1000px 800px at -20% 0, #111a3f 0, transparent 60%),
+        var(--bg);
+      font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+    }
 
-    .pill{display:inline-flex;gap:.5rem;align-items:center;padding:.35rem .6rem;border:1px dashed var(--border);border-radius:999px;color:var(--muted)}
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
 
-    .blog-slider{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}
-    .blog-track{display:flex;will-change:transform;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
-    .blog-slide{min-width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:1rem;align-items:stretch}
-    .blog-media{position:relative;border-right:1px solid var(--border);background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.12))}
-    .blog-media img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:16/9}
-    .blog-media::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(0,0,0,.25),transparent 40%)}
-    .blog-body{padding:16px;display:flex;flex-direction:column;justify-content:center}
-    .blog-body h3{margin:.2rem 0 .4rem;font-size:clamp(1.05rem,1vw + 1rem,1.5rem)}
-    .blog-body p.meta{color:var(--muted);margin:.1rem 0 .6rem}
-    .blog-cta{margin-top:.6rem;display:flex;gap:.5rem;flex-wrap:wrap}
-    .blog-ghost{background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.12))}
-    .blog-nav{position:absolute;inset:auto 0 8px 0;display:flex;justify-content:space-between;pointer-events:none}
-    .blog-btn{pointer-events:auto;background:rgba(0,0,0,.35);border:1px solid var(--border);color:#fff;backdrop-filter:blur(6px);border-radius:999px;padding:.5rem .8rem;margin:0 .5rem;cursor:pointer}
-    .blog-btn:focus{outline:2px solid var(--accent)}
-    .blog-dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:.45rem}
-    .blog-dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.5)}
-    .blog-dot.active,.blog-dot[aria-current="true"]{background:#fff}
+    a:hover {
+      text-decoration: underline;
+    }
 
-    .proj-slider{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}
-    .proj-track{display:flex;transition:transform .5s cubic-bezier(.22,.61,.36,1);will-change:transform}
-    .proj-slide{min-width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:1rem;align-items:stretch}
-    .proj-media{position:relative;border-right:1px solid var(--border);background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.12))}
-    .proj-media img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:16/9}
-    .proj-body{padding:16px;display:flex;flex-direction:column;justify-content:center}
-    .proj-body h3{margin:.2rem 0 .4rem;font-size:clamp(1.05rem,1vw + 1rem,1.5rem)}
-    .proj-body p.meta{color:var(--muted);margin:.1rem 0 .6rem}
-    .proj-cta{margin-top:.6rem;display:flex;gap:.5rem;flex-wrap:wrap}
-    .proj-ghost{background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.12))}
-    .proj-nav{position:absolute;inset:auto 0 8px 0;display:flex;justify-content:space-between;pointer-events:none}
-    .proj-btn{pointer-events:auto;background:rgba(0,0,0,.35);border:1px solid var(--border);color:#fff;backdrop-filter:blur(6px);border-radius:999px;padding:.5rem .8rem;margin:0 .5rem;cursor:pointer}
-    .proj-dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:.45rem}
-    .proj-dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.5)}
-    .proj-dot.active{background:#fff}
-    @media (max-width: 900px){.proj-slide{grid-template-columns:1fr}.proj-media{border-right:0}}
-    @media (max-width: 900px){.blog-slide{grid-template-columns:1fr}.blog-media{border-right:0}}
-    @media (prefers-reduced-motion: reduce){ .blog-track{transition:none} }
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
 
-    .cyber-anim { --rx: 0deg; --ry: 0deg; border-radius: 18px; max-width: 100%; height: auto; display: block;
-      will-change: transform, filter; transition: transform 180ms ease, filter 220ms ease, box-shadow 220ms ease;
-      transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.02); box-shadow: 0 0 20px rgba(96,165,250,.30);
-      animation: cyberPulse 5s infinite ease-in-out; }
-    .cyber-anim:hover { box-shadow: 0 0 30px rgba(96,165,250,.55), 0 0 60px rgba(167,139,250,.35); filter: brightness(1.08); }
-    @keyframes cyberPulse { 0%,100% { box-shadow: 0 0 20px rgba(96,165,250,.30); } 50% { box-shadow: 0 0 40px rgba(167,139,250,.45), 0 0 70px rgba(96,165,250,.35); } }
-    @media (prefers-reduced-motion: reduce) { .cyber-anim { animation: none; transition: none; transform: none; } }
+    code {
+      overflow-wrap: anywhere;
+    }
 
-    :root { --header-h: 64px; }
-    @media (max-width: 760px){ :root { --header-h: 56px; } }
-    header .nav { min-height: var(--header-h); padding: 10px 0; }
-    main { padding-top: calc(var(--header-h) + 8px); }
-    section { scroll-margin-top: calc(var(--header-h) + 12px); }
+    .container {
+      width: min(1100px, 92%);
+      margin-inline: auto;
+    }
 
-    footer { padding: 32px 0; border-top: 1px solid var(--border); color: var(--muted); text-align: center; }
-    footer a { color: var(--accent); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--border);
+      background:
+        linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .4)),
+        var(--bg);
+      backdrop-filter: blur(8px);
+    }
 
-    .hero .pill { background: transparent; }
-    @media (max-width: 900px){ .hero .grid { grid-template-columns: 1fr !important; } }
+    header .nav {
+      min-height: var(--header-h);
+      padding: 10px 0;
+    }
 
-    .contact-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .5rem; }
-    .btn-contact { display: inline-flex; align-items: center; gap: .5rem; padding: .55rem .9rem;
-      border-radius: 9999px; border: 1px solid var(--border, rgba(0,0,0,.15));
-      background: transparent; color: inherit; text-decoration: none;
-      font: 500 0.95rem/1.1 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      transition: transform .06s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease, color .15s ease; }
-    .btn-contact:hover { border-color: var(--accent, #2563eb); color: var(--accent, #2563eb); box-shadow: 0 4px 14px rgba(0,0,0,.12); transform: translateY(-1px); }
-    .btn-contact:active { transform: translateY(0); box-shadow: 0 2px 6px rgba(0,0,0,.10); }
-    .btn-contact svg { display:block; fill: currentColor; }
-    .btn-contact:first-child { background: var(--accent, #2563eb); color: #fff; border-color: var(--accent, #2563eb); }
-    .btn-contact:first-child:hover { filter: brightness(1.05); color: #fff; }
-    @media (prefers-color-scheme: dark) {
-      .btn-contact { border-color: var(--border, rgba(255,255,255,.18)); }
-      .btn-contact:hover { box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .brand:hover {
+      text-decoration: none;
+    }
+
+    .brand .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    .menu {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .hamburger {
+      display: none;
+      border: 0;
+      color: var(--text);
+      background: none;
+      font-size: 1.35rem;
+      cursor: pointer;
+    }
+
+    .drawer {
+      display: none;
+    }
+
+    @media (max-width: 760px) {
+      .menu {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .drawer {
+        position: absolute;
+        inset: var(--header-h) 0 auto 0;
+        display: none;
+        border-bottom: 1px solid var(--border);
+        background: var(--bg);
+      }
+
+      .drawer a {
+        display: block;
+        padding: 12px 4%;
+        border-top: 1px solid var(--border);
+      }
+
+      .drawer.open {
+        display: block;
+      }
+    }
+
+    main {
+      padding-top: 8px;
+    }
+
+    section {
+      padding: 44px 0;
+      scroll-margin-top: calc(var(--header-h) + 12px);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.2rem, 1rem + 1.2vw, 1.8rem);
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1rem;
+    }
+
+    .col-4 {
+      grid-column: span 4;
+    }
+
+    .col-6 {
+      grid-column: span 6;
+    }
+
+    .col-12 {
+      grid-column: span 12;
+    }
+
+    @media (max-width: 980px) {
+      .col-4 {
+        grid-column: span 6;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .col-4,
+      .col-6 {
+        grid-column: span 12;
+      }
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .card .thumb {
+      aspect-ratio: 16 / 9;
+      background:
+        linear-gradient(135deg, rgba(96, 165, 250, .2), rgba(167, 139, 250, .18)),
+        repeating-linear-gradient(
+          45deg,
+          rgba(255, 255, 255, .06) 0 8px,
+          transparent 8px 16px
+        );
+    }
+
+    .card-body {
+      padding: 14px 16px;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: .4rem;
+    }
+
+    .tag {
+      padding: .25rem .5rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .4rem .7rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: calc(100vh - var(--header-h));
+      display: flex;
+      align-items: center;
+      padding: 72px 0 56px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+      align-items: center;
+      gap: 3rem;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      margin: 0 0 1rem;
+      padding: .4rem .8rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--accent);
+      background: rgba(96, 165, 250, .08);
+      font-size: .9rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .hero h1 {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(2.7rem, 6vw, 5rem);
+      line-height: 1.02;
+      letter-spacing: -.045em;
+    }
+
+    .hero h1 span {
+      display: block;
+      margin-top: .55rem;
+      color: var(--accent);
+      font-size: clamp(1.35rem, 3vw, 2.25rem);
+      line-height: 1.2;
+      letter-spacing: -.025em;
+    }
+
+    .hero-summary {
+      max-width: 760px;
+      margin: 1.5rem 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.3vw, 1.15rem);
+    }
+
+    .hero-summary strong {
+      color: var(--text);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: 1.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: .7rem 1.1rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-weight: 700;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      text-decoration: none;
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      border-color: transparent;
+      color: #07111f;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    .hero-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+      margin-top: 1.5rem;
+    }
+
+    .skill-pill {
+      padding: .35rem .7rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(18, 25, 52, .65);
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .hero-card {
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background:
+        linear-gradient(145deg, rgba(96, 165, 250, .10), rgba(167, 139, 250, .06)),
+        var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h2 {
+      margin: 0 0 .5rem;
+      font-size: 1.25rem;
+    }
+
+    .hero-card p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+    }
+
+    .hero-stat {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      align-items: center;
+      gap: .8rem;
+      padding: .8rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .hero-stat strong {
+      color: var(--accent);
+      font-size: 1.15rem;
+    }
+
+    .hero-stat span {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        min-height: auto;
+        padding: 64px 0 44px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .hero-card {
+        max-width: 650px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Sliders */
+    .blog-slider,
+    .proj-slider {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .blog-track,
+    .proj-track {
+      display: flex;
+      will-change: transform;
+      transition: transform .5s cubic-bezier(.22, .61, .36, 1);
+    }
+
+    .blog-slide,
+    .proj-slide {
+      min-width: 100%;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .blog-media,
+    .proj-media {
+      position: relative;
+      border-right: 1px solid var(--border);
+      background: linear-gradient(
+        135deg,
+        rgba(96, 165, 250, .12),
+        rgba(167, 139, 250, .12)
+      );
+    }
+
+    .blog-media img,
+    .proj-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 16 / 9;
+    }
+
+    .blog-body,
+    .proj-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .blog-body h3,
+    .proj-body h3 {
+      margin: .2rem 0 .4rem;
+      font-size: clamp(1.05rem, 1vw + 1rem, 1.5rem);
+    }
+
+    .blog-cta,
+    .proj-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: .6rem;
+    }
+
+    .blog-ghost,
+    .proj-ghost {
+      background: linear-gradient(
+        135deg,
+        rgba(96, 165, 250, .12),
+        rgba(167, 139, 250, .12)
+      );
+    }
+
+    .blog-nav,
+    .proj-nav {
+      position: absolute;
+      inset: auto 0 8px 0;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .blog-btn,
+    .proj-btn {
+      pointer-events: auto;
+      margin: 0 .5rem;
+      padding: .5rem .8rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: #ffffff;
+      background: rgba(0, 0, 0, .35);
+      backdrop-filter: blur(6px);
+      cursor: pointer;
+    }
+
+    .blog-dots,
+    .proj-dots {
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+      display: flex;
+      gap: .45rem;
+      transform: translateX(-50%);
+    }
+
+    .blog-dot,
+    .proj-dot {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: 1px solid rgba(255, 255, 255, .5);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .35);
+    }
+
+    .blog-dot.active,
+    .proj-dot.active {
+      background: #ffffff;
+    }
+
+    @media (max-width: 900px) {
+      .blog-slide,
+      .proj-slide {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-media,
+      .proj-media {
+        border-right: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .blog-track,
+      .proj-track {
+        transition: none;
+      }
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-top: .5rem;
+    }
+
+    .btn-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .55rem .9rem;
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      color: inherit;
+      background: transparent;
+      font-weight: 600;
+      transition: transform .06s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+
+    .btn-contact:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .12);
+      transform: translateY(-1px);
+    }
+
+    .btn-contact:first-child {
+      border-color: var(--accent);
+      color: #ffffff;
+      background: var(--accent);
+    }
+
+    .btn-contact svg {
+      display: block;
+      fill: currentColor;
+    }
+
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
     }
   </style>
 </head>
 
 <body>
-  <!-- HEADER -->
   <header>
     <div class="container nav">
       <a class="brand" href="{{ '/' | relative_url }}" aria-label="Home">
@@ -163,18 +676,26 @@ title: "Brandon Love — Portfolio"
       <nav class="menu" aria-label="Primary">
         <a href="#portfolio">Portfolio</a>
         <a href="#featured-projects">Projects</a>
+        <a href="#soc-playbooks">Playbooks</a>
         <a href="#latest-blogs">Blog</a>
         <a href="{{ '/reports/analyst_report/' | relative_url }}">Reports</a>
         <a href="#contact">Contact</a>
       </nav>
 
-      <button class="hamburger" aria-expanded="false" aria-controls="drawer" aria-label="Toggle menu">☰</button>
+      <button
+        class="hamburger"
+        aria-expanded="false"
+        aria-controls="drawer"
+        aria-label="Toggle menu"
+      >
+        â°
+      </button>
     </div>
 
-    <!-- Mobile Drawer -->
     <div id="drawer" class="drawer container" role="dialog" aria-label="Mobile menu">
       <a href="#portfolio">Portfolio</a>
       <a href="#featured-projects">Projects</a>
+      <a href="#soc-playbooks">Playbooks</a>
       <a href="#latest-blogs">Blog</a>
       <a href="{{ '/reports/analyst_report/' | relative_url }}">Reports</a>
       <a href="#contact">Contact</a>
@@ -183,91 +704,183 @@ title: "Brandon Love — Portfolio"
 
   <main id="top">
     <!-- HERO -->
-    <section class="container hero" style="padding:56px 0 32px">
-      <div class="grid" style="grid-template-columns:1.15fr .85fr;align-items:center;gap:2rem">
+    <section class="hero">
+      <div class="container hero-grid">
         <div>
-          <span class="pill">🛡️ Veteran → Cyber Threat Hunter</span>
-          <h1 style="font-size:clamp(1.6rem,1.2rem + 2.6vw,3rem);line-height:1.15;margin:.6rem 0 0">
-            From tactical supply chains to tactical cyber defense.
+          <p class="hero-eyebrow">U.S. Army Veteran Â· Security Operations</p>
+
+          <h1>
+            Brandon Love
+            <span>SOC Analyst | Incident Response | Detection Engineering</span>
           </h1>
-          <p class="meta" style="margin:.6rem 0 1.1rem">
-            I’m <strong>Brandon Love</strong> — U.S. Army logistics veteran turned cybersecurity analyst.
-            I secure systems, decode threats, and turn noisy signals into clear, actionable defense.
+
+          <p class="hero-summary">
+            I am a <strong>U.S. Army Staff Sergeant with 12 years of leadership experience</strong>
+            and hands-on cybersecurity experience building SIEM environments, investigating
+            incidents, analyzing endpoint and network evidence, automating workflows, and
+            developing practical security tools.
           </p>
-          <ul class="meta" style="list-style:none;padding:0;margin:0 0 1rem;display:flex;gap:.8rem;flex-wrap:wrap">
-            <li>DFIR & Incident Response</li>
-            <li>MITRE ATT&amp;CK</li>
-            <li>Let’sDefend / HTB</li>
-            <li>Powershell &amp; Network Forensics</li>
-          </ul>
-          <div style="display:flex;gap:.8rem;flex-wrap:wrap">
-            <a class="pill" href="#featured-projects">Browse Projects</a>
-            <a class="pill" href="#latest-blogs">See Latest Blogs</a>
-            <a class="pill" href="#contact">Contact</a>
+
+          <div class="hero-actions">
+            <a
+              class="btn btn-primary"
+              href="{{ '/assets/files/Brandon_Love_Resume.pdf' | relative_url }}"
+              target="_blank"
+              rel="noopener"
+            >
+              Download RÃ©sumÃ©
+            </a>
+            <a class="btn" href="#featured-projects">View Featured Projects</a>
+            <a class="btn" href="https://github.com/Love2150" target="_blank" rel="noopener">
+              GitHub
+            </a>
+            <a
+              class="btn"
+              href="https://www.linkedin.com/in/brandon-love-85b247261"
+              target="_blank"
+              rel="noopener"
+            >
+              LinkedIn
+            </a>
+          </div>
+
+          <div class="hero-skills" aria-label="Core skills">
+            <span class="skill-pill">Microsoft Sentinel</span>
+            <span class="skill-pill">Microsoft Defender</span>
+            <span class="skill-pill">Wazuh</span>
+            <span class="skill-pill">KQL</span>
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">PowerShell</span>
+            <span class="skill-pill">DFIR</span>
+            <span class="skill-pill">Network Forensics</span>
+            <span class="skill-pill">MITRE ATT&amp;CK</span>
+            <span class="skill-pill">Azure</span>
           </div>
         </div>
 
-        <div class="card" style="overflow:hidden">
-          <div class="thumb" aria-hidden="true">
-            <img src="/assets/images/cybersecurity-animation.gif" alt="Animated cyber defense lock with flowing data streams" class="cyber-anim" loading="lazy">
+        <aside class="hero-card" aria-label="Professional highlights">
+          <h2>What I Bring</h2>
+          <p>
+            Operational leadership, technical curiosity, and a disciplined approach to
+            investigation, documentation, and response.
+          </p>
+
+          <div class="hero-stat">
+            <strong>12+</strong>
+            <span>Years of U.S. Army leadership and operational experience</span>
           </div>
-          <div class="card-body meta">Journey: Logistics ➝ Cyber Defense</div>
-        </div>
+
+          <div class="hero-stat">
+            <strong>SIEM</strong>
+            <span>Hands-on work with Sentinel, Defender, Wazuh, and Log Analytics</span>
+          </div>
+
+          <div class="hero-stat">
+            <strong>DFIR</strong>
+            <span>Windows logs, Sysmon, PCAP analysis, IOC extraction, and reporting</span>
+          </div>
+
+          <div class="hero-stat">
+            <strong>Code</strong>
+            <span>Python, PowerShell, KQL, GitHub Actions, and practical automation</span>
+          </div>
+        </aside>
       </div>
     </section>
 
     <!-- Portfolio -->
     <section id="portfolio" class="container">
       <div class="section-head">
-        <h2>Portfolio Highlights</h2>
-        <p>Selected work with short case studies.</p>
+        <div>
+          <h2>Portfolio Highlights</h2>
+          <p>Original tools and investigation work that demonstrate job-ready skills.</p>
+        </div>
       </div>
 
       <div class="grid">
         <article class="card col-6">
-          <div class="thumb" role="img" aria-label="PCAP Quick Profiler report preview"
-               style="background-image:url('{{ '/assets/images/Pcap-profiler.png' | relative_url }}');background-size:cover;background-position:center"></div>
+          <div
+            class="thumb"
+            role="img"
+            aria-label="PCAP Quick Profiler report preview"
+            style="background-image:url('{{ '/assets/images/Pcap-profiler.png' | relative_url }}');background-size:cover;background-position:center"
+          ></div>
+
           <div class="card-body">
             <h3>PCAP Quick Profiler</h3>
-            <p class="meta">Portfolio Spotlight · Live triage demo</p>
-            <div class="tags"><span class="tag">DFIR</span><span class="tag">PyShark</span><span class="tag">TShark</span></div>
-          </div>
-          <a class="meta" style="padding:0 16px 16px" href="{{ '/projects/pcap-quick-profiler/' | relative_url }}">Open live demo →</a>
-          <a class="meta" style="padding:0 16px 16px" href="{{ '/reports/pcap-profiler/demo_report.html' | relative_url }}" target="_blank" rel="noopener">Open raw report ↗</a>
-        </article>
-
-        <!-- Let'sDefend profile card -->
-        <article class="card col-6">
-          <div class="thumb" role="img" aria-label="Let'sDefend blue team lab profile"
-               style="background-image:url('{{ '/assets/images/letsdefend_profile.png' | relative_url }}');background-size:cover;background-position:center"></div>
-          <div class="card-body">
-            <h3>Let’sDefend Blue Team Lab Profile</h3>
-            <p class="meta">Hands-on SOC investigations · Alerts, IR, & threat hunting</p>
+            <p class="meta">
+              Automated network triage that converts packet captures into analyst-ready findings.
+            </p>
+            <p>
+              Extracts protocol activity, hosts, HTTP data, TLS indicators, and other useful
+              evidence to accelerate initial network investigations.
+            </p>
             <div class="tags">
-              <span class="tag">SOC</span>
-              <span class="tag">Blue Team</span>
-              <span class="tag">Hands-on Labs</span>
+              <span class="tag">Python</span>
+              <span class="tag">PyShark</span>
+              <span class="tag">TShark</span>
+              <span class="tag">Network Forensics</span>
             </div>
           </div>
-          <a class="meta" style="padding:0 16px 16px"
-             href="https://app.letsdefend.io/user/shinyhunter50" target="_blank" rel="noopener">
-            View Let’sDefend profile ↗
+
+          <a
+            class="meta"
+            style="padding:0 16px 16px"
+            href="{{ '/projects/pcap-quick-profiler/' | relative_url }}"
+          >
+            View case study â
+          </a>
+        </article>
+
+        <article class="card col-6">
+          <div
+            class="thumb"
+            role="img"
+            aria-label="Windows Log Triage project"
+            style="background-image:url('{{ '/assets/images/wintriage_demo.png' | relative_url }}');background-size:cover;background-position:center"
+          ></div>
+
+          <div class="card-body">
+            <h3>Windows Log Triage</h3>
+            <p class="meta">
+              Python-based EVTX and Sysmon analysis with IOC extraction and suspicious behavior detection.
+            </p>
+            <p>
+              Produces HTML, JSON, and CSV outputs while identifying behaviors such as encoded
+              PowerShell, LOLBins, suspicious process chains, and common attacker techniques.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">EVTX</span>
+              <span class="tag">Sysmon</span>
+              <span class="tag">IOC Extraction</span>
+            </div>
+          </div>
+
+          <a
+            class="meta"
+            style="padding:0 16px 16px"
+            href="{{ '/projects/winlog-triage/' | relative_url }}"
+          >
+            View case study â
           </a>
         </article>
       </div>
     </section>
 
-    <!-- Featured Projects (slider) -->
+    <!-- Featured Projects -->
     <section id="featured-projects" class="container">
       <div class="section-head">
-        <h2>Featured Projects</h2>
-        <p class="meta">Newest or hand-picked projects. Last slide links to all projects.</p>
+        <div>
+          <h2>Featured Projects</h2>
+          <p>Selected projects showing detection, investigation, automation, and reporting.</p>
+        </div>
       </div>
 
       <div class="proj-slider" aria-roledescription="carousel">
         <div class="proj-track" id="projTrack">
-          {%- comment -%} SAFE: try collection first; else fall back to any page in /projects/ (not the index) {%- endcomment -%}
           {% assign featured = site.projects %}
+
           {% if featured == nil or featured.size == 0 %}
             {% assign pages_in_projects = site.pages | where_exp: "p", "p.url contains '/projects/'" %}
             {% assign featured = pages_in_projects | where_exp: "p", "p.url != '/projects/'" %}
@@ -276,23 +889,45 @@ title: "Brandon Love — Portfolio"
           {% if featured and featured.size > 0 %}
             {% assign featured = featured | sort: 'weight' %}
             {% assign top3 = featured | slice: 0, 3 %}
+
             {% for p in top3 %}
               <article class="proj-slide">
                 <div class="proj-media">
                   {% if p.image %}
-                    <img src="{{ p.image | relative_url }}" alt="{{ p.title | escape }}" loading="lazy" decoding="async">
+                    <img
+                      src="{{ p.image | relative_url }}"
+                      alt="{{ p.title | escape }}"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   {% else %}
                     <div class="proj-ghost" style="height:100%;min-height:240px"></div>
                   {% endif %}
                 </div>
+
                 <div class="proj-body">
                   <h3><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
-                  <p class="meta">{% if p.tags %}{{ p.tags | join: ", " }} · {% endif %}{% if p.date %}{{ p.date | date: "%b %d, %Y" }}{% endif %}</p>
+
+                  <p class="meta">
+                    {% if p.tags %}{{ p.tags | join: ", " }}{% endif %}
+                  </p>
+
                   <p>{{ p.summary | default: p.excerpt | strip_html | truncate: 220 }}</p>
+
                   <div class="proj-cta">
-                    {% if p.demo %}<a class="pill" href="{{ p.demo }}" target="_blank" rel="noopener">Demo →</a>{% endif %}
-                    {% if p.repo %}<a class="pill" href="{{ p.repo }}" target="_blank" rel="noopener">Repo →</a>{% endif %}
-                    <a class="pill" href="{{ p.url | relative_url }}">Details →</a>
+                    {% if p.demo %}
+                      <a class="pill" href="{{ p.demo }}" target="_blank" rel="noopener">
+                        Demo â
+                      </a>
+                    {% endif %}
+
+                    {% if p.repo %}
+                      <a class="pill" href="{{ p.repo }}" target="_blank" rel="noopener">
+                        Repository â
+                      </a>
+                    {% endif %}
+
+                    <a class="pill" href="{{ p.url | relative_url }}">Case Study â</a>
                   </div>
                 </div>
               </article>
@@ -302,27 +937,33 @@ title: "Brandon Love — Portfolio"
               <div class="proj-media proj-ghost"></div>
               <div class="proj-body" style="text-align:center;align-items:center">
                 <h3>No projects found</h3>
-                <p class="meta">Add files to <code>_projects/</code> or pages under <code>/projects/</code>.</p>
-                <p><a class="pill" href="{{ '/projects/' | relative_url }}">Open Projects →</a></p>
+                <p class="meta">
+                  Add project files to <code>_projects/</code> or pages under <code>/projects/</code>.
+                </p>
+                <p>
+                  <a class="pill" href="{{ '/projects/' | relative_url }}">Open Projects â</a>
+                </p>
               </div>
             </article>
           {% endif %}
 
-          <!-- CTA slide -->
           <article class="proj-slide">
             <div class="proj-media proj-ghost"></div>
             <div class="proj-body" style="text-align:center;align-items:center">
-              <h3>See all projects</h3>
-              <p class="meta">Browse the full collection.</p>
-              <p><a class="pill" href="{{ '/projects/' | relative_url }}">View all projects →</a></p>
+              <h3>Explore the full project collection</h3>
+              <p class="meta">View all labs, tools, case studies, and technical documentation.</p>
+              <p>
+                <a class="pill" href="{{ '/projects/' | relative_url }}">View All Projects â</a>
+              </p>
             </div>
           </article>
         </div>
 
         <div class="proj-nav" aria-hidden="true">
-          <button class="proj-btn" id="prevProj" aria-label="Previous">‹</button>
-          <button class="proj-btn" id="nextProj" aria-label="Next">›</button>
+          <button class="proj-btn" id="prevProj" aria-label="Previous">â¹</button>
+          <button class="proj-btn" id="nextProj" aria-label="Next">âº</button>
         </div>
+
         <div class="proj-dots" id="projDots" aria-hidden="true"></div>
       </div>
     </section>
@@ -330,193 +971,169 @@ title: "Brandon Love — Portfolio"
     <!-- SOC Playbooks -->
     <section id="soc-playbooks" class="container">
       <div class="section-head">
-        <h2>SOC Playbooks</h2>
-        <p class="meta">How I triage, investigate, and respond to real-world alerts.</p>
+        <div>
+          <h2>SOC Playbooks</h2>
+          <p>How I triage, investigate, document, and respond to security alerts.</p>
+        </div>
       </div>
 
       <div class="grid">
-        <!-- Playbook 1 -->
         <article class="card col-4">
           <div class="card-body">
             <h3>Suspicious PowerShell Execution</h3>
-            <p class="meta">Event IDs 4104, 4688, Sysmon 1/7/11</p>
+            <p class="meta">Event IDs 4104, 4688, Sysmon 1, 3, 7, and 11</p>
             <p>
-              Detect and investigate encoded or living-off-the-land PowerShell activity,
-              with a focus on command-line logging and child process behavior.
+              Investigates encoded commands, suspicious parent-child relationships, downloaded
+              payloads, persistence activity, and related network connections.
             </p>
-            <ul class="meta" style="padding-left:1.1rem;margin:0.4rem 0 0;">
-              <li>Hunt for suspicious <code>powershell.exe</code> command lines</li>
-              <li>Correlate process tree with network connections</li>
-              <li>Export script blocks and decode payloads</li>
-              <li>Verify persistence and credentials impact</li>
-            </ul>
           </div>
         </article>
 
-        <!-- Playbook 2 -->
         <article class="card col-4">
           <div class="card-body">
-            <h3>SharePoint EoP (CVE-2023-29357)</h3>
-            <p class="meta">Public-facing app exploit → privilege escalation</p>
+            <h3>SharePoint Privilege Escalation</h3>
+            <p class="meta">Public-facing application activity and account impact</p>
             <p>
-              Playbook for investigating suspicious SharePoint activity,
-              mapping evidence to MITRE ATT&amp;CK and confirming impact.
+              Reviews IIS and SharePoint evidence, authentication changes, uploaded files,
+              privilege modifications, webshell indicators, containment, and patch status.
             </p>
-            <ul class="meta" style="padding-left:1.1rem;margin:0.4rem 0 0;">
-              <li>Review SharePoint / IIS logs for exploit patterns</li>
-              <li>Correlate authentication changes &amp; new privileges</li>
-              <li>Check for webshells or uploaded payloads</li>
-              <li>Validate containment and patch status</li>
-            </ul>
           </div>
         </article>
 
-        <!-- Playbook 3 -->
         <article class="card col-4">
           <div class="card-body">
-            <h3>Malicious Office → Initial Access</h3>
-            <p class="meta">Phishing → macro → child process</p>
+            <h3>Malicious Office Document</h3>
+            <p class="meta">Phishing, macro execution, scripting engines, and LOLBins</p>
             <p>
-              Playbook focused on suspicious Office documents spawning
-              scripting engines or LOLBINs on endpoints.
+              Correlates the message source, attachment, Office child processes, dropped files,
+              network traffic, user impact, and recommended containment actions.
             </p>
-            <ul class="meta" style="padding-left:1.1rem;margin:0.4rem 0 0;">
-              <li>Identify email + attachment source in mail logs</li>
-              <li>Correlate <code>WINWORD.EXE</code> / <code>EXCEL.EXE</code> child processes</li>
-              <li>Extract IOCs from dropped files and network traffic</li>
-              <li>Document user impact and recommend awareness actions</li>
-            </ul>
           </div>
         </article>
       </div>
     </section>
 
-    <!-- SOC Stats & Badges -->
-    <section id="soc-stats" class="container">
+    <!-- Military Leadership -->
+    <section id="leadership" class="container">
       <div class="section-head">
-        <h2>Hands-on SOC Experience</h2>
-        <p class="meta">Live blue-team platforms and structured training.</p>
+        <div>
+          <h2>Military Leadership Applied to Cybersecurity</h2>
+          <p>Operational experience that strengthens security analysis and incident response.</p>
+        </div>
       </div>
 
-      <div class="grid">
-        <!-- Stats widget (static, easy to update) -->
-        <article class="card col-6">
-          <div class="card-body">
-            <h3>Let’sDefend Blue Team Lab</h3>
-            <p class="meta">Active SOC training · Realistic alert queues</p>
-            <p>
-              I regularly work through SIEM alerts, phishing cases, and incident
-              simulations on Let’sDefend to sharpen my triage and investigation flow.
-            </p>
-            <ul class="meta" style="padding-left:1.1rem;margin:0.4rem 0 0;">
-              <li>Focus on alert triage, evidence gathering, and root-cause analysis</li>
-              <li>Practice mapping findings to MITRE ATT&amp;CK</li>
-              <li>Document outcomes in SOC-style reports and playbooks</li>
-            </ul>
-            <p class="meta" style="margin-top:.6rem;">
-              <a href="https://app.letsdefend.io/user/ShinyHunter50" target="_blank" rel="noopener">
-                View my Let’sDefend profile ↗
-              </a>
-            </p>
-          </div>
-        </article>
+      <div class="card">
+        <div class="card-body">
+          <p>
+            I bring 12 years of U.S. Army experience, including two deployments and leadership
+            responsibilities as a Staff Sergeant, Platoon Sergeant, Operations NCO, and Battle
+            Desk NCOIC.
+          </p>
 
-        <!-- Badges / platforms -->
-        <article class="card col-6">
-          <div class="card-body">
-            <h3>Cyber Range & Training Badges</h3>
-            <p class="meta">Platforms I use to stay sharp.</p>
-
-            <div style="display:flex;flex-direction:column;gap:.45rem;margin-top:.4rem;">
-              <div class="pill" style="justify-content:space-between;">
-                <span>Let’sDefend · Blue Team Labs</span>
-                <a href="https://app.letsdefend.io/user/shinyhunter" target="_blank" rel="noopener" class="meta">
-                  Profile ↗
-                </a>
-              </div>
-              <div class="pill" style="justify-content:space-between;">
-                <span>Hack The Box · Windows &amp; Linux boxes</span>
-                <span class="meta">Hands-on attack paths &amp; defense mindset</span>
-              </div>
-              <div class="pill" style="justify-content:space-between;">
-                <span>Splunk / SIEM Labs</span>
-                <span class="meta">Search, correlation, dashboards</span>
-              </div>
-              <div class="pill" style="justify-content:space-between;">
-                <span>ISC2 &amp; foundational security training</span>
-                <span class="meta">Core security concepts &amp; standards</span>
-              </div>
+          <div class="grid">
+            <div class="col-6">
+              <ul class="meta">
+                <li>Make time-sensitive decisions with incomplete information</li>
+                <li>Prioritize incidents according to risk and mission impact</li>
+                <li>Communicate clearly across technical and nontechnical teams</li>
+              </ul>
             </div>
 
-            <p class="meta" style="margin-top:.7rem;">
-              I treat these platforms like a real SOC: hypothesis → evidence → conclusion → report.
-            </p>
+            <div class="col-6">
+              <ul class="meta">
+                <li>Train and lead personnel under operational pressure</li>
+                <li>Maintain documentation, accountability, and procedural discipline</li>
+                <li>Coordinate response activities across multiple stakeholders</li>
+              </ul>
+            </div>
           </div>
-        </article>
+        </div>
       </div>
     </section>
 
     <!-- Latest Blogs -->
     <section id="latest-blogs" class="container">
       <div class="section-head">
-        <h2>Latest Blogs</h2>
-        <p class="meta">Newest three posts with images. The last slide links to the full archive.</p>
+        <div>
+          <h2>Latest Technical Writing</h2>
+          <p>Incident investigations, SOC analysis, lessons learned, and security research.</p>
+        </div>
       </div>
 
       <div class="blog-slider" aria-roledescription="carousel">
         <div class="blog-track" id="blogTrack">
-          {%- assign newest = site.posts | sort: "date" | reverse -%}
-          {%- assign top3 = newest | slice: 0, 3 -%}
-          {%- for post in top3 -%}
-            {%- assign hero = post.image | default: post.hero | default: post.thumbnail -%}
-            {%- if hero == nil or hero == "" -%}
-              {%- assign split1 = post.content | split:'img src="' -%}
-              {%- if split1.size > 1 -%}
-                {%- assign split2 = split1[1] | split:'"' -%}
-                {%- assign hero = split2[0] -%}
-              {%- endif -%}
-            {%- endif -%}
+          {% assign newest = site.posts | sort: "date" | reverse %}
+          {% assign top3 = newest | slice: 0, 3 %}
+
+          {% for post in top3 %}
+            {% assign hero = post.image | default: post.hero | default: post.thumbnail %}
 
             <article class="blog-slide">
               <div class="blog-media{% if hero == nil or hero == '' %} blog-ghost{% endif %}">
-                {%- if hero and hero != '' -%}
+                {% if hero and hero != '' %}
                   {% if hero contains '://' %}
-                    <img src="{{ hero }}" alt="{{ post.title | escape }}" loading="lazy" decoding="async">
+                    <img
+                      src="{{ hero }}"
+                      alt="{{ post.title | escape }}"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   {% else %}
-                    <img src="{{ hero | relative_url }}" alt="{{ post.title | escape }}" loading="lazy" decoding="async">
+                    <img
+                      src="{{ hero | relative_url }}"
+                      alt="{{ post.title | escape }}"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   {% endif %}
-                {%- else -%}
+                {% else %}
                   <div style="height:100%;min-height:240px"></div>
-                {%- endif -%}
+                {% endif %}
               </div>
+
               <div class="blog-body">
                 <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-                <p class="meta">{{ post.date | date: "%b %d, %Y" }}{% if post.tags %} · {{ post.tags | join: ", " }}{% endif %}</p>
-                <p>{{ post.excerpt | strip_html | replace: '——2','' | replace: '— — 2','' | truncate: 220 }}</p>
+                <p class="meta">
+                  {{ post.date | date: "%b %d, %Y" }}
+                  {% if post.tags %} Â· {{ post.tags | join: ", " }}{% endif %}
+                </p>
+                <p>{{ post.excerpt | strip_html | truncate: 220 }}</p>
+
                 <div class="blog-cta">
-                  <a class="pill" href="{{ post.url | relative_url }}">Read post →</a>
-                  {%- if post.medium_canonical -%}
-                    <a class="pill" href="{{ post.medium_canonical }}" target="_blank" rel="noopener">Open on Medium ↗</a>
-                  {%- endif -%}
+                  <a class="pill" href="{{ post.url | relative_url }}">Read Article â</a>
+
+                  {% if post.medium_canonical %}
+                    <a
+                      class="pill"
+                      href="{{ post.medium_canonical }}"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Open on Medium â
+                    </a>
+                  {% endif %}
                 </div>
               </div>
             </article>
-          {%- endfor -%}
+          {% endfor %}
 
           <article class="blog-slide">
             <div class="blog-media blog-ghost"></div>
             <div class="blog-body" style="text-align:center;align-items:center">
               <h3>Explore the full archive</h3>
-              <p class="meta">All posts, filters, and deep dives.</p>
-              <p><a class="pill" href="{{ '/archive/' | relative_url }}">View all posts →</a></p>
+              <p class="meta">Browse all technical articles, reports, and investigations.</p>
+              <p>
+                <a class="pill" href="{{ '/archive/' | relative_url }}">View All Posts â</a>
+              </p>
             </div>
           </article>
         </div>
 
         <div class="blog-nav" aria-hidden="true">
-          <button class="blog-btn" id="prevSlide" aria-label="Previous">‹</button>
-          <button class="blog-btn" id="nextSlide" aria-label="Next">›</button>
+          <button class="blog-btn" id="prevSlide" aria-label="Previous">â¹</button>
+          <button class="blog-btn" id="nextSlide" aria-label="Next">âº</button>
         </div>
+
         <div class="blog-dots" id="blogDots" aria-hidden="true"></div>
       </div>
     </section>
@@ -524,133 +1141,280 @@ title: "Brandon Love — Portfolio"
     <!-- Contact -->
     <section id="contact" class="container">
       <div class="section-head">
-        <h2>Get in touch</h2>
-        <p>Reach out for collaborations, roles available, or training opportunities.</p>
+        <div>
+          <h2>Get in Touch</h2>
+          <p>Open to cybersecurity opportunities, professional networking, and collaboration.</p>
+        </div>
       </div>
+
       <div class="grid">
-        <div class="col-6 card" style="padding:16px">
+        <div class="col-12 card" style="padding:16px">
           <div class="contact-actions">
-            <a class="btn-contact" href="https://www.linkedin.com/in/brandon-love-85b247261" target="_blank" rel="noopener" aria-label="Open LinkedIn">
-              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM0 8h5v16H0V8zm7.5 0H12v2.23h.06c.63-1.14 2.17-2.49 4.66-2.49 4.99 0 5.92 3.28 5.92 7.55V24h-5v-6.91c0-1.65-.03-3.78-2.3-3.78-2.3 0-2.65 1.8-2.65 3.66V24h-5V8z"/></svg>
+            <a
+              class="btn-contact"
+              href="https://www.linkedin.com/in/brandon-love-85b247261"
+              target="_blank"
+              rel="noopener"
+              aria-label="Open LinkedIn"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM0 8h5v16H0V8zm7.5 0H12v2.23h.06c.63-1.14 2.17-2.49 4.66-2.49 4.99 0 5.92 3.28 5.92 7.55V24h-5v-6.91c0-1.65-.03-3.78-2.3-3.78-2.3 0-2.65 1.8-2.65 3.66V24h-5V8z"/>
+              </svg>
               LinkedIn
             </a>
-            <a class="btn-contact" href="mailto:brandonlove2150@icloud.com?subject=Hello%20Brandon&body=Hi%20Brandon%2C%0A%0A" aria-label="Compose email to Brandon">
-              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v.4l10 6.25L22 6.4V6a2 2 0 0 0-2-2zm2 5.1-9.35 5.83a1.5 1.5 0 0 1-1.3 0L2 9.1V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9.1z"/></svg>
+
+            <a
+              class="btn-contact"
+              href="mailto:brandonlove2150@icloud.com?subject=Cybersecurity%20Opportunity"
+              aria-label="Compose email to Brandon"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <path d="M20 4H4a2 2 0 0 0-2 2v.4l10 6.25L22 6.4V6a2 2 0 0 0-2-2zm2 5.1-9.35 5.83a1.5 1.5 0 0 1-1.3 0L2 9.1V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9.1z"/>
+              </svg>
               Email
             </a>
-            <a class="btn-contact" href="https://github.com/Love2150" target="_blank" rel="noopener" aria-label="Open GitHub">
-              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
+
+            <a
+              class="btn-contact"
+              href="https://github.com/Love2150"
+              target="_blank"
+              rel="noopener"
+              aria-label="Open GitHub"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/>
+              </svg>
               GitHub
             </a>
-            <a class="btn-contact" href="https://www.google.com/maps/search/?api=1&query=Killeen%2C%20TX" target="_blank" rel="noopener" aria-label="Open map to Killeen, Texas">
-              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
-              Killeen, TX
+
+            <a
+              class="btn-contact"
+              href="{{ '/assets/files/Brandon_Love_Resume.pdf' | relative_url }}"
+              target="_blank"
+              rel="noopener"
+            >
+              RÃ©sumÃ©
             </a>
+
+            <span class="btn-contact" aria-label="Location">Killeen, Texas</span>
           </div>
         </div>
-
-        <div class="col-6 card" id="cyber-tips" style="padding:16px">
-          <p class="meta">Loading live cybersecurity tip…</p>
-          <noscript>Enable JavaScript to see live security tips.</noscript>
-        </div>
       </div>
-
-      <script>
-      (function () {
-        const mount = document.getElementById("cyber-tips");
-        if (!mount) return;
-        const ACCENT = getComputedStyle(document.documentElement).getPropertyValue("--accent") || "#2563eb";
-        const ROTATE_MS = 60000, CACHE_MS  = 600000, CACHE_KEY = "cyber_tips_json_v1";
-        let items = [], cursor = 0;
-        const tidy = (s="") => s.replace(/\s+/g," ").trim();
-        const ago = (iso) => { const d = new Date(iso), mins = Math.floor((Date.now()-d)/60000);
-          if (mins < 1) return "just now"; if (mins < 60) return mins+"m ago";
-          const h = Math.floor(mins/60); return h<24? h+"h ago" : Math.floor(h/24)+"d ago"; };
-        function render(){ if(!items.length) return; const it = items[cursor%items.length];
-          const summary = it.summary && it.summary.length>180 ? it.summary.slice(0,177)+"…" : it.summary;
-          mount.innerHTML = `<p><strong>Tip:</strong> <a href="${it.link||'#'}" target="_blank" rel="noopener" style="text-underline-offset:2px; color:${ACCENT};">${tidy(it.title||"Read more")}</a></p>${summary?`<p>${tidy(summary)}</p>`:""}<p class="meta">${it.source?it.source+" · ":""}${it.date?ago(it.date):""}</p>`; cursor++; }
-        function loadCache(){ try{ const raw = localStorage.getItem(CACHE_KEY); if(!raw) return null; const {savedAt,payload}=JSON.parse(raw);
-          if(!payload||!Array.isArray(payload.items)) return null; if(Date.now()-savedAt>CACHE_MS) return null; return payload; }catch{return null} }
-        function saveCache(payload){ try{ localStorage.setItem(CACHE_KEY, JSON.stringify({savedAt:Date.now(), payload})); }catch{} }
-        async function fetchTips(){ const res = await fetch('{{ "/assets/tips.json" | relative_url }}?v='+Date.now(), {cache:"no-store"}); if(!res.ok) throw new Error(); return res.json(); }
-        const cached = loadCache(); if (cached) { items=cached.items||[]; render(); } else { mount.innerHTML = `<p class="meta">Loading tip…</p>`; }
-        fetchTips().then(d=>{ if(d && Array.isArray(d.items) && d.items.length){ items=d.items; saveCache(d); cursor=0; render(); } }).catch(()=>{});
-        setInterval(render, ROTATE_MS);
-        setInterval(async()=>{ try{ const d=await fetchTips(); if(d && Array.isArray(d.items) && d.items.length){ items=d.items; cursor=0; render(); saveCache(d); } }catch{} }, CACHE_MS);
-      })();
-      </script>
     </section>
   </main>
 
   <footer>
-    <div class="container" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
-      <span>© <span id="year"></span> Brandon Love. All rights reserved.</span>
-      <span>Built with ♥ and shipped on GitHub Pages · <a href="https://github.com/Love2150/Love2150.github.io/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a></span>
+    <div
+      class="container"
+      style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap"
+    >
+      <span>Â© <span id="year"></span> Brandon Love. All rights reserved.</span>
+      <span>
+        Built with GitHub Pages Â·
+        <a
+          href="https://github.com/Love2150/Love2150.github.io/blob/main/LICENSE"
+          target="_blank"
+          rel="noopener"
+        >
+          MIT License
+        </a>
+      </span>
     </div>
   </footer>
 
   <script>
-    const btn=document.querySelector('.hamburger'); const drawer=document.getElementById('drawer');
-    btn?.addEventListener('click',()=>{const open=drawer.classList.toggle('open');btn.setAttribute('aria-expanded',open?'true':'false');});
-    document.getElementById('year').textContent=new Date().getFullYear();
-  </script>
+    const menuButton = document.querySelector(".hamburger");
+    const drawer = document.getElementById("drawer");
 
-  <script src="https://medium-widget.pixelpoint.io/widget.js"></script>
-  <script>
-  (function(){
-    const resource="https://medium.com/@brandonlove2150", feedSel="#medium-feed";
-    function init(i=0){ const feed=document.querySelector(feedSel); if(!feed) return;
-      if(window.MediumWidget){ try{ MediumWidget.Init({renderTo:feedSel, params:{resource,postsPerLine:3,limit:3,picture:"big",fields:["description","claps","publishAt"],ratio:"landscape"}}); const fb=document.getElementById("medium-fallback"); if(fb) fb.style.display="none";
-      }catch(e){ feed.innerHTML='<p class="meta">Couldn’t render Medium posts.</p>'; } return; }
-      if(i<40) setTimeout(()=>init(i+1),250); else feed.innerHTML='<p class="meta">Couldn’t load Medium (content blocker?).</p>'; }
-    init(); window.addEventListener("load",init);
-  })();
-  </script>
-
-  <!-- Sliders -->
-  <script>
-  (function(){
-    function makeSlider(cfg){
-      const track = document.getElementById(cfg.trackId); if (!track) return;
-      const container = track.closest(cfg.containerSel), slides = Array.from(track.children);
-      const dotsWrap = document.getElementById(cfg.dotsId), prev = document.getElementById(cfg.prevId), next = document.getElementById(cfg.nextId);
-      let index = 0, timer = null, hovering = false, focused = false;
-      dotsWrap.innerHTML=''; slides.forEach((_,i)=>{ const b=document.createElement('button'); b.className=cfg.dotClass; b.type='button'; b.setAttribute('aria-label',`Go to slide ${i+1} of ${slides.length}`); b.addEventListener('click',()=>go(i,true)); dotsWrap.appendChild(b); });
-      function update(){ track.style.transform=`translateX(-${index*100}%)`; [...dotsWrap.children].forEach((d,i)=>d.classList.toggle('active', i===index)); const h=slides[index].offsetHeight; track.parentElement.style.height=(h||0)+'px'; }
-      function go(i,user=false){ index=(i+slides.length)%slides.length; update(); if(user) restartAutoplay(); }
-      prev?.addEventListener('click',()=>go(index-1,true)); next?.addEventListener('click',()=>go(index+1,true));
-      let x0=null; track.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
-      track.addEventListener('touchmove',e=>{ if(x0===null) return; const dx=e.touches[0].clientX-x0; if(Math.abs(dx)>42){ go(index+(dx<0?1:-1),true); x0=null; }},{passive:true});
-      container.setAttribute('tabindex','0'); container.addEventListener('focusin',()=>{focused=true; pause();}); container.addEventListener('focusout',()=>{focused=false; play();});
-      container.addEventListener('keydown',e=>{ if(e.key==='ArrowRight'){e.preventDefault(); go(index+1,true);} if(e.key==='ArrowLeft'){e.preventDefault(); go(index-1,true);} });
-      const INTERVAL=cfg.interval||5000; function tick(){ if(!hovering && !focused) go(index+1); } function play(){ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; timer=setInterval(tick,INTERVAL);} function pause(){ if(timer){clearInterval(timer); timer=null;} } function restartAutoplay(){ pause(); play(); }
-      container.addEventListener('mouseenter',()=>{hovering=true; pause();}); container.addEventListener('mouseleave',()=>{hovering=false; play();});
-      window.addEventListener('load',update); window.addEventListener('resize',update); const ro=new ResizeObserver(update); slides.forEach(s=>ro.observe(s));
-      update(); play();
-    }
-    makeSlider({containerSel:'.blog-slider',trackId:'blogTrack',dotsId:'blogDots',prevId:'prevSlide',nextId:'nextSlide',dotClass:'blog-dot',interval:5000});
-    makeSlider({containerSel:'.proj-slider',trackId:'projTrack',dotsId:'projDots',prevId:'prevProj',nextId:'nextProj',dotClass:'proj-dot',interval:5500});
-  })();
-  </script>
-
-  <script>
-  (function interactiveGlow(selector = '.cyber-anim'){
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const MAX_TILT = 8, MAX_GLOW = 28;
-    function onMove(e, img){
-      const r = img.getBoundingClientRect(); const x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
-      const dx=(x-0.5), dy=(y-0.5);
-      img.style.setProperty('--rx', (-dy*MAX_TILT).toFixed(2)+'deg');
-      img.style.setProperty('--ry', ( dx*MAX_TILT).toFixed(2)+'deg');
-      img.style.filter = `drop-shadow(${Math.round(dx*MAX_GLOW)}px ${Math.round(dy*MAX_GLOW)}px 26px rgba(96,165,250,.40))`;
-    }
-    function onLeave(img){ img.style.setProperty('--rx','0deg'); img.style.setProperty('--ry','0deg'); img.style.filter='none'; }
-    document.querySelectorAll(selector).forEach(img => {
-      img.addEventListener('mousemove', (e)=> onMove(e, img), {passive:true});
-      img.addEventListener('mouseleave', ()=> onLeave(img), {passive:true});
-      img.addEventListener('touchstart', ()=> { img.style.transform='scale(1.035)'; setTimeout(()=> img.style.transform='', 180); }, {passive:true});
+    menuButton?.addEventListener("click", () => {
+      const isOpen = drawer.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
-  })();
+
+    drawer?.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        drawer.classList.remove("open");
+        menuButton?.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <script>
+    (function () {
+      function makeSlider(config) {
+        const track = document.getElementById(config.trackId);
+        if (!track) return;
+
+        const container = track.closest(config.containerSelector);
+        const slides = Array.from(track.children);
+        const dotsWrap = document.getElementById(config.dotsId);
+        const previous = document.getElementById(config.previousId);
+        const next = document.getElementById(config.nextId);
+
+        if (!container || !slides.length || !dotsWrap) return;
+
+        let index = 0;
+        let timer = null;
+        let hovering = false;
+        let focused = false;
+
+        dotsWrap.innerHTML = "";
+
+        slides.forEach((_, slideIndex) => {
+          const dot = document.createElement("button");
+          dot.className = config.dotClass;
+          dot.type = "button";
+          dot.setAttribute(
+            "aria-label",
+            `Go to slide ${slideIndex + 1} of ${slides.length}`
+          );
+          dot.addEventListener("click", () => goTo(slideIndex, true));
+          dotsWrap.appendChild(dot);
+        });
+
+        function update() {
+          track.style.transform = `translateX(-${index * 100}%)`;
+
+          Array.from(dotsWrap.children).forEach((dot, dotIndex) => {
+            dot.classList.toggle("active", dotIndex === index);
+          });
+
+          const height = slides[index]?.offsetHeight || 0;
+          if (height) {
+            track.parentElement.style.height = `${height}px`;
+          }
+        }
+
+        function goTo(newIndex, userInitiated = false) {
+          index = (newIndex + slides.length) % slides.length;
+          update();
+
+          if (userInitiated) {
+            restartAutoplay();
+          }
+        }
+
+        previous?.addEventListener("click", () => goTo(index - 1, true));
+        next?.addEventListener("click", () => goTo(index + 1, true));
+
+        let touchStart = null;
+
+        track.addEventListener(
+          "touchstart",
+          (event) => {
+            touchStart = event.touches[0].clientX;
+          },
+          { passive: true }
+        );
+
+        track.addEventListener(
+          "touchmove",
+          (event) => {
+            if (touchStart === null) return;
+
+            const difference = event.touches[0].clientX - touchStart;
+
+            if (Math.abs(difference) > 42) {
+              goTo(index + (difference < 0 ? 1 : -1), true);
+              touchStart = null;
+            }
+          },
+          { passive: true }
+        );
+
+        container.setAttribute("tabindex", "0");
+
+        container.addEventListener("focusin", () => {
+          focused = true;
+          pause();
+        });
+
+        container.addEventListener("focusout", () => {
+          focused = false;
+          play();
+        });
+
+        container.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowRight") {
+            event.preventDefault();
+            goTo(index + 1, true);
+          }
+
+          if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            goTo(index - 1, true);
+          }
+        });
+
+        function tick() {
+          if (!hovering && !focused) {
+            goTo(index + 1);
+          }
+        }
+
+        function play() {
+          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+          if (!timer) {
+            timer = setInterval(tick, config.interval || 5000);
+          }
+        }
+
+        function pause() {
+          if (timer) {
+            clearInterval(timer);
+            timer = null;
+          }
+        }
+
+        function restartAutoplay() {
+          pause();
+          play();
+        }
+
+        container.addEventListener("mouseenter", () => {
+          hovering = true;
+          pause();
+        });
+
+        container.addEventListener("mouseleave", () => {
+          hovering = false;
+          play();
+        });
+
+        window.addEventListener("load", update);
+        window.addEventListener("resize", update);
+
+        if ("ResizeObserver" in window) {
+          const observer = new ResizeObserver(update);
+          slides.forEach((slide) => observer.observe(slide));
+        }
+
+        update();
+        play();
+      }
+
+      makeSlider({
+        containerSelector: ".blog-slider",
+        trackId: "blogTrack",
+        dotsId: "blogDots",
+        previousId: "prevSlide",
+        nextId: "nextSlide",
+        dotClass: "blog-dot",
+        interval: 5000
+      });
+
+      makeSlider({
+        containerSelector: ".proj-slider",
+        trackId: "projTrack",
+        dotsId: "projDots",
+        previousId: "prevProj",
+        nextId: "nextProj",
+        dotClass: "proj-dot",
+        interval: 5500
+      });
+    })();
   </script>
 </body>
 </html>
