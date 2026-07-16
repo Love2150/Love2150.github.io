@@ -890,7 +890,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
             style="padding:0 16px 16px"
             href="{{ '/projects/pcap-quick-profiler/' | relative_url }}"
           >
-            View case study →
+            View case study &rarr;
           </a>
         </article>
 
@@ -924,7 +924,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
             style="padding:0 16px 16px"
             href="{{ '/projects/winlog-triage/' | relative_url }}"
           >
-            View case study →
+            View case study &rarr;
           </a>
         </article>
       </div>
@@ -989,7 +989,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
                       </a>
                     {% endif %}
 
-                    <a class="pill" href="{{ p.url | relative_url }}">Case Study →</a>
+                    <a class="pill" href="{{ p.url | relative_url }}">Case Study &rarr;</a>
                   </div>
                 </div>
               </article>
@@ -1003,7 +1003,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
                   Add project files to <code>_projects/</code> or pages under <code>/projects/</code>.
                 </p>
                 <p>
-                  <a class="pill" href="{{ '/projects/' | relative_url }}">Open Projects →</a>
+                  <a class="pill" href="{{ '/projects/' | relative_url }}">Open Projects &rarr;</a>
                 </p>
               </div>
             </article>
@@ -1015,15 +1015,15 @@ title: "Brandon Love | SOC Analyst & Incident Response"
               <h3>Explore the full project collection</h3>
               <p class="meta">View all labs, tools, case studies, and technical documentation.</p>
               <p>
-                <a class="pill" href="{{ '/projects/' | relative_url }}">View All Projects →</a>
+                <a class="pill" href="{{ '/projects/' | relative_url }}">View All Projects &rarr;</a>
               </p>
             </div>
           </article>
         </div>
 
         <div class="proj-nav" aria-hidden="true">
-          <button class="proj-btn" id="prevProj" aria-label="Previous">←</button>
-          <button class="proj-btn" id="nextProj" aria-label="Next">→</button>
+          <button class="proj-btn" id="prevProj" aria-label="Previous">&lsaquo;</button>
+<button class="proj-btn" id="nextProj" aria-label="Next">&rsaquo;</button>
         </div>
 
         <div class="proj-dots" id="projDots" aria-hidden="true"></div>
@@ -1157,7 +1157,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
                 <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
                 <p class="meta">
                   {{ post.date | date: "%b %d, %Y" }}
-                  {% if post.tags %} · {{ post.tags | join: ", " }}{% endif %}
+                  {% if post.tags %} &middot; {{ post.tags | join: ", " }}{% endif %}
                 </p>
                 <p>{{ post.excerpt | strip_html | truncate: 220 }}</p>
 
