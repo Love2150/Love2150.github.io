@@ -24,7 +24,7 @@
 
 ---
 
-## ð¡ï¸ About Me
+## 🛡️ About Me
 
 I am a **U.S. Army Staff Sergeant** with more than **12 years of leadership and operational experience**, including two deployments. I apply that discipline to cybersecurity by building practical tools, investigating suspicious activity, documenting findings, and creating repeatable security workflows.
 
@@ -36,7 +36,8 @@ I am a **U.S. Army Staff Sergeant** with more than **12 years of leadership and 
 
 ---
 
-## ð¯ Current Focus
+
+## 🎯 Current Focus
 
 ```text
 > Microsoft Sentinel and Microsoft Defender
@@ -49,7 +50,7 @@ I am a **U.S. Army Staff Sergeant** with more than **12 years of leadership and 
 
 ---
 
-## ð§° Core Skills
+## 🧰 Core Skills
 
 <p align="center">
   <img src="https://img.shields.io/badge/Microsoft%20Sentinel-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Microsoft Sentinel">
@@ -68,7 +69,7 @@ I am a **U.S. Army Staff Sergeant** with more than **12 years of leadership and 
 
 ---
 
-## ð Featured Projects
+## 🚀 Featured Projects
 
 <table>
 <tr>
@@ -150,7 +151,7 @@ Created a Python network-analysis utility that converts packet captures into ana
 
 ---
 
-## ð Featured Investigations
+## 🔍 Featured Investigations
 
 - Golden Ticket attack investigation
 - Suspicious MSHTA execution
@@ -170,7 +171,7 @@ Created a Python network-analysis utility that converts packet captures into ana
 
 ---
 
-## âï¸ Technical Writing
+## ✍️ Technical Writing
 
 I publish investigations, walkthroughs, and lessons learned covering SOC analysis, detection engineering, DFIR, malware analysis, Microsoft Sentinel, and Blue Team operations.
 
@@ -182,7 +183,7 @@ I publish investigations, walkthroughs, and lessons learned covering SOC analysi
 
 ---
 
-## ð GitHub Statistics
+## 📊 GitHub Statistics
 
 <p align="center">
   <img height="170" src="https://github-readme-stats.vercel.app/api?username=Love2150&show_icons=true&theme=tokyonight&hide_border=true&rank_icon=github" alt="Brandon Love GitHub statistics">
@@ -199,7 +200,7 @@ I publish investigations, walkthroughs, and lessons learned covering SOC analysi
 
 ---
 
-## ðï¸ Military Leadership Applied to Cybersecurity
+## 🎖️ Military Leadership Applied to Cybersecurity
 
 - Make time-sensitive decisions with incomplete information
 - Prioritize incidents according to risk and mission impact
@@ -210,7 +211,7 @@ I publish investigations, walkthroughs, and lessons learned covering SOC analysi
 
 ---
 
-## ð Certifications & Learning
+## 📚 Certifications & Learning
 
 ### Completed
 
@@ -229,7 +230,7 @@ I publish investigations, walkthroughs, and lessons learned covering SOC analysi
 
 ---
 
-## ð Connect With Me
+## 🌐 Connect With Me
 
 <p align="center">
   <a href="https://love2150.github.io">
