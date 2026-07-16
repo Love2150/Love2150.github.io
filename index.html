@@ -330,14 +330,41 @@ title: "Brandon Love | SOC Analyst & Incident Response"
     }
 
     .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      padding: .4rem .7rem;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--muted);
-    }
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  min-height: 40px;
+  padding: .55rem .9rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  background: rgba(96, 165, 250, .08);
+  font-size: .88rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    color .2s ease,
+    transform .2s ease;
+}
+
+.pill:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  background: rgba(96, 165, 250, .18);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.pill:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 
     /* HERO */
     .hero {
