@@ -4,6 +4,7 @@ title: "Golden Ticket (Walkthrough)"
 date: 2025-11-19 20:10:22 -0600
 author: "Brandon Love"
 medium_canonical: "https://medium.com/@brandonlove2150/golden-ticket-walkthrough-d47dd458994d?source=rss-024d132ba4b7------2"
+canonical_url: "https://medium.com/@brandonlove2150/golden-ticket-walkthrough-d47dd458994d?source=rss-024d132ba4b7------2"
 tags: ["cybersecurity-training", "cybersecurity-awareness", "blueteamlabs", "letsdefend-writeup", "letsdefendio"]
 ---
 > Originally published on Medium: https://medium.com/@brandonlove2150/golden-ticket-walkthrough-d47dd458994d?source=rss-024d132ba4b7------2

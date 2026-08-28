@@ -4,6 +4,7 @@ title: "SOC239 — Remote Code Execution Detected in Splunk Enterprise (Lets
 date: 2025-11-03 20:57:02 -0600
 author: "Brandon Love"
 medium_canonical: "https://medium.com/@brandonlove2150/soc239-remote-code-execution-detected-in-splunk-enterprise-letsdefend-34b36bd92fff?source=rss-024d132ba4b7------2"
+canonical_url: "https://medium.com/@brandonlove2150/soc239-remote-code-execution-detected-in-splunk-enterprise-letsdefend-34b36bd92fff?source=rss-024d132ba4b7------2"
 tags: ["lets-defend", "cybersecurity", "letsdefendio"]
 ---
 > Originally published on Medium: https://medium.com/@brandonlove2150/soc239-remote-code-execution-detected-in-splunk-enterprise-letsdefend-34b36bd92fff?source=rss-024d132ba4b7------2

@@ -4,6 +4,7 @@ title: "Batch Downloader(LetsDefend)"
 date: 2025-11-05 13:58:25 -0600
 author: "Brandon Love"
 medium_canonical: "https://medium.com/@brandonlove2150/batch-downloader-letsdefend-63cf273737aa?source=rss-024d132ba4b7------2"
+canonical_url: "https://medium.com/@brandonlove2150/batch-downloader-letsdefend-63cf273737aa?source=rss-024d132ba4b7------2"
 tags: ["lets-defend", "cybersecurity", "blue-team", "letsdefendio"]
 ---
 > Originally published on Medium: https://medium.com/@brandonlove2150/batch-downloader-letsdefend-63cf273737aa?source=rss-024d132ba4b7------2

@@ -1,12 +1,19 @@
 ---
-layout: page
+layout: project
 title: "Windows Log Triage"
 permalink: /projects/winlog-triage/
 image: /assets/images/wintriage_demo.png
 summary: "EVTX + Sysmon → Sigma-like hits, IOCs, and a dark-mode HTML report."
 tags: [dfir, windows, sysmon, sigma, evtx]
+status: "Working demo"
+featured: true
+last_reviewed: 2026-08-28
+role: "Tool developer and analyst"
+tools: [Python, EVTX, Sysmon, Sigma-like detections, HTML, JSON, CSV]
+outcome: "Produces a shareable HTML report plus JSON and CSV artifacts from Windows telemetry."
 weight: 8
 repo: https://github.com/Love2150/security-tools/tree/main/tools/winlog-triage
+demo: /reports/wintriage/demo_report.html
 ---
 
 ## Overview

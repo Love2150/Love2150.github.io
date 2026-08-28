@@ -1,5 +1,5 @@
 ---
-layout: null
+layout: project
 title: "Personal Portfolio & Blog (Jekyll + GitHub Pages)"
 date: 2025-11-07 10:00:00 -0600
 image: /assets/images/Homepage-Overlay.png   # ← add an image to this path

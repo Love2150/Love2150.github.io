@@ -4,6 +4,7 @@ title: "Upstyle Backdoor (LetsDefend)"
 date: 2025-11-05 18:19:42 -0600
 author: "Brandon Love"
 medium_canonical: "https://medium.com/@brandonlove2150/upstyle-backdoor-letsdefend-7513e41cd145?source=rss-024d132ba4b7------2"
+canonical_url: "https://medium.com/@brandonlove2150/upstyle-backdoor-letsdefend-7513e41cd145?source=rss-024d132ba4b7------2"
 tags: ["letsdefend-writeup", "blue-team", "letsdefendio", "cybersecurity"]
 ---
 > Originally published on Medium: https://medium.com/@brandonlove2150/upstyle-backdoor-letsdefend-7513e41cd145?source=rss-024d132ba4b7------2

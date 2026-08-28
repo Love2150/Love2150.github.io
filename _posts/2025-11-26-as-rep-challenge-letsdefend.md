@@ -4,6 +4,7 @@ title: "AS-Rep Challenge(LetsDefend)"
 date: 2025-11-26 20:04:11 -0600
 author: "Brandon Love"
 medium_canonical: "https://medium.com/@brandonlove2150/as-rep-challenge-letsdefend-cf1dee11b6a5?source=rss-024d132ba4b7------2"
+canonical_url: "https://medium.com/@brandonlove2150/as-rep-challenge-letsdefend-cf1dee11b6a5?source=rss-024d132ba4b7------2"
 tags: ["letsdefend-writeup", "letsdefendio", "blueteamlabs", "cybersecurity"]
 ---
 > Originally published on Medium: https://medium.com/@brandonlove2150/as-rep-challenge-letsdefend-cf1dee11b6a5?source=rss-024d132ba4b7------2

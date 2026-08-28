@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "Wazuh SIEM + VirusTotal + Action1 Patch Management Lab"
 image: /assets/images/F8C556A5-ACB7-4FE1-8417-62B2AEEA9DED.png
 permalink: /projects/wazuh-siem-threat-intel-lab/

@@ -1,55 +1,17 @@
 ---
 layout: report
 title: "Analyst Reports"
-description: "Case studies, investigations, and SOC-style SOC write-ups."
+description: "Evidence-led SOC investigations with executive summaries, timelines, technical findings, and recommendations."
 permalink: /reports/analyst_report/
 ---
-
-<p>
-  Welcome to my analyst report collection. These write-ups mirror how I structure
-  real-world investigations in a SOC: executive summary first, then timeline,
-  technical details, and recommendations.
-</p>
-
+<p>These case files show how I organize investigation evidence for analyst handoff: scope first, then timeline, findings, containment, and recommendations.</p>
 <div class="reports-grid" role="list">
-  {%
-    assign reports = site.pages
-      | where_exp: "p", "p.url contains '/reports/analyst_report/'"
-      | where_exp: "p", "p.url != '/reports/analyst_report/'"
-  %}
-  {% assign reports = reports | sort: "weight" %}
-
+  {% assign reports = site.pages | where_exp: "p", "p.url contains '/reports/analyst_report/'" | where_exp: "p", "p.url != '/reports/analyst_report/'" | sort: "weight" %}
   {% for r in reports %}
-    {% assign img = r.image | default: '/assets/images/projects/fallback.jpg' %}
-    <article class="report-card" role="listitem">
-      <div class="report-card-thumb" aria-label="{{ r.title | escape }}">
-        <img src="{{ img | relative_url }}" alt="" loading="lazy" decoding="async">
-      </div>
-      <div class="report-card-body">
-        <h2>
-          <a href="{{ r.url | relative_url }}">{{ r.title }}</a>
-        </h2>
-
-        {% if r.tags %}
-          <p class="meta">{{ r.tags | join: " · " }}</p>
-        {% endif %}
-
-        {% if r.description %}
-          <p>{{ r.description }}</p>
-        {% endif %}
-
-        <div class="report-tags">
-          {% if r.tags %}
-            {% for t in r.tags limit:4 %}
-              <span class="report-tag">{{ t }}</span>
-            {% endfor %}
-          {% endif %}
-        </div>
-
-        <p class="meta" style="margin-top:.4rem;">
-          <a href="{{ r.url | relative_url }}">Read report →</a>
-        </p>
-      </div>
-    </article>
+  <article class="report-card" role="listitem">
+    {% if r.image %}<div class="report-card-thumb"><img src="{{ r.image | relative_url }}" alt="" loading="lazy"></div>{% else %}<div class="report-card-evidence"><strong>Evidence brief</strong><span>Timeline · findings · response</span></div>{% endif %}
+    <div class="report-card-body"><p class="eyebrow">Evidence brief</p><h2><a href="{{ r.url | relative_url }}">{{ r.title }}</a></h2>{% if r.description %}<p>{{ r.description }}</p>{% endif %}{% if r.tags %}<div class="tags">{% for tag in r.tags limit: 4 %}<span class="tag">{{ tag }}</span>{% endfor %}</div>{% endif %}</div>
+    <div class="card-actions"><a href="{{ r.url | relative_url }}">Read report →</a></div>
+  </article>
   {% endfor %}
 </div>

@@ -34,7 +34,7 @@ defaults:
       path: ""
       type: "projects"
     values:
-      layout: page
+      layout: project
       hidden: false
       weight: 100
 
@@ -43,7 +43,7 @@ defaults:
       path: ""
       type: "reports"
     values:
-      layout: page
+      layout: report
       hidden: false
       weight: 100
 
@@ -51,7 +51,7 @@ defaults:
   - scope:
       path: "reports/analyst_report"
     values:
-      layout: page
+      layout: report
       hidden: false
       weight: 100
 
@@ -69,6 +69,7 @@ plugins:
 # ----------------------------------------
 # SEO & Build Settings
 # ----------------------------------------
+url: https://love2150.github.io
 image: /assets/images/og-default.png
 timezone: America/Chicago
 future: true

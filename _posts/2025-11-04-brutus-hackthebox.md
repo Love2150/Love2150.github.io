@@ -4,6 +4,7 @@ title: "Brutus (hackthebox)"
 date: 2025-11-04 18:33:50 -0600
 author: "Brandon Love"
 medium_canonical: "https://medium.com/@brandonlove2150/brutus-hackthebox-09ee5059f8e8?source=rss-024d132ba4b7------2"
+canonical_url: "https://medium.com/@brandonlove2150/brutus-hackthebox-09ee5059f8e8?source=rss-024d132ba4b7------2"
 tags: ["blue-team", "cybersecurity", "hackthebox-walkthrough", "hackthebox"]
 ---
 > Originally published on Medium: https://medium.com/@brandonlove2150/brutus-hackthebox-09ee5059f8e8?source=rss-024d132ba4b7------2

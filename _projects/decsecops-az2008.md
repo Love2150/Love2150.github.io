@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "DevSecOps Labs (AZ-2008)"
 permalink: /projects/devsecops-az2008/
 image: /assets/images/IMG_1108.jpeg

@@ -1,0 +1,31 @@
+---
+layout: default
+---
+<article class="content-shell case-file">
+  <header class="page-heading">
+    <p class="eyebrow">Security project · case file</p>
+    <h1>{{ page.title }}</h1>
+    {% if page.summary or page.description %}<p class="lede">{{ page.summary | default: page.description }}</p>{% endif %}
+  </header>
+
+  {% if page.status or page.role or page.tools or page.outcome or page.last_reviewed %}
+  <dl class="proof-strip" aria-label="Project proof summary">
+    {% if page.status %}<div><dt>Status</dt><dd>{{ page.status }}</dd></div>{% endif %}
+    {% if page.role %}<div><dt>Role</dt><dd>{{ page.role }}</dd></div>{% endif %}
+    {% if page.tools %}<div><dt>Tools</dt><dd>{{ page.tools | join: ", " }}</dd></div>{% endif %}
+    {% if page.last_reviewed %}<div><dt>Last reviewed</dt><dd>{{ page.last_reviewed | date: "%Y-%m-%d" }}</dd></div>{% endif %}
+    {% if page.outcome %}<div class="proof-outcome"><dt>{{ page.outcome_label | default: "Verified outcome" }}</dt><dd>{{ page.outcome }}</dd></div>{% endif %}
+  </dl>
+  {% endif %}
+
+  {% if page.repo or page.demo %}
+  <div class="evidence-actions" aria-label="Project evidence links">
+    {% if page.repo %}<a class="button" href="{{ page.repo }}" target="_blank" rel="noopener">Repository <span aria-hidden="true">↗</span></a>{% endif %}
+    {% if page.demo %}<a class="button button-secondary" href="{{ page.demo | relative_url }}" target="_blank" rel="noopener">Demo / report <span aria-hidden="true">↗</span></a>{% endif %}
+  </div>
+  {% endif %}
+
+  <div class="prose">
+    {{ content }}
+  </div>
+</article>

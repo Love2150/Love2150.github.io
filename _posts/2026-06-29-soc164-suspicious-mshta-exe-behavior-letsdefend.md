@@ -4,6 +4,7 @@ title: "SOC164 — Suspicious mshta.exe Behavior (LetsDefend)"
 date: 2026-06-29 19:29:29 -0500
 author: "Brandon Love"
 medium_canonical: "https://medium.com/@brandonlove2150/soc164-suspicious-mshta-exe-behavior-letsdefend-5d57e1e862e4?source=rss-024d132ba4b7------2"
+canonical_url: "https://medium.com/@brandonlove2150/soc164-suspicious-mshta-exe-behavior-letsdefend-5d57e1e862e4?source=rss-024d132ba4b7------2"
 tags: ["lets-defend", "cyber-security-training", "blue-team"]
 ---
 > Originally published on Medium: https://medium.com/@brandonlove2150/soc164-suspicious-mshta-exe-behavior-letsdefend-5d57e1e862e4?source=rss-024d132ba4b7------2
