@@ -24,11 +24,13 @@ title: "Brandon Love | SOC Analyst & Incident Response"
   <meta property="og:image" content="{{ page.image | default: site.image | absolute_url }}" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#111827" />
+  <link rel="icon" href="{{ '/favicon.svg' | relative_url }}" type="image/svg+xml" />
+  <link rel="alternate icon" href="{{ '/favicon.ico' | relative_url }}" />
 
   <link
     rel="alternate"
     type="application/rss+xml"
-    title="Brandon Love - Blog"
+    title="Brandon Love — Blog"
     href="{{ '/feed.xml' | relative_url }}"
   />
 
@@ -51,6 +53,8 @@ title: "Brandon Love | SOC Analyst & Incident Response"
         --card: #ffffff;
         --text: #0f172a;
         --muted: #475569;
+        --accent: #2563eb;
+        --accent-2: #7c3aed;
         --border: #e2e8f0;
         --shadow: 0 10px 20px rgba(2, 6, 23, .06);
       }
@@ -379,7 +383,6 @@ title: "Brandon Love | SOC Analyst & Incident Response"
       grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
       align-items: center;
       gap: 3rem;
-      width: 100%;
     }
 
     .hero-eyebrow {
@@ -405,13 +408,25 @@ title: "Brandon Love | SOC Analyst & Incident Response"
       letter-spacing: -.045em;
     }
 
-    .hero h1 span {
-      display: block;
+    .hero-role {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: .15em .45em;
       margin-top: .55rem;
       color: var(--accent);
       font-size: clamp(1.35rem, 3vw, 2.25rem);
       line-height: 1.2;
       letter-spacing: -.025em;
+    }
+
+    .hero-role-item {
+      white-space: nowrap;
+    }
+
+    .hero-role-item + .hero-role-item::before {
+      content: "•";
+      margin-right: .45em;
     }
 
     .hero-summary {
@@ -468,8 +483,8 @@ title: "Brandon Love | SOC Analyst & Incident Response"
       padding: .35rem .7rem;
       border: 1px solid var(--border);
       border-radius: 999px;
-      background: rgba(18, 25, 52, .65);
-      color: var(--muted);
+      background: rgba(37, 99, 235, .08);
+      color: var(--text);
       font-size: .86rem;
     }
 
@@ -624,6 +639,8 @@ title: "Brandon Love | SOC Analyst & Incident Response"
     .blog-btn,
     .proj-btn {
       pointer-events: auto;
+      min-width: 44px;
+      min-height: 44px;
       margin: 0 .5rem;
       padding: .5rem .8rem;
       border: 1px solid var(--border);
@@ -646,16 +663,31 @@ title: "Brandon Love | SOC Analyst & Incident Response"
 
     .blog-dot,
     .proj-dot {
-      width: 8px;
-      height: 8px;
+      position: relative;
+      min-width: 44px;
+      min-height: 44px;
       padding: 0;
-      border: 1px solid rgba(255, 255, 255, .5);
+      border: 0;
       border-radius: 999px;
-      background: rgba(255, 255, 255, .35);
+      background: transparent;
+      cursor: pointer;
     }
 
-    .blog-dot.active,
-    .proj-dot.active {
+    .blog-dot::before,
+    .proj-dot::before {
+      content: "";
+      position: absolute;
+      inset: 50% auto auto 50%;
+      width: 10px;
+      height: 10px;
+      border: 1px solid rgba(255, 255, 255, .65);
+      border-radius: 999px;
+      background: rgba(0, 0, 0, .45);
+      transform: translate(-50%, -50%);
+    }
+
+    .blog-dot.active::before,
+    .proj-dot.active::before {
       background: #ffffff;
     }
 
@@ -729,7 +761,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
 <body>
   <header>
     <div class="container nav">
-      <a class="brand" href="{{ '/' | relative_url }}" aria-label="Home">
+      <a class="brand" href="{{ '/' | relative_url }}" aria-label="Brandon Love — Home">
         <span class="dot"></span>
         <span>Brandon Love</span>
       </a>
@@ -754,7 +786,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
 </button>
     </div>
 
-    <div id="drawer" class="drawer" aria-label="Mobile navigation">
+    <div id="drawer" class="drawer" role="navigation" aria-label="Mobile navigation">
       <a href="#portfolio">Portfolio</a>
       <a href="#featured-projects">Projects</a>
       <a href="#soc-playbooks">Playbooks</a>
@@ -773,7 +805,11 @@ title: "Brandon Love | SOC Analyst & Incident Response"
 
           <h1>
             Brandon Love
-            <span>SOC Analyst | Incident Response | Detection Engineering</span>
+            <span class="hero-role">
+              <span class="hero-role-item">SOC Analyst</span>
+              <span class="hero-role-item">Incident Response</span>
+              <span class="hero-role-item">Detection Engineering</span>
+            </span>
           </h1>
 
           <p class="hero-summary">
@@ -786,11 +822,11 @@ title: "Brandon Love | SOC Analyst & Incident Response"
           <div class="hero-actions">
             <a
               class="btn btn-primary"
-              href="{{ '/assets/Brandon_Love_Cybersecurity_Resume.docx' | relative_url }}"
+              href="{{ '/assets/Brandon_Love_Cybersecurity_Resume.pdf' | relative_url }}"
               target="_blank"
               rel="noopener"
             >
-              Download Resume
+              Download Resume (PDF)
             </a>
             <a class="btn" href="#featured-projects">View Featured Projects</a>
             <a class="btn" href="https://github.com/Love2150" target="_blank" rel="noopener">
@@ -939,7 +975,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
         </div>
       </div>
 
-      <div class="proj-slider" aria-roledescription="carousel">
+      <div class="proj-slider" role="region" aria-roledescription="carousel" aria-label="Featured projects">
         <div class="proj-track" id="projTrack">
           {% assign featured = site.projects %}
 
@@ -979,13 +1015,13 @@ title: "Brandon Love | SOC Analyst & Incident Response"
                   <div class="proj-cta">
                     {% if p.demo %}
                       <a class="pill" href="{{ p.demo }}" target="_blank" rel="noopener">
-                        Demo →
+                        Demo →
                       </a>
                     {% endif %}
 
                     {% if p.repo %}
                       <a class="pill" href="{{ p.repo }}" target="_blank" rel="noopener">
-                        Repository →
+                        Repository →
                       </a>
                     {% endif %}
 
@@ -1021,12 +1057,12 @@ title: "Brandon Love | SOC Analyst & Incident Response"
           </article>
         </div>
 
-        <div class="proj-nav" aria-hidden="true">
-          <button class="proj-btn" id="prevProj" aria-label="Previous">&lsaquo;</button>
-<button class="proj-btn" id="nextProj" aria-label="Next">&rsaquo;</button>
+        <div class="proj-nav">
+          <button class="proj-btn" id="prevProj" aria-label="Previous featured project">&lsaquo;</button>
+          <button class="proj-btn" id="nextProj" aria-label="Next featured project">&rsaquo;</button>
         </div>
 
-        <div class="proj-dots" id="projDots" aria-hidden="true"></div>
+        <div class="proj-dots" id="projDots"></div>
       </div>
     </section>
 
@@ -1122,7 +1158,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
         </div>
       </div>
 
-      <div class="blog-slider" aria-roledescription="carousel">
+      <div class="blog-slider" role="region" aria-roledescription="carousel" aria-label="Latest technical writing">
         <div class="blog-track" id="blogTrack">
           {% assign newest = site.posts | sort: "date" | reverse %}
           {% assign top3 = newest | slice: 0, 3 %}
@@ -1179,7 +1215,7 @@ title: "Brandon Love | SOC Analyst & Incident Response"
                       target="_blank"
                       rel="noopener"
                     >
-                      Open on Medium &#8599;
+                      Open on Medium &#8599;
                     </a>
                   {% endif %}
                 </div>
@@ -1199,12 +1235,12 @@ title: "Brandon Love | SOC Analyst & Incident Response"
           </article>
         </div>
 
-        <div class="blog-nav" aria-hidden="true">
-          <button class="blog-btn" id="prevSlide" aria-label="Previous">&lsaquo;</button>
-          <button class="blog-btn" id="nextSlide" aria-label="Next">&rsaquo;</button>
+        <div class="blog-nav">
+          <button class="blog-btn" id="prevSlide" aria-label="Previous article">&lsaquo;</button>
+          <button class="blog-btn" id="nextSlide" aria-label="Next article">&rsaquo;</button>
         </div>
 
-        <div class="blog-dots" id="blogDots" aria-hidden="true"></div>
+        <div class="blog-dots" id="blogDots"></div>
       </div>
     </section>
 
@@ -1259,14 +1295,22 @@ title: "Brandon Love | SOC Analyst & Incident Response"
 
             <a
               class="btn-contact"
-              href="{{ 'assets/Brandon_Love_Cybersecurity_Resume.docx' | relative_url }}"
+              href="{{ '/assets/Brandon_Love_Cybersecurity_Resume.pdf' | relative_url }}"
               target="_blank"
               rel="noopener"
             >
-              Resume
+              Resume (PDF)
             </a>
 
-            <span class="btn-contact" aria-label="Location">Killeen, Texas</span>
+            <a
+              class="btn-contact"
+              href="{{ '/assets/Brandon_Love_Cybersecurity_Resume.docx' | relative_url }}"
+              download
+            >
+              Resume (DOCX)
+            </a>
+
+            <span class="btn-contact">Killeen, Texas</span>
           </div>
         </div>
       </div>
@@ -1377,6 +1421,21 @@ document.addEventListener("click", (event) => {
 
           Array.from(dotsWrap.children).forEach((dot, dotIndex) => {
             dot.classList.toggle("active", dotIndex === index);
+            if (dotIndex === index) {
+              dot.setAttribute("aria-current", "true");
+            } else {
+              dot.removeAttribute("aria-current");
+            }
+          });
+
+          slides.forEach((slide, slideIndex) => {
+            const isActive = slideIndex === index;
+            slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+            if (isActive) {
+              slide.removeAttribute("inert");
+            } else {
+              slide.setAttribute("inert", "");
+            }
           });
 
           const height = slides[index]?.offsetHeight || 0;

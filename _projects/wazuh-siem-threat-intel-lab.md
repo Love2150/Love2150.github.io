@@ -7,8 +7,6 @@ tags: [siem, wazuh, threat-intelligence, patch-management, soc, blue-team, linux
 weight: 1
 ---
 
-# Wazuh SIEM Deployment with Threat Intelligence & Patch Automation
-
 ## Overview
 
 This project documents the deployment of a full security monitoring and remediation lab using:

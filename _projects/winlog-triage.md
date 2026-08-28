@@ -44,31 +44,31 @@ python -m pip install -r requirements.txt
 #   PowerShell-Operational.evtx (optional)
 python .\wintriage.py .\samples --outdir .\out --max-per-file 5000
 start .\out
-Quick EVTX export
-powershell
-Copy code
+```
+
+## Quick EVTX Export
+
+```powershell
 # Run PowerShell as Administrator
 New-Item -ItemType Directory -Path C:\Logs -Force | Out-Null
 wevtutil epl Security C:\Logs\Security.evtx /ow:true
 wevtutil epl Microsoft-Windows-Sysmon/Operational C:\Logs\Sysmon.evtx /ow:true
 wevtutil epl Microsoft-Windows-PowerShell/Operational C:\Logs\PowerShell-Operational.evtx /ow:true
+```
 
-Artifacts Produced
-Writes to out/:
+## Artifacts Produced
 
-wintriage-*.html — shareable report (used in the live demo above)
+Writes to `out/`:
 
-wintriage-*.json — machine-readable summary
+- `wintriage-*.html` — shareable report used in the live demo above
+- `wintriage-*.json` — machine-readable summary
+- `wintriage-*.csv` — sample rows (`ts`, `provider`, `eid`, `image`, `cmd`)
 
-wintriage-*.csv — sample rows (ts/provider/eid/image/cmd)
+## Roadmap
 
-Roadmap
-ATT&CK mini heatmap
-
-Optional pySigma integration
-
-VT/AbuseIPDB enrichment toggles
-
-Case bundle export (HTML + JSON + matched rules)
+- ATT&CK mini heatmap
+- Optional pySigma integration
+- VirusTotal and AbuseIPDB enrichment toggles
+- Case bundle export (HTML + JSON + matched rules)
 
 
