@@ -4,6 +4,7 @@ title: "SOC250 — APT35 HyperScrape Data Exfiltration Tool Detected (LetsDe
 date: 2025-11-02 06:49:03 -0600
 author: "Brandon Love"
 medium_canonical: "https://medium.com/@brandonlove2150/soc250-apt35-hyperscrape-data-exfiltration-tool-detected-letsdefend-f85d6388111f?source=rss-024d132ba4b7------2"
+canonical_url: "https://medium.com/@brandonlove2150/soc250-apt35-hyperscrape-data-exfiltration-tool-detected-letsdefend-f85d6388111f?source=rss-024d132ba4b7------2"
 tags: ["letsdefendio", "cybersecurity", "blue-team", "letsdefend-writeup"]
 ---
 > Originally published on Medium: https://medium.com/@brandonlove2150/soc250-apt35-hyperscrape-data-exfiltration-tool-detected-letsdefend-f85d6388111f?source=rss-024d132ba4b7------2

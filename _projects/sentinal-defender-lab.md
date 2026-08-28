@@ -1,9 +1,16 @@
 ---
-layout: page
+layout: project
 title: "Microsoft Sentinel + Defender Lab (Azure SIEM/SOAR)"
 permalink: /projects/sentinel-defender-lab/
 image: /assets/images/A995D708-1B57-4DD0-813D-5233941AB46F.png
-description: "Built a cloud SIEM/SOAR lab in Microsoft Azure using Microsoft Sentinel + Microsoft Defender. Ingested logs, created KQL detections, generated incidents, and automated enrichment and response using playbooks."
+description: "Built a cloud SIEM/SOAR lab in Microsoft Azure using Microsoft Sentinel + Microsoft Defender. Ingested logs, created KQL detections, generated incidents, and tested a Logic Apps playbook."
+status: "Documented lab"
+featured: true
+last_reviewed: 2026-08-28
+role: "Lab architect and analyst"
+tools: [Microsoft Azure, Log Analytics, Microsoft Sentinel, Microsoft Defender, KQL, Logic Apps]
+outcome_label: "Documented result"
+outcome: "Documented Azure Activity ingestion, KQL analytics, incident triage, and successful Logic App run history."
 weight: 1
 ---
 
@@ -190,13 +197,13 @@ Trigger (Sentinel Incident)
 ---
 
 ## Testing & Validation
-I validated the pipeline by:
+I tested the pipeline by:
 - Making a controlled NSG security rule change (lab-safe)
 - Confirming the event appears in Log Analytics
 - Confirming the Analytics Rule runs and generates an incident
-- Confirming the Playbook triggers and writes enrichment back to the incident
+- Confirming the Playbook triggers and records a successful run
 
-**Evidence checklist**
+**Evidence still to capture in a final validation pass**
 - [ ] Log exists in AzureActivity table
 - [ ] Analytics rule match found
 - [ ] Incident created with expected entities

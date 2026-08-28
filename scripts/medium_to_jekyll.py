@@ -90,6 +90,7 @@ def write_post(out_dir: str, author: str, entry) -> str:
         f'date: {dt_local.strftime("%Y-%m-%d %H:%M:%S %z")}',
         f'author: "{esc_author}"',
         f'medium_canonical: "{esc_canonical}"',
+        f'canonical_url: "{esc_canonical}"',
     ]
     if tags:
         fm_tags = ", ".join([f'"{yq(t)}"' for t in tags])

@@ -4,6 +4,7 @@ title: "PowerShell Script (LetsDefend)"
 date: 2025-11-02 15:01:54 -0600
 author: "Brandon Love"
 medium_canonical: "https://medium.com/@brandonlove2150/powershell-script-letsdefend-c59e68353c91?source=rss-024d132ba4b7------2"
+canonical_url: "https://medium.com/@brandonlove2150/powershell-script-letsdefend-c59e68353c91?source=rss-024d132ba4b7------2"
 tags: ["letsdefend-writeup", "letsdefendio", "blueteamlabs"]
 ---
 > Originally published on Medium: https://medium.com/@brandonlove2150/powershell-script-letsdefend-c59e68353c91?source=rss-024d132ba4b7------2

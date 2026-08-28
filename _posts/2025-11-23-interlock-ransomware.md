@@ -4,6 +4,7 @@ title: "Interlock Ransomware"
 date: 2025-11-23 19:12:16 -0600
 author: "Brandon Love"
 medium_canonical: "https://medium.com/@brandonlove2150/interlock-ransomware-47b4154e27e7?source=rss-024d132ba4b7------2"
+canonical_url: "https://medium.com/@brandonlove2150/interlock-ransomware-47b4154e27e7?source=rss-024d132ba4b7------2"
 tags: ["letsdefendio", "cybersecurity-training", "lets-defend", "blueteamlabs"]
 ---
 > Originally published on Medium: https://medium.com/@brandonlove2150/interlock-ransomware-47b4154e27e7?source=rss-024d132ba4b7------2

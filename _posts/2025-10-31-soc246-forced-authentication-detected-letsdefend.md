@@ -4,6 +4,7 @@ title: "SOC246 — Forced Authentication Detected (LetsDefend)"
 date: 2025-10-31 19:51:25 -0500
 author: "Brandon Love"
 medium_canonical: "https://medium.com/@brandonlove2150/soc246-forced-authentication-detected-letsdefend-0747859c4bda?source=rss-024d132ba4b7------2"
+canonical_url: "https://medium.com/@brandonlove2150/soc246-forced-authentication-detected-letsdefend-0747859c4bda?source=rss-024d132ba4b7------2"
 tags: ["letsdefend-writeup", "blue-team", "cybersecurity", "letsdefendio"]
 ---
 > Originally published on Medium: https://medium.com/@brandonlove2150/soc246-forced-authentication-detected-letsdefend-0747859c4bda?source=rss-024d132ba4b7------2

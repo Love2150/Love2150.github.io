@@ -4,6 +4,7 @@ title: "SOC205 —Event 231 Malicious Macro has been executed (LetsDefend)"
 date: 2025-11-26 15:29:06 -0600
 author: "Brandon Love"
 medium_canonical: "https://medium.com/@brandonlove2150/soc205-event-231-malicious-macro-has-been-executed-letsdefend-47408ea87c5e?source=rss-024d132ba4b7------2"
+canonical_url: "https://medium.com/@brandonlove2150/soc205-event-231-malicious-macro-has-been-executed-letsdefend-47408ea87c5e?source=rss-024d132ba4b7------2"
 tags: ["blueteamlabs", "cybersecurity", "letsdefendio", "letsdefend-writeup"]
 ---
 > Originally published on Medium: https://medium.com/@brandonlove2150/soc205-event-231-malicious-macro-has-been-executed-letsdefend-47408ea87c5e?source=rss-024d132ba4b7------2

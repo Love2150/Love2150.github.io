@@ -4,6 +4,7 @@ title: "SOC 202 FakeGPT — LetsDefend"
 date: 2026-03-02 16:05:53 -0600
 author: "Brandon Love"
 medium_canonical: "https://medium.com/@brandonlove2150/soc-202-fakegpt-letsdefend-d33074b05056?source=rss-024d132ba4b7------2"
+canonical_url: "https://medium.com/@brandonlove2150/soc-202-fakegpt-letsdefend-d33074b05056?source=rss-024d132ba4b7------2"
 tags: ["lets-defend", "blue-team", "cybersecurity"]
 ---
 > Originally published on Medium: https://medium.com/@brandonlove2150/soc-202-fakegpt-letsdefend-d33074b05056?source=rss-024d132ba4b7------2

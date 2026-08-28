@@ -1,9 +1,16 @@
 ---
-layout: page
+layout: project
 title: "PCAP Quick Profiler"
+permalink: /projects/pcap-quick-profiler/
 image: /assets/images/pcap_demo.png
 summary: "Windows-friendly PCAP triage: top IPs/ports, HTTP/TLS metadata (SNI/JA3), beacon heuristic, and HTML report."
 tags: [dfir, networking, windows, python]
+status: "Working demo"
+featured: true
+last_reviewed: 2026-08-28
+role: "Tool developer and analyst"
+tools: [Python, PCAP, DNS, HTTP, TLS, JA3, HTML]
+outcome: "Publishes an HTML triage report with protocol mix, top IPs and ports, HTTP and TLS metadata, and beacon suspects."
 repo: "https://github.com/Love2150/security-tools/tree/main/tools/Pcap-profiler"
 demo: "/reports/pcap-profiler/demo_report.html"
 weight: 10

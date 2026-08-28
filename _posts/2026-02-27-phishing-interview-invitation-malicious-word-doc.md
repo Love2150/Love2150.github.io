@@ -4,6 +4,7 @@ title: "Phishing “Interview Invitation” — Malicious Word Doc."
 date: 2026-02-27 23:22:42 -0600
 author: "Brandon Love"
 medium_canonical: "https://medium.com/@brandonlove2150/phishing-interview-invitation-malicious-word-doc-b35d2a30f100?source=rss-024d132ba4b7------2"
+canonical_url: "https://medium.com/@brandonlove2150/phishing-interview-invitation-malicious-word-doc-b35d2a30f100?source=rss-024d132ba4b7------2"
 tags: ["cybersecurity", "lets-defend"]
 ---
 > Originally published on Medium: https://medium.com/@brandonlove2150/phishing-interview-invitation-malicious-word-doc-b35d2a30f100?source=rss-024d132ba4b7------2

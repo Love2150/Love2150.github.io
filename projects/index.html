@@ -1,114 +1,24 @@
 ---
-layout: null
+layout: default
 title: "Projects"
+description: "Security engineering, detection, incident response, and DFIR projects by Brandon Love."
 permalink: /projects/
 ---
-
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Projects</title>
-<style>
-  :root{
-    --bg:#0b1020; --card:#121934; --text:#e5e7eb; --muted:#9ca3af;
-    --accent:#60a5fa; --border:#1f2a4d; --shadow:0 8px 24px rgba(0,0,0,.4)
-  }
-  body{margin:0; background:var(--bg); color:var(--text); font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-  a{color:var(--accent); text-decoration:none}
-  .container{width:min(1100px,92%); margin-inline:auto}
-  header{position:sticky; top:0; z-index:10; background:var(--bg); border-bottom:1px solid var(--border)}
-  .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
-  main{padding:28px 0 60px}
-  h1{font-size:clamp(1.6rem,1rem + 2vw,2.2rem); margin:0 0 8px}
-  .back{display:inline-flex; align-items:center; gap:.5rem; color:var(--muted); font-size:.95rem}
-  .grid{display:grid; gap:1rem; grid-template-columns:repeat(12,1fr)}
-  .col-4{grid-column:span 4}
-  @media (max-width:980px){.col-4{grid-column:span 6}}
-  @media (max-width:640px){.col-4{grid-column:span 12}}
-
-  /* Card */
-  .card{background:var(--card); border:1px solid var(--border); border-radius:18px; overflow:hidden; box-shadow:var(--shadow); height:100%; display:flex; flex-direction:column}
-  .thumb{position:relative; width:100%; aspect-ratio:16/9; background:linear-gradient(135deg, rgba(96,165,250,.18), rgba(167,139,250,.16))}
-  .thumb img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
-  .card-body{padding:14px 16px; display:flex; flex-direction:column; gap:.4rem}
-  .meta{color:var(--muted); font-size:.9rem}
-  .tags{display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.2rem}
-  .tag{font-size:.78rem; padding:.2rem .45rem; border:1px solid var(--border); border-radius:999px; color:var(--muted)}
-  .more{margin-top:.4rem}
-  .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
-</style>
-</head>
-<body>
-  <header>
-    <div class="container nav">
-      <a class="back" href="{{ '/' | relative_url }}">← Back to Home</a>
-      <span class="meta">Portfolio</span>
-    </div>
-  </header>
-
-  <main class="container">
-    <h1>Projects</h1>
-
-    {%- comment -%}
-      Resolve items robustly:
-      - Prefer the 'projects' collection (site.projects or site.collections['projects'].docs)
-      - Fallback: any page using layout 'project'
-      Only sort when we actually have items; avoids "Cannot sort a null object".
-    {%- endcomment -%}
-    {% assign _projects = site.projects | default: site.collections['projects'] %}
-    {% if _projects and _projects.docs %}
-      {% assign items = _projects.docs %}
-    {% elsif _projects and _projects != empty %}
-      {% assign items = _projects %}
-    {% else %}
-      {% assign items = site.pages | where: 'layout', 'project' %}
-    {% endif %}
-
-    {% if items and items.size > 0 %}
-      {% assign items = items | sort: 'weight' %}
-      <div class="grid" role="list">
-        {%- for p in items -%}
-          {%- assign img = p.image | default: '/assets/images/projects/fallback.jpg' -%}
-          <article class="card col-4" role="listitem">
-            <div class="thumb" aria-label="{{ p.title | escape }}">
-              <img src="{{ img | relative_url }}" alt="{{ p.title | escape }}" loading="lazy" decoding="async">
-            </div>
-            <div class="card-body">
-              <h2 style="margin:.1rem 0 .2rem; font-size:1.1rem;">
-                <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
-              </h2>
-              <p class="meta">
-                {%- if p.tags and p.tags.size > 0 -%}
-                  {{ p.tags | join: " · " }} ·
-                {%- endif -%}
-                {%- if p.date -%} {{ p.date | date: "%b %d, %Y" }} {%- endif -%}
-              </p>
-              {%- if p.summary -%}
-                <p>{{ p.summary }}</p>
-              {%- endif -%}
-              {%- if p.tags and p.tags.size > 0 -%}
-              <div class="tags">
-                {%- for t in p.tags limit:4 -%}<span class="tag">{{ t }}</span>{%- endfor -%}
-              </div>
-              {%- endif -%}
-              <p class="more">
-                {%- if p.demo and p.demo != "" -%}
-                  <a href="{{ p.demo }}" target="_blank" rel="noopener">Demo →</a>&nbsp;&nbsp;
-                {%- endif -%}
-                {%- if p.repo and p.repo != "" -%}
-                  <a href="{{ p.repo }}" target="_blank" rel="noopener">Repo →</a>
-                {%- endif -%}
-              </p>
-            </div>
-          </article>
-        {%- endfor -%}
+<section class="page-shell">
+  <header class="page-heading"><p class="eyebrow">Portfolio index</p><h1>Security Projects</h1><p class="lede">Labs, analyst tools, and case studies. Featured work leads; all existing project routes remain available.</p></header>
+  {% assign items = site.projects | sort: 'weight' %}
+  <div class="project-grid" role="list">
+    {% for p in items %}
+    <article class="project-card" role="listitem">
+      {% if p.image %}<div class="project-card-media"><img src="{{ p.image | relative_url }}" alt="" loading="lazy"></div>{% else %}<div class="report-card-evidence"><strong>Documented project</strong><span>Technical case file</span></div>{% endif %}
+      <div class="project-card-body">
+        <p class="eyebrow">{% if p.featured %}Flagship · {% endif %}{{ p.status | default: "Project" }}</p>
+        <h2><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h2>
+        {% if p.summary or p.description %}<p>{{ p.summary | default: p.description }}</p>{% endif %}
+        {% if p.tags %}<div class="tags">{% for tag in p.tags limit: 5 %}<span class="tag">{{ tag }}</span>{% endfor %}</div>{% endif %}
       </div>
-    {% else %}
-      <p>No projects found.</p>
-    {% endif %}
-  </main>
-</body>
-</html>
-
+      <div class="card-actions"><a href="{{ p.url | relative_url }}">Open case file →</a>{% if p.repo %}<a href="{{ p.repo }}" target="_blank" rel="noopener">Repo ↗</a>{% endif %}{% if p.demo %}<a href="{{ p.demo | relative_url }}" target="_blank" rel="noopener">Demo ↗</a>{% endif %}</div>
+    </article>
+    {% endfor %}
+  </div>
+</section>

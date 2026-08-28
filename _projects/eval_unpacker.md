@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "eval_unpacker — JavaScript De-obfuscation Toolkit"
 permalink: /projects/eval_unpacker/
 image: /assets/images/eval-unpacker-hero.jpg

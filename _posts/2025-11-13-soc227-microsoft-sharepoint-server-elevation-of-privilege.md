@@ -4,6 +4,7 @@ title: "SOC227 — Microsoft SharePoint Server Elevation of Privilege"
 date: 2025-11-13 17:17:39 -0600
 author: "Brandon Love"
 medium_canonical: "https://medium.com/@brandonlove2150/soc227-microsoft-sharepoint-server-elevation-of-privilege-054803829e80?source=rss-024d132ba4b7------2"
+canonical_url: "https://medium.com/@brandonlove2150/soc227-microsoft-sharepoint-server-elevation-of-privilege-054803829e80?source=rss-024d132ba4b7------2"
 tags: ["cybersecurity", "lets-defend", "blueteamlabs", "letsdefendio"]
 ---
 > Originally published on Medium: https://medium.com/@brandonlove2150/soc227-microsoft-sharepoint-server-elevation-of-privilege-054803829e80?source=rss-024d132ba4b7------2
