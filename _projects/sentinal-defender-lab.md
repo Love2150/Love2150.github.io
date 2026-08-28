@@ -7,8 +7,6 @@ description: "Built a cloud SIEM/SOAR lab in Microsoft Azure using Microsoft Sen
 weight: 1
 ---
 
-# Microsoft Sentinel + Defender Lab (Azure SIEM/SOAR)
-
 ## TL;DR
 Built a cloud SIEM/SOAR lab in **Microsoft Azure** using **Microsoft Sentinel** + **Microsoft Defender**.  
 Configured log ingestion into **Log Analytics**, wrote **KQL detections**, generated incidents, and created **automation/playbooks** (Logic Apps) for enrichment and response.
