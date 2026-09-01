@@ -7,13 +7,23 @@ Medium RSS -> Jekyll Markdown importer
 Usage:
   python scripts/medium_to_jekyll.py --feed FEED_URL --out _posts --author "Your Name"
 """
-import argparse, os, re, sys, time
-from datetime import datetime
+import argparse
+import calendar
+import hashlib
+import json
+import os
+import re
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
 import feedparser
+import pytz
 import requests
+from bs4 import BeautifulSoup
 from markdownify import markdownify as md
 from slugify import slugify
-import pytz
+
 
 def fetch(url: str) -> str:
     # Medium sometimes blocks default bots; use browsery headers.
@@ -29,39 +39,84 @@ def fetch(url: str) -> str:
     r.raise_for_status()
     return r.text
 
-def to_md(html: str) -> str:
-    return md(html or "", heading_style="ATX", strip=['span'])
+def to_md(html: str, fallback_alt: str = "Article evidence image") -> str:
+    soup = BeautifulSoup(html or "", "html.parser")
+    for image in list(soup.find_all("img")):
+        source = image.get("src", "")
+        if "medium.com/_/stat" in source.lower():
+            image.decompose()
+            continue
+        if image.get("alt", "").strip():
+            continue
+        figure = image.find_parent("figure")
+        caption = figure.find("figcaption") if figure else None
+        if not caption and figure:
+            candidate = figure.find_next_sibling()
+            candidate_text = candidate.get_text(" ", strip=True) if candidate else ""
+            if candidate_text.lower().startswith("caption:"):
+                caption = candidate
+        image["alt"] = caption.get_text(" ", strip=True).removeprefix("Caption:").strip(" “\"") if caption else fallback_alt
+    return md(str(soup), heading_style="ATX", strip=['span'])
 
 def first_sentence(text: str) -> str:
     text = re.sub(r"\s+", " ", text).strip()
-    m = re.search(r"(.{40,200}?\.)\s", text)
-    return m.group(1) if m else text[:200]
+    match = re.match(r"^(.{40,200}?[.!?])(?:\s|$)", text)
+    if match:
+        return match.group(1)
+    if len(text) <= 200:
+        return text
+    shortened = text[:197].rsplit(" ", 1)[0]
+    return f"{shortened}..."
+
+
+def summary_from_markdown(markdown: str) -> str:
+    for block in re.split(r"\n\s*\n", markdown):
+        candidate = re.sub(r"\s+", " ", block).strip()
+        if not candidate or candidate.startswith(("#", "!", ">", "```")):
+            continue
+        candidate = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", candidate)
+        candidate = re.sub(r"[*_`]", "", candidate)
+        if len(candidate) >= 40:
+            return first_sentence(candidate)
+    return first_sentence(re.sub(r"[#*_`]", "", markdown))
+
 
 def yq(s: str) -> str:
-    """Escape double quotes for YAML double-quoted strings."""
-    return (s or "").replace('"', r'\"')
+    """Serialize a string as a YAML-compatible JSON scalar."""
+    return json.dumps(s or "", ensure_ascii=False)
 
-def write_post(out_dir: str, author: str, entry) -> str:
+def write_post(out_dir: str, author: str, entry) -> str | None:
     title = (entry.get('title') or 'Untitled').strip()
 
-    # Date (prefer published -> updated -> now)
+    # Feedparser exposes UTC struct_time values.
     dt = None
     for key in ('published_parsed', 'updated_parsed'):
         if entry.get(key):
-            dt = datetime.fromtimestamp(time.mktime(entry.get(key)))
+            timestamp = calendar.timegm(entry.get(key))
+            dt = datetime.fromtimestamp(timestamp, tz=timezone.utc)
             break
     if dt is None:
-        dt = datetime.utcnow()
+        dt = datetime.now(timezone.utc)
 
     tz = pytz.timezone('America/Chicago')
-    dt_local = tz.localize(dt.replace(tzinfo=None)) if dt.tzinfo is None else dt.astimezone(tz)
+    dt_local = dt.astimezone(tz)
     date_str = dt_local.strftime('%Y-%m-%d')
 
+    canonical = (entry.get('link') or '').strip()
     slug = slugify(title) or f"post-{int(dt.timestamp())}"
     filename = f"{date_str}-{slug}.md"
     path = os.path.join(out_dir, filename)
     if os.path.exists(path):
-        return path
+        existing = Path(path).read_text(encoding="utf-8")
+        if not canonical or f"medium_canonical: {yq(canonical)}" in existing:
+            return None
+        suffix = hashlib.sha256(canonical.encode("utf-8")).hexdigest()[:10]
+        path = os.path.join(out_dir, f"{date_str}-{slug}-{suffix}.md")
+        if os.path.exists(path):
+            existing = Path(path).read_text(encoding="utf-8")
+            if f"medium_canonical: {yq(canonical)}" in existing:
+                return None
+            raise RuntimeError(f"Post filename collision: {path}")
 
     # Content HTML
     if entry.get('content'):
@@ -69,7 +124,7 @@ def write_post(out_dir: str, author: str, entry) -> str:
     else:
         content_html = entry.get('summary', '') or entry.get('description', '')
 
-    body_md = to_md(content_html).strip()
+    body_md = to_md(content_html, f"{title} evidence image").strip()
 
     tags = []
     for tag in (entry.get('tags') or []):
@@ -77,23 +132,20 @@ def write_post(out_dir: str, author: str, entry) -> str:
         if term:
             tags.append(str(term).strip())
 
-    canonical = (entry.get('link') or '').strip()
-    excerpt = first_sentence(re.sub(r"\n+", " ", body_md))
+    excerpt = summary_from_markdown(body_md)
 
-    esc_title = yq(title)
-    esc_author = yq(author)
-    esc_canonical = yq(canonical)
     fm = [
         '---',
         'layout: post',
-        f'title: "{esc_title}"',
+        f'title: {yq(title)}',
         f'date: {dt_local.strftime("%Y-%m-%d %H:%M:%S %z")}',
-        f'author: "{esc_author}"',
-        f'medium_canonical: "{esc_canonical}"',
-        f'canonical_url: "{esc_canonical}"',
+        f'author: {yq(author)}',
+        f'summary: {yq(excerpt)}',
+        f'medium_canonical: {yq(canonical)}',
+        f'canonical_url: {yq(canonical)}',
     ]
     if tags:
-        fm_tags = ", ".join([f'"{yq(t)}"' for t in tags])
+        fm_tags = ", ".join(yq(tag) for tag in tags)
         fm.append(f'tags: [{fm_tags}]')
     fm.append('---\n')
 
@@ -131,7 +183,7 @@ def main():
         p = write_post(args.out, args.author, e)
         if p:
             created += 1
-    print(f"Processed {len(feed.entries)} entries. New files may be under {args.out}.")
+    print(f"Processed {len(feed.entries)} entries. Created {created} new post(s).")
 
 if __name__ == '__main__':
     main()
