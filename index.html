@@ -61,8 +61,8 @@ body_class: home
         <dl>
           <div><dt>Problem</dt><dd>Reduce the manual effort required to review EVTX and Sysmon evidence.</dd></div>
           <div><dt>Built</dt><dd>A Python triage tool for IOC extraction and Sigma-like suspicious behavior hits.</dd></div>
-          <div><dt>Validation</dt><dd>Processed Windows telemetry into a browsable demonstration report.</dd></div>
-          <div><dt>Outcome</dt><dd>The tool produces shareable HTML plus machine-readable JSON and CSV artifacts.</dd></div>
+          <div><dt>Validation</dt><dd>A clean-wheel run processed five sanitized records with zero skipped records and zero parse errors.</dd></div>
+          <div><dt>Outcome</dt><dd>The package produces escaped HTML plus JSON/CSV output and records parser completeness for analyst review.</dd></div>
         </dl>
       </div>
       <div class="card-actions"><a href="{{ '/projects/winlog-triage/' | relative_url }}">Case study →</a><a href="{{ '/reports/wintriage/demo_report.html' | relative_url }}" target="_blank" rel="noopener">Demo report ↗</a><a href="https://github.com/Love2150/security-tools/tree/main/tools/winlog-triage" target="_blank" rel="noopener">Repository ↗</a></div>
@@ -74,14 +74,24 @@ body_class: home
         <p class="eyebrow">Case 03 · Network DFIR</p><h3>PCAP Quick Profiler</h3>
         <dl>
           <div><dt>Problem</dt><dd>Turn raw packet captures into a fast first-pass analyst view.</dd></div>
-          <div><dt>Built</dt><dd>A Windows-friendly profiler for protocol, IP, port, HTTP, TLS, JA3, and beaconing evidence.</dd></div>
-          <div><dt>Validation</dt><dd>Ran the profiler against a sample capture and published its HTML output.</dd></div>
-          <div><dt>Outcome</dt><dd>The report surfaces protocol mix, top talkers, web and TLS metadata, and beacon suspects.</dd></div>
+          <div><dt>Built</dt><dd>An installable profiler with complete-capture statistics, protected reports, and public-unicast-filtered VirusTotal enrichment.</dd></div>
+          <div><dt>Validation</dt><dd>Checked totals against TShark and added a deterministic packet fixture to Repository CI.</dd></div>
+          <div><dt>Outcome</dt><dd>The latest review also blocks private, reserved, multicast, ULA, and malformed values before VirusTotal requests.</dd></div>
         </dl>
       </div>
-      <div class="card-actions"><a href="{{ '/projects/pcap-quick-profiler/' | relative_url }}">Case study →</a><a href="{{ '/reports/pcap-profiler/demo_report.html' | relative_url }}" target="_blank" rel="noopener">Demo report ↗</a><a href="https://github.com/Love2150/security-tools/tree/main/tools/Pcap-profiler" target="_blank" rel="noopener">Repository ↗</a></div>
+      <div class="card-actions"><a href="{{ '/projects/pcap-quick-profiler/' | relative_url }}">Case study →</a><a href="{{ '/reports/pcap-profiler/demo_report.html' | relative_url }}" target="_blank" rel="noopener">Demo report ↗</a><a href="https://github.com/Love2150/security-tools/tree/main/tools/pcap-profiler" target="_blank" rel="noopener">Repository ↗</a></div>
     </article>
   </div>
+</section>
+
+<section class="home-section">
+  <div class="section-heading"><div><p class="eyebrow">Secure development</p><h2>Security Tools Engineering</h2></div><p>How three analyst utilities were hardened through threat modeling, regression tests, packaging assurance, evidence governance, and CI/CD.</p></div>
+  <div class="brief-grid">
+    <article class="brief-card"><p class="eyebrow">Network evidence</p><h3>PCAP Quick Profiler</h3><p>TShark-validated totals, protected reports, and globally routable unicast filtering before optional VirusTotal requests.</p></article>
+    <article class="brief-card"><p class="eyebrow">Endpoint evidence</p><h3>Windows Log Triage</h3><p>Safe EVTX paths, parser-completeness metadata, validated indicators, and escaped HTML/JSON/CSV output.</p></article>
+    <article class="brief-card"><p class="eyebrow">Hostile source</p><h3>Eval Unpacker</h3><p>Bounded reconstruction without JavaScript execution, 35 focused tests, and 91% core coverage.</p></article>
+  </div>
+  <div class="hero-actions"><a class="button button-secondary" href="{{ '/projects/security-tools-engineering/' | relative_url }}">Review the engineering case study</a><a class="button button-secondary" href="https://github.com/Love2150/security-tools" target="_blank" rel="noopener">Repository ↗</a></div>
 </section>
 
 <section class="home-section">
