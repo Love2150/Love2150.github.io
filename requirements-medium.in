@@ -1,5 +1,5 @@
 beautifulsoup4==4.15.0
-feedparser==6.0.12
+feedparser==6.0.14
 markdownify==1.2.3
 python-slugify==8.0.4
 pytz==2026.3.post1
