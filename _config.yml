@@ -91,10 +91,10 @@ social:
     - https://github.com/Love2150
     - https://www.linkedin.com/in/brandon-love-85b247261
 # Optional: add a Cloudflare Web Analytics token to enable privacy-friendly analytics.
-cloudflare_analytics_token:
+cloudflare_analytics_token: "fe82e8dcb67242b0a34a597ba589e014"
 timezone: America/Chicago
 future: true
-resume_last_reviewed: 2026-08-28
+resume_last_reviewed: 2026-09-01
 
 
 

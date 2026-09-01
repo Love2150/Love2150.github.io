@@ -37,7 +37,7 @@ class PhaseSixSeoTests(unittest.TestCase):
         analytics = (ROOT / "_includes/analytics.html").read_text(encoding="utf-8")
         self.assertIn("site.cloudflare_analytics_token", analytics)
         self.assertIn("data-cf-beacon", analytics)
-        self.assertIn("defer", analytics)
+        self.assertIn('type="module"', analytics)
 
     def test_structured_data_covers_person_profile_and_projects(self) -> None:
         structured = (ROOT / "_includes/structured-data.html").read_text(
