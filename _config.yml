@@ -29,6 +29,12 @@ collections:
 # Defaults for content types
 # ----------------------------------------
 defaults:
+  # Site-wide social preview fallback
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/og-default.png
+
   # Projects
   - scope:
       path: ""
@@ -69,8 +75,23 @@ plugins:
 # ----------------------------------------
 # SEO & Build Settings
 # ----------------------------------------
+title: "Brandon Love | Security Operations Portfolio"
+description: "Evidence-driven SOC, incident response, detection engineering, and DFIR work by Brandon Love."
 url: https://love2150.github.io
 image: /assets/images/og-default.png
+logo: /assets/images/brand/brandmark.png
+locale: en_US
+author:
+  name: Brandon Love
+  email: brandonlove2150@icloud.com
+  url: https://love2150.github.io
+social:
+  name: Brandon Love
+  links:
+    - https://github.com/Love2150
+    - https://www.linkedin.com/in/brandon-love-85b247261
+# Optional: add a Cloudflare Web Analytics token to enable privacy-friendly analytics.
+cloudflare_analytics_token:
 timezone: America/Chicago
 future: true
 resume_last_reviewed: 2026-08-28
