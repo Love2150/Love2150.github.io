@@ -3,7 +3,9 @@ layout: project
 title: "Microsoft Sentinel + Defender Lab (Azure SIEM/SOAR)"
 permalink: /projects/sentinel-defender-lab/
 image: /assets/images/A995D708-1B57-4DD0-813D-5233941AB46F.png
+summary: "Cloud SIEM/SOAR lab demonstrating Azure log ingestion, KQL detections, incident generation, and tested Logic Apps automation."
 description: "Built a cloud SIEM/SOAR lab in Microsoft Azure using Microsoft Sentinel + Microsoft Defender. Ingested logs, created KQL detections, generated incidents, and tested a Logic Apps playbook."
+demo: "/projects/sentinel-defender-lab/"
 status: "Documented lab"
 featured: true
 last_reviewed: 2026-08-28
