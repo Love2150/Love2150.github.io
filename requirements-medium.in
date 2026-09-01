@@ -1,0 +1,6 @@
+beautifulsoup4==4.15.0
+feedparser==6.0.12
+markdownify==1.2.2
+python-slugify==8.0.4
+pytz==2025.2
+requests==2.33.0
