@@ -1,152 +1,65 @@
 ---
 layout: project
-title: "eval_unpacker — JavaScript De-obfuscation Toolkit"
+title: "Eval Unpacker"
 permalink: /projects/eval_unpacker/
 image: /assets/images/eval-unpacker-hero.jpg
-summary: "Detects and safely unpacks common JS obfuscators (Packer, base64 chains, array-join loaders), extracts IOCs, and beautifies output."
-tags: [reverse-engineering, javascript, malware-analysis, dfir, python]
-repo: "https://github.com/Love2150/security-tools/tree/main/tools/eval_unpacker"
+summary: "Bounded reconstruction of classic eval(function(...)) JavaScript packer payloads without executing recovered code."
+tags: [reverse-engineering, javascript, malware-analysis, dfir, python, secure-development]
+status: "Tested portfolio tool"
+featured: false
+last_reviewed: 2026-09-01
+role: "Tool developer and security analyst"
+tools: [Python, Pytest, Coverage, JavaScript analysis, jsbeautifier]
+outcome: "Reconstructs the first supported classic packer occurrence with explicit syntax boundaries, resource limits, UTF-8 diagnostics, and 91% core coverage."
+repo: "https://github.com/Love2150/security-tools/tree/main/tools/eval-unpacker"
 weight: 5
-description: "A Python-based static de-obfuscation tool that detects Dean Edwards Packer (eval(function(p,a,c,k,e,d){…})), layered base64, escaped Unicode/hex, atob wrappers, and array-join loaders. Produces beautified code + extracted IOCs for rapid triage."
+description: "Static reconstruction of a defined classic JavaScript packer family with hostile-input controls and no recovered-code execution."
 ---
 
-## What is it?
-`eval_unpacker` is a **static JavaScript de-obfuscation** tool for analysts. It **does not execute** attacker code. Instead, it detects common packers, repeatedly **decodes layers** (base64/hex/`%uXXXX`/`\xNN`/`\uNNNN`/`unescape`/`atob`), reconstructs array-join loaders, and finally **beautifies** the result and **extracts IOCs** (domains, URLs, IPs, hashes, emails).
+## Executive summary
 
-- No `eval`/VM runtime — safe pattern/AST-assisted approach  
-- Layered decoding until stable (or max passes)  
-- One-shot triage: readable output + IOCs + JSON summary
+Eval Unpacker reconstructs the first supported classic `eval(function(p,a,c,k,e,d){...})(...)` packer occurrence without executing JavaScript. With `--recursive`, it follows the first nested supported occurrence at each layer.
 
----
+This is a source-triage utility, not a sandbox, malware classifier, IOC extractor, or general JavaScript deobfuscation engine. Recovered source may still be malicious and must not be executed on a trusted system.
 
-## What it detects/unpacks
-- **Dean Edwards Packer**: `eval(function(p,a,c,k,e,d){…})`
-- **Layered encodings**: base64 → hex → `%uXXXX`/`\xNN`/`\uNNNN` → `unescape`/`atob`
-- **Array-join loaders**: `['h','t','t','p'].join('')`, chunk rebuild patterns
-- **String spreading/noise**: split/concat and replace-maps that rebuild payloads
-- **Heuristics**:
-  - JSFuck indicators (`!+[]` etc.)
-  - anti-debug snippets (`Function('debugger')`)
-  - suspicious endpoints (`/gate.php`, `/admin/`)
+## Security engineering work
 
-> Focuses on mainstream, automatable obfuscations common in loaders/web skimmers. Complex custom VMs typically require sandboxing.
+- Added malformed and adversarial tests for nested strings, escaped quotes, empty tokens, base bounds, unsupported syntax, and multiple packer calls.
+- Rejects negative numeric conversion inputs.
+- Limits input bytes, declared token count, token replacements, recursion depth, intermediate values, output size, and beautification input.
+- Documents first-supported-occurrence behavior instead of implying every packed block is processed.
+- Replaces invalid UTF-8 bytes visibly, reports the first invalid-byte offset, and never silently discards evidence.
+- Provides bounded optional beautification without changing the security boundary.
+- Corrected package naming, metadata, URLs, and the canonical README.
 
----
+## Verification
 
-## Quick start
-```powershell
-# 1) Create & activate venv (Windows PowerShell)
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+| Control | Result |
+| --- | --- |
+| Python compatibility | 3.9–3.13 |
+| Focused tests | 35 passed |
+| Core coverage | 91% |
+| Installed interfaces | `eval-unpack` and `python -m eval_unpacker.cli` |
+| Package formats | Wheel and source distribution |
+| Execution policy | Reconstructed JavaScript is never executed |
 
-# 2) Install deps
-python -m pip install -U jsbeautifier chardet
+## Usage
 
-# 3) Run on a file or folder
-python eval_unpacker.py .\samples\packed.js --out .\out
-````
-
----
-
-## CLI usage
-
-```text
-usage: eval_unpacker.py [-h] [--out OUTDIR] [--max-passes N] [--beautify {on,off}]
-                        [--json JSON_OUT] [--txt TXT_OUT] [--ioc IOC_OUT]
-                        target_path
-
-positional arguments:
-  target_path           File or directory of .js/.txt/.html to analyze
-
-options:
-  -h, --help            show this help message and exit
-  --out OUTDIR          Output directory (default: ./out)
-  --max-passes N        Max decode passes (default: 6)
-  --beautify {on,off}   Beautify final JS (default: on)
-  --json JSON_OUT       Write machine-readable result summary
-  --txt TXT_OUT         Write human-readable summary
-  --ioc IOC_OUT         Write extracted IOCs (text)
+```bash
+python -m pip install "./tools/eval-unpacker[beautify]"
+eval-unpack packed.js --recursive --beautify
+cat packed.js | eval-unpack -
 ```
 
----
+Successful output is reconstructed UTF-8 JavaScript text on standard output. Diagnostics, decoding warnings, and errors are written to standard error.
 
-## Output (example)
+## Supported boundary
 
-**Console summary**
+The parser accepts a quoted payload string, an integer base from 2 through 36, a non-negative token count, and either a split dictionary or literal string array. Other packer families, runtime-keyed decryption, custom virtual machines, and dynamic token expressions are outside scope.
 
-```
-[eval_unpacker] target: samples\packed.js
-  • Detected: Packer, base64 chain (2 layers), %uXXXX escapes
-  • Passes: 4 → stabilized
-  • IOCs: 3 domains, 2 URLs, 1 IPv4
-  • Output:
-      - out\packed.decoded.js
-      - out\packed.ioc.txt
-      - out\packed.summary.json
-```
+## Evidence
 
-**IOC file (`*.ioc.txt`)**
-
-```
-domains:
-  - cdn-stat-assets.com
-  - update-checker.net
-urls:
-  - https://cdn-stat-assets.com/g/loader.js
-  - http://update-checker.net/ping.php
-ipv4:
-  - 185.199.110.153
-```
-
----
-
-## How it works (high-level)
-
-1. **Sniff** obfuscation signatures (regex + token checks).
-2. **Unpack** in passes: Packer → base64/hex → escape normalization → `atob/unescape` → array-join rebuild.
-3. **Beautify** final JavaScript (`jsbeautifier`, or `prettier` if you add it).
-4. **Extract IOCs** (domains/URLs/IPs/emails/hashes), de-dupe and sort.
-5. **Report** to console + write decoded JS, IOC list, and JSON summary.
-
----
-
-## Why analysts like it
-
-* **Fast triage** — answer “what is this?” in seconds
-* **Repeatable** — deterministic output, ideal for case notes/PRs
-* **Readable** — beautified code for code-review/YARA/Sigma drafting
-* **Portable** — pure-Python, works offline
-
----
-
-## Limitations
-
-* Custom VM protectors and runtime-keyed decryptors won’t fully de-virtualize.
-* Heavy anti-analysis (WASM VMs, canvas/audio crypto) needs sandboxing.
-* Encrypted blobs (RC4/AES) are flagged but not always decrypted without keys.
-
----
-
-## Roadmap
-
-* Extra array-mangling/AST rebuild patterns
-* Optional `prettier` backend (auto-detect if Node is present)
-* Skimmer family signatures (magecart-style)
-* SARIF/JSONL export for CI pipelines
-
----
-
-## Links
-
-* **Repo:** <{{ page.repo }}>
-* **Related project:** PCAP Quick Profiler → {{ '/projects/pcap-quick-profiler/' | relative_url }}
-
----
-
-## Notes for this site
-
-* The header image path is `/assets/images/eval_unpacker.png`.
-  Add a screenshot or diagram at that path to show a hero image.
-
-```
-```
+- [Canonical package](https://github.com/Love2150/security-tools/tree/main/tools/eval-unpacker)
+- [Architecture and trust boundaries](https://github.com/Love2150/security-tools/blob/main/docs/ARCHITECTURE.md)
+- [Portfolio case studies](https://github.com/Love2150/security-tools/blob/main/docs/PORTFOLIO.md)
+- [Hostile-input hardening pull request](https://github.com/Love2150/security-tools/pull/5)

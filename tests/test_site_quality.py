@@ -23,6 +23,20 @@ def front_matter(text: str) -> str:
     return match.group(1) if match else ""
 
 
+def css_block(text: str, selector: str) -> str:
+    start = text.index(selector)
+    opening = text.index("{", start)
+    depth = 0
+    for index in range(opening, len(text)):
+        if text[index] == "{":
+            depth += 1
+        elif text[index] == "}":
+            depth -= 1
+            if depth == 0:
+                return text[opening + 1:index]
+    raise AssertionError(f"unclosed CSS block: {selector}")
+
+
 class SiteQualityTests(unittest.TestCase):
     def test_source_contains_no_forbidden_c1_control_characters(self) -> None:
         failures: list[str] = []
@@ -119,6 +133,11 @@ class SiteQualityTests(unittest.TestCase):
 
     def test_flagships_have_truthful_review_metadata_and_project_layout(self) -> None:
         required_keys = ("status", "featured", "last_reviewed", "role", "tools", "outcome")
+        expected_review_dates = {
+            "sentinal-defender-lab.md": "2026-08-28",
+            "winlog-triage.md": "2026-09-01",
+            "pcap-quick-profiler.md": "2026-09-01",
+        }
         failures: list[str] = []
         for filename in FLAGSHIPS:
             matter = front_matter((ROOT / "_projects" / filename).read_text(encoding="utf-8"))
@@ -129,9 +148,66 @@ class SiteQualityTests(unittest.TestCase):
                     failures.append(f"{filename}: {key}")
             if not re.search(r"^featured:\s*true\s*$", matter, re.MULTILINE):
                 failures.append(f"{filename}: featured true")
-            if not re.search(r"^last_reviewed:\s*2026-08-28\s*$", matter, re.MULTILINE):
+            expected_date = expected_review_dates[filename]
+            if not re.search(rf"^last_reviewed:\s*{expected_date}\s*$", matter, re.MULTILINE):
                 failures.append(f"{filename}: review date")
         self.assertEqual([], failures)
+
+    def test_security_tools_portfolio_uses_current_verified_contracts(self) -> None:
+        homepage = (ROOT / "index.html").read_text(encoding="utf-8")
+        umbrella = (ROOT / "_projects/security-tools-engineering.md").read_text(encoding="utf-8")
+        pcap = (ROOT / "_projects/pcap-quick-profiler.md").read_text(encoding="utf-8")
+        winlog = (ROOT / "_projects/winlog-triage.md").read_text(encoding="utf-8")
+        unpacker = (ROOT / "_projects/eval_unpacker.md").read_text(encoding="utf-8")
+        combined = "\n".join((homepage, umbrella, pcap, winlog, unpacker))
+
+        self.assertIn("Security Tools Engineering", homepage)
+        for tool in ("PCAP Quick Profiler", "Windows Log Triage", "Eval Unpacker"):
+            self.assertIn(tool, homepage)
+        self.assertIn("79 tests", combined)
+        self.assertIn("91%", combined)
+        self.assertIn("globally routable unicast", combined)
+        for blocked in ("private", "reserved", "multicast", "malformed"):
+            self.assertIn(blocked, combined.lower())
+        self.assertIn("records skipped", winlog.lower())
+        self.assertIn("parse errors", winlog.lower())
+        self.assertIn("without executing JavaScript", unpacker)
+        self.assertIn("first supported classic", unpacker)
+        self.assertNotIn("tools/Pcap-profiler", combined)
+        self.assertNotIn("tools/eval_unpacker", combined)
+        self.assertNotIn("array-join loaders", unpacker)
+        self.assertNotIn("extracts IOCs", unpacker)
+        self.assertNotIn("bounded VirusTotal", combined)
+        for pull_request in range(1, 10):
+            self.assertIn(f"/pull/{pull_request}", umbrella)
+        self.assertIn("Separate fail-closed AI review plus executable tests", umbrella)
+        self.assertIn("Eight engineering phases plus the documentation foundation", umbrella)
+
+    def test_security_tools_external_links_target_current_canonical_paths(self) -> None:
+        expected = {
+            "_projects/pcap-quick-profiler.md": "tools/pcap-profiler",
+            "_projects/winlog-triage.md": "tools/winlog-triage",
+            "_projects/eval_unpacker.md": "tools/eval-unpacker",
+        }
+        for relative, canonical in expected.items():
+            text = (ROOT / relative).read_text(encoding="utf-8")
+            self.assertIn(f"security-tools/tree/main/{canonical}", text)
+            self.assertIn("security-tools/blob/main/docs/ARCHITECTURE.md", text)
+            self.assertIn("security-tools/blob/main/docs/PORTFOLIO.md", text)
+
+    def test_embedded_reports_have_mobile_safe_fallbacks(self) -> None:
+        pcap_include = (ROOT / "_includes/pcap-demo-iframe.html").read_text(encoding="utf-8")
+        winlog = (ROOT / "_projects/winlog-triage.md").read_text(encoding="utf-8")
+        css = (ROOT / "assets/css/style.scss").read_text(encoding="utf-8")
+        self.assertIn('class="embedded-report-preview"', pcap_include)
+        self.assertIn('class="embedded-report-preview"', winlog)
+        mobile = css_block(css, "@media (max-width: 640px)")
+        self.assertIn(".embedded-report-preview { display: none; }", mobile)
+        self.assertEqual(1, css.count(".embedded-report-preview { display: none; }"))
+        self.assertIn("Open sanitized demonstration report", winlog)
+        self.assertIn("Open sanitized demonstration report", (ROOT / "_projects/pcap-quick-profiler.md").read_text(encoding="utf-8"))
+        self.assertIn("white-space: nowrap", css)
+        self.assertIn(".prose th:first-child, .prose td:first-child { white-space: nowrap; }", css)
 
     def test_sentinel_summary_matches_visible_evidence(self) -> None:
         project = (ROOT / "_projects/sentinal-defender-lab.md").read_text(encoding="utf-8")
