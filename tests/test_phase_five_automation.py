@@ -316,6 +316,7 @@ class PhaseFiveAutomationTests(unittest.TestCase):
             self.assertIn(command, quality)
         self.assertIn("pull_request:", quality)
         self.assertIn("contents: read", quality)
+        self.assertIn("fetch-depth: 0", quality)
         self.assertNotIn("--config-file", quality)
         self.assertNotIn("--no-ignore-empty-alt", quality)
         self.assertIn("--disable-external --no-enforce-https", quality)
